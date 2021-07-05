@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".view.SignInActivity">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="@dimen/signin_logo"
+        android:layout_height="@dimen/signin_logo"
+        android:layout_marginTop="120dp"
+        android:layout_marginBottom="501dp"
+        android:src="@drawable/ic_bamboo_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/signin_btn"
+            android:elevation="10dp"
+            android:layout_marginStart="@dimen/signin_btn_margin_start_end"
+            android:layout_marginEnd="@dimen/signin_btn_margin_start_end"
+            android:fontFamily="@font/nanumsquareround_otfb"
+            android:includeFontPadding="false"
+            android:text="사용자로 시작하기"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/signin_btn"
+            android:elevation="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="@dimen/signin_btn_margin_start_end"
+            android:layout_marginEnd="@dimen/signin_btn_margin_start_end"
+
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/nanumsquareround_otfb"
+            android:includeFontPadding="false"
+            android:text="사용자로 시작하기"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

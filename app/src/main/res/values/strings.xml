@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Bamboo</string>
+    <string name="navigation_item_rules">규칙</string>
+    <string name="navigation_item_home">홈</string>
+    <string name="navigation_item_more_see">더보기</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

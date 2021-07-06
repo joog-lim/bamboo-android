@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="10dp"
+    android:orientation="vertical"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+    android:background="@drawable/home_fragment_recycler_frame"
+    android:padding="20dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/post_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/post_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/nanumsquareround_otfb"
+                android:text="#192번째 알고리즘"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/main_color"
+                android:textSize="17sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@id/post_tag"
+                android:layout_toEndOf="@id/post_number"
+                android:fontFamily="@font/nanumsquareround_otfb"
+                android:text="2021년 3월 12일 새벽"
+                android:gravity="start"
+                android:textColor="#C4C4C4"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/post_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="#공부"
+                android:textColor="@color/main_color"
+                android:textSize="15sp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/post_md"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/black"
+            android:layout_below="@id/post_top"
+            android:text="역시 개발은 새벽이지~"
+            android:fontFamily="@font/nanumsquareround_otfeb"
+            android:textStyle="bold"
+            android:includeFontPadding="false"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/black"
+            android:layout_below="@id/post_md"
+            android:text="새벽 코딩이 개꿀임. 진심 집중도 잘 되고 뭔가 날 방해하는 것도 없어. 이걸 참아??????????????????? 가능???????????"
+            android:fontFamily="@font/nanumsquareround_otfl"
+            android:textStyle="bold"
+            android:includeFontPadding="false"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

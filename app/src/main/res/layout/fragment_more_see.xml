@@ -1,14 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".view.fragment.MoreSeeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <carbon.widget.RelativeLayout
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/white"
+        app:carbon_elevation="8dp"
+        app:carbon_elevationShadowColor="@color/main_color">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="6dp"
+            android:src="@drawable/ic_logo_icon" />
+    </carbon.widget.RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_below="@id/title_bar"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
 
-</FrameLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+
+            >
+
+            <LinearLayout
+                android:id="@+id/title_txt_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:orientation="horizontal">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nanumsquareround_otfb"
+                    android:includeFontPadding="false"
+                    android:text="안녕하세요!"
+                    android:textColor="@color/main_color"
+                    android:textSize="20sp" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nanumsquareround_otfb"
+                    android:includeFontPadding="false"
+                    android:text=" 이곳은"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/title_txt_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title_txt_one"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/nanumsquareround_otfb"
+                android:includeFontPadding="false"
+                android:text="광대숲입니다!?"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/title_txt_three"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title_txt_two"
+                android:layout_marginTop="35dp"
+                android:fontFamily="@font/nanumsquareround_otfr"
+                android:includeFontPadding="false"
+                android:text="누구한테도 말하기 어려웠던 이야기부터\n 사소하고 조그만 이야기까지."
+                android:textColor="@color/main_color"
+                android:textSize="15sp" />
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/main_color"
+                android:layout_below="@id/title_txt_three"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="80dp"
+                />
+
+            <TextView
+                android:id="@+id/content_title_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/line"
+                android:layout_marginTop="60dp"
+                android:fontFamily="@font/nanumsquareround_otfb"
+                android:includeFontPadding="false"
+                android:text="안녕하세요, 광대숲 개발자입니다."
+                android:textColor="@color/black"
+                android:textSize="@dimen/title_txt" />
+
+            <TextView
+                android:id="@+id/content_content_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/content_title_txt"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/nanumsquareround_otfr"
+                android:includeFontPadding="false"
+                android:text="광대숲은 저희 학교만의 익명 커뮤니티를 만들고 운영하며\n학교 사람들이 담아두기만 하던 어려운 이야기부터\n사소하고 조그만 이야기까지 함께 나눴으면 하는 마음으로\n개발을 시작하게 되었습니다."
+                android:textColor="@color/black"
+                android:textSize="@dimen/content_txt" />
+
+            <TextView
+                android:id="@+id/q_a_title_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/content_content_txt"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/nanumsquareround_otfb"
+                android:includeFontPadding="false"
+                android:text="자주 묻는 말"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/q_a_title_txt"
+                android:orientation="vertical"
+                >
+                <TextView
+                android:id="@+id/q_a_content_title_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/nanumsquareround_otfb"
+                android:includeFontPadding="false"
+                android:text="Q. 광대숲이란 무엇인가요?"
+                android:textColor="@color/black"
+                    android:textSize="@dimen/title_txt" />
+
+                <TextView
+                    android:id="@+id/q_a_content_content_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:fontFamily="@font/nanumsquareround_otfr"
+                    android:includeFontPadding="false"
+                    android:text="A. 광대숲은 저희 학교만의 익명 커뮤니티를 만들고 운영하며 학교 사람들이 담아두기만 하던 어려운 이야기부터 사소하고 조그만 이야기까지 함께 나눴으면 하는 마음으로 개발을 시작하게 되었습니다."
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/content_txt" />
+
+                <TextView
+                    android:id="@+id/q_a_content_title_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/nanumsquareround_otfb"
+                    android:includeFontPadding="false"
+                    android:text="Q. 댓글을 달 순 없나요?"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title_txt" />
+
+                <TextView
+                    android:id="@+id/q_a_content_content_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:fontFamily="@font/nanumsquareround_otfr"
+                    android:includeFontPadding="false"
+                    android:text="A. 댓글 기능이 없는 이유는, 댓글의 여론이 좋지 않아 게시글로 자신만의 이야기를 쉬이 나눌 수 없는 환경을 예방하기 위함입니다."
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/content_txt" />
+
+
+                <TextView
+                    android:id="@+id/q_a_content_title_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/nanumsquareround_otfb"
+                    android:includeFontPadding="false"
+                    android:text="Q. 글에 반응을 달고 싶어요."
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title_txt" />
+
+                <TextView
+                    android:id="@+id/q_a_content_content_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:fontFamily="@font/nanumsquareround_otfr"
+                    android:includeFontPadding="false"
+                    android:text="A. 각 알고리즘들에 반응을 표시하기 위해 이모지를 다는 방안을 검토 중에 있습니다."
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/content_txt" />
+
+
+                <TextView
+                    android:id="@+id/q_a_content_title_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/nanumsquareround_otfb"
+                    android:includeFontPadding="false"
+                    android:text="Q. 내 의견을 찾을 수 없어요."
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title_txt" />
+
+                <TextView
+                    android:id="@+id/q_a_content_content_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:fontFamily="@font/nanumsquareround_otfr"
+                    android:includeFontPadding="false"
+                    android:text="@string/q_a_content_4"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/content_txt" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

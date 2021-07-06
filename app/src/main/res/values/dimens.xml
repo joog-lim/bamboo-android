@@ -3,4 +3,6 @@
     <dimen name="splash_logo">100dp</dimen>
     <dimen name="signin_logo">80dp</dimen>
     <dimen name="signin_btn_margin_start_end">50dp</dimen>
+    <dimen name="title_txt">15sp</dimen>
+    <dimen name="content_txt">15sp</dimen>
 </resources>

@@ -16,43 +16,59 @@
         android:layout_height="wrap_content">
 
         <RelativeLayout
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
             android:id="@+id/post_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/post_number"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_centerVertical="true"
-                android:fontFamily="@font/nanumsquareround_otfb"
-                android:text="#192번째 알고리즘"
-                android:layout_marginEnd="10dp"
-                android:textColor="@color/main_color"
-                android:textSize="17sp" />
+                android:orientation="horizontal"
+                android:layout_toStartOf="@id/post_more"
+                android:gravity="center_vertical|start"
+                >
+                <TextView
+                    android:id="@+id/post_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginEnd="5dp"
+                    android:fontFamily="@font/nanumsquareround_otfb"
+                    android:text="#192번째 알고리즘"
+                    android:textColor="@color/main_color"
+                    android:textSize="@dimen/post_number" />
+
+                <TextView
+                    android:id="@+id/post_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:fontFamily="@font/nanumsquareround_otfb"
+                    android:gravity="start"
+                    android:text="2021년 3월 12일 새벽"
+                    android:textColor="#C4C4C4"
+                    android:layout_marginEnd="5dp"
+                    android:textSize="@dimen/post_time" />
+
+
+            </LinearLayout>
+
 
             <TextView
+                android:id="@+id/post_more"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toStartOf="@id/post_tag"
-                android:layout_toEndOf="@id/post_number"
-                android:fontFamily="@font/nanumsquareround_otfb"
-                android:text="2021년 3월 12일 새벽"
-                android:gravity="start"
-                android:textColor="#C4C4C4"
-                android:textSize="14sp" />
-            <TextView
-                android:id="@+id/post_tag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="#공부"
-                android:textColor="@color/main_color"
-                android:textSize="15sp"
+
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
+                android:fontFamily="@font/nanumsquareround_otfb"
+                android:gravity="start"
+                android:text="#공부"
+                android:textColor="#C4C4C4"
+                android:textSize="@dimen/post_tag"
                 />
         </RelativeLayout>
 
@@ -68,9 +84,10 @@
             android:textStyle="bold"
             android:includeFontPadding="false"
             android:layout_marginTop="10dp"
-            android:textSize="15sp"
+            android:textSize="@dimen/post_md"
             />
         <TextView
+            android:id="@+id/post_con"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start"
@@ -81,7 +98,7 @@
             android:textStyle="bold"
             android:includeFontPadding="false"
             android:layout_marginTop="10dp"
-            android:textSize="15sp"
+            android:textSize="@dimen/post_con"
             />
     </RelativeLayout>
 

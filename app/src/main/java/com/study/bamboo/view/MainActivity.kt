@@ -44,7 +44,7 @@ class MainActivity : BaseActivity() {
     }
 
 
-    private fun replaceFragment(fragment: Fragment) {
+   private fun replaceFragment(fragment: Fragment) {
         val fragmentTransaction: FragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.apply {
             replace(R.id.frame_layout, fragment)

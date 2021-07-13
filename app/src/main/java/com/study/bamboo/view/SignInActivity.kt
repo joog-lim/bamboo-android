@@ -28,8 +28,6 @@ class SignInActivity : BaseActivity() {
             this,
             ViewModelProvider.NewInstanceFactory()
         ).get(SignInViewModel::class.java)
-
-
     }
 
 
@@ -44,14 +42,10 @@ class SignInActivity : BaseActivity() {
         display.getSize(size)
 
         ViewModel.signInViewModel.display_size_x.value = size.x
-
-
-        //dialog.dialog?.window?.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
     }
 
     fun clickAdminLogin(view: View){
         val dialog = LoginDialog()
         dialog.show(supportFragmentManager, "AdminLoginDialog")
     }
-
 }

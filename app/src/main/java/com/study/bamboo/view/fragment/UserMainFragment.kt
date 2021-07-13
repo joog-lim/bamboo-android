@@ -7,12 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.study.bamboo.R
-import com.study.bamboo.databinding.FragmentHomeBinding
+import com.study.bamboo.databinding.FragmentUserMainBinding
+import com.study.bamboo.utils.Functions
+import com.study.bamboo.view.adapter.UserHomeItemAdapter
 
+class UserMainFragment : Fragment() {
 
-class HomeFragment : Fragment() {
-
-    lateinit var binding: FragmentHomeBinding
+    lateinit var binding: FragmentUserMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,12 +23,11 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false)
+    ): View? {
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_user_main,container,false)
 
-        val transaction = childFragmentManager.beginTransaction()
-        transaction.add(R.id.user_or_admin, AdminMainFragment())
-        transaction.commit()
+        Functions.recyclerViewManager(binding.postRecyclerView,requireContext())
+        binding.postRecyclerView.adapter = UserHomeItemAdapter()
 
         return binding.root
     }

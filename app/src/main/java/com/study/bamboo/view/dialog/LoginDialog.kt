@@ -5,10 +5,18 @@ import android.graphics.Color
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModelProvider
 import com.study.bamboo.databinding.ActivityLoginDialogBinding
 import com.study.bamboo.utils.ViewModel
+import com.study.bamboo.utils.ViewModel.signInViewModel
+import com.study.bamboo.viewmodel.SignInViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 
 class LoginDialog : DialogFragment() {
     private var _binding: ActivityLoginDialogBinding? = null
@@ -35,6 +43,13 @@ class LoginDialog : DialogFragment() {
         _binding = ActivityLoginDialogBinding.inflate(inflater, container, false)
         val view = binding.root
 
+/*        //viewModel
+        val signInViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        ).get(SignInViewModel::class.java)*/
+
+
         //다이얼로그 백그라운드 삭제 -> 모서리 둥글게
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
@@ -44,11 +59,19 @@ class LoginDialog : DialogFragment() {
         else
             binding.whoLoginTxt.text = "관리자님 환영합니다!"
 
-
+        //로그인 눌렀을때의 처리
         binding.loginBtn.setOnClickListener {
-            //로그인 눌렀을때의 처리
+
+                loginBtnClick()
+
         }
         return view
+    }
+
+     fun loginBtnClick(){
+         Log.d("로그","edittext password : ${binding.passwordEdittext.text.toString()}")
+        signInViewModel.callAdminLoginAPI(binding.passwordEdittext.text.toString())
+
     }
 
     override fun onDestroyView() {

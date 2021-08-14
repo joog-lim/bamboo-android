@@ -1,6 +1,7 @@
 package com.study.bamboo.view
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Point
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -48,20 +49,20 @@ class SignInActivity : BaseActivity() {
 
 
     fun clickUserLogin(view: View) {
+        val intent = Intent(this,MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    fun clickAdminLogin(view: View) {
         val dialog = LoginDialog()
-        dialog.show(supportFragmentManager, "UserLoginDialog")
-        //dialog.dialog?.window?.setBackgroundDrawableResource(R.drawable.popup_press)
+        dialog.show(supportFragmentManager, "AdminLoginDialog")
 
         val windowManager = this.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val display = windowManager.defaultDisplay
         val size = Point()
         display.getSize(size)
 
-        ViewModel.signInViewModel.display_size_x.value = size.x
-    }
-
-    fun clickAdminLogin(view: View) {
-        val dialog = LoginDialog()
-        dialog.show(supportFragmentManager, "AdminLoginDialog")
+        signInViewModel.display_size_x.value = size.x
     }
 }

@@ -43,21 +43,12 @@ class LoginDialog : DialogFragment() {
         _binding = ActivityLoginDialogBinding.inflate(inflater, container, false)
         val view = binding.root
 
-/*        //viewModel
-        val signInViewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.NewInstanceFactory()
-        ).get(SignInViewModel::class.java)*/
 
 
         //다이얼로그 백그라운드 삭제 -> 모서리 둥글게
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
 
-        if (tag == "UserLoginDialog")
-            binding.whoLoginTxt.text = "사용자님 환영합니다!"
-        else
-            binding.whoLoginTxt.text = "관리자님 환영합니다!"
 
         //로그인 눌렀을때의 처리
         binding.loginBtn.setOnClickListener {

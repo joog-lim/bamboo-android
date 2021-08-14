@@ -12,29 +12,13 @@
         android:layout_height="match_parent"
         tools:context=".view.fragment.AdminMainFragment">
 
-        <carbon.widget.RelativeLayout
-            android:id="@+id/title_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:background="@color/white"
-            app:carbon_elevation="8dp"
-            app:carbon_elevationShadowColor="@color/main_color">
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="40dp"
-                android:layout_centerInParent="true"
-                android:layout_margin="6dp"
-                android:src="@drawable/ic_logo_icon" />
-        </carbon.widget.RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
-            android:layout_below="@id/title_bar">
+            android:layout_alignParentTop="true">
 
             <RelativeLayout
                 android:id="@+id/top_layout"

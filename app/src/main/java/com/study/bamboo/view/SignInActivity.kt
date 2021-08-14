@@ -49,9 +49,10 @@ class SignInActivity : BaseActivity() {
 
 
     fun clickUserLogin(view: View) {
-        val intent = Intent(this,MainActivity::class.java)
+        signInViewModel.callGetPost(20,"60b8407473d81a1b4cc591a5","PENDING")
+     /*   val intent = Intent(this,MainActivity::class.java)
         startActivity(intent)
-        finish()
+        finish()*/
     }
 
     fun clickAdminLogin(view: View) {

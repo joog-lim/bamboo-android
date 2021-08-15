@@ -15,6 +15,7 @@
         android:background="@color/white"
         tools:context=".view.SignInActivity">
 
+
         <ImageView
             android:id="@+id/logo"
             android:layout_width="@dimen/signin_logo"
@@ -67,5 +68,16 @@
                 android:textSize="15sp" />
 
         </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/main_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

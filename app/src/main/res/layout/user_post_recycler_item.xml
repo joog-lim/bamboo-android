@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:elevation="10dp"
-    android:orientation="vertical"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
     android:layout_marginStart="20dp"
+    android:layout_marginTop="10dp"
     android:layout_marginEnd="20dp"
+    android:layout_marginBottom="10dp"
     android:background="@drawable/home_fragment_recycler_frame"
+    android:elevation="3dp"
+    android:orientation="vertical"
     android:padding="20dp">
 
     <RelativeLayout
@@ -16,49 +18,36 @@
         android:layout_height="wrap_content">
 
         <RelativeLayout
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:id="@+id/post_top"
+            android:id="@+id/user_post_top"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:orientation="horizontal"
-                android:layout_toStartOf="@id/post_more"
+                android:layout_toStartOf="@id/user_post_tag"
                 android:gravity="center_vertical|start"
-                >
+                android:orientation="horizontal">
+
                 <TextView
-                    android:id="@+id/post_number"
+                    android:id="@+id/user_post_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:layout_marginEnd="5dp"
                     android:fontFamily="@font/nanumsquareround_otfb"
                     android:text="#192번째 알고리즘"
                     android:textColor="@color/main_color"
                     android:textSize="@dimen/post_number" />
 
-                <TextView
-                    android:id="@+id/post_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:fontFamily="@font/nanumsquareround_otfb"
-                    android:gravity="start"
-                    android:text="2021년 3월 12일 새벽"
-                    android:textColor="#C4C4C4"
-                    android:layout_marginEnd="5dp"
-                    android:textSize="@dimen/post_time" />
-
 
             </LinearLayout>
 
 
             <TextView
-                android:id="@+id/post_more"
+                android:id="@+id/user_post_tag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
@@ -68,38 +57,49 @@
                 android:gravity="start"
                 android:text="#공부"
                 android:textColor="#C4C4C4"
-                android:textSize="@dimen/post_tag"
-                />
+                android:textSize="@dimen/post_tag" />
         </RelativeLayout>
 
+
         <TextView
-            android:id="@+id/post_md"
+            android:id="@+id/user_post_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_post_top"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="@font/nanumsquareround_otfb"
+            android:gravity="start"
+            android:text="2021년 3월 12일 새벽"
+            android:textColor="#C4C4C4"
+            android:textSize="@dimen/post_time" />
+
+        <TextView
+            android:id="@+id/user_post_md"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="start"
-            android:textColor="@color/black"
-            android:layout_below="@id/post_top"
-            android:text="역시 개발은 새벽이지~"
+            android:layout_below="@id/user_post_time"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/nanumsquareround_otfeb"
-            android:textStyle="bold"
+            android:gravity="start"
             android:includeFontPadding="false"
-            android:layout_marginTop="10dp"
+            android:text="역시 개발은 새벽이지~"
+            android:textColor="@color/black"
             android:textSize="@dimen/post_md"
-            />
+            android:textStyle="bold" />
+
         <TextView
-            android:id="@+id/post_con"
+            android:id="@+id/user_post_con"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="start"
-            android:textColor="@color/black"
-            android:layout_below="@id/post_md"
-            android:text="새벽 코딩이 개꿀임. 진심 집중도 잘 되고 뭔가 날 방해하는 것도 없어. 이걸 참아??????????????????? 가능???????????"
-            android:fontFamily="@font/nanumsquareround_otfl"
-            android:textStyle="bold"
-            android:includeFontPadding="false"
+            android:layout_below="@id/user_post_md"
             android:layout_marginTop="10dp"
+            android:fontFamily="@font/nanumsquareround_otfl"
+            android:gravity="start"
+            android:includeFontPadding="false"
+            android:text="새벽 코딩이 개꿀임. 진심 집중도 잘 되고 뭔가 날 방해하는 것도 없어. 이걸 참아??????????????????? 가능???????????"
+            android:textColor="@color/black"
             android:textSize="@dimen/post_con"
-            />
+            android:textStyle="bold" />
     </RelativeLayout>
 
 </LinearLayout>

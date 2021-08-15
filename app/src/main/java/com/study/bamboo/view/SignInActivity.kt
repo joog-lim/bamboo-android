@@ -29,12 +29,21 @@ class SignInActivity : BaseActivity() {
         setContentView(R.layout.activity_sign_in)
         binding.activity = this
 
+        binding.progressBar.visibility = View.GONE
+
         signInViewModel = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
         ).get(SignInViewModel::class.java)
 
 
+
+        //post 게시물을 받아왔을때 MainActivity로 넘어가기
+        signInViewModel.getPostResponse.observe(this, Observer {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        })
 
         signInViewModel.adminLoginResponse.observe(this, Observer {
             Log.d("로그", "어드민 로그인 API : ${it}")
@@ -49,10 +58,9 @@ class SignInActivity : BaseActivity() {
 
 
     fun clickUserLogin(view: View) {
-        signInViewModel.callGetPost(20,"60b8407473d81a1b4cc591a5","PENDING")
-     /*   val intent = Intent(this,MainActivity::class.java)
-        startActivity(intent)
-        finish()*/
+        binding.progressBar.visibility = View.VISIBLE
+        signInViewModel.callGetPost(20, "60b8407473d81a1b4cc591a5", "PENDING")
+
     }
 
     fun clickAdminLogin(view: View) {

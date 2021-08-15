@@ -29,6 +29,8 @@ class SignInActivity : BaseActivity() {
         setContentView(R.layout.activity_sign_in)
         binding.activity = this
 
+        binding.progressBar.visibility = View.GONE
+
         signInViewModel = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
@@ -36,6 +38,7 @@ class SignInActivity : BaseActivity() {
 
 
 
+        //post 게시물을 받아왔을때 MainActivity로 넘어가기
         signInViewModel.getPostResponse.observe(this, Observer {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -55,10 +58,9 @@ class SignInActivity : BaseActivity() {
 
 
     fun clickUserLogin(view: View) {
+        binding.progressBar.visibility = View.VISIBLE
         signInViewModel.callGetPost(20, "60b8407473d81a1b4cc591a5", "PENDING")
-        /*   val intent = Intent(this,MainActivity::class.java)
-           startActivity(intent)
-           finish()*/
+
     }
 
     fun clickAdminLogin(view: View) {

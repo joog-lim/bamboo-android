@@ -36,6 +36,12 @@ class SignInActivity : BaseActivity() {
 
 
 
+        signInViewModel.getPostResponse.observe(this, Observer {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        })
+
         signInViewModel.adminLoginResponse.observe(this, Observer {
             Log.d("로그", "어드민 로그인 API : ${it}")
             if (it == "null") {
@@ -49,10 +55,10 @@ class SignInActivity : BaseActivity() {
 
 
     fun clickUserLogin(view: View) {
-        signInViewModel.callGetPost(20,"60b8407473d81a1b4cc591a5","PENDING")
-     /*   val intent = Intent(this,MainActivity::class.java)
-        startActivity(intent)
-        finish()*/
+        signInViewModel.callGetPost(20, "60b8407473d81a1b4cc591a5", "PENDING")
+        /*   val intent = Intent(this,MainActivity::class.java)
+           startActivity(intent)
+           finish()*/
     }
 
     fun clickAdminLogin(view: View) {

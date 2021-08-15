@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.study.bamboo.model.dto.GetPostDTO
 import com.study.bamboo.model.dto.AdminSignInDTO
+import com.study.bamboo.model.dto.PostDTO
 import com.study.bamboo.model.retrofit.AdminLoginAPI
 import com.study.bamboo.model.retrofit.GetPostAPI
 import com.study.bamboo.model.retrofit.RetrofitClient
@@ -19,6 +20,10 @@ class SignInViewModel : ViewModel() {
 
     val adminLoginResponse get() = _adminLoginResponse
     private val _adminLoginResponse: MutableLiveData<String> = MutableLiveData<String>()
+
+
+    val getPostResponse get() = _getPostResponse
+    private val _getPostResponse: MutableLiveData<List<PostDTO>?> = MutableLiveData<List<PostDTO>?>()
 
     init {
         display_size_x.value = 0
@@ -58,6 +63,8 @@ class SignInViewModel : ViewModel() {
         retService.getPost(count,cursor,status).enqueue(object : Callback<GetPostDTO> {
             override fun onResponse(call: Call<GetPostDTO>, response: Response<GetPostDTO>) {
                 Log.d("로그","리스폰스 : ${response.body()?.posts?.get(0)?.title}")
+                _getPostResponse.value = response.body()?.posts
+                Log.d("로그","리스폰스 : ${_getPostResponse.value?.get(0)?.title}, 사이즈 : ${_getPostResponse.value?.size}")
             }
 
             override fun onFailure(call: Call<GetPostDTO>, t: Throwable) {

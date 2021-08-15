@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import com.study.bamboo.R
 import com.study.bamboo.databinding.FragmentUserMainBinding
 import com.study.bamboo.utils.Functions
+import com.study.bamboo.utils.ViewModel.signInViewModel
 import com.study.bamboo.view.adapter.UserHomeItemAdapter
 
 class UserMainFragment : Fragment() {
@@ -27,7 +28,9 @@ class UserMainFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_user_main,container,false)
 
         Functions.recyclerViewManager(binding.postRecyclerView,requireContext())
-        binding.postRecyclerView.adapter = UserHomeItemAdapter()
+        binding.postRecyclerView.adapter = UserHomeItemAdapter(signInViewModel.getPostResponse)
+
+
 
         return binding.root
     }

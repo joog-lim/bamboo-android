@@ -26,7 +26,7 @@ class HomeFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false)
 
         val transaction = childFragmentManager.beginTransaction()
-        transaction.add(R.id.user_or_admin, AdminMainFragment())
+        transaction.add(R.id.user_or_admin, UserMainFragment())
         transaction.commit()
 
         return binding.root

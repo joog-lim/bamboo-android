@@ -58,46 +58,13 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentEnd="true">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="관리자"
-                        android:textColor="#C4C4C4"
-                        android:textSize="15sp"
-                        android:layout_marginEnd="10dp"
-                        android:fontFamily="@font/nanumsquareround_otfb" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="규칙"
-                        android:layout_marginEnd="10dp"
-                        android:textColor="@color/black"
-                        android:textSize="15sp"
-                        android:fontFamily="@font/nanumsquareround_otfb" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="신고하기"
-                        android:textColor="#E75858"
-                        android:textSize="15sp"
-                        android:fontFamily="@font/nanumsquareround_otfb" />
-                </LinearLayout>
             </RelativeLayout>
 
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/post_recycler_view"
                 android:layout_width="match_parent"
+                android:overScrollMode="never"
                 android:layout_marginTop="20dp"
                 android:layout_height="match_parent"
                 android:layout_below="@id/top_layout"

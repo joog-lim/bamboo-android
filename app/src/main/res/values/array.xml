@@ -6,4 +6,15 @@
         <item>거절</item>
         <item>삭제</item>
     </string-array>
+
+    <string-array name="PostCreateTagList">
+        <item>태그선택</item>
+        <item>#유머</item>
+        <item>#공부</item>
+        <item>#일상</item>
+        <item>#학교</item>
+        <item>#취업</item>
+        <item>#관계</item>
+        <item>#기타</item>
+    </string-array>
 </resources>

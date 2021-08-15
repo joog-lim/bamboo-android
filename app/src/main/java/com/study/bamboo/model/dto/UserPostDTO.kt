@@ -1,6 +1,6 @@
 package com.study.bamboo.model.dto
 
-data class PostDTO(
+data class UserPostDTO(
     val content: String,
     val createdAt: Long,
     val id: String,

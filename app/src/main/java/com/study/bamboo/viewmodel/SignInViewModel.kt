@@ -3,8 +3,8 @@ package com.study.bamboo.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.study.bamboo.model.dto.AdminSignInDTO
 import com.study.bamboo.model.dto.GetPostDTO
+import com.study.bamboo.model.dto.AdminSignInDTO
 import com.study.bamboo.model.retrofit.AdminLoginAPI
 import com.study.bamboo.model.retrofit.GetPostAPI
 import com.study.bamboo.model.retrofit.RetrofitClient
@@ -57,7 +57,7 @@ class SignInViewModel : ViewModel() {
         val retService = RetrofitClient().getService().create(GetPostAPI::class.java)
         retService.getPost(count,cursor,status).enqueue(object : Callback<GetPostDTO> {
             override fun onResponse(call: Call<GetPostDTO>, response: Response<GetPostDTO>) {
-               Log.d("로그","리스폰스 : ${response.body()?.content}")
+                Log.d("로그","리스폰스 : ${response.body()?.posts?.get(0)?.title}")
             }
 
             override fun onFailure(call: Call<GetPostDTO>, t: Throwable) {

@@ -51,7 +51,7 @@
                         android:text="@{data.number}"
                         android:textColor="@color/main_color"
                         android:textSize="@dimen/post_number"
-                        tools:text="#192번째 대기중" />
+                        tools:text="#192번째 알고리즘" />
 
                     <TextView
                         android:id="@+id/post_time"

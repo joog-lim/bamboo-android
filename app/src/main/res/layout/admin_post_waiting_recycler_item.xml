@@ -46,12 +46,13 @@
                         android:id="@+id/post_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+
                         android:layout_marginEnd="5dp"
                         android:fontFamily="@font/nanumsquareround_otfb"
                         android:text="@{data.number}"
-                        android:textColor="@color/main_color"
+                        android:textColor="@color/text_waiting_color"
                         android:textSize="@dimen/post_number"
-                        tools:text="#192번째 알고리즘" />
+                        tools:text="#192번째 대기중" />
 
                     <TextView
                         android:id="@+id/post_time"
@@ -87,7 +88,7 @@
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/nanumsquareround_otfb"
                     android:gravity="start"
-                    tools:text="수정"
+                    tools:text="더보기"
                     android:text="@{data.status}"
                     android:textColor="#C4C4C4"
                     android:textSize="@dimen/post_more" />

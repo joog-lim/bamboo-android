@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="main_color">#57CC4D</color>
     <color name="main_background">#E5E5E5</color>
+    <color name="text_waiting_color">#ECD06B</color>
+    <color name="text_reject_color" >#E75858</color>
 </resources>

@@ -5,11 +5,10 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface GetPostAPI {
-    @GET("post/get-list")
+interface GetVerifyAPI {
+    @GET("get/verify")
     fun getPost(
-        @Query("count") count : Int,
-        @Query("cursor") cursor : String,
-        @Query("status") status : String
+        @Query("id") id : String,
+        @Query("question") question : String
     ) : Call<UserGetPostDTO>
 }

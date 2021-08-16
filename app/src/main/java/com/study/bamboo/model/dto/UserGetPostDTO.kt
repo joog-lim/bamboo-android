@@ -1,8 +1,8 @@
 package com.study.bamboo.model.dto
 
-data class GetPostDTO(
+data class UserGetPostDTO(
     val count: Int,
     val cursor: String,
     val hasNext: Boolean,
-    val posts: List<PostDTO>
+    val posts: List<UserPostDTO>
 )

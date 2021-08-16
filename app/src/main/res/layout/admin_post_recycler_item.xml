@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.study.bamboo.model.dto.PostDTO" />
+            type="com.study.bamboo.model.dto.UserPostDTO" />
 
     </data>
 

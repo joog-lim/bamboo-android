@@ -13,14 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bamboo">
         <activity android:name=".view.PostCreateActivity">
+
+        </activity>
+        <activity android:name=".view.SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".view.SignInActivity">
-
         </activity>
         <activity android:name=".view.SplashActivity" />
         <activity android:name=".view.MainActivity">

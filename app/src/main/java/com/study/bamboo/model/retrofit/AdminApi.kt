@@ -1,8 +1,8 @@
 package com.study.bamboo.model.retrofit
 
-import com.study.bamboo.model.dto.DeletePostDto
+/*import com.study.bamboo.model.dto.DeletePostDto
 import com.study.bamboo.model.dto.GetPostDTO
-import com.study.bamboo.model.dto.PostDTO
+import com.study.bamboo.model.dto.PostDTO*/
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.DELETE
@@ -11,7 +11,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface AdminApi {
-    @DELETE("delete/{arg}")
+/*    @DELETE("delete/{arg}")
    suspend fun deletePost(
         @Path("arg") arg: String
     ): Response<DeletePostDto>
@@ -21,5 +21,5 @@ interface AdminApi {
         @Query("count") count : Int,
         @Query("cursor") cursor : String,
         @Query("status") status : String
-    ) : Response<GetPostDTO>
+    ) : Response<GetPostDTO>*/
 }

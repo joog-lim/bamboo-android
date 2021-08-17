@@ -1,6 +1,5 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext.kotlin_version = "1.5.10"
+    ext.kotlin_version = "1.4.32"
     repositories {
         google()
         mavenCentral()
@@ -8,8 +7,8 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:4.2.1"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0"
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.28-alpha'
-        classpath 'com.google.gms:google-services:4.3.8'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -17,10 +16,9 @@ buildscript {
 
 allprojects {
     repositories {
-        maven { url "https://jitpack.io" }
-
         google()
         mavenCentral()
+        jcenter() // Warning: this repository is going to shut down soon
     }
 }
 

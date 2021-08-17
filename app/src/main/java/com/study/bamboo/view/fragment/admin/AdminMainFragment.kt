@@ -1,32 +1,31 @@
 package com.study.bamboo.view.fragment.admin
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import carbon.recycler.Adapter
 import com.study.bamboo.R
 import com.study.bamboo.databinding.FragmentAdminMainBinding
-import com.study.bamboo.utils.Functions
 import com.study.bamboo.adapter.AdminHomeItemAdapter
 import com.study.bamboo.adapter.Situation
 import com.study.bamboo.view.base.BaseFragment
+import com.study.bamboo.viewmodel.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
 class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragment_admin_main) {
 
+    companion object {
+        const val TAG = "AdminMainFragment"
+    }
 
     private val viewModel: AdminViewModel by viewModels()
-
+    private val tokenViewModel: SignInViewModel by viewModels()
 
     private val acceptAdapter: AdminHomeItemAdapter by lazy {
 
@@ -46,17 +45,18 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
     }
 
     override fun FragmentAdminMainBinding.onCreateView() {
-
+        setItemAdapter(acceptAdapter)
         spinnerContact()
-    }
-
-    override fun FragmentAdminMainBinding.onViewCreated() {
         //spinner
         binding.activitySpinner.adapter = ArrayAdapter.createFromResource(
             requireContext(),
             R.array.AdminItemList,
             R.layout.admin_spinner_item
         )
+    }
+
+    override fun FragmentAdminMainBinding.onViewCreated() {
+
 
     }
 
@@ -77,32 +77,45 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                         0 -> {
 
                             setItemAdapter(acceptAdapter)
-                            observeNetwork(20, "", "")
+                            observeNetwork(
+                                tokenViewModel.adminLoginResponse.toString(),
+                                20,
+                                "60b8407473d81a1b4cc591a5",
+                                "ACCEPTED"
+                            )
                             viewModel.getPostData.observe(viewLifecycleOwner, {
 
-                                acceptAdapter.setItemList(listOf(it))
+                                Log.d(TAG, "data: $it")
+                                acceptAdapter.setItemList(it!!)
                             })
 
                         }
                         1 -> {
+
                             setItemAdapter(waitingAdapter)
+                            observeNetwork( tokenViewModel.adminLoginResponse.toString(),20, "60b8407473d81a1b4cc591a5", "PENDING")
                             viewModel.getPostData.observe(viewLifecycleOwner, {
-                                waitingAdapter.setItemList(listOf(it))
+                                waitingAdapter.setItemList(it!!)
 
                             })
                         }
                         2 -> {
                             setItemAdapter(rejectAdapter)
+                            observeNetwork( tokenViewModel.adminLoginResponse.toString(),20, "60b8407473d81a1b4cc591a5", "REJECT")
+
                             viewModel.getPostData.observe(viewLifecycleOwner, {
 
-                                rejectAdapter.setItemList(listOf(it))
+
+                                rejectAdapter.setItemList(it!!)
                             })
                         }
                         3 -> {
-
                             setItemAdapter(deleteAdapter)
+                            observeNetwork( tokenViewModel.adminLoginResponse.toString(),20, "60b8407473d81a1b4cc591a5", "DELETED")
+
                             viewModel.getPostData.observe(viewLifecycleOwner, {
-                                deleteAdapter.setItemList(listOf(it))
+                                Log.d("DELETE", "onItemSelected: $it ")
+                                deleteAdapter.setItemList(it!!)
 
                             })
 
@@ -115,9 +128,11 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
     }
 
-    fun observeNetwork(count: Int, cursor: String, status: String) {
-        viewModel.getPost(count, cursor, status)
-    }
+    fun observeNetwork(token: String, count: Int, cursor: String, status: String) =
+        lifecycleScope.launch {
+            viewModel.getPost(token, count, cursor, status)
+
+        }
 
     fun setItemAdapter(adapter: AdminHomeItemAdapter) {
         binding.postRecyclerView.apply {
@@ -125,4 +140,5 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
             this.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         }
     }
+
 }

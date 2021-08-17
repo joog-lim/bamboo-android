@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -46,17 +46,16 @@
                         android:id="@+id/post_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:layout_marginEnd="5dp"
                         android:fontFamily="@font/nanumsquareround_otfb"
-                        android:text="@{data.number}"
                         android:textColor="@color/text_waiting_color"
                         android:textSize="@dimen/post_number"
+                        app:number="@{data.number}"
+                        app:status="@{data.status}"
                         tools:text="#192번째 대기중" />
 
                     <TextView
                         android:id="@+id/post_time"
-                        app:day="@{data.createdAt}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
@@ -64,16 +63,17 @@
                         android:gravity="start"
                         android:textColor="#C4C4C4"
                         android:textSize="@dimen/post_time"
+                        app:day="@{data.createdAt}"
                         tools:text="2021년 3월 12일 새벽" />
 
                     <TextView
                         android:id="@+id/post_tag"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        tools:text="#공부"
                         android:text="@{data.tag}"
                         android:textColor="@color/main_color"
                         android:textSize="@dimen/post_tag"
+                        tools:text="#공부"
 
                         />
                 </LinearLayout>
@@ -83,15 +83,17 @@
                     android:id="@+id/post_more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:entries="@array/waitingList"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/nanumsquareround_otfb"
                     android:gravity="start"
-                    tools:text="더보기"
-                    android:text="@{data.status}"
                     android:textColor="#C4C4C4"
-                    android:textSize="@dimen/post_more" />
+                    android:textSize="@dimen/post_more"
+                    app:chooseStatus="@{data.status}"
+                    tools:text="더보기" />
+
+
             </RelativeLayout>
 
             <TextView
@@ -103,11 +105,11 @@
                 android:fontFamily="@font/nanumsquareround_otfeb"
                 android:gravity="start"
                 android:includeFontPadding="false"
-                tools:text="역시 개발은 새벽이지~"
                 android:text="@{data.title}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/post_md"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="역시 개발은 새벽이지~" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -116,12 +118,12 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/nanumsquareround_otfl"
                 android:gravity="start"
-                tools:text="새벽 코딩이 개꿀임. 진심 집중도 잘 되고 뭔가 날 방해하는 것도 없어. 이걸 참아??????????????????? 가능???????????"
                 android:includeFontPadding="false"
                 android:text="@{data.content}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/post_con"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="새벽 코딩이 개꿀임. 진심 집중도 잘 되고 뭔가 날 방해하는 것도 없어. 이걸 참아??????????????????? 가능???????????" />
         </RelativeLayout>
 
     </LinearLayout>

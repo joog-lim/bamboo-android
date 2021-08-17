@@ -2,24 +2,53 @@ package com.study.bamboo.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.study.bamboo.R
 import com.study.bamboo.databinding.ActivityMainBinding
 import com.study.bamboo.databinding.ActivityPostCreateBinding
+import com.study.bamboo.utils.ViewModel
+import com.study.bamboo.utils.ViewModel.postCreateViewModel
+import com.study.bamboo.utils.ViewModel.signInViewModel
 import com.study.bamboo.view.base.BaseActivity
+import com.study.bamboo.viewmodel.PostCreateViewModel
+import com.study.bamboo.viewmodel.SignInViewModel
 
 class PostCreateActivity : BaseActivity() {
 
     private val binding by binding<ActivityPostCreateBinding>(R.layout.activity_post_create)
+    private var tag = "태그선택"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post_create)
 
+        binding.activity = this
+
+/*        postCreateViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        ).get(PostCreateViewModel::class.java)*/
+
+
+        postCreateViewModel.postCreateResponse.observe(this, Observer {
+            binding.progressBar.visibility = View.GONE
+        })
+
+
+        binding.uploadBtn.setOnClickListener {
+            Log.d("로그","눌림")
+            binding.progressBar.visibility = View.VISIBLE
+           // postCreateBtnClick()
+
+        }
 
         //spinner
         binding.choiceTag.adapter = ArrayAdapter.createFromResource(this,R.array.PostCreateTagList, R.layout.post_create_tag_spinner_item)
@@ -38,32 +67,41 @@ class PostCreateActivity : BaseActivity() {
             ) {
                 when (position) {
                     0 -> {
-
+                        tag = "태그선택"
                     }
                     1 -> {
+                        tag = "유머"
 
                     }
                     2 -> {
+                        tag = "공부"
 
                     }
                     3 -> {
+                        tag = "일상"
 
                     }
                     4 -> {
+                        tag = "학교"
 
                     }
                     5 -> {
+                        tag = "취업"
 
                     }
                     6 -> {
+                        tag = "관계"
 
                     }
                     7 -> {
+                        tag = "기타"
 
                     }
                     else -> {
+                        tag = "태그선택"
                     }
                 }
+                postCreateViewModel.setChoiceTag(tag)
             }
         }
 
@@ -71,7 +109,12 @@ class PostCreateActivity : BaseActivity() {
         setupSpinnerHandler()*/
     }
 
-    private fun setupSpinnerTag() {
+    fun postCreateBtnClick(){
+        postCreateViewModel.getVerifyResponse.value?.let { postCreateViewModel.callPostCreateAPI(binding.title.text.toString(),binding.content.text.toString(),tag, it.id, "#softmaster01") }
+
+    }
+
+/*    private fun setupSpinnerTag() {
         val tags = resources.getStringArray(R.array.PostCreateTagList)
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, tags)
         binding.choiceTag.adapter = adapter
@@ -121,6 +164,6 @@ class PostCreateActivity : BaseActivity() {
             }
         }
 
-    }
+    }*/
 
 }

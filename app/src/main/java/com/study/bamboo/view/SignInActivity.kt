@@ -16,9 +16,11 @@ import com.study.bamboo.R
 import com.study.bamboo.databinding.ActivityMainBinding
 import com.study.bamboo.databinding.ActivitySignInBinding
 import com.study.bamboo.utils.ViewModel
+import com.study.bamboo.utils.ViewModel.postCreateViewModel
 import com.study.bamboo.utils.ViewModel.signInViewModel
 import com.study.bamboo.view.base.BaseActivity
 import com.study.bamboo.view.dialog.LoginDialog
+import com.study.bamboo.viewmodel.PostCreateViewModel
 import com.study.bamboo.viewmodel.SignInViewModel
 
 class SignInActivity : BaseActivity() {
@@ -36,7 +38,10 @@ class SignInActivity : BaseActivity() {
             ViewModelProvider.NewInstanceFactory()
         ).get(SignInViewModel::class.java)
 
-
+        postCreateViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        ).get(PostCreateViewModel::class.java)
 
         //post 게시물을 받아왔을때 MainActivity로 넘어가기
         signInViewModel.getPostResponse.observe(this, Observer {

@@ -2,6 +2,7 @@ package com.study.bamboo.view.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,9 @@ import com.study.bamboo.viewmodel.SignInViewModel
 class UserMainFragment : Fragment() {
 
     lateinit var binding: FragmentUserMainBinding
+    companion object{
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +41,7 @@ class UserMainFragment : Fragment() {
         super.onStop()
         binding.progressBar.visibility = View.GONE
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,13 +50,11 @@ class UserMainFragment : Fragment() {
         binding.activity = this
         binding.progressBar.visibility = View.GONE
 
+
         Functions.recyclerViewManager(binding.postRecyclerView,requireContext())
         binding.postRecyclerView.adapter = UserHomeItemAdapter(signInViewModel.getPostResponse)
 
-        postCreateViewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.NewInstanceFactory()
-        ).get(PostCreateViewModel::class.java)
+
 
 
         //글쓰기 버튼을 눌렀을때 verify 호출 후 완료 했을때
@@ -66,7 +69,14 @@ class UserMainFragment : Fragment() {
 
     fun addPostBtnClick(view: View){
         binding.progressBar.visibility = View.VISIBLE
-        postCreateViewModel.callGetVerifyAPI()
+        Log.d("로그","getVerifyResponse 값 : ${postCreateViewModel.getVerifyResponse.value}")
+        if (postCreateViewModel.getVerifyResponse.value != null){
+            val intent = Intent(requireContext(), PostCreateActivity::class.java)
+            startActivity(intent)
+        }else{
+            postCreateViewModel.callGetVerifyAPI()
+
+        }
 
     }
 

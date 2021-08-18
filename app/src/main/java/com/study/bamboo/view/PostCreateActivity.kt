@@ -39,7 +39,6 @@ class PostCreateActivity : BaseActivity() {
 
         //게시물을 전송하기 버튼 클릭 후 질문 답 확인
         postCreateViewModel.postCreateResponse.observe(this, Observer {
-            Log.d("로그","게시물 업로드 후 : $it")
             binding.progressBar.visibility = View.GONE
             if(it != null) {
                 postCreateViewModel.postCreateSuccess.value = true
@@ -48,7 +47,6 @@ class PostCreateActivity : BaseActivity() {
 
         //게시물을 성공적으로 전송했는지 확인
         postCreateViewModel.postCreateSuccess.observe(this, Observer {
-            Log.d("로그","여기 호출됨 postCreate success $it")
             if(it == true){
                 finish()
             }
@@ -62,14 +60,13 @@ class PostCreateActivity : BaseActivity() {
         if (TextUtils.isEmpty(binding.title.text.toString()) || TextUtils.isEmpty(binding.content.text.toString()) || postCreateViewModel.choiceTag.value == "태그선택" || TextUtils.isEmpty(binding.questionAnswer.text.toString())){
             Toast.makeText(this,"필수항목을 작성해 주세요",Toast.LENGTH_SHORT).show()
         }else{
-            binding.progressBar.visibility = View.VISIBLE
 
             if(questionAnswerTrue(binding.questionAnswer.text.toString())){
+                binding.progressBar.visibility = View.VISIBLE
                 splashViewModel.getVerifyResponse.value?.let { postCreateViewModel.callPostCreateAPI(binding.title.text.toString(),binding.content.text.toString(),tag, it.id, binding.questionAnswer.text.toString()) }
 
             }else{
                 Toast.makeText(this,"질문에 대한 답이 옳지 않습니다",Toast.LENGTH_SHORT).show()
-
             }
         }
     }

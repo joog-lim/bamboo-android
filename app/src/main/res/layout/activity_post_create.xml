@@ -120,6 +120,51 @@
 
 
             </RelativeLayout>
+
+
+
+
+            <TextView
+                android:id="@+id/question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="34dp"
+                android:layout_marginStart="@dimen/post_create_margin"
+                android:layout_marginEnd="@dimen/post_create_margin"
+                android:fontFamily="@font/nanumsquareround_otfb"
+                android:text="Q. 질문입니다"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <EditText
+                    android:id="@+id/question_answer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/post_create_margin"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="@dimen/post_create_margin"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/post_create_box"
+                    android:elevation="5dp"
+                    android:fontFamily="@font/nanumsquareround_otfb"
+                    android:gravity="top|start"
+                    android:hint="답변을 입력하세요."
+                    android:inputType="text"
+                    android:padding="10dp"
+                    android:textSize="15sp" />
+
+
+            </RelativeLayout>
+
+
+
             <RelativeLayout
 
                 android:layout_width="match_parent"
@@ -140,6 +185,9 @@
                     />
 
             </RelativeLayout>
+
+
+
 
         </LinearLayout>
 

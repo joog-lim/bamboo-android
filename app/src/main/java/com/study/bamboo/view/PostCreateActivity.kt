@@ -2,11 +2,13 @@ package com.study.bamboo.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -41,6 +43,8 @@ class PostCreateActivity : BaseActivity() {
         postCreateViewModel.postCreateResponse.observe(this, Observer {
             binding.progressBar.visibility = View.GONE
         })
+
+        binding.question.text = "Q. ${postCreateViewModel.getVerifyResponse.value?.question}"
 
 
         //spinner
@@ -103,10 +107,13 @@ class PostCreateActivity : BaseActivity() {
     }
 
     fun postCreateBtnClick(view: View){
-        binding.progressBar.visibility = View.VISIBLE
+        if (TextUtils.isEmpty(binding.title.text.toString()) || TextUtils.isEmpty(binding.content.text.toString()) || postCreateViewModel.choiceTag.value == "태그선택" || TextUtils.isEmpty(binding.questionAnswer.text.toString())){
+            Toast.makeText(this,"필수항목을 작성해 주세요",Toast.LENGTH_SHORT).show()
+        }else{
+            binding.progressBar.visibility = View.VISIBLE
 
-        postCreateViewModel.getVerifyResponse.value?.let { postCreateViewModel.callPostCreateAPI(binding.title.text.toString(),binding.content.text.toString(),tag, it.id, "#softmeister01") }
-
+            postCreateViewModel.getVerifyResponse.value?.let { postCreateViewModel.callPostCreateAPI(binding.title.text.toString(),binding.content.text.toString(),tag, it.id, binding.questionAnswer.text.toString()) }
+        }
     }
 
 /*    private fun setupSpinnerTag() {

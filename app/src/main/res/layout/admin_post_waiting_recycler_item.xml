@@ -79,7 +79,7 @@
                 </LinearLayout>
 
 
-                <TextView
+           <!--     <TextView
                     android:id="@+id/post_more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
                     android:textSize="@dimen/post_more"
                     app:chooseStatus="@{data.status}"
                     tools:text="더보기" />
-
+-->
 
             </RelativeLayout>
 

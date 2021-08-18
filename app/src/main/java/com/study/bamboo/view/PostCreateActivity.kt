@@ -43,13 +43,6 @@ class PostCreateActivity : BaseActivity() {
         })
 
 
-        binding.uploadBtn.setOnClickListener {
-            Log.d("로그","눌림")
-            binding.progressBar.visibility = View.VISIBLE
-           // postCreateBtnClick()
-
-        }
-
         //spinner
         binding.choiceTag.adapter = ArrayAdapter.createFromResource(this,R.array.PostCreateTagList, R.layout.post_create_tag_spinner_item)
 
@@ -109,8 +102,10 @@ class PostCreateActivity : BaseActivity() {
         setupSpinnerHandler()*/
     }
 
-    fun postCreateBtnClick(){
-        postCreateViewModel.getVerifyResponse.value?.let { postCreateViewModel.callPostCreateAPI(binding.title.text.toString(),binding.content.text.toString(),tag, it.id, "#softmaster01") }
+    fun postCreateBtnClick(view: View){
+        binding.progressBar.visibility = View.VISIBLE
+
+        postCreateViewModel.getVerifyResponse.value?.let { postCreateViewModel.callPostCreateAPI(binding.title.text.toString(),binding.content.text.toString(),tag, it.id, "#softmeister01") }
 
     }
 

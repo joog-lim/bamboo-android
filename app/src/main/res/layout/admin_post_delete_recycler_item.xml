@@ -34,6 +34,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
+<!--
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -78,9 +79,10 @@
 
                         />
                 </LinearLayout>
+-->
 
 
-                <TextView
+<!--                <TextView
                     android:id="@+id/post_more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -93,7 +95,7 @@
                     android:textColor="#C4C4C4"
                     android:textSize="@dimen/post_more"
                     app:chooseStatus="@{data.status}"
-                    tools:hint="더보기" />
+                    tools:hint="더보기" />-->
             </RelativeLayout>
 
             <TextView

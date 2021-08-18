@@ -10,6 +10,6 @@ class AdminRepository @Inject constructor(
 ) {
 
     suspend fun deletePost(arg: String) = adminApi.deletePost(arg)
-    suspend fun getPost(count: Int, cursor: String, status: String) =
-        adminApi.getPost(count, cursor, status)
+    suspend fun getPost(token:String,count: Int, cursor: String, status: String) =
+        adminApi.getPost(token,count, cursor, status)
 }

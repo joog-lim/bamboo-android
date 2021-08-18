@@ -1,25 +1,19 @@
-package com.study.bamboo.view
+package com.study.bamboo.view.activity.signin
 
 import android.content.Context
 import android.content.Intent
 import android.graphics.Point
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.study.bamboo.R
-import com.study.bamboo.databinding.ActivityMainBinding
 import com.study.bamboo.databinding.ActivitySignInBinding
-import com.study.bamboo.utils.ViewModel
 import com.study.bamboo.utils.ViewModel.signInViewModel
+import com.study.bamboo.view.activity.MainActivity
 import com.study.bamboo.view.base.BaseActivity
-import com.study.bamboo.view.dialog.LoginDialog
-import com.study.bamboo.viewmodel.SignInViewModel
 
 class SignInActivity : BaseActivity() {
     private val binding by binding<ActivitySignInBinding>(R.layout.activity_sign_in)
@@ -30,11 +24,6 @@ class SignInActivity : BaseActivity() {
         binding.activity = this
 
         binding.progressBar.visibility = View.GONE
-
-        signInViewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.NewInstanceFactory()
-        ).get(SignInViewModel::class.java)
 
 
 

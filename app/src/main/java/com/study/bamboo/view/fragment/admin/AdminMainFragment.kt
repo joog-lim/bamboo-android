@@ -1,20 +1,16 @@
 package com.study.bamboo.view.fragment.admin
 
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.study.bamboo.R
 import com.study.bamboo.databinding.FragmentAdminMainBinding
 import com.study.bamboo.adapter.AdminHomeItemAdapter
 import com.study.bamboo.adapter.Situation
 import com.study.bamboo.view.base.BaseFragment
-import com.study.bamboo.viewmodel.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -24,9 +20,9 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
         const val TAG = "AdminMainFragment"
     }
 
-    private val viewModel: AdminViewModel by viewModels()
+    /*private val viewModel: AdminViewModel by viewModels()
     private val tokenViewModel: SignInViewModel by viewModels()
-
+*/
     private val acceptAdapter: AdminHomeItemAdapter by lazy {
 
         AdminHomeItemAdapter(Situation.ACCEPT)
@@ -73,7 +69,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                     position: Int,
                     id: Long
                 ) {
-                    when (position) {
+              /*      when (position) {
                         0 -> {
 
                             setItemAdapter(acceptAdapter)
@@ -122,17 +118,17 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                         }
                         else -> {
                         }
-                    }
+                    }*/
                 }
             }
 
     }
 
-    fun observeNetwork(token: String, count: Int, cursor: String, status: String) =
+/*    fun observeNetwork(token: String, count: Int, cursor: String, status: String) =
         lifecycleScope.launch {
             viewModel.getPost(token, count, cursor, status)
 
-        }
+        }*/
 
     fun setItemAdapter(adapter: AdminHomeItemAdapter) {
         binding.postRecyclerView.apply {

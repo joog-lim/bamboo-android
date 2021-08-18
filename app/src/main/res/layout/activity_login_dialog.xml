@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:background="@drawable/login_dialog_password_edittext"
         android:layout_height="wrap_content"
-        tools:context=".view.dialog.LoginDialog">
+        tools:context=".view.activity.signin.LoginDialog">
 
         <ImageView
             android:id="@+id/logo_img"

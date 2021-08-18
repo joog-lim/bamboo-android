@@ -6,14 +6,14 @@
     <data>
         <variable
             name="activity"
-            type="com.study.bamboo.view.SignInActivity" />
+            type="com.study.bamboo.view.activity.signin.SignInActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context=".view.SignInActivity">
+        tools:context=".view.activity.signin.SignInActivity">
 
 
         <ImageView

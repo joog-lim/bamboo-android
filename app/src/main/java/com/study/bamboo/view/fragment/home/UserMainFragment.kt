@@ -35,6 +35,14 @@ class UserMainFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         binding.progressBar.visibility = View.GONE
+        postCreateViewModel.postCreateSuccess.value = false
+        postCreateViewModel.postCreateResponse.value = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+
     }
 
     override fun onStop() {
@@ -70,6 +78,7 @@ class UserMainFragment : Fragment() {
     fun addPostBtnClick(view: View){
         binding.progressBar.visibility = View.VISIBLE
         Log.d("로그","getVerifyResponse 값 : ${postCreateViewModel.getVerifyResponse.value}")
+        Log.d("로그","게시글 눌렀을때 : ${postCreateViewModel.postCreateSuccess.value}")
         if (postCreateViewModel.getVerifyResponse.value != null){
             val intent = Intent(requireContext(), PostCreateActivity::class.java)
             startActivity(intent)

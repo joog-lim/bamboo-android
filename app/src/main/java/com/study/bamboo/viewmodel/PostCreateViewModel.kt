@@ -25,10 +25,18 @@ class PostCreateViewModel : ViewModel() {
     val postCreateResponse get() = _postCreateResponse
     private val _postCreateResponse: MutableLiveData<PostCreateResponse> = MutableLiveData<PostCreateResponse>()
 
+    //게시물 업로드 후 리스폰스 받아오기
+    val postCreateSuccess get() = _postCreateSuccess
+    private val _postCreateSuccess: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
+
+
 
     val choiceTag get() = _choiceTag
     private val _choiceTag: MutableLiveData<String> = MutableLiveData<String>()
 
+    init {
+        _postCreateSuccess.value = false
+    }
 
     //스피너로 tag변경할때 tag 값 변경
     fun setChoiceTag(tag : String){
@@ -48,7 +56,7 @@ class PostCreateViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<GetVerifyDTO>, t: Throwable) {
-                TODO("Not yet implemented")
+
             }
 
         })
@@ -69,11 +77,12 @@ class PostCreateViewModel : ViewModel() {
                 response: Response<PostCreateResponse>
             ) {
                 Log.d("로그","게시물 게시후 ${response.body()?.id}")
+                Log.d("로그","실패  message : ${response.raw()}, errorBody : ${response.isSuccessful}")
                 _postCreateResponse.value = response.body()
             }
 
             override fun onFailure(call: Call<PostCreateResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                Log.d("로그","onFailure : $call, $t")
             }
 
         })

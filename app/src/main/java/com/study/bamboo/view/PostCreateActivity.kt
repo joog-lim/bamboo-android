@@ -31,26 +31,59 @@ class PostCreateActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post_create)
-
         binding.activity = this
+        binding.question.text = "Q. ${postCreateViewModel.getVerifyResponse.value?.question}"
+        setupSpinnerTag()
+        setupSpinnerHandler()
 
-/*        postCreateViewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.NewInstanceFactory()
-        ).get(PostCreateViewModel::class.java)*/
-
-
+        //게시물을 전송하기 버튼 클릭 후 질문 답 확인
         postCreateViewModel.postCreateResponse.observe(this, Observer {
+            Log.d("로그","게시물 업로드 후 : $it")
             binding.progressBar.visibility = View.GONE
+            if(it != null) {
+                postCreateViewModel.postCreateSuccess.value = true
+            }
         })
 
-        binding.question.text = "Q. ${postCreateViewModel.getVerifyResponse.value?.question}"
+        //게시물을 성공적으로 전송했는지 확인
+        postCreateViewModel.postCreateSuccess.observe(this, Observer {
+            Log.d("로그","여기 호출됨 postCreate success $it")
+            if(it == true){
+                //finish()
+            }
+        })
 
 
-        //spinner
+
+    }
+
+    fun postCreateBtnClick(view: View){
+        if (TextUtils.isEmpty(binding.title.text.toString()) || TextUtils.isEmpty(binding.content.text.toString()) || postCreateViewModel.choiceTag.value == "태그선택" || TextUtils.isEmpty(binding.questionAnswer.text.toString())){
+            Toast.makeText(this,"필수항목을 작성해 주세요",Toast.LENGTH_SHORT).show()
+        }else{
+            binding.progressBar.visibility = View.VISIBLE
+
+            if(questionAnswerTrue(binding.questionAnswer.text.toString())){
+                postCreateViewModel.getVerifyResponse.value?.let { postCreateViewModel.callPostCreateAPI(binding.title.text.toString(),binding.content.text.toString(),tag, it.id, binding.questionAnswer.text.toString()) }
+
+            }else{
+                Toast.makeText(this,"질문에 대한 답이 옳지 않습니다",Toast.LENGTH_SHORT).show()
+
+            }
+        }
+    }
+
+    //게시글 문제 답 체크
+    private fun questionAnswerTrue(answer : String):Boolean{
+        return answer == "#softmeister01"
+    }
+    //spinner
+    private fun setupSpinnerTag() {
         binding.choiceTag.adapter = ArrayAdapter.createFromResource(this,R.array.PostCreateTagList, R.layout.post_create_tag_spinner_item)
+    }
 
-
+    //spinner
+    private fun setupSpinnerHandler() {
         binding.choiceTag.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
@@ -102,70 +135,6 @@ class PostCreateActivity : BaseActivity() {
             }
         }
 
-/*        setupSpinnerTag()
-        setupSpinnerHandler()*/
     }
-
-    fun postCreateBtnClick(view: View){
-        if (TextUtils.isEmpty(binding.title.text.toString()) || TextUtils.isEmpty(binding.content.text.toString()) || postCreateViewModel.choiceTag.value == "태그선택" || TextUtils.isEmpty(binding.questionAnswer.text.toString())){
-            Toast.makeText(this,"필수항목을 작성해 주세요",Toast.LENGTH_SHORT).show()
-        }else{
-            binding.progressBar.visibility = View.VISIBLE
-
-            postCreateViewModel.getVerifyResponse.value?.let { postCreateViewModel.callPostCreateAPI(binding.title.text.toString(),binding.content.text.toString(),tag, it.id, binding.questionAnswer.text.toString()) }
-        }
-    }
-
-/*    private fun setupSpinnerTag() {
-        val tags = resources.getStringArray(R.array.PostCreateTagList)
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, tags)
-        binding.choiceTag.adapter = adapter
-
-    }
-
-    private fun setupSpinnerHandler() {
-        binding.choiceTag.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                when (position) {
-                    0 -> {
-
-                    }
-                    1 -> {
-
-                    }
-                    2 -> {
-
-                    }
-                    3 -> {
-
-                    }
-                    4 -> {
-
-                    }
-                    5 -> {
-
-                    }
-                    6 -> {
-
-                    }
-                    7 -> {
-
-                    }
-                    else -> {
-                    }
-                }
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-
-            }
-        }
-
-    }*/
 
 }

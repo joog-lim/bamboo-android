@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navi"
+    app:startDestination="@id/adminMainFragment">
+
+
+    <fragment
+        android:id="@+id/adminMainFragment"
+        tools:layout="@layout/fragment_admin_main"
+        android:name="com.study.bamboo.view.fragment.admin.AdminMainFragment"
+        android:label="dsad" >
+
+        <argument
+            android:name="auth"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/adminRulesFragment"
+        android:name="com.study.bamboo.view.fragment.RulesFragment"
+        android:label="fragment_rules"
+        tools:layout="@layout/fragment_rules" />
+    <fragment
+        android:id="@+id/adminMoreSeeFragment"
+        android:name="com.study.bamboo.view.fragment.MoreSeeFragment"
+        android:label="fragment_more_see"
+        tools:layout="@layout/fragment_more_see" />
+    <dialog
+        android:id="@+id/loginDialog"
+        android:name="com.study.bamboo.view.activity.signin.LoginDialog"
+        tools:layout="@layout/activity_login_dialog"
+        android:label="LoginDialog" >
+        <action
+            android:id="@+id/action_loginDialog_to_adminMainFragment"
+            app:destination="@id/adminMainFragment" />
+    </dialog>
+
+</navigation>

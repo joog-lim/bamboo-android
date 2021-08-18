@@ -15,8 +15,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
+            android:orientation="vertical"
             android:layout_height="match_parent"
             android:padding="15dp"
 
@@ -220,7 +221,7 @@
             </LinearLayout>
 
 
-        </RelativeLayout>
+        </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 

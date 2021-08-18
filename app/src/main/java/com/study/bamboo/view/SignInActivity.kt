@@ -33,15 +33,7 @@ class SignInActivity : BaseActivity() {
 
         binding.progressBar.visibility = View.GONE
 
-        signInViewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.NewInstanceFactory()
-        ).get(SignInViewModel::class.java)
 
-        postCreateViewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.NewInstanceFactory()
-        ).get(PostCreateViewModel::class.java)
 
         //post 게시물을 받아왔을때 MainActivity로 넘어가기
         signInViewModel.getPostResponse.observe(this, Observer {

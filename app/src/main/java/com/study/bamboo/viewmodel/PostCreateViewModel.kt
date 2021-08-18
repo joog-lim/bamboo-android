@@ -16,10 +16,6 @@ import retrofit2.Response
 
 class PostCreateViewModel : ViewModel() {
 
-    //verify 값 받아오기
-    val getVerifyResponse get() = _getVerifyResponse
-    private val _getVerifyResponse: MutableLiveData<GetVerifyDTO> = MutableLiveData<GetVerifyDTO>()
-
 
     //게시물 업로드 후 리스폰스 받아오기
     val postCreateResponse get() = _postCreateResponse
@@ -43,24 +39,6 @@ class PostCreateViewModel : ViewModel() {
         _choiceTag.value = tag
     }
 
-
-    //verify호출로 id와 질문 가져오기
-    fun callGetVerifyAPI(){
-        val retService = RetrofitClient().getService().create(GetVerifyAPI::class.java)
-        retService.getVerify().enqueue(object : Callback<GetVerifyDTO> {
-            override fun onResponse(call: Call<GetVerifyDTO>, response: Response<GetVerifyDTO>) {
-                Log.d("로그","Verify 값 : ${response.body()?.id}")
-                if(response.body()?.id != null){
-                    _getVerifyResponse.value = response.body()
-                }
-            }
-
-            override fun onFailure(call: Call<GetVerifyDTO>, t: Throwable) {
-
-            }
-
-        })
-    }
 
 
     //게시물 올리기

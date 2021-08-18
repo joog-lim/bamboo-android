@@ -19,6 +19,7 @@ import com.study.bamboo.databinding.ActivityPostCreateBinding
 import com.study.bamboo.utils.ViewModel
 import com.study.bamboo.utils.ViewModel.postCreateViewModel
 import com.study.bamboo.utils.ViewModel.signInViewModel
+import com.study.bamboo.utils.ViewModel.splashViewModel
 import com.study.bamboo.view.base.BaseActivity
 import com.study.bamboo.viewmodel.PostCreateViewModel
 import com.study.bamboo.viewmodel.SignInViewModel
@@ -32,7 +33,7 @@ class PostCreateActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post_create)
         binding.activity = this
-        binding.question.text = "Q. ${postCreateViewModel.getVerifyResponse.value?.question}"
+        binding.question.text = "Q. ${splashViewModel.getVerifyResponse.value?.question}"
         setupSpinnerTag()
         setupSpinnerHandler()
 
@@ -49,7 +50,7 @@ class PostCreateActivity : BaseActivity() {
         postCreateViewModel.postCreateSuccess.observe(this, Observer {
             Log.d("로그","여기 호출됨 postCreate success $it")
             if(it == true){
-                //finish()
+                finish()
             }
         })
 
@@ -64,7 +65,7 @@ class PostCreateActivity : BaseActivity() {
             binding.progressBar.visibility = View.VISIBLE
 
             if(questionAnswerTrue(binding.questionAnswer.text.toString())){
-                postCreateViewModel.getVerifyResponse.value?.let { postCreateViewModel.callPostCreateAPI(binding.title.text.toString(),binding.content.text.toString(),tag, it.id, binding.questionAnswer.text.toString()) }
+                splashViewModel.getVerifyResponse.value?.let { postCreateViewModel.callPostCreateAPI(binding.title.text.toString(),binding.content.text.toString(),tag, it.id, binding.questionAnswer.text.toString()) }
 
             }else{
                 Toast.makeText(this,"질문에 대한 답이 옳지 않습니다",Toast.LENGTH_SHORT).show()

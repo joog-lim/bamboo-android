@@ -65,11 +65,12 @@ class UserMainFragment : Fragment() {
 
 
 
-        //글쓰기 버튼을 눌렀을때 verify 호출 후 완료 했을때
+/*        //글쓰기 버튼을 눌렀을때 verify 호출 후 완료 했을때
         postCreateViewModel.getVerifyResponse.observe(requireActivity(), Observer {
+
             val intent = Intent(requireContext(), PostCreateActivity::class.java)
             startActivity(intent)
-        })
+        })*/
 
 
         return binding.root
@@ -77,15 +78,9 @@ class UserMainFragment : Fragment() {
 
     fun addPostBtnClick(view: View){
         binding.progressBar.visibility = View.VISIBLE
-        Log.d("로그","getVerifyResponse 값 : ${postCreateViewModel.getVerifyResponse.value}")
-        Log.d("로그","게시글 눌렀을때 : ${postCreateViewModel.postCreateSuccess.value}")
-        if (postCreateViewModel.getVerifyResponse.value != null){
+
             val intent = Intent(requireContext(), PostCreateActivity::class.java)
             startActivity(intent)
-        }else{
-            postCreateViewModel.callGetVerifyAPI()
-
-        }
 
     }
 

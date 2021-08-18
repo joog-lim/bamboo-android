@@ -1,4 +1,4 @@
-package com.study.bamboo.view.fragment
+package com.study.bamboo.view.fragment.home
 
 import android.content.Intent
 import android.os.Bundle

@@ -11,5 +11,5 @@
     <dimen name="post_more">13sp</dimen>
     <dimen name="post_md">14sp</dimen>
     <dimen name="post_con">13sp</dimen>
-    <dimen name="post_create_margin">40dp</dimen>
+    <dimen name="post_create_margin">20dp</dimen>
 </resources>

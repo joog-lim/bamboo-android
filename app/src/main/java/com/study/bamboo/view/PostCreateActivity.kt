@@ -56,6 +56,10 @@ class PostCreateActivity : BaseActivity() {
 
     }
 
+    fun backBtnClick(view: View){
+        finish()
+    }
+
     fun postCreateBtnClick(view: View){
         if (TextUtils.isEmpty(binding.title.text.toString()) || TextUtils.isEmpty(binding.content.text.toString()) || postCreateViewModel.choiceTag.value == "태그선택" || TextUtils.isEmpty(binding.questionAnswer.text.toString())){
             Toast.makeText(this,"필수항목을 작성해 주세요",Toast.LENGTH_SHORT).show()

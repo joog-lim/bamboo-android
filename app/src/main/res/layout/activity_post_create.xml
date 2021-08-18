@@ -21,6 +21,38 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <carbon.widget.RelativeLayout
+                android:id="@+id/title_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:carbon_elevation="8dp"
+                app:carbon_elevationShadowColor="@color/main_color">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nanumsquareround_otfeb"
+                    android:text="글 입력하기"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/back_btn"
+                    android:textColor="@color/main_color"
+                    android:textSize="20sp" />
+                <ImageView
+                    android:id="@+id/back_btn"
+                    android:onClick="@{activity::backBtnClick}"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="10dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_back_btn" />
+            </carbon.widget.RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -32,15 +64,6 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nanumsquareround_otfeb"
-                    android:text="글 입력하기"
-                    android:textColor="@color/main_color"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
                     android:fontFamily="@font/nanumsquareround_otfb"
                     android:text="올리고 싶은 글을 입력해 주세요!"
                     android:textColor="@color/black"

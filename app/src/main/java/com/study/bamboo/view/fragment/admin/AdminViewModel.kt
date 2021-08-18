@@ -20,8 +20,8 @@ class AdminViewModel @Inject constructor(
     private val _deletePostData = MutableLiveData<DeletePostDto>()
     val deletePostDto: LiveData<DeletePostDto> get() = _deletePostData
 
-    private val _getPostData = MutableLiveData<UserPostDTO>()
-    val getPostData: LiveData<UserPostDTO> get() = _getPostData
+    private val _getPostData = MutableLiveData<List<UserPostDTO>>()
+    val getPostData: LiveData<List<UserPostDTO>> get() = _getPostData
 
     fun deletePost(arg: String) = viewModelScope.launch {
 
@@ -33,14 +33,14 @@ class AdminViewModel @Inject constructor(
         }
     }
 
-    fun getPost(count: Int, cursor: String, status: String) = viewModelScope.launch {
+    fun getPost(token:String,count: Int, cursor: String, status: String) = viewModelScope.launch {
 
-        adminRepository.getPost(count, cursor, status).let { response ->
+        adminRepository.getPost(token,count, cursor, status).let { response ->
 
             if (response.isSuccessful) {
 
                 response.body()?.posts?.filter { it.status == status }.apply {
-                    _getPostData.value = this?.get(0)
+                    _getPostData.value = this
                 }
 
             }

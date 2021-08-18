@@ -8,17 +8,17 @@
 
     <fragment
         android:id="@+id/userMainFragment"
-        tools:layout="@layout/fragment_home"
+        tools:layout="@layout/fragment_user_main"
         android:name="com.study.bamboo.view.fragment.home.UserMainFragment"
         android:label="HomeFragment" />
 
     <fragment
-        android:id="@+id/rulesFragment"
+        android:id="@+id/userRulesFragment"
         android:name="com.study.bamboo.view.fragment.RulesFragment"
         android:label="fragment_rules"
         tools:layout="@layout/fragment_rules" />
     <fragment
-        android:id="@+id/moreSeeFragment"
+        android:id="@+id/userMoreSeeFragment"
         android:name="com.study.bamboo.view.fragment.MoreSeeFragment"
         android:label="fragment_more_see"
         tools:layout="@layout/fragment_more_see" />

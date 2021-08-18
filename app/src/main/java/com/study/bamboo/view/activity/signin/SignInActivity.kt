@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import com.study.bamboo.R
 import com.study.bamboo.databinding.ActivitySignInBinding
 import com.study.bamboo.utils.ViewModel.signInViewModel
-import com.study.bamboo.view.activity.MainActivity
+import com.study.bamboo.view.activity.main.MainActivity
 import com.study.bamboo.view.base.BaseActivity
 
 class SignInActivity : BaseActivity() {
@@ -22,7 +22,7 @@ class SignInActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
         binding.activity = this
-
+        supportActionBar!!.hide()
         binding.progressBar.visibility = View.GONE
 
 

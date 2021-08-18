@@ -22,6 +22,7 @@ class PostCreateActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post_create)
         binding.activity = this
+        supportActionBar!!.hide()
         binding.question.text = "Q. ${splashViewModel.getVerifyResponse.value?.question}"
         setupSpinnerTag()
         setupSpinnerHandler()

@@ -1,6 +1,5 @@
 package com.study.bamboo.view.fragment.admin
 
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -11,9 +10,7 @@ import com.study.bamboo.databinding.FragmentAdminMainBinding
 import com.study.bamboo.adapter.AdminHomeItemAdapter
 import com.study.bamboo.adapter.Situation
 import com.study.bamboo.view.base.BaseFragment
-import com.study.bamboo.viewmodel.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint

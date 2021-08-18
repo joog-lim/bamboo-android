@@ -1,4 +1,4 @@
-package com.study.bamboo.view
+package com.study.bamboo.view.activity.splash
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,13 +6,12 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.study.bamboo.R
-import com.study.bamboo.utils.ViewModel
 import com.study.bamboo.utils.ViewModel.postCreateViewModel
 import com.study.bamboo.utils.ViewModel.signInViewModel
 import com.study.bamboo.utils.ViewModel.splashViewModel
-import com.study.bamboo.viewmodel.PostCreateViewModel
-import com.study.bamboo.viewmodel.SignInViewModel
-import com.study.bamboo.viewmodel.SplashViewModel
+import com.study.bamboo.view.activity.signin.SignInActivity
+import com.study.bamboo.view.activity.postcreate.PostCreateViewModel
+import com.study.bamboo.view.activity.signin.SignInViewModel
 
 class SplashActivity : AppCompatActivity() {
 

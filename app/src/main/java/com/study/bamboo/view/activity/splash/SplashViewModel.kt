@@ -1,4 +1,4 @@
-package com.study.bamboo.viewmodel
+package com.study.bamboo.view.activity.splash
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

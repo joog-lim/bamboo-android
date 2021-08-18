@@ -1,8 +1,8 @@
 package com.study.bamboo.utils
 
-import com.study.bamboo.viewmodel.PostCreateViewModel
-import com.study.bamboo.viewmodel.SignInViewModel
-import com.study.bamboo.viewmodel.SplashViewModel
+import com.study.bamboo.view.activity.postcreate.PostCreateViewModel
+import com.study.bamboo.view.activity.signin.SignInViewModel
+import com.study.bamboo.view.activity.splash.SplashViewModel
 
 object ViewModel {
     lateinit var signInViewModel: SignInViewModel

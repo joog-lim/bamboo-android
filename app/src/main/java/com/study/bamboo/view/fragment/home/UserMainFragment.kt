@@ -2,23 +2,18 @@ package com.study.bamboo.view.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.study.bamboo.R
 import com.study.bamboo.databinding.FragmentUserMainBinding
 import com.study.bamboo.utils.Functions
 import com.study.bamboo.utils.ViewModel.postCreateViewModel
 import com.study.bamboo.utils.ViewModel.signInViewModel
-import com.study.bamboo.view.PostCreateActivity
+import com.study.bamboo.view.activity.postcreate.PostCreateActivity
 import com.study.bamboo.view.adapter.UserHomeItemAdapter
-import com.study.bamboo.viewmodel.PostCreateViewModel
-import com.study.bamboo.viewmodel.SignInViewModel
 
 class UserMainFragment : Fragment() {
 

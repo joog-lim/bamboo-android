@@ -1,22 +1,14 @@
-package com.study.bamboo.view.dialog
+package com.study.bamboo.view.activity.signin
 
-import android.content.Context
 import android.graphics.Color
-import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.ViewModelProvider
 import com.study.bamboo.databinding.ActivityLoginDialogBinding
 import com.study.bamboo.utils.ViewModel
 import com.study.bamboo.utils.ViewModel.signInViewModel
-import com.study.bamboo.viewmodel.SignInViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
 
 class LoginDialog : DialogFragment() {
     private var _binding: ActivityLoginDialogBinding? = null

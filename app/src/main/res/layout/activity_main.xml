@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.MainActivity">
+        tools:context=".view.activity.MainActivity">
         <carbon.widget.RelativeLayout
             android:id="@+id/title_bar"
             android:layout_width="match_parent"

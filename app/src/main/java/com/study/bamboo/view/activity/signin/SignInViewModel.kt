@@ -1,4 +1,4 @@
-package com.study.bamboo.viewmodel
+package com.study.bamboo.view.activity.signin
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

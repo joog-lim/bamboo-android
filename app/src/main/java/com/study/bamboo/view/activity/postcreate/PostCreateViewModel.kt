@@ -1,13 +1,11 @@
-package com.study.bamboo.viewmodel
+package com.study.bamboo.view.activity.postcreate
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.study.bamboo.model.dto.GetVerifyDTO
 import com.study.bamboo.model.dto.postcreate.PostCreateRequest
 import com.study.bamboo.model.dto.postcreate.PostCreateResponse
 import com.study.bamboo.model.dto.postcreate.Verifier
-import com.study.bamboo.model.retrofit.GetVerifyAPI
 import com.study.bamboo.model.retrofit.PostCreateAPI
 import com.study.bamboo.model.retrofit.RetrofitClient
 import retrofit2.Call

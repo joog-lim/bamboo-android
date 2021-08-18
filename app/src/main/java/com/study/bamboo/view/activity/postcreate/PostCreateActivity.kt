@@ -1,28 +1,17 @@
-package com.study.bamboo.view
+package com.study.bamboo.view.activity.postcreate
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.study.bamboo.R
-import com.study.bamboo.databinding.ActivityMainBinding
 import com.study.bamboo.databinding.ActivityPostCreateBinding
-import com.study.bamboo.utils.ViewModel
 import com.study.bamboo.utils.ViewModel.postCreateViewModel
-import com.study.bamboo.utils.ViewModel.signInViewModel
 import com.study.bamboo.utils.ViewModel.splashViewModel
 import com.study.bamboo.view.base.BaseActivity
-import com.study.bamboo.viewmodel.PostCreateViewModel
-import com.study.bamboo.viewmodel.SignInViewModel
 
 class PostCreateActivity : BaseActivity() {
 

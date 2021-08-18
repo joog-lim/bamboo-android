@@ -6,14 +6,14 @@
     <data>
         <variable
             name="activity"
-            type="com.study.bamboo.view.PostCreateActivity" />
+            type="com.study.bamboo.view.activity.postcreate.PostCreateActivity" />
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".view.PostCreateActivity">
+        tools:context=".view.activity.postcreate.PostCreateActivity">
 
 
 

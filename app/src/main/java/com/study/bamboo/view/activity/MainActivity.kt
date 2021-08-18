@@ -1,4 +1,4 @@
-package com.study.bamboo.view
+package com.study.bamboo.view.activity
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -4,10 +4,7 @@ import com.study.bamboo.model.dto.DeletePostDto
 import com.study.bamboo.model.dto.UserGetPostDTO
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface AdminApi {
     @DELETE("delete/{arg}")
@@ -17,6 +14,7 @@ interface AdminApi {
 
     @GET("post/get-list")
   suspend  fun getPost(
+        @Header("Authorization") Authorization :String,
         @Query("count") count : Int,
         @Query("cursor") cursor : String,
         @Query("status") status : String

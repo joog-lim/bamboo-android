@@ -34,18 +34,22 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
     private val acceptAdapter: AdminHomeItemAdapter by lazy {
 
         AdminHomeItemAdapter(Situation.ACCEPT)
+
     }
     private val deleteAdapter: AdminHomeItemAdapter by lazy {
 
         AdminHomeItemAdapter(Situation.DELETE)
+
     }
     private val rejectAdapter: AdminHomeItemAdapter by lazy {
 
         AdminHomeItemAdapter(Situation.REJECT)
+
     }
     private val waitingAdapter: AdminHomeItemAdapter by lazy {
 
         AdminHomeItemAdapter(Situation.WAITING)
+
     }
 
     override fun FragmentAdminMainBinding.onCreateView() {
@@ -142,7 +146,6 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
     fun observeNetwork(token: String, count: Int, cursor: String, status: String) =
         lifecycleScope.launch {
             viewModel.getPost(token, count, cursor, status)
-
         }
 
     fun setItemAdapter(adapter: AdminHomeItemAdapter) {

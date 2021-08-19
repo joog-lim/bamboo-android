@@ -6,10 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.study.bamboo.R
-import com.study.bamboo.databinding.AdminPostDeleteRecyclerItemBinding
-import com.study.bamboo.databinding.AdminPostRecyclerItemBinding
-import com.study.bamboo.databinding.AdminPostRejectRecyclerItemBinding
-import com.study.bamboo.databinding.AdminPostWaitingRecyclerItemBinding
+import com.study.bamboo.databinding.*
 import com.study.bamboo.model.dto.UserPostDTO
 
 // TODO: 2021-08-16 어댑터를 나누자 각각의 상황에맞게
@@ -25,7 +22,7 @@ class AdminHomeItemAdapter(private val situation: Situation) :
 
 
     //수락
-    class AdminAcceptItemViewHolder(val binding: AdminPostRecyclerItemBinding) :
+    class AdminAcceptItemViewHolder(val binding: AdminPostAcceptedRecyclerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
 
@@ -37,12 +34,35 @@ class AdminHomeItemAdapter(private val situation: Situation) :
         companion object {
             fun from(parent: ViewGroup): AdminAcceptItemViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding: AdminPostRecyclerItemBinding = DataBindingUtil
+                val binding: AdminPostAcceptedRecyclerItemBinding = DataBindingUtil
                     .inflate(
-                        layoutInflater, R.layout.admin_post_recycler_item,
+                        layoutInflater, R.layout.admin_post_accepted_recycler_item,
                         parent, false
                     )
                 return AdminAcceptItemViewHolder(binding)
+            }
+        }
+    }
+
+    //대기
+    class AdminWaitingItemViewHolder(val binding: AdminPostWaitingRecyclerItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+
+        fun bind(data: UserPostDTO) {
+            binding.data = data
+            binding.executePendingBindings()
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): AdminWaitingItemViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding: AdminPostWaitingRecyclerItemBinding = DataBindingUtil
+                    .inflate(
+                        layoutInflater, R.layout.admin_post_waiting_recycler_item,
+                        parent, false
+                    )
+                return AdminWaitingItemViewHolder(binding)
             }
         }
     }
@@ -93,28 +113,6 @@ class AdminHomeItemAdapter(private val situation: Situation) :
         }
     }
 
-    //대기
-    class AdminWaitingItemViewHolder(val binding: AdminPostWaitingRecyclerItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-
-        fun bind(data: UserPostDTO) {
-            binding.data = data
-            binding.executePendingBindings()
-        }
-
-        companion object {
-            fun from(parent: ViewGroup): AdminWaitingItemViewHolder {
-                val layoutInflater = LayoutInflater.from(parent.context)
-                val binding: AdminPostWaitingRecyclerItemBinding = DataBindingUtil
-                    .inflate(
-                        layoutInflater, R.layout.admin_post_waiting_recycler_item,
-                        parent, false
-                    )
-                return AdminWaitingItemViewHolder(binding)
-            }
-        }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 

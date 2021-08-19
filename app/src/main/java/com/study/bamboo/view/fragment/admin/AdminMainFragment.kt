@@ -13,6 +13,7 @@ import com.study.bamboo.R
 import com.study.bamboo.adapter.AdminHomeItemAdapter
 import com.study.bamboo.adapter.Situation
 import com.study.bamboo.databinding.FragmentAdminMainBinding
+import com.study.bamboo.utils.ViewModel.signInViewModel
 import com.study.bamboo.view.activity.signin.SignInViewModel
 import com.study.bamboo.view.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -63,6 +64,28 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
         tokenViewModel.callAdminLoginAPI("#promotion")
 
+
+        //처음 수락 상태 게시물 가져오기
+        setItemAdapter(acceptAdapter)
+        signInViewModel.adminLoginResponse.value?.let {
+            observeNetwork(
+                it,
+                20,
+                "60b8407473d81a1b4cc591a5",
+                "ACCEPTED"
+            )
+        }
+
+        viewModel.getPostData.observe(viewLifecycleOwner, {
+
+            acceptAdapter.setItemList(it!!)
+
+
+            waitingAdapter.setItemList(it!!)
+            deleteAdapter.setItemList(it!!)
+            rejectAdapter.setItemList(it!!)
+
+        })
     }
 
     override fun FragmentAdminMainBinding.onViewCreated() {
@@ -100,39 +123,38 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                                 "60b8407473d81a1b4cc591a5",
                                 "ACCEPTED"
                             )
-                            viewModel.getPostData.observe(viewLifecycleOwner, {
+                  /*          viewModel.getPostData.observe(viewLifecycleOwner, {
 
                                 acceptAdapter.setItemList(it!!)
-                            })
+                            })*/
 
                         }
                         1 -> {
 
                             setItemAdapter(waitingAdapter)
                             observeNetwork(token, 20, "60b8407473d81a1b4cc591a5", "PENDING")
-                            viewModel.getPostData.observe(viewLifecycleOwner, {
+              /*              viewModel.getPostData.observe(viewLifecycleOwner, {
                                 waitingAdapter.setItemList(it!!)
 
-                            })
+                            })*/
                         }
                         2 -> {
                             setItemAdapter(rejectAdapter)
                             observeNetwork(token, 20, "60b8407473d81a1b4cc591a5", "REJECTED")
 
-                            viewModel.getPostData.observe(viewLifecycleOwner, {
-
+              /*              viewModel.getPostData.observe(viewLifecycleOwner, {
 
                                 rejectAdapter.setItemList(it!!)
-                            })
+                            })*/
                         }
                         3 -> {
                             setItemAdapter(deleteAdapter)
                             observeNetwork(token, 20, "60b8407473d81a1b4cc591a5", "DELETED")
 
-                            viewModel.getPostData.observe(viewLifecycleOwner, {
+    /*                        viewModel.getPostData.observe(viewLifecycleOwner, {
                                 deleteAdapter.setItemList(it!!)
 
-                            })
+                            })*/
 
                         }
                         else -> {

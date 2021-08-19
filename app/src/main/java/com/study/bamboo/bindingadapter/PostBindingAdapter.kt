@@ -7,13 +7,16 @@ import java.util.*
 
 object PostBindingAdapter {
 
+    //admin
+
+
     @BindingAdapter("app:day")
     @JvmStatic
     fun getDay(text: TextView, day: Long) {
+
         val toTimeStamp = Date(day)
         val date= SimpleDateFormat("yyyy년 MM월 dd일 aa", Locale.forLanguageTag("ko"))
         text.text = date.format(toTimeStamp)
-
 
     }
 
@@ -47,4 +50,49 @@ object PostBindingAdapter {
 
     }
 
+
+
+    //user
+
+
+    @BindingAdapter("app:userDay")
+    @JvmStatic
+    fun getUserDay(text: TextView, day: Long) {
+
+        val toTimeStamp = Date(day)
+        val date= SimpleDateFormat("yyyy년 MM월 dd일 aa", Locale.forLanguageTag("ko"))
+        text.text = date.format(toTimeStamp)
+    }
+
+    @BindingAdapter("app:userPostNumber")
+    @JvmStatic
+    fun getUserPostNumber(text: TextView, number: Int) {
+
+        text.text = "#${number}번째 알고리즘"
+
+    }
+
+    @BindingAdapter("app:userPostTag")
+    @JvmStatic
+    fun getUserPostTag(text: TextView, tag: String) {
+
+        text.text = tag
+
+    }
+
+    @BindingAdapter("app:userPostTitle")
+    @JvmStatic
+    fun getUserPostTitle(text: TextView, title: String) {
+
+        text.text = title
+
+    }
+
+    @BindingAdapter("app:userPostContent")
+    @JvmStatic
+    fun getUserPostContent(text: TextView, content: String) {
+
+        text.text = content
+
+    }
 }

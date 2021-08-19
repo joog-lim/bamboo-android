@@ -32,6 +32,7 @@ class SignInViewModel : ViewModel() {
 
     init {
         display_size_x.value = 0
+        _dataSuccess.value = false
     }
 
 
@@ -88,10 +89,6 @@ class SignInViewModel : ViewModel() {
 
         })
 
-    }
-
-    init {
-        _dataSuccess.value = false
     }
 
 }

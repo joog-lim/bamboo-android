@@ -69,8 +69,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
     private fun spinnerContact() {
         var token=""
-        binding.activitySpinner.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
+        binding.activitySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
 
                 }

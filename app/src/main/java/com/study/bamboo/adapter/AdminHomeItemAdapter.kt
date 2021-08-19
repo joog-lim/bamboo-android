@@ -23,6 +23,8 @@ class AdminHomeItemAdapter(private val situation: Situation) :
 
     private val postList = mutableListOf<UserPostDTO>()
 
+
+    //수락
     class AdminAcceptItemViewHolder(val binding: AdminPostRecyclerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -45,6 +47,7 @@ class AdminHomeItemAdapter(private val situation: Situation) :
         }
     }
 
+    //거부
     class AdminRejectItemViewHolder(val binding: AdminPostRejectRecyclerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -67,6 +70,7 @@ class AdminHomeItemAdapter(private val situation: Situation) :
         }
     }
 
+    //삭제
     class AdminDeleteItemViewHolder(val binding: AdminPostDeleteRecyclerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -89,6 +93,7 @@ class AdminHomeItemAdapter(private val situation: Situation) :
         }
     }
 
+    //대기
     class AdminWaitingItemViewHolder(val binding: AdminPostWaitingRecyclerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -131,6 +136,7 @@ class AdminHomeItemAdapter(private val situation: Situation) :
             is AdminWaitingItemViewHolder -> holder.bind(postList[position])
         }
     }
+
     fun setItemList(data: List<UserPostDTO>) {
         // 데이터가 바뀌였으면
         val movieDiffUtil = AdminDiffUtil(postList, data)
@@ -150,6 +156,8 @@ class AdminHomeItemAdapter(private val situation: Situation) :
         return postList.size
     }
 }
+
+//달라진 아이템 갱신
 class AdminDiffUtil(
     private val oldList: List<UserPostDTO>,
     private val newList: List<UserPostDTO>

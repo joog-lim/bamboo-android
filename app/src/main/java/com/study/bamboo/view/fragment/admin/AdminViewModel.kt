@@ -34,34 +34,16 @@ class AdminViewModel @Inject constructor(
         }
     }
 
-/*    fun getPost(token:String,count: Int, cursor: String, status: String) = viewModelScope.launch {
-
-        adminRepository.getPost(token,count, cursor, status).let { response ->
-
-            if (response.isSuccessful) {
-
-                response.body()?.posts?.filter { it.status == status }.apply {
-                    _getPostData.value = this
-                }
-
-            }
-        }
-    }*/
 
     fun getAcceptedPost(count: Int, cursor: String, status: String) = viewModelScope.launch {
-        Log.d("로그","AdminViewModel accepted count : $this")
         adminRepository.getAcceptedPost(count, cursor, status).let { response ->
 
             if (response.isSuccessful) {
-                Log.d("로그","AdminViewModel accepted response : ${response.body()?.posts}")
+
                 _getPostData.value = response.body()?.posts
 
-             /*   response.body()?.posts?.filter{ it.status == status }.apply {
-                    Log.d("로그","AdminViewModel accepted : $this")
-                    _getPostData.value = this
-                }*/
-
             }
+
         }
     }
 
@@ -72,9 +54,7 @@ class AdminViewModel @Inject constructor(
 
             if (response.isSuccessful) {
 
-                response.body()?.posts?.filter{ it.status == status }.apply {
-                    _getPostData.value = this
-                }
+                _getPostData.value = response.body()?.posts
 
             }
         }
@@ -86,10 +66,7 @@ class AdminViewModel @Inject constructor(
 
             if (response.isSuccessful) {
 
-                response.body()?.posts?.filter{ it.status == status }.apply {
-                    Log.d("로그","AdminViewModel pending : $this")
-                    _getPostData.value = this
-                }
+                _getPostData.value = response.body()?.posts
 
             }
         }
@@ -101,9 +78,10 @@ class AdminViewModel @Inject constructor(
 
             if (response.isSuccessful) {
 
-                response.body()?.posts?.filter{ it.status == status }.apply {
+                _getPostData.value = response.body()?.posts
+/*                response.body()?.posts?.filter{ it.status == status }.apply {
                     _getPostData.value = this
-                }
+                }*/
 
             }
         }

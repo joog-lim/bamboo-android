@@ -117,44 +117,25 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                         0 -> {
 
                             setItemAdapter(acceptAdapter)
-                            observeNetwork(
-                                token,
-                                20,
-                                "60b8407473d81a1b4cc591a5",
-                                "ACCEPTED"
-                            )
-                  /*          viewModel.getPostData.observe(viewLifecycleOwner, {
-
-                                acceptAdapter.setItemList(it!!)
-                            })*/
+                            observeNetwork(token, 20, "60b8407473d81a1b4cc591a5", "ACCEPTED")
 
                         }
                         1 -> {
 
                             setItemAdapter(waitingAdapter)
                             observeNetwork(token, 20, "60b8407473d81a1b4cc591a5", "PENDING")
-              /*              viewModel.getPostData.observe(viewLifecycleOwner, {
-                                waitingAdapter.setItemList(it!!)
 
-                            })*/
                         }
                         2 -> {
+
                             setItemAdapter(rejectAdapter)
                             observeNetwork(token, 20, "60b8407473d81a1b4cc591a5", "REJECTED")
 
-              /*              viewModel.getPostData.observe(viewLifecycleOwner, {
-
-                                rejectAdapter.setItemList(it!!)
-                            })*/
                         }
                         3 -> {
+
                             setItemAdapter(deleteAdapter)
                             observeNetwork(token, 20, "60b8407473d81a1b4cc591a5", "DELETED")
-
-    /*                        viewModel.getPostData.observe(viewLifecycleOwner, {
-                                deleteAdapter.setItemList(it!!)
-
-                            })*/
 
                         }
                         else -> {

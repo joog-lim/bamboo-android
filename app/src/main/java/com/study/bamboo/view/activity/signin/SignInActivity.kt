@@ -43,6 +43,14 @@ class SignInActivity : BaseActivity() {
                 Toast.makeText(this, "안녕하세요 관리자님!", Toast.LENGTH_SHORT).show()
             }
         })
+/*
+        signInViewModel.dataSuccess.observe(this, Observer {
+            if(it == true){
+
+            }
+        })*/
+
+
     }
 
 

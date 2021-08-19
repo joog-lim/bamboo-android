@@ -59,7 +59,7 @@ class SignInViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<AdminSignInDTO>, t: Throwable) {
-                TODO("Not yet implemented")
+
             }
 
         })

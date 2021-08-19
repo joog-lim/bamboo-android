@@ -1,6 +1,5 @@
 package com.study.bamboo.view.fragment.admin
 
-import com.study.bamboo.model.dto.AdminSignInDTO
 import com.study.bamboo.model.retrofit.AdminApi
 import javax.inject.Inject
 
@@ -17,8 +16,8 @@ class AdminRepository @Inject constructor(
     suspend fun getPendingPost(token: String, count: Int, cursor: String, status: String) =
         adminApi.getPendingPost(token, count, cursor, status)
 
-    suspend fun getAcceptedPost(token: String, count: Int, cursor: String, status: String) =
-        adminApi.getAcceptedPost(token, count, cursor, status)
+    suspend fun getAcceptedPost(count: Int, cursor: String, status: String) =
+        adminApi.getAcceptedPost(count, cursor, status)
 
     suspend fun getDeletedPost(token: String, count: Int, cursor: String, status: String) =
         adminApi.getDeletedPost(token, count, cursor, status)

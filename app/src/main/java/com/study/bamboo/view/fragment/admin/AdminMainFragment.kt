@@ -27,7 +27,6 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
     }
 
 
-
     private val viewModel: AdminViewModel by viewModels()
     private val tokenViewModel: SignInViewModel by viewModels()
 
@@ -72,8 +71,9 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
     }
 
     private fun spinnerContact() {
-        var token=""
-        binding.activitySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        var token = ""
+        binding.activitySpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
 
                 }
@@ -84,10 +84,10 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                     position: Int,
                     id: Long
                 ) {
-                    tokenViewModel.adminLoginResponse.observe(requireActivity(),{
+                    tokenViewModel.adminLoginResponse.observe(requireActivity(), {
                         Log.d(TAG, "onItemSelected: $token")
-                        if(token.isEmpty())
-                        token=it
+                        if (token.isEmpty())
+                            token = it
                     })
 
                     when (position) {
@@ -109,7 +109,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                         1 -> {
 
                             setItemAdapter(waitingAdapter)
-                            observeNetwork(token,20, "60b8407473d81a1b4cc591a5", "PENDING")
+                            observeNetwork(token, 20, "60b8407473d81a1b4cc591a5", "PENDING")
                             viewModel.getPostData.observe(viewLifecycleOwner, {
                                 waitingAdapter.setItemList(it!!)
 
@@ -117,7 +117,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                         }
                         2 -> {
                             setItemAdapter(rejectAdapter)
-                            observeNetwork( token,20, "60b8407473d81a1b4cc591a5", "REJECTED")
+                            observeNetwork(token, 20, "60b8407473d81a1b4cc591a5", "REJECTED")
 
                             viewModel.getPostData.observe(viewLifecycleOwner, {
 
@@ -127,7 +127,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                         }
                         3 -> {
                             setItemAdapter(deleteAdapter)
-                            observeNetwork( token,20, "60b8407473d81a1b4cc591a5", "DELETED")
+                            observeNetwork(token, 20, "60b8407473d81a1b4cc591a5", "DELETED")
 
                             viewModel.getPostData.observe(viewLifecycleOwner, {
                                 deleteAdapter.setItemList(it!!)
@@ -143,10 +143,25 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
     }
 
-    fun observeNetwork(token: String, count: Int, cursor: String, status: String) =
-        lifecycleScope.launch {
-            viewModel.getPost(token, count, cursor, status)
+    fun observeNetwork(token: String, count: Int, cursor: String, status: String) {
+        when (status) {
+            "ACCEPTED" -> lifecycleScope.launch {
+                viewModel.getAcceptedPost(count, cursor, status)
+            }
+            "PENDING" -> lifecycleScope.launch {
+                viewModel.getPendingPost(token, count, cursor, status)
+            }
+            "REJECTED" -> lifecycleScope.launch {
+                viewModel.getRejectedPost(token, count, cursor, status)
+            }
+            "DELETED" -> lifecycleScope.launch {
+                viewModel.getDeletedPost(token, count, cursor, status)
+            }
+
         }
+
+    }
+
 
     fun setItemAdapter(adapter: AdminHomeItemAdapter) {
         binding.postRecyclerView.apply {

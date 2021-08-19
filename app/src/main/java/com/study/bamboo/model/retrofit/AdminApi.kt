@@ -3,7 +3,6 @@ package com.study.bamboo.model.retrofit
 import com.study.bamboo.model.dto.DeletePostDto
 import com.study.bamboo.model.dto.PatchPostDto
 import com.study.bamboo.model.dto.UserGetPostDTO
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -32,7 +31,6 @@ interface AdminApi {
     //게시된 상태 게시물
     @GET("post/get-list")
     suspend fun getAcceptedPost(
-        @Header("Authorization") Authorization: String,
         @Query("count") count: Int,
         @Query("cursor") cursor: String,
         @Query("status") status: String

@@ -17,10 +17,8 @@ class UserHomeItemAdapter(val getPosts: MutableLiveData<List<UserPostDTO>?>) :
     RecyclerView.Adapter<UserHomeItemViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserHomeItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val listItem =
-            layoutInflater.inflate(R.layout.user_post_recycler_item, parent, false)
 
-        val binding = DataBindingUtil.inflate<UserPostRecyclerItemBinding>(LayoutInflater.from(parent.context), R.layout.user_post_recycler_item, parent, false)
+        val binding = DataBindingUtil.inflate<UserPostRecyclerItemBinding>(layoutInflater, R.layout.user_post_recycler_item, parent, false)
         return UserHomeItemViewHolder(binding)
     }
 

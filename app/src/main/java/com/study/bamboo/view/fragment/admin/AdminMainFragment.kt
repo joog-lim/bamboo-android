@@ -1,6 +1,5 @@
 package com.study.bamboo.view.fragment.admin
 
-import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -46,55 +45,38 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
         AdminHomeItemAdapter(Situation.REJECT)
 
     }
-    private val waitingAdapter: AdminHomeItemAdapter by lazy {
+    private val pendingAdapter: AdminHomeItemAdapter by lazy {
 
         AdminHomeItemAdapter(Situation.WAITING)
 
     }
+    var token=""
 
     override fun FragmentAdminMainBinding.onCreateView() {
-        setItemAdapter(acceptAdapter)
-        spinnerContact()
         //spinner
         binding.activitySpinner.adapter = ArrayAdapter.createFromResource(
             requireContext(),
             R.array.AdminItemList,
             R.layout.admin_spinner_item
         )
+        spinnerContact()
 
-        tokenViewModel.callAdminLoginAPI("#promotion")
+        observeCreateToken()
 
-
-        //처음 수락 상태 게시물 가져오기
-        setItemAdapter(acceptAdapter)
-        signInViewModel.adminLoginResponse.value?.let {
-            observeNetwork(
-                it,
-                20,
-                "60b8407473d81a1b4cc591a5",
-                "ACCEPTED"
-            )
-        }
-
-        viewModel.getPostData.observe(viewLifecycleOwner, {
-
-            acceptAdapter.setItemList(it!!)
-
-
-            waitingAdapter.setItemList(it!!)
-            deleteAdapter.setItemList(it!!)
-            rejectAdapter.setItemList(it!!)
-
-        })
     }
 
     override fun FragmentAdminMainBinding.onViewCreated() {
 
+//        Adapter 연결
+        setItemAdapter(acceptAdapter)
+        setItemAdapter(rejectAdapter)
+        setItemAdapter(deleteAdapter)
+        setItemAdapter(pendingAdapter)
 
     }
 
     private fun spinnerContact() {
-        var token = ""
+
         binding.activitySpinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -107,35 +89,39 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                     position: Int,
                     id: Long
                 ) {
-                    tokenViewModel.adminLoginResponse.observe(requireActivity(), {
-                        Log.d(TAG, "onItemSelected: $token")
-                        if (token.isEmpty())
-                            token = it
-                    })
 
+                    observeReturnToken()
                     when (position) {
                         0 -> {
 
-                            setItemAdapter(acceptAdapter)
-                            observeNetwork(token, 20, "60b8407473d81a1b4cc591a5", "ACCEPTED")
+                            lifecycleScope.launch {
+                                observeNetwork(token, 20, "60b8407473d81a1b4cc591a5", "ACCEPTED")
+
+                            }
 
                         }
                         1 -> {
 
-                            setItemAdapter(waitingAdapter)
-                            observeNetwork(token, 20, "60b8407473d81a1b4cc591a5", "PENDING")
+
+                            lifecycleScope.launch {
+                                observeNetwork(token, 20, "60b8407473d81a1b4cc591a5", "PENDING")
+                            }
 
                         }
                         2 -> {
 
-                            setItemAdapter(rejectAdapter)
-                            observeNetwork(token, 20, "60b8407473d81a1b4cc591a5", "REJECTED")
+                            lifecycleScope.launch {
+                                observeNetwork(token, 20, "60b8407473d81a1b4cc591a5", "REJECTED")
+
+                            }
 
                         }
                         3 -> {
 
-                            setItemAdapter(deleteAdapter)
-                            observeNetwork(token, 20, "60b8407473d81a1b4cc591a5", "DELETED")
+                            lifecycleScope.launch {
+                                observeNetwork(token, 20, "60b8407473d81a1b4cc591a5", "DELETED")
+
+                            }
 
                         }
                         else -> {
@@ -146,27 +132,65 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
     }
 
-    fun observeNetwork(token: String, count: Int, cursor: String, status: String) {
-        when (status) {
-            "ACCEPTED" -> lifecycleScope.launch {
-                viewModel.getAcceptedPost(count, cursor, status)
+     private fun observeCreateToken(){
+        lifecycleScope.launch {
+            tokenViewModel.callAdminLoginAPI("#promotion")
+
+        }
+    }
+    fun observeReturnToken() : String{
+
+        tokenViewModel.adminLoginResponse.observe(requireActivity(), {
+
+            if (token.isEmpty()) {
+                token = it
+                Log.d(TAG, "onItemSelected: $token")
             }
-            "PENDING" -> lifecycleScope.launch {
-                viewModel.getPendingPost(token, count, cursor, status)
-            }
-            "REJECTED" -> lifecycleScope.launch {
-                viewModel.getRejectedPost(token, count, cursor, status)
-            }
-            "DELETED" -> lifecycleScope.launch {
-                viewModel.getDeletedPost(token, count, cursor, status)
-            }
+        })
+        return token
+
+    }
+
+    suspend fun observeNetwork(token: String?, count: Int, cursor: String, status: String) {
+
+            when (status) {
+                "ACCEPTED" -> lifecycleScope.launch {
+                    viewModel.getPostData(token.toString(),count, cursor, status)
+                    // status에 따라 post 가져옴
+                    observeGetPost(acceptAdapter)
+
+                }
+                "PENDING" -> lifecycleScope.launch {
+
+                    viewModel.getPostData(token.toString(), count, cursor, status)
+                    observeGetPost(pendingAdapter)
+
+                }
+                "REJECTED" -> lifecycleScope.launch {
+
+                    viewModel.getPostData(token.toString(), count, cursor, status)
+                    observeGetPost(rejectAdapter)
+
+                }
+                "DELETED" -> lifecycleScope.launch {
+                    viewModel.getPostData(token.toString(), count, cursor, status)
+                    observeGetPost(deleteAdapter)
+
+                }
 
         }
 
     }
+    private  fun observeGetPost(adapter:AdminHomeItemAdapter){
+        viewModel.getPostData.observe(viewLifecycleOwner,{
+            adapter.setItemList(it)
 
 
-    fun setItemAdapter(adapter: AdminHomeItemAdapter) {
+        })
+    }
+
+
+    private fun setItemAdapter(adapter: AdminHomeItemAdapter) {
         binding.postRecyclerView.apply {
             this.adapter = adapter
             this.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

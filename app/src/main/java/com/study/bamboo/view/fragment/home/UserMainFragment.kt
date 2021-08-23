@@ -18,7 +18,8 @@ import com.study.bamboo.view.adapter.UserHomeItemAdapter
 class UserMainFragment : Fragment() {
 
     lateinit var binding: FragmentUserMainBinding
-    companion object{
+
+    companion object {
 
     }
 
@@ -49,34 +50,23 @@ class UserMainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_user_main,container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user_main, container, false)
         binding.activity = this
         binding.progressBar.visibility = View.GONE
-
-
-        Functions.recyclerViewManager(binding.postRecyclerView,requireContext())
-        binding.postRecyclerView.adapter = UserHomeItemAdapter(signInViewModel.getPostResponse)
-
-
-
-
-/*        //글쓰기 버튼을 눌렀을때 verify 호출 후 완료 했을때
-        postCreateViewModel.getVerifyResponse.observe(requireActivity(), Observer {
-
-            val intent = Intent(requireContext(), PostCreateActivity::class.java)
-            startActivity(intent)
-        })*/
-
+        initRecyclerView()
 
         return binding.root
     }
 
-    fun addPostBtnClick(view: View){
+    fun addPostBtnClick(view: View) {
         binding.progressBar.visibility = View.VISIBLE
+        val intent = Intent(requireContext(), PostCreateActivity::class.java)
+        startActivity(intent)
+    }
 
-            val intent = Intent(requireContext(), PostCreateActivity::class.java)
-            startActivity(intent)
-
+    private fun initRecyclerView() {
+        Functions.recyclerViewManager(binding.postRecyclerView, requireContext())
+        binding.postRecyclerView.adapter = UserHomeItemAdapter(signInViewModel.getPostResponse)
     }
 
 }

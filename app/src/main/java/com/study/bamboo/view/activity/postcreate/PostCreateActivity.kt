@@ -26,55 +26,70 @@ class PostCreateActivity : BaseActivity() {
         binding.question.text = "Q. ${splashViewModel.getVerifyResponse.value?.question}"
         setupSpinnerTag()
         setupSpinnerHandler()
+        observeViewModel()
+    }
 
+    private fun observeViewModel() {
         //게시물을 전송하기 버튼 클릭 후 질문 답 확인
         postCreateViewModel.postCreateResponse.observe(this, Observer {
             binding.progressBar.visibility = View.GONE
-            if(it != null) {
+            if (it != null) {
                 postCreateViewModel.postCreateSuccess.value = true
             }
         })
 
+
         //게시물을 성공적으로 전송했는지 확인
         postCreateViewModel.postCreateSuccess.observe(this, Observer {
-            if(it == true){
+            if (it == true) {
                 finish()
             }
         })
-
-
-
     }
 
-    fun backBtnClick(view: View){
+    fun backBtnClick(view: View) {
         finish()
     }
 
-    fun postCreateBtnClick(view: View){
-        if (TextUtils.isEmpty(binding.title.text.toString()) || TextUtils.isEmpty(binding.content.text.toString()) || postCreateViewModel.choiceTag.value == "태그선택" || TextUtils.isEmpty(binding.questionAnswer.text.toString())){
-            Toast.makeText(this,"필수항목을 작성해 주세요",Toast.LENGTH_SHORT).show()
-        }else{
+    fun postCreateBtnClick(view: View) {
+        if (TextUtils.isEmpty(binding.title.text.toString()) || TextUtils.isEmpty(binding.content.text.toString()) || postCreateViewModel.choiceTag.value == "태그선택" || TextUtils.isEmpty(
+                binding.questionAnswer.text.toString()
+            )
+        ) {
+            Toast.makeText(this, "필수항목을 작성해 주세요", Toast.LENGTH_SHORT).show()
+        } else {
 
-            if(questionAnswerTrue(binding.questionAnswer.text.toString())){
+            if (questionAnswerTrue(binding.questionAnswer.text.toString())) {
                 binding.progressBar.visibility = View.VISIBLE
-                splashViewModel.getVerifyResponse.value?.let { postCreateViewModel.callPostCreateAPI(binding.title.text.toString(),binding.content.text.toString(),tag, it.id, binding.questionAnswer.text.toString()) }
+                splashViewModel.getVerifyResponse.value?.let {
+                    postCreateViewModel.callPostCreateAPI(
+                        binding.title.text.toString(),
+                        binding.content.text.toString(),
+                        tag,
+                        it.id,
+                        binding.questionAnswer.text.toString()
+                    )
+                }
 
-            }else{
-                Toast.makeText(this,"질문에 대한 답이 옳지 않습니다",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "질문에 대한 답이 옳지 않습니다", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     //게시글 문제 답 체크
-    private fun questionAnswerTrue(answer : String):Boolean{
+    private fun questionAnswerTrue(answer: String): Boolean {
         return answer == "#softmeister01"
     }
-    //spinner
+
     private fun setupSpinnerTag() {
-        binding.choiceTag.adapter = ArrayAdapter.createFromResource(this,R.array.PostCreateTagList, R.layout.post_create_tag_spinner_item)
+        binding.choiceTag.adapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.PostCreateTagList,
+            R.layout.post_create_tag_spinner_item
+        )
     }
 
-    //spinner
     private fun setupSpinnerHandler() {
         binding.choiceTag.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {

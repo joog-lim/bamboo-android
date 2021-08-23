@@ -19,6 +19,12 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         supportActionBar!!.hide()
+        initViewModel()
+        observeViewModel()
+        callViewModelApi()
+    }
+
+    private fun initViewModel(){
         signInViewModel = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
@@ -33,14 +39,17 @@ class SplashActivity : AppCompatActivity() {
             this,
             ViewModelProvider.NewInstanceFactory()
         ).get(SplashViewModel::class.java)
+    }
 
-        splashViewModel.callGetVerifyAPI()
-
-
+    private fun observeViewModel(){
         splashViewModel.getVerifyResponse.observe(this, Observer {
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
             finish()
         })
+    }
+
+    private fun callViewModelApi(){
+        splashViewModel.callGetVerifyAPI()
     }
 }

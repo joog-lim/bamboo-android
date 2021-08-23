@@ -1,5 +1,6 @@
 package com.study.bamboo.view.fragment.admin
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -33,18 +34,56 @@ class AdminViewModel @Inject constructor(
         }
     }
 
-    fun getPost(token:String,count: Int, cursor: String, status: String) = viewModelScope.launch {
 
-        adminRepository.getPost(token,count, cursor, status).let { response ->
+    fun getAcceptedPost(count: Int, cursor: String, status: String) = viewModelScope.launch {
+        adminRepository.getAcceptedPost(count, cursor, status).let { response ->
 
             if (response.isSuccessful) {
 
-                response.body()?.posts?.filter { it.status == status }.apply {
-                    _getPostData.value = this
-                }
+                _getPostData.value = response.body()?.posts
+
+            }
+
+        }
+    }
+
+
+    fun getDeletedPost(token:String,count: Int, cursor: String, status: String) = viewModelScope.launch {
+
+        adminRepository.getDeletedPost(token,count, cursor, status).let { response ->
+
+            if (response.isSuccessful) {
+
+                _getPostData.value = response.body()?.posts
 
             }
         }
     }
 
+    fun getPendingPost(token:String,count: Int, cursor: String, status: String) = viewModelScope.launch {
+
+        adminRepository.getPendingPost(token,count, cursor, status).let { response ->
+
+            if (response.isSuccessful) {
+
+                _getPostData.value = response.body()?.posts
+
+            }
+        }
+    }
+
+    fun getRejectedPost(token:String,count: Int, cursor: String, status: String) = viewModelScope.launch {
+
+        adminRepository.getRejectedPost(token,count, cursor, status).let { response ->
+
+            if (response.isSuccessful) {
+
+                _getPostData.value = response.body()?.posts
+/*                response.body()?.posts?.filter{ it.status == status }.apply {
+                    _getPostData.value = this
+                }*/
+
+            }
+        }
+    }
 }

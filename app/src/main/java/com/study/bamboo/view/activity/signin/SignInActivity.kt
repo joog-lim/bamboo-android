@@ -24,25 +24,7 @@ class SignInActivity : BaseActivity() {
         binding.activity = this
         supportActionBar!!.hide()
         binding.progressBar.visibility = View.GONE
-
-
-
-        //post 게시물을 받아왔을때 MainActivity로 넘어가기
-        signInViewModel.getPostResponse.observe(this, Observer {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        })
-
-        signInViewModel.adminLoginResponse.observe(this, Observer {
-            Log.d("로그", "어드민 로그인 API : ${it}")
-            if (it == "null") {
-                Toast.makeText(this, "비밀번호가 틀렸습니다", Toast.LENGTH_SHORT).show()
-
-            } else {
-                Toast.makeText(this, "안녕하세요 관리자님!", Toast.LENGTH_SHORT).show()
-            }
-        })
+        observeViewModel()
     }
 
 
@@ -62,5 +44,24 @@ class SignInActivity : BaseActivity() {
         display.getSize(size)
 
         signInViewModel.display_size_x.value = size.x
+    }
+
+    private fun observeViewModel(){
+        //post 게시물을 받아왔을때 MainActivity로 넘어가기
+        signInViewModel.getPostResponse.observe(this, Observer {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        })
+
+        signInViewModel.adminLoginResponse.observe(this, Observer {
+            Log.d("로그", "어드민 로그인 API : ${it}")
+            if (it == "null") {
+                Toast.makeText(this, "비밀번호가 틀렸습니다", Toast.LENGTH_SHORT).show()
+
+            } else {
+                Toast.makeText(this, "안녕하세요 관리자님!", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

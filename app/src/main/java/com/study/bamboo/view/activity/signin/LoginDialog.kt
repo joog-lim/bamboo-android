@@ -59,14 +59,13 @@ class LoginDialog : DialogFragment() {
         Log.d("로그", "edittext password : ${binding.passwordEdittext.text.toString()}")
         signInViewModel.callAdminLoginAPI(binding.passwordEdittext.text.toString())
         signInViewModel.adminLoginResponse.observe(requireActivity(), {
-//            val intent = Intent(requireContext(), AdminActivity::class.java)
-//            intent.putExtra("nextKey",it)
-//            Log.d(TAG, "loginBtnClick: $it")
-//            startActivity(intent)
-//            val action=LoginDialogDirections.actionLoginDialogToAdminMainFragment(
-//                it
-//            )
-
+            val intent = Intent(requireContext(), AdminActivity::class.java)
+            intent.putExtra("nextKey",it)
+            Log.d(TAG, "loginBtnClick: $it")
+            startActivity(intent)
+/*            val action=LoginDialogDirections.actionLoginDialogToAdminMainFragment(
+                it
+            )*/
 
         })
 

@@ -19,35 +19,12 @@ interface AdminApi {
         @Path("id") id: String
     ): Response<PatchPostDto>
 
-    //승인 대기 상태 게시물
-    @GET("post/get-list")
-    suspend fun getPendingPost(
-        @Header("Authorization") Authorization: String,
-        @Query("count") count: Int,
-        @Query("cursor") cursor: String,
-        @Query("status") status: String
-    ): Response<UserGetPostDTO>
 
-    //게시된 상태 게시물
-    @GET("post/get-list")
-    suspend fun getAcceptedPost(
-        @Query("count") count: Int,
-        @Query("cursor") cursor: String,
-        @Query("status") status: String
-    ): Response<UserGetPostDTO>
 
-    //이미 거절된 상태 게시물
-    @GET("post/get-list")
-    suspend fun getRejectedPost(
-        @Header("Authorization") Authorization: String,
-        @Query("count") count: Int,
-        @Query("cursor") cursor: String,
-        @Query("status") status: String
-    ): Response<UserGetPostDTO>
 
     //누군가 삭제요청(신고)를 보낸 상태 게시물
     @GET("post/get-list")
-    suspend fun getDeletedPost(
+    suspend fun getPost(
         @Header("Authorization") Authorization: String,
         @Query("count") count: Int,
         @Query("cursor") cursor: String,

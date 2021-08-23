@@ -49,23 +49,24 @@ class LoginDialog : DialogFragment() {
         //로그인 눌렀을때의 처리
         binding.loginBtn.setOnClickListener {
 
-            loginBtnClick()
+                loginBtnClick()
+
 
         }
         return view
     }
 
-    private fun loginBtnClick() {
+    private  fun loginBtnClick() {
         Log.d("로그", "edittext password : ${binding.passwordEdittext.text.toString()}")
-        signInViewModel.callAdminLoginAPI(binding.passwordEdittext.text.toString())
+
+            signInViewModel.callAdminLoginAPI(binding.passwordEdittext.text.toString())
+
         signInViewModel.adminLoginResponse.observe(requireActivity(), {
             val intent = Intent(requireContext(), AdminActivity::class.java)
-            intent.putExtra("nextKey",it)
-            Log.d(TAG, "loginBtnClick: $it")
             startActivity(intent)
-/*            val action=LoginDialogDirections.actionLoginDialogToAdminMainFragment(
-                it
-            )*/
+
+
+
 
         })
 

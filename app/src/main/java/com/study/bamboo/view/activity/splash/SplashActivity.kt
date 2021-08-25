@@ -23,7 +23,6 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun initViewModel(){
-
         postCreateViewModel = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()

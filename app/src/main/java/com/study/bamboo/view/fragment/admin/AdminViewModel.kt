@@ -6,6 +6,7 @@ import androidx.lifecycle.*
 import com.study.bamboo.adapter.Status
 import com.study.bamboo.data.DataStoreRepository
 import com.study.bamboo.model.dto.DeletePostDto
+import com.study.bamboo.model.dto.PatchDto
 import com.study.bamboo.model.dto.UserPostDTO
 import com.study.bamboo.utils.Util.Companion.DEFAULT_TOKEN
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,11 +25,13 @@ class AdminViewModel @Inject constructor(
 
      var token = DEFAULT_TOKEN
     val readToken = dataStoreRepository.readToken
-
+private val TAG="AdminViewModel"
 
     private val _deletePostData = MutableLiveData<DeletePostDto>()
     val deletePostDto: LiveData<DeletePostDto> get() = _deletePostData
 
+    private val _patchPostData = MutableLiveData<PatchDto>()
+    val patchPostDto: LiveData<PatchDto> get() = _patchPostData
 
     private val _getPostData = MutableLiveData<List<UserPostDTO>>()
     val getPostData: LiveData<List<UserPostDTO>> get() = _getPostData
@@ -36,21 +39,11 @@ class AdminViewModel @Inject constructor(
     // 토큰을 저장한다.
     fun saveToken(token: String) =
         viewModelScope.launch(Dispatchers.IO) {
+            Log.d("AdminViewModel", "saveToken: $token")
             dataStoreRepository.saveToken(token)
         }
 
-    // token을 쓴다 ?
 
-    fun getToken() {
-        viewModelScope.launch {
-            readToken.collect { value ->
-                token = value.token
-                Log.d("AdminViewModel", "token: ${value.token}")
-
-            }
-        }
-
-    }
 
     fun patchPost(
         token: String,
@@ -63,17 +56,20 @@ class AdminViewModel @Inject constructor(
         adminRepository.patchPost(token, id, status, title, content, reason).let { response ->
 
             if (response.isSuccessful) {
+                _patchPostData.value=response.body()
             }
         }
     }
 
 
-    fun deletePost(message: String, arg: String) = viewModelScope.launch {
+    fun deletePost(token:String,message: String, arg: String) = viewModelScope.launch {
 
-        adminRepository.deletePost(arg, message).let { response ->
+        adminRepository.deletePost(token,arg, message).let { response ->
 
             if (response.isSuccessful) {
                 _deletePostData.value = response.body()
+            } else {
+                Log.d(TAG, "deletePost: ${response.errorBody()}")
             }
         }
     }

@@ -3,19 +3,24 @@ package com.study.bamboo.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.study.bamboo.R
 import com.study.bamboo.databinding.*
 import com.study.bamboo.model.dto.UserPostDTO
+import com.study.bamboo.view.fragment.admin.AdminMainFragmentDirections
 
 // TODO: 2021-08-16 어댑터를 나누자 각각의 상황에맞게
 
-enum class Situation {
-    REJECT, DELETE, ACCEPT, WAITING
+enum class Status {
+    REJECTED, DELETED, ACCEPTED, PENDING
 }
 
-class AdminHomeItemAdapter(private val situation: Situation) :
+class AdminHomeItemAdapter(
+    private val status: Status,
+
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val postList = mutableListOf<UserPostDTO>()
@@ -116,22 +121,34 @@ class AdminHomeItemAdapter(private val situation: Situation) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        return when (situation) {
+        return when (status) {
 
-            Situation.DELETE -> AdminDeleteItemViewHolder.from(parent)
-            Situation.WAITING -> AdminWaitingItemViewHolder.from(parent)
-            Situation.REJECT -> AdminRejectItemViewHolder.from(parent)
-            Situation.ACCEPT -> AdminAcceptItemViewHolder.from(parent)
+            Status.DELETED -> AdminDeleteItemViewHolder.from(parent)
+            Status.PENDING -> AdminWaitingItemViewHolder.from(parent)
+            Status.REJECTED -> AdminRejectItemViewHolder.from(parent)
+            Status.ACCEPTED -> AdminAcceptItemViewHolder.from(parent)
 
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is AdminRejectItemViewHolder -> holder.bind(postList[position])
+            is AdminRejectItemViewHolder -> {
+                holder.bind(postList[position])
+
+            }
             is AdminDeleteItemViewHolder -> holder.bind(postList[position])
             is AdminAcceptItemViewHolder -> holder.bind(postList[position])
-            is AdminWaitingItemViewHolder -> holder.bind(postList[position])
+            is AdminWaitingItemViewHolder -> {
+                holder.bind(postList[position])
+
+                holder.binding.postMore.setOnClickListener {
+                    val action = AdminMainFragmentDirections.actionAdminMainFragmentToPendingDialog(
+                        postList[0].id
+                    )
+                    it.findNavController().navigate(action)
+                }
+            }
         }
     }
 

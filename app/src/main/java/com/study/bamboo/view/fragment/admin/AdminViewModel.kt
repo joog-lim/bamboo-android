@@ -2,8 +2,10 @@ package com.study.bamboo.view.fragment.admin
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.*
-import com.study.bamboo.adapter.Status
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.study.bamboo.data.DataStoreRepository
 import com.study.bamboo.model.dto.DeletePostDto
 import com.study.bamboo.model.dto.PatchDto
@@ -11,7 +13,6 @@ import com.study.bamboo.model.dto.UserPostDTO
 import com.study.bamboo.utils.Util.Companion.DEFAULT_TOKEN
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -48,7 +49,7 @@ private val TAG="AdminViewModel"
     fun patchPost(
         token: String,
         id: String,
-        status: Status,
+        status: String,
         title: String,
         content: String,
         reason: String
@@ -61,7 +62,20 @@ private val TAG="AdminViewModel"
         }
     }
 
+    fun acceptPatchPost(
+        token: String,
+        id: String,
+        title: String,
+        content: String,
+        reason: String
+    ) = viewModelScope.launch {
+        adminRepository.acceptPatchPost(token, id, title, content, reason).let { response ->
 
+            if (response.isSuccessful) {
+                _patchPostData.value=response.body()
+            }
+        }
+    }
     fun deletePost(token:String,message: String, arg: String) = viewModelScope.launch {
 
         adminRepository.deletePost(token,arg, message).let { response ->

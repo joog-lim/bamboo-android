@@ -12,9 +12,10 @@
         android:name="com.study.bamboo.view.fragment.admin.AdminMainFragment"
         android:label="dsad" >
 
-        <argument
-            android:name="auth"
-            app:argType="string" />
+
+        <action
+            android:id="@+id/action_adminMainFragment_to_pendingDialog"
+            app:destination="@id/pendingDialog" />
     </fragment>
 
     <fragment
@@ -28,13 +29,15 @@
         android:label="fragment_more_see"
         tools:layout="@layout/fragment_more_see" />
     <dialog
-        android:id="@+id/loginDialog"
-        android:name="com.study.bamboo.view.activity.signin.LoginDialog"
-        tools:layout="@layout/activity_login_dialog"
-        android:label="LoginDialog" >
-        <action
-            android:id="@+id/action_loginDialog_to_adminMainFragment"
-            app:destination="@id/adminMainFragment" />
+        android:id="@+id/pendingDialog"
+        android:name="com.study.bamboo.view.fragment.admin.dialog.PendingDialog"
+        tools:layout="@layout/pending_dialog"
+        android:label="" >
+
+        <argument
+            android:name="auth"
+            app:argType="string" />
+
     </dialog>
 
 </navigation>

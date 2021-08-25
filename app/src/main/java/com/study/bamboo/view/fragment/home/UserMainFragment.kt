@@ -6,17 +6,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import com.study.bamboo.R
 import com.study.bamboo.databinding.FragmentUserMainBinding
 import com.study.bamboo.utils.Functions
 import com.study.bamboo.utils.ViewModel.postCreateViewModel
-import com.study.bamboo.utils.ViewModel.signInViewModel
 import com.study.bamboo.view.activity.postcreate.PostCreateActivity
+import com.study.bamboo.view.activity.signin.SignInViewModel
 import com.study.bamboo.view.adapter.UserHomeItemAdapter
 
 class UserMainFragment : Fragment() {
 
+    private val signInViewModel: SignInViewModel by viewModels()
     lateinit var binding: FragmentUserMainBinding
 
     companion object {

@@ -8,7 +8,7 @@ import javax.inject.Inject
 class AdminRepository @Inject constructor(
     private val adminApi: AdminApi
 ) {
-    suspend fun deletePost(message: String, arg: String) = adminApi.deletePost(message, arg)
+    suspend fun deletePost(token:String,message: String, arg: String) = adminApi.deletePost(token,message, arg)
 
     suspend fun patchPost(token:String,id: String, status:Status,title: String, content: String, reason: String) =
         adminApi.patchPost(token,id, status,title, content, reason)

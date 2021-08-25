@@ -12,7 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.navArgs
 import com.study.bamboo.adapter.AdminHomeItemAdapter
-import com.study.bamboo.adapter.Status
+import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.REJECTEDType
 import com.study.bamboo.databinding.RejectCancelDialogBinding
 import com.study.bamboo.model.dto.UserPostDTO
 import com.study.bamboo.view.fragment.admin.AdminViewModel
@@ -59,12 +59,12 @@ class RejectCancelDialog : DialogFragment() {
             viewModel.patchPost(
                 token,
                 args.auth,
-                Status.ACCEPTED,
+                "ACCEPTED",
                 "",
                 "",
                 ""
             )
-            observePatchPost(AdminHomeItemAdapter(Status.REJECTED))
+            observePatchPost(AdminHomeItemAdapter(REJECTEDType))
             dialog?.hide()
         }
 

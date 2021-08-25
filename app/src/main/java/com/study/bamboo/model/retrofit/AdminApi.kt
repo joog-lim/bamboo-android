@@ -9,8 +9,9 @@ import retrofit2.http.*
 
 interface AdminApi {
     //게시물 삭제
-    @DELETE("delete/{arg}")
+    @DELETE("post/delete/{arg}")
     suspend fun deletePost(
+        @Header("Authorization") Authorization: String,
         @Path("arg") arg: String,
         @Query("message") message:String,
     ): Response<DeletePostDto>

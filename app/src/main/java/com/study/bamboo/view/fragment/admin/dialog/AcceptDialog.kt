@@ -12,7 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.navArgs
 import com.study.bamboo.adapter.AdminHomeItemAdapter
-import com.study.bamboo.adapter.Status
+import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.ACCEPTEDType
 import com.study.bamboo.databinding.AcceptDialogBinding
 import com.study.bamboo.model.dto.UserPostDTO
 import com.study.bamboo.view.fragment.admin.AdminViewModel
@@ -47,6 +47,7 @@ class AcceptDialog : DialogFragment() {
         _binding = AcceptDialogBinding.inflate(inflater, container, false)
 
 
+
         viewModel.readToken.asLiveData().observe(viewLifecycleOwner, {
             token = it.token
             Log.d(TAG, "observeUiPreferences: ${it.token}")
@@ -55,15 +56,18 @@ class AcceptDialog : DialogFragment() {
 
 
         binding.acceptBtn.setOnClickListener {
-            viewModel.patchPost(
+            viewModel.acceptPatchPost(
                 token,
                 args.auth,
-                Status.REJECTED,
-                "",
-                "",
+                binding.updateTitle.text.toString(),
+                binding.updateContent.text.toString(),
                 ""
             )
-            observePatchPost(AdminHomeItemAdapter(Status.ACCEPTED))
+            Log.d(
+                TAG,
+                "acceptBtn: title : ${binding.updateTitle.text} content :${binding.updateContent.text} "
+            )
+            observePatchPost(AdminHomeItemAdapter(ACCEPTEDType))
             dialog?.hide()
         }
 
@@ -85,7 +89,7 @@ class AcceptDialog : DialogFragment() {
                 it.tag,
                 it.title
             )
-            Log.d(TAG, "observePatchPost: $it")
+            Log.d(TAG, "observePatchPost content :  ${it.content} title : ${it.title}")
             adapter.setItemList(listOf(userPostDto))
         })
     }

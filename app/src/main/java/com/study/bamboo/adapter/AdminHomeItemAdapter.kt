@@ -14,15 +14,22 @@ import com.study.bamboo.view.fragment.admin.AdminMainFragmentDirections
 
 // TODO: 2021-08-16 어댑터를 나누자 각각의 상황에맞게
 
-enum class Status {
-    REJECTED, DELETED, ACCEPTED, PENDING
-}
 
 class AdminHomeItemAdapter(
-    private val status: Status,
-
+    private val type: Int
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    companion object {
+        const val ACCEPTEDType = 0
+        const val PENDINGType = 1
+        const val REJECTEDType = 2
+        const val DELETEDType = 3
+    }
+
+    enum class Status{
+        ACCEPTED,PENDING,REJECTED,DELETED
+    }
 
     private var postList = mutableListOf<UserPostDTO>()
 
@@ -122,13 +129,14 @@ class AdminHomeItemAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        return when (status) {
+        return when (type) {
 
-            Status.DELETED -> AdminDeleteItemViewHolder.from(parent)
-            Status.PENDING -> AdminPendingItemViewHolder.from(parent)
-            Status.REJECTED -> AdminRejectItemViewHolder.from(parent)
-            Status.ACCEPTED -> AdminAcceptItemViewHolder.from(parent)
+            DELETEDType -> AdminDeleteItemViewHolder.from(parent)
+            PENDINGType -> AdminPendingItemViewHolder.from(parent)
+            REJECTEDType -> AdminRejectItemViewHolder.from(parent)
+            ACCEPTEDType -> AdminAcceptItemViewHolder.from(parent)
 
+            else -> AdminAcceptItemViewHolder.from(parent)
         }
     }
 
@@ -138,9 +146,10 @@ class AdminHomeItemAdapter(
                 holder.bind(postList[position])
                 holder.binding.postMore.setOnClickListener {
 
-                    val action = AdminMainFragmentDirections.actionAdminMainFragmentToRejectCancelDialog(
-                        postList[0].id
-                    )
+                    val action =
+                        AdminMainFragmentDirections.actionAdminMainFragmentToRejectCancelDialog(
+                            postList[0].id
+                        )
                     it.findNavController().navigateUp()
                     it.findNavController().navigate(action)
                 }
@@ -158,7 +167,7 @@ class AdminHomeItemAdapter(
                 }
             }
 
-            is AdminAcceptItemViewHolder ->{
+            is AdminAcceptItemViewHolder -> {
                 holder.bind(postList[position])
                 holder.binding.postMore.setOnClickListener {
                     val action = AdminMainFragmentDirections.actionAdminMainFragmentToAcceptDialog(
@@ -186,7 +195,7 @@ class AdminHomeItemAdapter(
         // 이전꺼, 데이터가 변한값
         val recipesDiffUtil = AdminDiffUtil(postList, data)
         // 데이터의 차이?? 비교 데이터가 무엇이 변햇는지
-        val diffUtilResult= DiffUtil.calculateDiff(recipesDiffUtil)
+        val diffUtilResult = DiffUtil.calculateDiff(recipesDiffUtil)
         postList = data as MutableList<UserPostDTO>
         //결과가 나오면 전달
         diffUtilResult.dispatchUpdatesTo(this)

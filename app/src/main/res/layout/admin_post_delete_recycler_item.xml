@@ -80,11 +80,11 @@
                     android:id="@+id/post_more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    tools:textColor="@color/text_reject_color"
                     android:layout_marginStart="10dp"
                     android:background="@drawable/admin_reject_spinner"
                     android:fontFamily="@font/nanumsquareround_otfb"
                     android:gravity="start"
-                    android:textColor="#C4C4C4"
                     android:textSize="@dimen/post_more"
                     app:chooseStatus="@{data.status}"
                     tools:hint="더보기" />

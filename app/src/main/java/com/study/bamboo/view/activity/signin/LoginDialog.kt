@@ -1,11 +1,11 @@
 package com.study.bamboo.view.activity.signin
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
@@ -26,15 +26,7 @@ class LoginDialog : DialogFragment() {
 
     override fun onResume() {
         super.onResume()
-
-//        //디바이스 크기 확인후 커스텀 다이어로그 팝업 크기 조정
-//        val params: ViewGroup.LayoutParams? = dialog?.window?.attributes
-//        val deviceWidth =signInViewModel.display_size_x.value
-//        if (deviceWidth != null) {
-//            params?.width = (deviceWidth * 0.9).toInt()
-//        }
-//        dialog?.window?.attributes = params as WindowManager.LayoutParams
-
+        initDialog()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,18 +52,25 @@ class LoginDialog : DialogFragment() {
 
 
 //        //다이얼로그 백그라운드 삭제 -> 모서리 둥글게
-//        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-//        dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
 
 
         //로그인 눌렀을때의 처리
         binding.loginBtn.setOnClickListener {
-
             loginBtnClick()
-
-
         }
         return binding.root
+    }
+
+    private fun initDialog(){
+        //        //디바이스 크기 확인후 커스텀 다이어로그 팝업 크기 조정
+        val params: ViewGroup.LayoutParams? = dialog?.window?.attributes
+        val deviceWidth =arguments?.getInt("displaySizeX")
+        if (deviceWidth != null) {
+            params?.width = (deviceWidth * 0.9).toInt()
+        }
+        dialog?.window?.attributes = params as WindowManager.LayoutParams
     }
 
     private fun loginBtnClick() {
@@ -85,7 +84,6 @@ class LoginDialog : DialogFragment() {
             val intent = Intent(requireContext(), AdminActivity::class.java)
             startActivity(intent)
         })
-
     }
 
 

@@ -1,6 +1,6 @@
 package com.study.bamboo.model.retrofit
 
-import com.study.bamboo.adapter.Status
+import com.study.bamboo.adapter.AdminHomeItemAdapter
 import com.study.bamboo.model.dto.DeletePostDto
 import com.study.bamboo.model.dto.PatchDto
 import com.study.bamboo.model.dto.UserGetPostDTO
@@ -22,12 +22,21 @@ interface AdminApi {
     suspend fun patchPost(
         @Header("Authorization") Authorization: String,
         @Path("id") id: String,
-        @Field("status") status:Status,
+        @Field("status") status:String,
         @Field("title") title:String,
         @Field("content") content:String,
         @Field("reason") reason:String,
     ): Response<PatchDto>
-
+    //게시물 상태 수정 가능(수락 상태, 거절 상태 등)
+    @FormUrlEncoded
+    @PATCH("post/patch/{id}")
+    suspend fun acceptPatchPost(
+        @Header("Authorization") Authorization: String,
+        @Path("id") id: String,
+        @Field("title") title:String,
+        @Field("content") content:String,
+        @Field("reason") reason:String,
+    ): Response<PatchDto>
 
 
 

@@ -11,14 +11,11 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.navGraphViewModels
-import com.study.bamboo.R
 import com.study.bamboo.adapter.AdminHomeItemAdapter
-import com.study.bamboo.adapter.Status
+import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.ACCEPTEDType
+import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.PENDINGType
 import com.study.bamboo.databinding.PendingDialogBinding
 import com.study.bamboo.model.dto.UserPostDTO
-import com.study.bamboo.view.activity.signin.SignInViewModel
-import com.study.bamboo.view.fragment.admin.AdminMainFragment
 import com.study.bamboo.view.fragment.admin.AdminViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -61,12 +58,12 @@ class PendingDialog : DialogFragment() {
             viewModel.patchPost(
                 token,
                 args.auth,
-                Status.ACCEPTED,
+                "ACCEPTED",
                 "",
                 "",
                 ""
             )
-            observePatchPost(AdminHomeItemAdapter(Status.ACCEPTED))
+            observePatchPost(AdminHomeItemAdapter(ACCEPTEDType))
             dialog?.hide()
         }
 
@@ -74,12 +71,12 @@ class PendingDialog : DialogFragment() {
             viewModel.patchPost(
                 token,
                 args.auth,
-                Status.REJECTED,
+              "REJECTED",
                 "",
                 "",
                 ""
             )
-            observePatchPost(AdminHomeItemAdapter(Status.PENDING))
+            observePatchPost(AdminHomeItemAdapter(PENDINGType))
             dialog?.hide()
         }
 
@@ -88,10 +85,11 @@ class PendingDialog : DialogFragment() {
 
         return binding.root
     }
+
     private fun observePatchPost(adapter: AdminHomeItemAdapter) {
         viewModel.patchPostDto.observe(viewLifecycleOwner, {
             Log.d(TAG, "observeGetPost: $it")
-            val userPostDto= UserPostDTO(
+            val userPostDto = UserPostDTO(
                 it.content,
                 it.createdAt,
                 it.id,

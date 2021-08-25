@@ -12,7 +12,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.navArgs
 import com.study.bamboo.adapter.AdminHomeItemAdapter
-import com.study.bamboo.adapter.Status
+import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.DELETEDType
+import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.REJECTEDType
 import com.study.bamboo.databinding.DeleteDialogBinding
 import com.study.bamboo.model.dto.UserPostDTO
 import com.study.bamboo.view.fragment.admin.AdminViewModel
@@ -60,7 +61,7 @@ class DeleteDialog : DialogFragment() {
                 args.auth,
 
                 )
-            observePatchPost(AdminHomeItemAdapter(Status.DELETED))
+            observePatchPost(AdminHomeItemAdapter(DELETEDType))
             dialog?.hide()
         }
 
@@ -68,12 +69,12 @@ class DeleteDialog : DialogFragment() {
             viewModel.patchPost(
                 token,
                 args.auth,
-                Status.REJECTED,
+               "REJECTED",
                 "",
                 "",
                 ""
             )
-            observePatchPost(AdminHomeItemAdapter(Status.REJECTED))
+            observePatchPost(AdminHomeItemAdapter(REJECTEDType))
             dialog?.hide()
         }
 

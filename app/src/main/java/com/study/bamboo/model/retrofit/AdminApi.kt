@@ -1,7 +1,8 @@
 package com.study.bamboo.model.retrofit
 
+import com.study.bamboo.adapter.Status
 import com.study.bamboo.model.dto.DeletePostDto
-import com.study.bamboo.model.dto.PatchPostDto
+import com.study.bamboo.model.dto.PatchDto
 import com.study.bamboo.model.dto.UserGetPostDTO
 import retrofit2.Response
 import retrofit2.http.*
@@ -10,19 +11,25 @@ interface AdminApi {
     //게시물 삭제
     @DELETE("delete/{arg}")
     suspend fun deletePost(
-        @Path("arg") arg: String
+        @Path("arg") arg: String,
+        @Query("message") message:String,
     ): Response<DeletePostDto>
 
     //게시물 상태 수정 가능(수락 상태, 거절 상태 등)
-    @PATCH("patch/{id}")
+    @FormUrlEncoded
+    @PATCH("post/patch/{id}")
     suspend fun patchPost(
-        @Path("id") id: String
-    ): Response<PatchPostDto>
+        @Header("Authorization") Authorization: String,
+        @Path("id") id: String,
+        @Field("status") status:Status,
+        @Field("title") title:String,
+        @Field("content") content:String,
+        @Field("reason") reason:String,
+    ): Response<PatchDto>
 
 
 
 
-    //누군가 삭제요청(신고)를 보낸 상태 게시물
     @GET("post/get-list")
     suspend fun getPost(
         @Header("Authorization") Authorization: String,

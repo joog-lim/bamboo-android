@@ -11,7 +11,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.study.bamboo.R
 import com.study.bamboo.adapter.AdminHomeItemAdapter
-import com.study.bamboo.adapter.Status
+import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.ACCEPTEDType
+import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.DELETEDType
+import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.PENDINGType
 import com.study.bamboo.databinding.FragmentAdminMainBinding
 import com.study.bamboo.view.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,20 +30,20 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
     private lateinit var viewModel: AdminViewModel
 
     private val acceptAdapter: AdminHomeItemAdapter by lazy {
-        AdminHomeItemAdapter(Status.ACCEPTED)
+        AdminHomeItemAdapter(ACCEPTEDType)
     }
 
     private val deleteAdapter: AdminHomeItemAdapter by lazy {
-        AdminHomeItemAdapter(Status.DELETED)
+        AdminHomeItemAdapter(DELETEDType)
     }
 
     private val rejectAdapter: AdminHomeItemAdapter by lazy {
 
-        AdminHomeItemAdapter(Status.REJECTED)
+        AdminHomeItemAdapter(AdminHomeItemAdapter.REJECTEDType)
     }
 
     private val pendingAdapter: AdminHomeItemAdapter by lazy {
-        AdminHomeItemAdapter(Status.PENDING)
+        AdminHomeItemAdapter(PENDINGType)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

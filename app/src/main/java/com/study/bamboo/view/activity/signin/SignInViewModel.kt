@@ -18,13 +18,9 @@ class SignInViewModel : ViewModel() {
     val display_size_x get() = _display_size_x
     private val _display_size_x: MutableLiveData<Int> = MutableLiveData<Int>()
 
-    private val _dataSuccess = MutableLiveData<Boolean>()
-    val dataSuccess: LiveData<Boolean> get() = _dataSuccess
 
-    val adminLoginResponse get() = _adminLoginResponse
-    private val _adminLoginResponse: MutableLiveData<String> = MutableLiveData<String>()
-
-
+     private val _adminLoginResponse: MutableLiveData<String> = MutableLiveData<String>()
+    val adminLoginResponse : MutableLiveData<String> get() = _adminLoginResponse
 
     val getPostResponse get() = _getPostResponse
     private val _getPostResponse: MutableLiveData<List<UserPostDTO>?> =
@@ -32,7 +28,6 @@ class SignInViewModel : ViewModel() {
 
     init {
         display_size_x.value = 0
-        _dataSuccess.value = false
     }
 
 
@@ -54,7 +49,6 @@ class SignInViewModel : ViewModel() {
             ) {
                 if (response.isSuccessful) {
                     _adminLoginResponse.value = response.body()?.token.toString()
-                    _dataSuccess.value = true
                 }
 
             }

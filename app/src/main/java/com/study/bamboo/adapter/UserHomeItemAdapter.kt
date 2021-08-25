@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.study.bamboo.R
 import com.study.bamboo.databinding.UserPostRecyclerItemBinding
 import com.study.bamboo.model.dto.UserPostDTO
-import com.study.bamboo.utils.ViewModel.signInViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 

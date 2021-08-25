@@ -12,18 +12,18 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.navArgs
 import com.study.bamboo.adapter.AdminHomeItemAdapter
-import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.ACCEPTEDType
-import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.PENDINGType
-import com.study.bamboo.databinding.PendingDialogBinding
+import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.DELETEDType
+import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.REJECTEDType
+import com.study.bamboo.databinding.DeleteDialogBinding
 import com.study.bamboo.model.dto.UserPostDTO
 import com.study.bamboo.view.fragment.admin.AdminViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PendingDialog : DialogFragment() {
-    private var _binding: PendingDialogBinding? = null
+class DeleteDialog : DialogFragment() {
+    private var _binding: DeleteDialogBinding? = null
     private val binding get() = _binding!!
-    private val args by navArgs<PendingDialogArgs>()
+    private val args by navArgs<DeleteDialogArgs>()
     private val viewModel: AdminViewModel by viewModels()
 
     override fun onResume() {
@@ -45,7 +45,7 @@ class PendingDialog : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = PendingDialogBinding.inflate(inflater, container, false)
+        _binding = DeleteDialogBinding.inflate(inflater, container, false)
 
 
         viewModel.readToken.asLiveData().observe(viewLifecycleOwner, {
@@ -54,29 +54,27 @@ class PendingDialog : DialogFragment() {
 
         })
 
-        binding.acceptBtn.setOnClickListener {
-            viewModel.patchPost(
+        binding.deleteBtn.setOnClickListener {
+            viewModel.deletePost(
                 token,
+                "",
                 args.auth,
-                "ACCEPTED",
-                "",
-                "",
-                ""
-            )
-            observePatchPost(AdminHomeItemAdapter(ACCEPTEDType))
+
+                )
+            observePatchPost(AdminHomeItemAdapter(DELETEDType))
             dialog?.hide()
         }
 
-        binding.pendingBtn.setOnClickListener {
+        binding.rejectBtn.setOnClickListener {
             viewModel.patchPost(
                 token,
                 args.auth,
-              "REJECTED",
+               "REJECTED",
                 "",
                 "",
                 ""
             )
-            observePatchPost(AdminHomeItemAdapter(PENDINGType))
+            observePatchPost(AdminHomeItemAdapter(REJECTEDType))
             dialog?.hide()
         }
 
@@ -100,10 +98,9 @@ class PendingDialog : DialogFragment() {
             )
             Log.d(TAG, "observePatchPost: $it")
             adapter.setItemList(listOf(userPostDto))
-
-
         })
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -111,6 +108,6 @@ class PendingDialog : DialogFragment() {
     }
 
     companion object {
-        const val TAG = "LoginDialog"
+        const val TAG = "DeleteDialog"
     }
 }

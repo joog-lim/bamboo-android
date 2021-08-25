@@ -16,6 +16,15 @@
         <action
             android:id="@+id/action_adminMainFragment_to_pendingDialog"
             app:destination="@id/pendingDialog" />
+        <action
+            android:id="@+id/action_adminMainFragment_to_deleteDialog"
+            app:destination="@id/deleteDialog" />
+        <action
+            android:id="@+id/action_adminMainFragment_to_rejectCancelDialog"
+            app:destination="@id/rejectCancelDialog" />
+        <action
+            android:id="@+id/action_adminMainFragment_to_acceptDialog"
+            app:destination="@id/acceptDialog" />
     </fragment>
 
     <fragment
@@ -32,7 +41,42 @@
         android:id="@+id/pendingDialog"
         android:name="com.study.bamboo.view.fragment.admin.dialog.PendingDialog"
         tools:layout="@layout/pending_dialog"
-        android:label="" >
+        android:label="dasdas" >
+
+        <argument
+            android:name="auth"
+            app:argType="string" />
+
+    </dialog>
+
+    <dialog
+        android:id="@+id/deleteDialog"
+        android:name="com.study.bamboo.view.fragment.admin.dialog.DeleteDialog"
+        tools:layout="@layout/delete_dialog"
+        android:label="dasdas" >
+
+        <argument
+            android:name="auth"
+            app:argType="string" />
+
+    </dialog>
+    <dialog
+        android:id="@+id/rejectCancelDialog"
+        android:name="com.study.bamboo.view.fragment.admin.dialog.RejectCancelDialog"
+        tools:layout="@layout/reject_cancel_dialog"
+        android:label="dasdas" >
+
+        <argument
+            android:name="auth"
+            app:argType="string" />
+
+    </dialog>
+
+    <dialog
+        android:id="@+id/acceptDialog"
+        android:name="com.study.bamboo.view.fragment.admin.dialog.AcceptDialog"
+        tools:layout="@layout/accept_dialog"
+        android:label="dasdas" >
 
         <argument
             android:name="auth"

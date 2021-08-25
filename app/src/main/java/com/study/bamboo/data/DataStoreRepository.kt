@@ -25,14 +25,26 @@ private val Context.dataStore by preferencesDataStore(PREFERENCE_NAME)
 class DataStoreRepository @Inject constructor(@ApplicationContext private val context: Context) {
 
 
+    private object PreferencesKeys {
+        val dataStoreToken = stringPreferencesKey(PREFERENCES_TOKEN)
 
+    }
     // context.createDataStore 사라지고 globalDataStore 로 마이그레이션
     private val dataStore: DataStore<androidx.datastore.preferences.core.Preferences> =
         context.dataStore
 
 
-    private object PreferencesKeys {
-        val dataStoreToken = stringPreferencesKey(PREFERENCES_TOKEN)
+
+    // 데이터를 쓴다
+    suspend fun saveToken(token: String) {
+
+        // 데이터 스트림에 내보낼 수 있는 새 흐름을 만듦
+        dataStore.edit { preferences ->
+            preferences[dataStoreToken] = token
+            Log.d("DataStoreRepository", "saveToken: ${preferences[dataStoreToken]}")
+
+
+        }
 
     }
 
@@ -55,18 +67,6 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         }
 
 
-    // 데이터를 쓴다
-    suspend fun saveToken(token: String) {
-
-        // 데이터 스트림에 내보낼 수 있는 새 흐름을 만듦
-        dataStore.edit { preferences ->
-            preferences[dataStoreToken] = token
-            Log.d("DataStoreRepository", "saveToken: ${preferences[dataStoreToken]}")
-
-
-        }
-
-    }
 
 
 }

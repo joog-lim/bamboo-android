@@ -84,7 +84,7 @@
                     android:background="@drawable/admin_reject_spinner"
                     android:fontFamily="@font/nanumsquareround_otfb"
                     android:gravity="start"
-                    android:textColor="#C4C4C4"
+                    android:textColor="@color/text_reject_color"
                     android:textSize="@dimen/post_more"
                     app:chooseStatus="@{data.status}"
                     tools:hint="거절취소" />

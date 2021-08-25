@@ -1,5 +1,6 @@
 package com.study.bamboo.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -13,17 +14,22 @@ import com.study.bamboo.view.fragment.admin.AdminMainFragmentDirections
 
 // TODO: 2021-08-16 어댑터를 나누자 각각의 상황에맞게
 
-enum class Status {
-    REJECTED, DELETED, ACCEPTED, PENDING
-}
 
 class AdminHomeItemAdapter(
-    private val status: Status,
-
+    private val type: Int
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val postList = mutableListOf<UserPostDTO>()
+    companion object {
+        const val ACCEPTEDType = 0
+        const val PENDINGType = 1
+        const val REJECTEDType = 2
+        const val DELETEDType = 3
+    }
+
+
+
+    private var postList = mutableListOf<UserPostDTO>()
 
 
     //수락
@@ -50,7 +56,7 @@ class AdminHomeItemAdapter(
     }
 
     //대기
-    class AdminWaitingItemViewHolder(val binding: AdminPostWaitingRecyclerItemBinding) :
+    class AdminPendingItemViewHolder(val binding: AdminPostWaitingRecyclerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
 
@@ -60,14 +66,14 @@ class AdminHomeItemAdapter(
         }
 
         companion object {
-            fun from(parent: ViewGroup): AdminWaitingItemViewHolder {
+            fun from(parent: ViewGroup): AdminPendingItemViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding: AdminPostWaitingRecyclerItemBinding = DataBindingUtil
                     .inflate(
                         layoutInflater, R.layout.admin_post_waiting_recycler_item,
                         parent, false
                     )
-                return AdminWaitingItemViewHolder(binding)
+                return AdminPendingItemViewHolder(binding)
             }
         }
     }
@@ -121,13 +127,14 @@ class AdminHomeItemAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        return when (status) {
+        return when (type) {
 
-            Status.DELETED -> AdminDeleteItemViewHolder.from(parent)
-            Status.PENDING -> AdminWaitingItemViewHolder.from(parent)
-            Status.REJECTED -> AdminRejectItemViewHolder.from(parent)
-            Status.ACCEPTED -> AdminAcceptItemViewHolder.from(parent)
+            DELETEDType -> AdminDeleteItemViewHolder.from(parent)
+            PENDINGType -> AdminPendingItemViewHolder.from(parent)
+            REJECTEDType -> AdminRejectItemViewHolder.from(parent)
+            ACCEPTEDType -> AdminAcceptItemViewHolder.from(parent)
 
+            else -> AdminAcceptItemViewHolder.from(parent)
         }
     }
 
@@ -135,17 +142,46 @@ class AdminHomeItemAdapter(
         when (holder) {
             is AdminRejectItemViewHolder -> {
                 holder.bind(postList[position])
+                holder.binding.postMore.setOnClickListener {
+
+                    val action =
+                        AdminMainFragmentDirections.actionAdminMainFragmentToRejectCancelDialog(
+                            postList[position].id
+                        )
+                    it.findNavController().navigateUp()
+                    it.findNavController().navigate(action)
+                }
 
             }
-            is AdminDeleteItemViewHolder -> holder.bind(postList[position])
-            is AdminAcceptItemViewHolder -> holder.bind(postList[position])
-            is AdminWaitingItemViewHolder -> {
+            is AdminDeleteItemViewHolder -> {
                 holder.bind(postList[position])
+                holder.binding.postMore.setOnClickListener {
 
+                    val action = AdminMainFragmentDirections.actionAdminMainFragmentToDeleteDialog(
+                        postList[position].id
+                    )
+                    it.findNavController().navigateUp()
+                    it.findNavController().navigate(action)
+                }
+            }
+
+            is AdminAcceptItemViewHolder -> {
+                holder.bind(postList[position])
+                holder.binding.postMore.setOnClickListener {
+                    val action = AdminMainFragmentDirections.actionAdminMainFragmentToAcceptDialog(
+                        postList[position].id
+                    )
+                    it.findNavController().navigateUp()
+                    it.findNavController().navigate(action)
+                }
+            }
+            is AdminPendingItemViewHolder -> {
+                holder.bind(postList[position])
                 holder.binding.postMore.setOnClickListener {
                     val action = AdminMainFragmentDirections.actionAdminMainFragmentToPendingDialog(
-                        postList[0].id
+                        postList[position].id
                     )
+                    it.findNavController().navigateUp()
                     it.findNavController().navigate(action)
                 }
             }
@@ -153,18 +189,14 @@ class AdminHomeItemAdapter(
     }
 
     fun setItemList(data: List<UserPostDTO>) {
-        // 데이터가 바뀌였으면
-        val movieDiffUtil = AdminDiffUtil(postList, data)
-        // calculateDiff 아이템 변경을 감지한다.
-        val diffUtilResult = movieDiffUtil.let { DiffUtil.calculateDiff(it) }
-        // 데이터를 없애고
-        postList.clear()
-        // 새로운 데이터로 갈아끼운다.
-        postList.addAll(data)
-
-        //어뎁터에 감지된 데이터를 전달한다.
+        Log.d("Adapter", "setItemList: $data")
+        // 이전꺼, 데이터가 변한값
+        val recipesDiffUtil = AdminDiffUtil(postList, data)
+        // 데이터의 차이?? 비교 데이터가 무엇이 변햇는지
+        val diffUtilResult = DiffUtil.calculateDiff(recipesDiffUtil)
+        postList = data as MutableList<UserPostDTO>
+        //결과가 나오면 전달
         diffUtilResult.dispatchUpdatesTo(this)
-        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {

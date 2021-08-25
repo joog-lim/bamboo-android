@@ -12,18 +12,17 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.navArgs
 import com.study.bamboo.adapter.AdminHomeItemAdapter
-import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.ACCEPTEDType
-import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.PENDINGType
-import com.study.bamboo.databinding.PendingDialogBinding
+import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.REJECTEDType
+import com.study.bamboo.databinding.RejectCancelDialogBinding
 import com.study.bamboo.model.dto.UserPostDTO
 import com.study.bamboo.view.fragment.admin.AdminViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PendingDialog : DialogFragment() {
-    private var _binding: PendingDialogBinding? = null
+class RejectCancelDialog : DialogFragment() {
+    private var _binding: RejectCancelDialogBinding? = null
     private val binding get() = _binding!!
-    private val args by navArgs<PendingDialogArgs>()
+    private val args by navArgs<RejectCancelDialogArgs>()
     private val viewModel: AdminViewModel by viewModels()
 
     override fun onResume() {
@@ -45,16 +44,18 @@ class PendingDialog : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = PendingDialogBinding.inflate(inflater, container, false)
+        _binding = RejectCancelDialogBinding.inflate(inflater, container, false)
 
 
         viewModel.readToken.asLiveData().observe(viewLifecycleOwner, {
             token = it.token
+            Log.d(TAG, "onCreateView: ${args.auth}")
             Log.d(TAG, "observeUiPreferences: ${it.token}")
 
         })
 
-        binding.acceptBtn.setOnClickListener {
+
+        binding.rejectCancelBtn.setOnClickListener {
             viewModel.patchPost(
                 token,
                 args.auth,
@@ -63,22 +64,10 @@ class PendingDialog : DialogFragment() {
                 "",
                 ""
             )
-            observePatchPost(AdminHomeItemAdapter(ACCEPTEDType))
+            observePatchPost(AdminHomeItemAdapter(REJECTEDType))
             dialog?.hide()
         }
 
-        binding.pendingBtn.setOnClickListener {
-            viewModel.patchPost(
-                token,
-                args.auth,
-              "REJECTED",
-                "",
-                "",
-                ""
-            )
-            observePatchPost(AdminHomeItemAdapter(PENDINGType))
-            dialog?.hide()
-        }
 
 
 
@@ -88,7 +77,7 @@ class PendingDialog : DialogFragment() {
 
     private fun observePatchPost(adapter: AdminHomeItemAdapter) {
         viewModel.patchPostDto.observe(viewLifecycleOwner, {
-            Log.d(TAG, "observeGetPost: $it")
+            Log.d(TAG, "observePatchPost: $it")
             val userPostDto = UserPostDTO(
                 it.content,
                 it.createdAt,
@@ -98,12 +87,10 @@ class PendingDialog : DialogFragment() {
                 it.tag,
                 it.title
             )
-            Log.d(TAG, "observePatchPost: $it")
             adapter.setItemList(listOf(userPostDto))
-
-
         })
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -111,6 +98,6 @@ class PendingDialog : DialogFragment() {
     }
 
     companion object {
-        const val TAG = "LoginDialog"
+        const val TAG = "RejectCancelDialog"
     }
 }

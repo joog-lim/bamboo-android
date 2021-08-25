@@ -27,9 +27,7 @@ class AdminHomeItemAdapter(
         const val DELETEDType = 3
     }
 
-    enum class Status{
-        ACCEPTED,PENDING,REJECTED,DELETED
-    }
+
 
     private var postList = mutableListOf<UserPostDTO>()
 
@@ -148,7 +146,7 @@ class AdminHomeItemAdapter(
 
                     val action =
                         AdminMainFragmentDirections.actionAdminMainFragmentToRejectCancelDialog(
-                            postList[0].id
+                            postList[position].id
                         )
                     it.findNavController().navigateUp()
                     it.findNavController().navigate(action)
@@ -160,7 +158,7 @@ class AdminHomeItemAdapter(
                 holder.binding.postMore.setOnClickListener {
 
                     val action = AdminMainFragmentDirections.actionAdminMainFragmentToDeleteDialog(
-                        postList[0].id
+                        postList[position].id
                     )
                     it.findNavController().navigateUp()
                     it.findNavController().navigate(action)
@@ -171,7 +169,7 @@ class AdminHomeItemAdapter(
                 holder.bind(postList[position])
                 holder.binding.postMore.setOnClickListener {
                     val action = AdminMainFragmentDirections.actionAdminMainFragmentToAcceptDialog(
-                        postList[0].id
+                        postList[position].id
                     )
                     it.findNavController().navigateUp()
                     it.findNavController().navigate(action)
@@ -181,7 +179,7 @@ class AdminHomeItemAdapter(
                 holder.bind(postList[position])
                 holder.binding.postMore.setOnClickListener {
                     val action = AdminMainFragmentDirections.actionAdminMainFragmentToPendingDialog(
-                        postList[0].id
+                        postList[position].id
                     )
                     it.findNavController().navigateUp()
                     it.findNavController().navigate(action)

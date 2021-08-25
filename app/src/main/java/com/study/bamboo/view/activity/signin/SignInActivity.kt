@@ -8,16 +8,20 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.study.bamboo.R
 import com.study.bamboo.databinding.ActivitySignInBinding
-import com.study.bamboo.utils.ViewModel.signInViewModel
 import com.study.bamboo.view.activity.main.MainActivity
 import com.study.bamboo.view.base.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignInActivity : BaseActivity() {
     private val binding by binding<ActivitySignInBinding>(R.layout.activity_sign_in)
 
+    private val signInViewModel: SignInViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)

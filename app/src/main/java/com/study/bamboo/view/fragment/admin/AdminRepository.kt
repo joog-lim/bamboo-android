@@ -15,8 +15,5 @@ class AdminRepository @Inject constructor(
         adminApi.acceptPatchPost(token,id,title, content, reason)
 
 
-    suspend fun getPost(token: String, count: Int, cursor: String, status: String) =
-        adminApi.getPost(token, count, cursor, status)
-
 
 }

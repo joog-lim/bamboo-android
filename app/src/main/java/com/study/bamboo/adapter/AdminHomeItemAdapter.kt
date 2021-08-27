@@ -5,10 +5,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.study.bamboo.R
-import com.study.bamboo.databinding.*
+import com.study.bamboo.databinding.AdminPostAcceptedRecyclerItemBinding
+import com.study.bamboo.databinding.AdminPostDeleteRecyclerItemBinding
+import com.study.bamboo.databinding.AdminPostRejectRecyclerItemBinding
+import com.study.bamboo.databinding.AdminPostWaitingRecyclerItemBinding
 import com.study.bamboo.model.dto.UserPostDTO
 import com.study.bamboo.view.fragment.admin.AdminMainFragmentDirections
 
@@ -18,15 +22,25 @@ import com.study.bamboo.view.fragment.admin.AdminMainFragmentDirections
 class AdminHomeItemAdapter(
     private val type: Int
 ) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    PagingDataAdapter<UserPostDTO, RecyclerView.ViewHolder>(diffCallback) {
 
     companion object {
+
+        const val TAG = "AdminHomeItemAdapter"
         const val ACCEPTEDType = 0
         const val PENDINGType = 1
         const val REJECTEDType = 2
         const val DELETEDType = 3
-    }
 
+        private val diffCallback = object : DiffUtil.ItemCallback<UserPostDTO>() {
+            override fun areItemsTheSame(oldItem: UserPostDTO, newItem: UserPostDTO): Boolean =
+
+                oldItem.id == newItem.id
+
+            override fun areContentsTheSame(oldItem: UserPostDTO, newItem: UserPostDTO): Boolean =
+                oldItem == newItem
+        }
+    }
 
 
     private var postList = mutableListOf<UserPostDTO>()
@@ -129,79 +143,93 @@ class AdminHomeItemAdapter(
 
         return when (type) {
 
-            DELETEDType -> AdminDeleteItemViewHolder.from(parent)
-            PENDINGType -> AdminPendingItemViewHolder.from(parent)
-            REJECTEDType -> AdminRejectItemViewHolder.from(parent)
-            ACCEPTEDType -> AdminAcceptItemViewHolder.from(parent)
+            DELETEDType -> {
+
+                AdminDeleteItemViewHolder.from(parent)
+            }
+            PENDINGType -> {
+                AdminPendingItemViewHolder.from(parent)
+            }
+            REJECTEDType -> {
+                AdminRejectItemViewHolder.from(parent)
+            }
+            ACCEPTEDType -> {
+                AdminAcceptItemViewHolder.from(parent)
+            }
 
             else -> AdminAcceptItemViewHolder.from(parent)
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder) {
-            is AdminRejectItemViewHolder -> {
-                holder.bind(postList[position])
-                holder.binding.postMore.setOnClickListener {
+        val item = getItem(position)
+        if (item != null) {
 
-                    val action =
-                        AdminMainFragmentDirections.actionAdminMainFragmentToRejectCancelDialog(
-                            postList[position].id
-                        )
-                    it.findNavController().navigateUp()
-                    it.findNavController().navigate(action)
+            when (holder) {
+
+                is AdminRejectItemViewHolder -> {
+                    holder.bind(item)
+                    holder.binding.postMore.setOnClickListener {
+
+                        val action =
+                            AdminMainFragmentDirections.actionAdminMainFragmentToRejectCancelDialog(
+                                item.id
+                            )
+                        it.findNavController().navigateUp()
+                        it.findNavController().navigate(action)
+                    }
+
+                }
+                is AdminDeleteItemViewHolder -> {
+                    holder.bind(item)
+                    holder.binding.postMore.setOnClickListener {
+
+                        val action =
+                            AdminMainFragmentDirections.actionAdminMainFragmentToDeleteDialog(
+                                item.id
+                            )
+                        it.findNavController().navigateUp()
+                        it.findNavController().navigate(action)
+                    }
                 }
 
-            }
-            is AdminDeleteItemViewHolder -> {
-                holder.bind(postList[position])
-                holder.binding.postMore.setOnClickListener {
-
-                    val action = AdminMainFragmentDirections.actionAdminMainFragmentToDeleteDialog(
-                        postList[position].id
-                    )
-                    it.findNavController().navigateUp()
-                    it.findNavController().navigate(action)
+                is AdminAcceptItemViewHolder -> {
+                    holder.bind(item)
+                    holder.binding.postMore.setOnClickListener {
+                        val action =
+                            AdminMainFragmentDirections.actionAdminMainFragmentToAcceptDialog(
+                                item.id
+                            )
+                        it.findNavController().navigateUp()
+                        it.findNavController().navigate(action)
+                    }
                 }
-            }
-
-            is AdminAcceptItemViewHolder -> {
-                holder.bind(postList[position])
-                holder.binding.postMore.setOnClickListener {
-                    val action = AdminMainFragmentDirections.actionAdminMainFragmentToAcceptDialog(
-                        postList[position].id
-                    )
-                    it.findNavController().navigateUp()
-                    it.findNavController().navigate(action)
-                }
-            }
-            is AdminPendingItemViewHolder -> {
-                holder.bind(postList[position])
-                holder.binding.postMore.setOnClickListener {
-                    val action = AdminMainFragmentDirections.actionAdminMainFragmentToPendingDialog(
-                        postList[position].id
-                    )
-                    it.findNavController().navigateUp()
-                    it.findNavController().navigate(action)
+                is AdminPendingItemViewHolder -> {
+                    holder.bind(item)
+                    holder.binding.postMore.setOnClickListener {
+                        val action =
+                            AdminMainFragmentDirections.actionAdminMainFragmentToPendingDialog(
+                                item.id
+                            )
+                        it.findNavController().navigateUp()
+                        it.findNavController().navigate(action)
+                    }
                 }
             }
         }
+
     }
+
+
 
     fun setItemList(data: List<UserPostDTO>) {
         Log.d("Adapter", "setItemList: $data")
-        // 이전꺼, 데이터가 변한값
         val recipesDiffUtil = AdminDiffUtil(postList, data)
-        // 데이터의 차이?? 비교 데이터가 무엇이 변햇는지
         val diffUtilResult = DiffUtil.calculateDiff(recipesDiffUtil)
         postList = data as MutableList<UserPostDTO>
-        //결과가 나오면 전달
         diffUtilResult.dispatchUpdatesTo(this)
     }
 
-    override fun getItemCount(): Int {
-        return postList.size
-    }
 }
 
 //달라진 아이템 갱신
@@ -229,4 +257,6 @@ class AdminDiffUtil(
         )
     }
 }
+
+
 

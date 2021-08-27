@@ -1,4 +1,4 @@
-package com.study.bamboo.data
+package com.study.bamboo.datastore
 
 import android.content.Context
 import android.util.Log
@@ -7,7 +7,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.study.bamboo.data.DataStoreRepository.PreferencesKeys.dataStoreToken
+import com.study.bamboo.datastore.DataStoreRepository.PreferencesKeys.dataStoreToken
 import com.study.bamboo.utils.Util.Companion.DEFAULT_TOKEN
 import com.study.bamboo.utils.Util.Companion.PREFERENCES_TOKEN
 import com.study.bamboo.utils.Util.Companion.PREFERENCE_NAME
@@ -36,7 +36,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
 
 
     // 데이터를 쓴다
-    suspend fun saveToken(token: String) {
+     suspend fun saveToken(token: String) {
 
         // 데이터 스트림에 내보낼 수 있는 새 흐름을 만듦
         dataStore.edit { preferences ->
@@ -65,8 +65,6 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
             Log.d("DataStoreRepository", "readToken  $token")
             Token(token)
         }
-
-
 
 
 }

@@ -6,7 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.study.bamboo.data.DataStoreRepository
+import com.study.bamboo.datastore.DataStoreRepository
 import com.study.bamboo.model.dto.DeletePostDto
 import com.study.bamboo.model.dto.PatchDto
 import com.study.bamboo.model.dto.UserPostDTO
@@ -57,7 +57,8 @@ private val TAG="AdminViewModel"
         adminRepository.patchPost(token, id, status, title, content, reason).let { response ->
 
             if (response.isSuccessful) {
-                _patchPostData.value=response.body()
+
+                _patchPostData.value = response.body()
             }
         }
     }
@@ -88,15 +89,6 @@ private val TAG="AdminViewModel"
         }
     }
 
-    suspend fun getPostData(token: String, count: Int, cursor: String, status: String) =
-        viewModelScope.launch {
 
-            adminRepository.getPost(token, count, cursor, status).let { response ->
-                response.body()?.posts?.filter { it.status == status }.apply {
-                    _getPostData.value = this
-                }
-
-            }
-        }
 
 }

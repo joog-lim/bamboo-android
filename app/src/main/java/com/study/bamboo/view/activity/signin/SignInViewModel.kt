@@ -15,8 +15,12 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SignInViewModel : ViewModel() {
+
+
+/*
     val display_size_x get() = _display_size_x
     private val _display_size_x: MutableLiveData<Int> = MutableLiveData<Int>()
+*/
 
 
      private val _adminLoginResponse: MutableLiveData<String> = MutableLiveData<String>()
@@ -27,7 +31,9 @@ class SignInViewModel : ViewModel() {
         MutableLiveData<List<UserPostDTO>?>()
 
     init {
+/*
         display_size_x.value = 0
+*/
     }
 
 
@@ -69,12 +75,12 @@ class SignInViewModel : ViewModel() {
                 call: Call<UserGetPostDTO>,
                 response: Response<UserGetPostDTO>
             ) {
-                Log.d("로그", "리스폰스 : ${response.body()?.posts?.get(0)?.title}")
+                //Log.d("로그", "리스폰스 : ${response.body()?.posts?.get(0)?.title}")
                 _getPostResponse.value = response.body()?.posts
-                Log.d(
+         /*       Log.d(
                     "로그",
                     "리스폰스 : ${_getPostResponse.value?.get(0)?.title}, 사이즈 : ${_getPostResponse.value?.size}"
-                )
+                )*/
             }
 
             override fun onFailure(call: Call<UserGetPostDTO>, t: Throwable) {

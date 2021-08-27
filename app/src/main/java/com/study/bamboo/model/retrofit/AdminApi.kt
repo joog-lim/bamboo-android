@@ -44,7 +44,7 @@ interface AdminApi {
     suspend fun getPost(
         @Header("Authorization") Authorization: String,
         @Query("count") count: Int,
-        @Query("cursor") cursor: String,
+        @Query("cursor") cursor: String?,
         @Query("status") status: String
     ): Response<UserGetPostDTO>
 }

@@ -80,7 +80,7 @@ class LoginDialog : DialogFragment() {
 
 
         signInViewModel.adminLoginResponse.observe(requireActivity(), {
-            adminViewModel.saveToken(token)
+            adminViewModel.saveToken(it)
             val intent = Intent(requireContext(), AdminActivity::class.java)
             startActivity(intent)
         })

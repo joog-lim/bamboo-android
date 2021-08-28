@@ -11,11 +11,11 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.navArgs
-import com.study.bamboo.adapter.AdminHomeItemAdapter
-import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.ACCEPTEDType
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter
 import com.study.bamboo.databinding.AcceptDialogBinding
-import com.study.bamboo.model.dto.UserPostDTO
+import com.study.bamboo.utils.Admin
 import com.study.bamboo.view.fragment.admin.AdminViewModel
+import com.study.bamboo.view.fragment.admin.paging.viewModel.PagingPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,6 +25,9 @@ class AcceptDialog : DialogFragment() {
     private val args by navArgs<AcceptDialogArgs>()
     private val viewModel: AdminViewModel by viewModels()
 
+    private val acceptAdapter: AdminAcceptAdapter by lazy{
+        AdminAcceptAdapter()
+    }
     override fun onResume() {
         super.onResume()
         dialogCorner()
@@ -67,7 +70,6 @@ class AcceptDialog : DialogFragment() {
                 TAG,
                 "acceptBtn: title : ${binding.updateTitle.text} content :${binding.updateContent.text} "
             )
-            observePatchPost(AdminHomeItemAdapter(ACCEPTEDType))
             dialog?.hide()
         }
 
@@ -77,10 +79,10 @@ class AcceptDialog : DialogFragment() {
         return binding.root
     }
 
-    private fun observePatchPost(adapter: AdminHomeItemAdapter) {
+    private fun observePatchPost() {
         viewModel.patchPostDto.observe(viewLifecycleOwner, {
             Log.d(TAG, "observeGetPost: $it")
-            val userPostDto = UserPostDTO(
+            val userPostDto = Admin.Accept(
                 it.content,
                 it.createdAt,
                 it.id,
@@ -90,7 +92,7 @@ class AcceptDialog : DialogFragment() {
                 it.title
             )
             Log.d(TAG, "observePatchPost content :  ${it.content} title : ${it.title}")
-            adapter.setItemList(listOf(userPostDto))
+//            acceptAdapter.submitData(lifecycle,userPostDto)
         })
     }
 

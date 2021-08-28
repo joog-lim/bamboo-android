@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.study.bamboo.R
@@ -12,7 +13,7 @@ import com.study.bamboo.model.dto.UserPostDTO
 import java.text.SimpleDateFormat
 import java.util.*
 
-class UserHomeItemAdapter(val getPosts: MutableLiveData<List<UserPostDTO>?>) :
+class UserHomeItemAdapter(val getPosts: LiveData<List<UserPostDTO>?>) :
     RecyclerView.Adapter<UserHomeItemViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserHomeItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

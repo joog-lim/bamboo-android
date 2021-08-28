@@ -23,8 +23,8 @@ class SignInActivity : BaseActivity() {
 
     private val binding by binding<ActivitySignInBinding>(R.layout.activity_sign_in)
     private val loginDialog = LoginDialog()
-
     private val signInViewModel: SignInViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
@@ -60,9 +60,12 @@ class SignInActivity : BaseActivity() {
     private fun observeViewModel() {
         //post 게시물을 받아왔을때 MainActivity로 넘어가기
         signInViewModel.getPostResponse.observe(this, Observer {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+            if(it != null){
+                val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("count",it.size)
+                startActivity(intent)
+                finish()
+            }
         })
 
         signInViewModel.adminLoginResponse.observe(this, Observer {

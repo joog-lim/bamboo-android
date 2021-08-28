@@ -12,14 +12,22 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.study.bamboo.LinearLayoutManagerWrapper
 import com.study.bamboo.R
-import com.study.bamboo.adapter.AdminHomeItemAdapter
-import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.ACCEPTEDType
-import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.DELETEDType
-import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.PENDINGType
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTED
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTEDType
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.DELETED
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.DELETEDType
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.PENDING
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.PENDINGType
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTED
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTEDType
 import com.study.bamboo.adapter.PostLoadingAdapter
+import com.study.bamboo.adapter.admin.AdminDeleteAdapter
+import com.study.bamboo.adapter.admin.AdminPendingAdapter
+import com.study.bamboo.adapter.admin.AdminRejectAdapter
 import com.study.bamboo.databinding.FragmentAdminMainBinding
 import com.study.bamboo.view.base.BaseFragment
-import com.study.bamboo.view.fragment.admin.paging.PagingPostViewModel
+import com.study.bamboo.view.fragment.admin.paging.viewModel.PagingPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
@@ -27,33 +35,41 @@ import kotlinx.coroutines.launch
 
 // TODO: 2021-08-26
 
+
 @AndroidEntryPoint
 class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragment_admin_main) {
 
     companion object {
         const val TAG = "AdminMainFragment"
+
+
     }
 
     private lateinit var viewModel: AdminViewModel
     private lateinit var pagingViewModel: PagingPostViewModel
 
-    private val acceptAdapter: AdminHomeItemAdapter by lazy {
-        AdminHomeItemAdapter(ACCEPTEDType)
+    private val acceptAdapter: AdminAcceptAdapter by lazy {
+        AdminAcceptAdapter()
     }
 
-    private val deleteAdapter: AdminHomeItemAdapter by lazy {
-        AdminHomeItemAdapter(DELETEDType)
+    private val deleteAdapter: AdminDeleteAdapter by lazy {
+
+        AdminDeleteAdapter()
     }
 
-    private val rejectAdapter: AdminHomeItemAdapter by lazy {
+    private val rejectAdapter: AdminRejectAdapter by lazy {
+        AdminRejectAdapter()
 
-        AdminHomeItemAdapter(AdminHomeItemAdapter.REJECTEDType)
     }
 
-    private val pendingAdapter: AdminHomeItemAdapter by lazy {
-        AdminHomeItemAdapter(PENDINGType)
+    private val pendingAdapter: AdminPendingAdapter by lazy {
+
+
+        AdminPendingAdapter()
     }
     private var job: Job? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(requireActivity()).get(AdminViewModel::class.java)
@@ -106,19 +122,19 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
                     when (position) {
                         0 -> {
-                            setItemAdapter(acceptAdapter)
+                            setItemAdapter(ACCEPTEDType)
                             Log.d(TAG, "onItemSelected: $position token :$token")
                             lifecycleScope.launch {
                                 observeNetwork(
                                     token,
                                     "",
-                                    "ACCEPTED"
+                                    ACCEPTED
                                 )
                             }
 
                         }
                         1 -> {
-                            setItemAdapter(pendingAdapter)
+                            setItemAdapter(PENDINGType)
                             Log.d(TAG, "onItemSelected: $position token :$token")
 
                             lifecycleScope.launch {
@@ -126,13 +142,13 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                                     token,
 
                                     "",
-                                    "PENDING"
+                                    PENDING
                                 )
                             }
 
                         }
                         2 -> {
-                            setItemAdapter(rejectAdapter)
+                            setItemAdapter(REJECTEDType)
                             Log.d(TAG, "onItemSelected: $position token :$token")
 
                             lifecycleScope.launch {
@@ -140,14 +156,15 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                                     token,
 
                                     "",
-                                    "REJECTED"
+                                    REJECTED
+
                                 )
 
                             }
 
                         }
                         3 -> {
-                            setItemAdapter(deleteAdapter)
+                            setItemAdapter(DELETEDType)
                             Log.d(TAG, "onItemSelected: $position token :$token")
 
                             lifecycleScope.launch {
@@ -155,21 +172,22 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                                     token,
 
                                     "",
-                                    "DELETED"
+                                    DELETED
+
                                 )
 
                             }
 
                         }
                         else -> {
-                            setItemAdapter(acceptAdapter)
+                            setItemAdapter(ACCEPTEDType)
                             Log.d(TAG, "onItemSelected: $position token :$token")
 
                             lifecycleScope.launch {
                                 observeNetwork(
                                     token,
                                     "",
-                                    "ACCEPTED"
+                                    ACCEPTED
                                 )
                             }
                         }
@@ -180,7 +198,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
     }
 
 
-    private fun recyclerViewEnd(recyclerView: RecyclerView, adapter: AdminHomeItemAdapter) {
+    private fun recyclerViewEnd(recyclerView: RecyclerView, adapter: AdminAcceptAdapter) {
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -195,20 +213,11 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                 // 스크롤이 끝에 도달했는지 확인
                 if (lastVisibleItemPosition == itemTotalCount) {
                     Log.d(TAG, "onScrolled: 마지막 포지션: $lastVisibleItemPosition")
-                } else {
-
                 }
             }
         })
     }
 
-
-    // Post observe (Paging x)
-    private fun observeData(adapter: AdminHomeItemAdapter) {
-        viewModel.getPostData.observe(viewLifecycleOwner, {
-            adapter.setItemList(it)
-        })
-    }
 
     // paging에 먼저 피마리터 값 보내줌
     private fun observeGetData(token: String, cursor: String, status: String) {
@@ -216,56 +225,68 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
     }
 
     // paging 데이터값 받아옴
-    private fun observePagingData(adapter: AdminHomeItemAdapter) {
+    private fun observePagingData(viewType:Int) {
 
-
+        job?.cancel()
         job = lifecycleScope.launch {
 
-            pagingViewModel.flow.collectLatest {
-                adapter.submitData( viewLifecycleOwner.lifecycle, it)
-                Log.d(TAG, "getPost: $it")
+            when(viewType){
+                ACCEPTEDType->{
+                    pagingViewModel.acceptData.collectLatest {
+                        acceptAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+                        Log.d(TAG, "getPost: $it")
+                    }
+                }
+                DELETEDType->{
+                    pagingViewModel.deleteData.collectLatest {
+                        deleteAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+                        Log.d(TAG, "getPost: $it")
+                    }
+                }
+                PENDINGType->{
+                    pagingViewModel.pendingData.collectLatest {
+                        pendingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+                        Log.d(TAG, "getPost: $it")
+
+                    }
+
+                }
+                REJECTEDType->{
+                    pagingViewModel.rejectData.collectLatest {
+                        rejectAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+                        Log.d(TAG, "getPost: $it")
+                    }
+                }
+
             }
 
-//            pagingViewModel.photos.observe(viewLifecycleOwner) {
-//                adapter.submitData(viewLifecycleOwner.lifecycle, it)
-//                Log.d(TAG, "getPost: $it")
-//            }
-        }
 
+        }
     }
 
 
     suspend fun observeNetwork(token: String, cursor: String, status: String) {
         when (status) {
-            "ACCEPTED" -> {
+            ACCEPTED -> {
                 // 데이터값을 보냄 (Paging x)
                 observeGetData(token, cursor, status)
+                observePagingData(ACCEPTEDType)
+                recyclerViewEnd(binding.postRecyclerView, acceptAdapter)
 
-
-//                //먼저 데이터값을 adapter에 넣음
-//                observeData(acceptAdapter)
-//                viewModel.getPost(token, 20, cursor, status)
-
-
-
-                observePagingData(acceptAdapter)
-                recyclerViewEnd(binding.postRecyclerView,acceptAdapter)
-                // 잘 넣어지면 게시물의 position 이 마지막으로 되면 페이징 으로 데이터를 보냄
-//                recyclerViewEnd(binding.postRecyclerView, acceptAdapter)
 
             }
-            "PENDING" -> {
+            PENDING -> {
                 // 데이터값을 보냄 (Paging x)
                 observeGetData(token, cursor, status)
-                observePagingData(pendingAdapter)
+                observePagingData(PENDINGType)
             }
-            "REJECTED" -> {
+            REJECTED -> {
                 observeGetData(token, cursor, status)
-                observePagingData(rejectAdapter)
+                observePagingData(REJECTEDType)
             }
-            "DELETED" -> {
+            DELETED -> {
                 observeGetData(token, cursor, status)
-                observePagingData(deleteAdapter)
+                observePagingData(DELETEDType)
             }
 
         }
@@ -273,21 +294,72 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
     }
 
 
-    private fun setItemAdapter(adapter: AdminHomeItemAdapter) {
+    private fun setItemAdapter(viewType: Int) {
 
 
         val linearLayoutManagerWrapepr =
             context?.let { LinearLayoutManagerWrapper(it, LinearLayoutManager.VERTICAL, false) }
 
 
-        binding.postRecyclerView.apply {
-            this.adapter = adapter
-            this.adapter = adapter.withLoadStateHeaderAndFooter(
-                header = PostLoadingAdapter { adapter.retry() },
-                footer = PostLoadingAdapter { adapter.retry() }
-            )
-            this.layoutManager = linearLayoutManagerWrapepr
+
+        when (viewType) {
+            ACCEPTEDType -> {
+                binding.postRecyclerView.apply {
+                    this.adapter = acceptAdapter
+                    this.adapter = acceptAdapter.withLoadStateHeaderAndFooter(
+                        header = PostLoadingAdapter { acceptAdapter.retry() },
+                        footer = PostLoadingAdapter { acceptAdapter.retry() }
+                    )
+                    this.layoutManager = linearLayoutManagerWrapepr
+
+
+                }
+            }
+            DELETEDType -> {
+                binding.postRecyclerView.apply {
+                    this.adapter = deleteAdapter
+                    this.adapter = deleteAdapter.withLoadStateHeaderAndFooter(
+                        header = PostLoadingAdapter { deleteAdapter.retry() },
+                        footer = PostLoadingAdapter { deleteAdapter.retry() }
+                    )
+                    this.layoutManager = linearLayoutManagerWrapepr
+
+
+                }
+
+            }
+            REJECTEDType -> {
+                binding.postRecyclerView.apply {
+                    this.adapter = rejectAdapter
+                    this.adapter = rejectAdapter.withLoadStateHeaderAndFooter(
+                        header = PostLoadingAdapter { rejectAdapter.retry() },
+                        footer = PostLoadingAdapter { rejectAdapter.retry() }
+                    )
+                    this.layoutManager = linearLayoutManagerWrapepr
+
+
+                }
+
+            }
+            PENDINGType -> {
+                binding.postRecyclerView.apply {
+                    this.adapter = pendingAdapter
+                    this.adapter = pendingAdapter.withLoadStateHeaderAndFooter(
+                        header = PostLoadingAdapter { pendingAdapter.retry() },
+                        footer = PostLoadingAdapter { pendingAdapter.retry() }
+                    )
+                    this.layoutManager = linearLayoutManagerWrapepr
+
+
+                }
+            }
         }
     }
+
 }
+
+
+
+
+
 

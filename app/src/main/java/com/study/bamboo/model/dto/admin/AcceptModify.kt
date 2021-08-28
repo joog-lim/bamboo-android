@@ -1,6 +1,6 @@
-package com.study.bamboo.model.dto
+package com.study.bamboo.model.dto.admin
 
-data class PatchDto(
+data class AcceptModify(
     val __v: Int,
     val _id: String,
     val content: String,

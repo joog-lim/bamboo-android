@@ -11,10 +11,11 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.navArgs
-import com.study.bamboo.adapter.AdminHomeItemAdapter
-import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.REJECTEDType
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTED
+import com.study.bamboo.adapter.admin.AdminRejectAdapter
+
+
 import com.study.bamboo.databinding.RejectCancelDialogBinding
-import com.study.bamboo.model.dto.UserPostDTO
 import com.study.bamboo.view.fragment.admin.AdminViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,6 +26,9 @@ class RejectCancelDialog : DialogFragment() {
     private val args by navArgs<RejectCancelDialogArgs>()
     private val viewModel: AdminViewModel by viewModels()
 
+    private val rejectAdapter: AdminRejectAdapter by lazy{
+        AdminRejectAdapter()
+    }
     override fun onResume() {
         super.onResume()
         dialogCorner()
@@ -59,12 +63,10 @@ class RejectCancelDialog : DialogFragment() {
             viewModel.patchPost(
                 token,
                 args.auth,
-                "ACCEPTED",
-                "",
-                "",
-                ""
+                ACCEPTED,
+
             )
-            observePatchPost(AdminHomeItemAdapter(REJECTEDType))
+            rejectAdapter.notifyDataSetChanged()
             dialog?.hide()
         }
 
@@ -73,22 +75,6 @@ class RejectCancelDialog : DialogFragment() {
 
 
         return binding.root
-    }
-
-    private fun observePatchPost(adapter: AdminHomeItemAdapter) {
-        viewModel.patchPostDto.observe(viewLifecycleOwner, {
-            Log.d(TAG, "observePatchPost: $it")
-            val userPostDto = UserPostDTO(
-                it.content,
-                it.createdAt,
-                it.id,
-                it.number,
-                it.status,
-                it.tag,
-                it.title
-            )
-            adapter.setItemList(listOf(userPostDto))
-        })
     }
 
 

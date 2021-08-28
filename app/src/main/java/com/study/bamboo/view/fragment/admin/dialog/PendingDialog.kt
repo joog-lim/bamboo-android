@@ -11,11 +11,12 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.navArgs
-import com.study.bamboo.adapter.AdminHomeItemAdapter
-import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.ACCEPTEDType
-import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.PENDINGType
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTED
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTED
+import com.study.bamboo.adapter.admin.AdminPendingAdapter
+
 import com.study.bamboo.databinding.PendingDialogBinding
-import com.study.bamboo.model.dto.UserPostDTO
 import com.study.bamboo.view.fragment.admin.AdminViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,6 +27,12 @@ class PendingDialog : DialogFragment() {
     private val args by navArgs<PendingDialogArgs>()
     private val viewModel: AdminViewModel by viewModels()
 
+    private val acceptAdapter: AdminAcceptAdapter by lazy{
+        AdminAcceptAdapter()
+    }
+    private val pendingAdapter: AdminPendingAdapter by lazy{
+        AdminPendingAdapter()
+    }
     override fun onResume() {
         super.onResume()
         dialogCorner()
@@ -58,12 +65,10 @@ class PendingDialog : DialogFragment() {
             viewModel.patchPost(
                 token,
                 args.auth,
-                "ACCEPTED",
-                "",
-                "",
-                ""
+                ACCEPTED
+
             )
-            observePatchPost(AdminHomeItemAdapter(ACCEPTEDType))
+          acceptAdapter.notifyDataSetChanged()
             dialog?.hide()
         }
 
@@ -71,12 +76,10 @@ class PendingDialog : DialogFragment() {
             viewModel.patchPost(
                 token,
                 args.auth,
-              "REJECTED",
-                "",
-                "",
-                ""
+              REJECTED,
+
             )
-            observePatchPost(AdminHomeItemAdapter(PENDINGType))
+            pendingAdapter.notifyDataSetChanged()
             dialog?.hide()
         }
 
@@ -86,24 +89,7 @@ class PendingDialog : DialogFragment() {
         return binding.root
     }
 
-    private fun observePatchPost(adapter: AdminHomeItemAdapter) {
-        viewModel.patchPostDto.observe(viewLifecycleOwner, {
-            Log.d(TAG, "observeGetPost: $it")
-            val userPostDto = UserPostDTO(
-                it.content,
-                it.createdAt,
-                it.id,
-                it.number,
-                it.status,
-                it.tag,
-                it.title
-            )
-            Log.d(TAG, "observePatchPost: $it")
-            adapter.setItemList(listOf(userPostDto))
 
-
-        })
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

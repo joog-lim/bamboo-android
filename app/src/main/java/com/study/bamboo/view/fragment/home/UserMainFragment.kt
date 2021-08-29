@@ -11,6 +11,7 @@ import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.study.bamboo.R
 import com.study.bamboo.databinding.FragmentUserMainBinding
 import com.study.bamboo.utils.Functions
@@ -33,6 +34,7 @@ class UserMainFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onStart() {
@@ -85,11 +87,13 @@ class UserMainFragment : Fragment() {
     }
 
     private fun observeViewModel(){
-        mainViewModel.getPostResponse.observe(viewLifecycleOwner){
+        mainViewModel.getPostResponse.observe(requireActivity(), Observer {
+            Log.d("로그","UserMainFragment getPostResponse : $it")
             if (it != null){
                 binding.progressBar.visibility = View.GONE
                 initRecyclerView()
             }
-        }
+        })
+
     }
 }

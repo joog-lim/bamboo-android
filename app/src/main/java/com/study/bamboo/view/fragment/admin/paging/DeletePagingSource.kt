@@ -15,13 +15,13 @@ class DeletePagingSource @Inject constructor(
     private val token: String,
     private val cursor: String?,
 
-) : PagingSource<Int, Admin.Delete>() {
+    ) : PagingSource<Int, Admin.Delete>() {
 
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Admin.Delete> {
-        val TAG="DeletePagingSource"
+        val TAG = "DeletePagingSource"
         return try {
-            val page = params.key ?: UNSPLASH_STARTING_PAGE_INDEX
+            val page = params.key ?: 0
 
             Log.d(TAG, "page : $page")
 
@@ -29,16 +29,17 @@ class DeletePagingSource @Inject constructor(
             Log.d(TAG, "load: ${response.body()}")
 
             val data = response.body()?.posts ?: emptyList()
-            Log.d(TAG, "load: ${data[0].status}")
 
 
-            Log.d(TAG, "count: ${response.body()!!.count}")
+            val totalCount = adminApi.getCount(token)
+
+            val countData = totalCount.body()!![1].count
+            Log.d(AcceptPagingSource.TAG, "totalCount delete: $countData ")
             Log.d(TAG, "nextPage : ${response.body()!!.hasNext}")
             LoadResult.Page(
                 data = data,
                 prevKey = if (page == 1) null else page.minus(20),
-                nextKey = if (page < response.body()!!.count)
-                    response.body()!!.count.plus(20) else null
+                nextKey = page.plus(20)
             )
 
 

@@ -21,7 +21,7 @@ class RejectPagingSource @Inject constructor(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Admin.Reject> {
         val TAG="RejectPagingSource"
         return try {
-            val page = params.key ?: UNSPLASH_STARTING_PAGE_INDEX
+            val page = params.key ?: 0
             Log.d(TAG, "page : $page")
 
 
@@ -31,13 +31,16 @@ class RejectPagingSource @Inject constructor(
             Log.d(TAG, "load: ${data[0].status}")
 
 
+            val totalCount=adminApi.getCount(token)
+            val countData=totalCount.body()!![0].count
+            Log.d(AcceptPagingSource.TAG, "totalCount reject: $countData ")
+
             Log.d(TAG, "count: ${response.body()!!.count}")
             Log.d(TAG, "nextPage : ${response.body()!!.hasNext}")
             LoadResult.Page(
                 data = data,
-                prevKey = if (page == 1) null else page.minus(20),
-                nextKey = if (page < response.body()!!.count)
-                    response.body()!!.count.plus(20) else null
+                prevKey = if (page == 0) null else page.minus(20),
+                nextKey = page.plus(20)
             )
 
 

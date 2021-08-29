@@ -21,14 +21,15 @@ class PendingPagingSource @Inject constructor(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Admin.Pending> {
         val TAG = "PendingPagingSource"
         return try {
-            val page = params.key ?: UNSPLASH_STARTING_PAGE_INDEX
+            val page = params.key ?: 0
 
             Log.d(TAG, "page : $page")
 
 
             val response = adminApi.getPendingPost(token, page, cursor, "PENDING")
-
-
+            val totalCount=adminApi.getCount(token)
+            val countData=totalCount.body()!![2].count
+            Log.d(AcceptPagingSource.TAG, "totalCount pending: $countData ")
             val data = response.body()?.posts ?: emptyList()
 
 
@@ -36,9 +37,8 @@ class PendingPagingSource @Inject constructor(
             Log.d(TAG, "nextPage : ${response.body()!!.hasNext}")
             LoadResult.Page(
                 data = data,
-                prevKey = if (page == 1) null else page.minus(20),
-                nextKey = if (page < response.body()!!.count)
-                    response.body()!!.count.plus(20) else null
+                prevKey = if (page == 0) null else page.minus(20),
+                nextKey =page.plus(20)
             )
 
 

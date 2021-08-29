@@ -26,34 +26,37 @@ class AcceptPagingSource @Inject constructor(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Admin.Accept> {
         return try {
-            val page = params.key ?: UNSPLASH_STARTING_PAGE_INDEX
+            val page = params.key ?: 0
 
 
             val response = adminApi.getAcceptPost(token, page, cursor, ACCEPTED)
 
+            val totalCount=adminApi.getCount(token)
+
+            val countData=totalCount.body()!![3].count
+            Log.d(TAG, "totalCount accept: $countData ")
+
+
+            Log.d(TAG, "page:$page")
             val data = response.body()?.posts ?: emptyList()
-            Log.d(TAG, "load: ${data[0].status}")
 
 
-            Log.d(TAG, "count: ${response.body()!!.count}")
-            Log.d(TAG, "nextPage : ${response.body()!!.hasNext}")
             LoadResult.Page(
                 data = data,
-                prevKey = if (page == 1) null else page.minus(20),
-                nextKey = if (page < response.body()!!.count)
-                    response.body()!!.count.plus(20) else null
+                prevKey = if (page == 0) null else page.minus(20),
+                nextKey = page.plus(20)
             )
 
 
         } catch (e: Exception) {
             Log.d(TAG, "error: $e")
-            LoadResult.Error(e)
+            return LoadResult.Error(e)
         } catch (e: HttpException) {
             Log.d(TAG, "HttpException: $e")
-            LoadResult.Error(e)
+         return   LoadResult.Error(e)
         } catch (e: IOException) {
-            Log.d(TAG, "IOException: $e")
-            LoadResult.Error(e)
+             Log.d(TAG, "IOException: $e")
+            return  LoadResult.Error(e)
         }
 
 

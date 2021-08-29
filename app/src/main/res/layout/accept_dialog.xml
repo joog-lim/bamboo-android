@@ -24,7 +24,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="내용"
-            app:layout_constraintBottom_toTopOf="@+id/accept_btn" />
+            app:layout_constraintBottom_toTopOf="@+id/update_tag"
+            app:layout_constraintEnd_toEndOf="@+id/update_title"
+            app:layout_constraintStart_toStartOf="@+id/update_title" />
+
+        <EditText
+            android:id="@+id/update_tag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="태그"
+            app:layout_constraintBottom_toTopOf="@+id/accept_btn"
+            app:layout_constraintEnd_toEndOf="@+id/update_content"
+            app:layout_constraintStart_toStartOf="@+id/update_content" />
 
         <androidx.appcompat.widget.AppCompatButton
 
@@ -32,9 +43,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="수정"
+            app:layout_constraintTop_toBottomOf="@id/update_tag"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/update_content"
             app:layout_constraintTop_toTopOf="parent" />
 
 

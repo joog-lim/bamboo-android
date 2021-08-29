@@ -18,6 +18,7 @@ import com.study.bamboo.utils.Admin
 import com.study.bamboo.view.fragment.admin.AdminViewModel
 import com.study.bamboo.view.fragment.admin.paging.viewModel.PagingPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -31,6 +32,7 @@ class AcceptDialog : DialogFragment() {
     private val acceptAdapter: AdminAcceptAdapter by lazy {
         AdminAcceptAdapter()
     }
+    private var job: Job? = null
 
     override fun onResume() {
         super.onResume()
@@ -63,26 +65,40 @@ class AcceptDialog : DialogFragment() {
 
 
         binding.acceptBtn.setOnClickListener {
-            viewModel.acceptPatchPost(
-                token,
-                args.auth,
-                binding.updateTitle.text.toString(),
-                binding.updateContent.text.toString(),
-                "공부 "
-            )
 
-            viewModel.successData.observe(viewLifecycleOwner){
-                if(it){
-                    updateData()
-                }
-            }
+            updatePost()
             dialog?.hide()
+
         }
 
 
 
 
+
+
         return binding.root
+    }
+
+
+    private fun updatePost() {
+        job?.cancel()
+        job = lifecycleScope.launch {
+
+            viewModel.acceptPatchPost(
+                token,
+                args.auth,
+                bodySend()
+            )
+        }
+    }
+
+    fun bodySend(): HashMap<String, String> {
+        val accepted: HashMap<String, String> = HashMap()
+        accepted["title"] = binding.updateTitle.text.toString()
+        accepted["content"] = binding.updateContent.text.toString()
+        accepted["tag"] = binding.updateTag.text.toString()
+
+        return accepted
     }
 
 

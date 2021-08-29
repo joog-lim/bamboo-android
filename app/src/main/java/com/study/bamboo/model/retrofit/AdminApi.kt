@@ -14,8 +14,7 @@ interface AdminApi {
 
     //게시물 삭제
     @FormUrlEncoded
-//    @DELETE("/post/delete/{id}")
-    @HTTP(method = "DELETE", path = "/post/delete/{id}", hasBody = true)
+    @HTTP(method = "DELETE", path = "post/{id}/delete", hasBody = true)
     suspend fun deletePost(
         @Header("Authorization") Authorization: String,
         @Path("id") arg: String,
@@ -23,37 +22,26 @@ interface AdminApi {
     ): Response<DeletePostDto>
 
     //게시물 상태 수정 가능(수락 상태, 거절 상태 등)
-    @FormUrlEncoded
-    @PATCH("post/patch/{id}")
+    @POST("post/{id}/setStatus")
     suspend fun patchPost(
         @Header("Authorization") Authorization: String,
         @Path("id") id: String,
-        @Field("status") status:String,
-
+        @Body status:  HashMap<String, String>,
     ): Response<UpdateStatus>
     // 수락 수정
 
     @FormUrlEncoded
-    @PATCH("post/patch/{id}")
+    @PATCH("post/{id}/modify")
     suspend fun acceptPatchPost(
         @Header("Authorization") Authorization: String,
         @Path("id") id: String,
-        @Field("title") title:String,
-        @Field("content") content:String,
-        @Field("reason") reason:String,
+        @Field("title") title: String,
+        @Field("content") content: String,
+        @Field("tag") tag: String,
     ): Response<AcceptModify>
 
 
-
-    @GET("post/get-list")
-    suspend fun getPost(
-        @Header("Authorization") Authorization: String,
-        @Query("count") count: Int,
-        @Query("cursor") cursor: String?,
-        @Query("status") status: String
-    ): Response<UserGetPostDTO>
-
-    @GET("post/get-list")
+    @GET("post/AlgorithemList")
     suspend fun getAcceptPost(
         @Header("Authorization") Authorization: String,
         @Query("count") count: Int,
@@ -61,7 +49,7 @@ interface AdminApi {
         @Query("status") status: String
     ): Response<AcceptPost>
 
-    @GET("post/get-list")
+    @GET("post/AlgorithemList")
     suspend fun getPendingPost(
         @Header("Authorization") Authorization: String,
         @Query("count") count: Int,
@@ -69,7 +57,7 @@ interface AdminApi {
         @Query("status") status: String
     ): Response<PendingPost>
 
-    @GET("post/get-list")
+    @GET("post/AlgorithemList")
     suspend fun getDeletePost(
         @Header("Authorization") Authorization: String,
         @Query("count") count: Int,
@@ -77,11 +65,17 @@ interface AdminApi {
         @Query("status") status: String
     ): Response<DeletePost>
 
-    @GET("post/get-list")
+    @GET("post/AlgorithemList")
     suspend fun getRejectPost(
         @Header("Authorization") Authorization: String,
         @Query("count") count: Int,
         @Query("cursor") cursor: String?,
         @Query("status") status: String
     ): Response<AdminRejectPost>
+
+    //각각의 status 게시물 가져오기
+    @GET("post/count")
+    suspend fun getCount(
+        @Header("Authorization") Authorization: String,
+    ): Response<PostCount>
 }

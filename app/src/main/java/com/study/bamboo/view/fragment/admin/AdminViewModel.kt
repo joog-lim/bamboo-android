@@ -48,14 +48,13 @@ init{
         }
 
 
-    fun acceptPatchPost(
+  suspend  fun acceptPatchPost(
         token: String,
         id: String,
-        title: String,
-        content: String,
-        tag: String
+        bodyMap: HashMap<String, String>
+
     ) = viewModelScope.launch {
-        adminRepository.acceptPatchPost(token, id, title, content, tag).let { response ->
+        adminRepository.acceptPatchPost(token, id, bodyMap).let { response ->
 
             if (response.isSuccessful) {
                 _successData.value = true

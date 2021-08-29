@@ -30,10 +30,13 @@ class SignInViewModel : ViewModel() {
     private val _getPostResponse: MutableLiveData<List<UserPostDTO>?> =
         MutableLiveData<List<UserPostDTO>?>()
 
+    val success= MutableLiveData<Boolean>()
     init {
 /*
         display_size_x.value = 0
+        
 */
+        success.value=false
     }
 
 
@@ -55,6 +58,7 @@ class SignInViewModel : ViewModel() {
             ) {
                 if (response.isSuccessful) {
                     _adminLoginResponse.value = response.body()?.token.toString()
+                    success.value=true
                 }
 
             }

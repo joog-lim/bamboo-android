@@ -34,6 +34,11 @@ class AdminViewModel @Inject constructor(
     private val _patchPostData = MutableLiveData<AcceptModify>()
     val patchPostDto: LiveData<AcceptModify> get() = _patchPostData
 
+    private val _successData = MutableLiveData<Boolean>()
+    val successData: LiveData<Boolean> get() = _successData
+init{
+    _successData.value=false
+}
 
     // 토큰을 저장한다.
     fun saveToken(token: String) =
@@ -48,18 +53,25 @@ class AdminViewModel @Inject constructor(
         id: String,
         title: String,
         content: String,
-        reason: String
+        tag: String
     ) = viewModelScope.launch {
-        adminRepository.acceptPatchPost(token, id, title, content, reason).let { response ->
+        adminRepository.acceptPatchPost(token, id, title, content, tag).let { response ->
 
             if (response.isSuccessful) {
-                _patchPostData.value = response.body()
+                _successData.value = true
             }
         }
     }
 
-    fun patchPost(token:String,id:String,status:String)=viewModelScope.launch {
-        adminRepository.patchPost(token,id,status)
+    fun patchPost(token: String, id: String, status: HashMap<String, String>) = viewModelScope.launch {
+        adminRepository.patchPost(token, id, status).let{
+
+            if(it.isSuccessful){
+                Log.d(TAG, "patchPost: 성공!")
+                _successData.value = true
+            }
+            it.errorBody()
+        }
     }
 
     fun deletePost(token: String, reason: String, id: String) = viewModelScope.launch {

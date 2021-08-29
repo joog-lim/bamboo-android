@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter
 import com.study.bamboo.databinding.AcceptDialogBinding
@@ -17,6 +18,8 @@ import com.study.bamboo.utils.Admin
 import com.study.bamboo.view.fragment.admin.AdminViewModel
 import com.study.bamboo.view.fragment.admin.paging.viewModel.PagingPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AcceptDialog : DialogFragment() {
@@ -24,10 +27,11 @@ class AcceptDialog : DialogFragment() {
     private val binding get() = _binding!!
     private val args by navArgs<AcceptDialogArgs>()
     private val viewModel: AdminViewModel by viewModels()
-
-    private val acceptAdapter: AdminAcceptAdapter by lazy{
+    private val pagingViewModel: PagingPostViewModel by viewModels()
+    private val acceptAdapter: AdminAcceptAdapter by lazy {
         AdminAcceptAdapter()
     }
+
     override fun onResume() {
         super.onResume()
         dialogCorner()
@@ -64,12 +68,14 @@ class AcceptDialog : DialogFragment() {
                 args.auth,
                 binding.updateTitle.text.toString(),
                 binding.updateContent.text.toString(),
-                ""
+                "공부 "
             )
-            Log.d(
-                TAG,
-                "acceptBtn: title : ${binding.updateTitle.text} content :${binding.updateContent.text} "
-            )
+
+            viewModel.successData.observe(viewLifecycleOwner){
+                if(it){
+                    updateData()
+                }
+            }
             dialog?.hide()
         }
 
@@ -79,23 +85,15 @@ class AcceptDialog : DialogFragment() {
         return binding.root
     }
 
-    private fun observePatchPost() {
-        viewModel.patchPostDto.observe(viewLifecycleOwner, {
-            Log.d(TAG, "observeGetPost: $it")
-            val userPostDto = Admin.Accept(
-                it.content,
-                it.createdAt,
-                it.id,
-                it.number,
-                it.status,
-                it.tag,
-                it.title
-            )
-            Log.d(TAG, "observePatchPost content :  ${it.content} title : ${it.title}")
-//            acceptAdapter.submitData(lifecycle,userPostDto)
-        })
-    }
 
+    private fun updateData() {
+        lifecycleScope.launch {
+            pagingViewModel.acceptData.collectLatest {
+                acceptAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+            }
+        }
+
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

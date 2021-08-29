@@ -10,14 +10,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTED
 import com.study.bamboo.adapter.admin.AdminRejectAdapter
 
 
 import com.study.bamboo.databinding.RejectCancelDialogBinding
 import com.study.bamboo.view.fragment.admin.AdminViewModel
+import com.study.bamboo.view.fragment.admin.paging.viewModel.PagingPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RejectCancelDialog : DialogFragment() {
@@ -25,7 +30,7 @@ class RejectCancelDialog : DialogFragment() {
     private val binding get() = _binding!!
     private val args by navArgs<RejectCancelDialogArgs>()
     private val viewModel: AdminViewModel by viewModels()
-
+    private  val pagingViewModel: PagingPostViewModel by viewModels()
     private val rejectAdapter: AdminRejectAdapter by lazy{
         AdminRejectAdapter()
     }
@@ -60,13 +65,20 @@ class RejectCancelDialog : DialogFragment() {
 
 
         binding.rejectCancelBtn.setOnClickListener {
+
+            val accept = HashMap<String, String>()
+            accept["status"] = AdminAcceptAdapter.ACCEPTED
             viewModel.patchPost(
                 token,
                 args.auth,
-                ACCEPTED,
+                accept,
 
             )
-            rejectAdapter.notifyDataSetChanged()
+            viewModel.successData.observe(viewLifecycleOwner){
+                if(it){
+                    updateData()
+                }
+            }
             dialog?.hide()
         }
 
@@ -76,7 +88,14 @@ class RejectCancelDialog : DialogFragment() {
 
         return binding.root
     }
+    private fun updateData() {
+        lifecycleScope.launch {
+            pagingViewModel.rejectData.collectLatest {
+                rejectAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+            }
 
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

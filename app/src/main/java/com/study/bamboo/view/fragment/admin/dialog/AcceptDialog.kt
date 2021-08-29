@@ -102,14 +102,7 @@ class AcceptDialog : DialogFragment() {
     }
 
 
-    private fun updateData() {
-        lifecycleScope.launch {
-            pagingViewModel.acceptData.collectLatest {
-                acceptAdapter.submitData(viewLifecycleOwner.lifecycle, it)
-            }
-        }
 
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

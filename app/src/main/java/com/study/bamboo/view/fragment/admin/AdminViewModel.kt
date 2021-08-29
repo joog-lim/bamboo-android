@@ -7,9 +7,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.study.bamboo.datastore.DataStoreRepository
-import com.study.bamboo.model.dto.DeletePostDto
-import com.study.bamboo.model.dto.PatchDto
-import com.study.bamboo.model.dto.UserPostDTO
+import com.study.bamboo.model.dto.admin.AcceptModify
+import com.study.bamboo.model.dto.admin.DeletePostDto
+
 import com.study.bamboo.utils.Util.Companion.DEFAULT_TOKEN
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -24,18 +24,21 @@ class AdminViewModel @Inject constructor(
     private val dataStoreRepository: DataStoreRepository
 ) : AndroidViewModel(application) {
 
-     var token = DEFAULT_TOKEN
+    var token = DEFAULT_TOKEN
     val readToken = dataStoreRepository.readToken
-private val TAG="AdminViewModel"
+    private val TAG = "AdminViewModel"
 
     private val _deletePostData = MutableLiveData<DeletePostDto>()
-    val deletePostDto: LiveData<DeletePostDto> get() = _deletePostData
+    val deletePostDtoDto: LiveData<DeletePostDto> get() = _deletePostData
 
-    private val _patchPostData = MutableLiveData<PatchDto>()
-    val patchPostDto: LiveData<PatchDto> get() = _patchPostData
+    private val _patchPostData = MutableLiveData<AcceptModify>()
+    val patchPostDto: LiveData<AcceptModify> get() = _patchPostData
 
-    private val _getPostData = MutableLiveData<List<UserPostDTO>>()
-    val getPostData: LiveData<List<UserPostDTO>> get() = _getPostData
+    private val _successData = MutableLiveData<Boolean>()
+    val successData: LiveData<Boolean> get() = _successData
+init{
+    _successData.value=false
+}
 
     // 토큰을 저장한다.
     fun saveToken(token: String) =
@@ -45,41 +48,34 @@ private val TAG="AdminViewModel"
         }
 
 
-
-    fun patchPost(
+  suspend  fun acceptPatchPost(
         token: String,
         id: String,
-        status: String,
-        title: String,
-        content: String,
-        reason: String
+        bodyMap: HashMap<String, String>
+
     ) = viewModelScope.launch {
-        adminRepository.patchPost(token, id, status, title, content, reason).let { response ->
+        adminRepository.acceptPatchPost(token, id, bodyMap).let { response ->
 
             if (response.isSuccessful) {
-
-                _patchPostData.value = response.body()
+                _successData.value = true
             }
         }
     }
 
-    fun acceptPatchPost(
-        token: String,
-        id: String,
-        title: String,
-        content: String,
-        reason: String
-    ) = viewModelScope.launch {
-        adminRepository.acceptPatchPost(token, id, title, content, reason).let { response ->
+    fun patchPost(token: String, id: String, status: HashMap<String, String>) = viewModelScope.launch {
+        adminRepository.patchPost(token, id, status).let{
 
-            if (response.isSuccessful) {
-                _patchPostData.value=response.body()
+            if(it.isSuccessful){
+                Log.d(TAG, "patchPost: 성공!")
+                _successData.value = true
             }
+            it.errorBody()
         }
     }
-    fun deletePost(token:String,message: String, arg: String) = viewModelScope.launch {
 
-        adminRepository.deletePost(token,arg, message).let { response ->
+    fun deletePost(token: String, reason: String, id: String) = viewModelScope.launch {
+
+        adminRepository.deletePost(token, reason, id).let { response ->
 
             if (response.isSuccessful) {
                 _deletePostData.value = response.body()
@@ -88,7 +84,6 @@ private val TAG="AdminViewModel"
             }
         }
     }
-
 
 
 }

@@ -10,14 +10,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.study.bamboo.adapter.AdminHomeItemAdapter
-import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.ACCEPTEDType
-import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.PENDINGType
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTED
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTED
+import com.study.bamboo.adapter.admin.AdminPendingAdapter
 import com.study.bamboo.databinding.PendingDialogBinding
-import com.study.bamboo.model.dto.UserPostDTO
 import com.study.bamboo.view.fragment.admin.AdminViewModel
+import com.study.bamboo.view.fragment.admin.paging.viewModel.PagingPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PendingDialog : DialogFragment() {
@@ -25,6 +28,12 @@ class PendingDialog : DialogFragment() {
     private val binding get() = _binding!!
     private val args by navArgs<PendingDialogArgs>()
     private val viewModel: AdminViewModel by viewModels()
+    private  val pagingViewModel: PagingPostViewModel by viewModels()
+
+    private val pendingAdapter: AdminPendingAdapter by lazy {
+        AdminPendingAdapter()
+    }
+
 
     override fun onResume() {
         super.onResume()
@@ -55,30 +64,43 @@ class PendingDialog : DialogFragment() {
         })
 
         binding.acceptBtn.setOnClickListener {
+            Log.d(TAG, "PendingDialog token: $token, id : ${args.auth}, status: $ACCEPTED")
+            val accepted = HashMap<String, String>()
+            accepted["status"] = ACCEPTED
+
             viewModel.patchPost(
-                token,
+                token = token,
                 args.auth,
-                "ACCEPTED",
-                "",
-                "",
-                ""
+                accepted
             )
-            observePatchPost(AdminHomeItemAdapter(ACCEPTEDType))
+
+
+            viewModel.successData.observe(viewLifecycleOwner){
+                if(it){
+                    updateData()
+                }
+            }
             dialog?.hide()
         }
 
+
         binding.pendingBtn.setOnClickListener {
+            val reject = HashMap<String, String>()
+            reject["status"] = REJECTED
             viewModel.patchPost(
                 token,
                 args.auth,
-              "REJECTED",
-                "",
-                "",
-                ""
-            )
-            observePatchPost(AdminHomeItemAdapter(PENDINGType))
+                reject,
+
+                )
+            viewModel.successData.observe(viewLifecycleOwner){
+                if(it){
+                    updateData()
+                }
+            }
             dialog?.hide()
         }
+
 
 
 
@@ -86,25 +108,14 @@ class PendingDialog : DialogFragment() {
         return binding.root
     }
 
-    private fun observePatchPost(adapter: AdminHomeItemAdapter) {
-        viewModel.patchPostDto.observe(viewLifecycleOwner, {
-            Log.d(TAG, "observeGetPost: $it")
-            val userPostDto = UserPostDTO(
-                it.content,
-                it.createdAt,
-                it.id,
-                it.number,
-                it.status,
-                it.tag,
-                it.title
-            )
-            Log.d(TAG, "observePatchPost: $it")
-            adapter.setItemList(listOf(userPostDto))
+    private fun updateData(){
+        lifecycleScope.launch {
+            pagingViewModel.pendingData .collectLatest{
+                pendingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+            }
+        }
 
-
-        })
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

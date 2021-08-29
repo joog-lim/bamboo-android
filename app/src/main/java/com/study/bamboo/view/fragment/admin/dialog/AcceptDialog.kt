@@ -10,13 +10,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.study.bamboo.adapter.AdminHomeItemAdapter
-import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.ACCEPTEDType
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter
 import com.study.bamboo.databinding.AcceptDialogBinding
-import com.study.bamboo.model.dto.UserPostDTO
+import com.study.bamboo.utils.Admin
 import com.study.bamboo.view.fragment.admin.AdminViewModel
+import com.study.bamboo.view.fragment.admin.paging.viewModel.PagingPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AcceptDialog : DialogFragment() {
@@ -24,6 +28,11 @@ class AcceptDialog : DialogFragment() {
     private val binding get() = _binding!!
     private val args by navArgs<AcceptDialogArgs>()
     private val viewModel: AdminViewModel by viewModels()
+    private val pagingViewModel: PagingPostViewModel by viewModels()
+    private val acceptAdapter: AdminAcceptAdapter by lazy {
+        AdminAcceptAdapter()
+    }
+    private var job: Job? = null
 
     override fun onResume() {
         super.onResume()
@@ -56,20 +65,13 @@ class AcceptDialog : DialogFragment() {
 
 
         binding.acceptBtn.setOnClickListener {
-            viewModel.acceptPatchPost(
-                token,
-                args.auth,
-                binding.updateTitle.text.toString(),
-                binding.updateContent.text.toString(),
-                ""
-            )
-            Log.d(
-                TAG,
-                "acceptBtn: title : ${binding.updateTitle.text} content :${binding.updateContent.text} "
-            )
-            observePatchPost(AdminHomeItemAdapter(ACCEPTEDType))
+
+            updatePost()
             dialog?.hide()
+
         }
+
+
 
 
 
@@ -77,23 +79,37 @@ class AcceptDialog : DialogFragment() {
         return binding.root
     }
 
-    private fun observePatchPost(adapter: AdminHomeItemAdapter) {
-        viewModel.patchPostDto.observe(viewLifecycleOwner, {
-            Log.d(TAG, "observeGetPost: $it")
-            val userPostDto = UserPostDTO(
-                it.content,
-                it.createdAt,
-                it.id,
-                it.number,
-                it.status,
-                it.tag,
-                it.title
+
+    private fun updatePost() {
+        job?.cancel()
+        job = lifecycleScope.launch {
+
+            viewModel.acceptPatchPost(
+                token,
+                args.auth,
+                bodySend()
             )
-            Log.d(TAG, "observePatchPost content :  ${it.content} title : ${it.title}")
-            adapter.setItemList(listOf(userPostDto))
-        })
+        }
     }
 
+    fun bodySend(): HashMap<String, String> {
+        val accepted: HashMap<String, String> = HashMap()
+        accepted["title"] = binding.updateTitle.text.toString()
+        accepted["content"] = binding.updateContent.text.toString()
+        accepted["tag"] = binding.updateTag.text.toString()
+
+        return accepted
+    }
+
+
+    private fun updateData() {
+        lifecycleScope.launch {
+            pagingViewModel.acceptData.collectLatest {
+                acceptAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+            }
+        }
+
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

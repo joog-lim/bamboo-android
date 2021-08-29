@@ -10,14 +10,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.study.bamboo.adapter.AdminHomeItemAdapter
-import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.DELETEDType
-import com.study.bamboo.adapter.AdminHomeItemAdapter.Companion.REJECTEDType
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTED
+import com.study.bamboo.adapter.admin.AdminDeleteAdapter
 import com.study.bamboo.databinding.DeleteDialogBinding
-import com.study.bamboo.model.dto.UserPostDTO
 import com.study.bamboo.view.fragment.admin.AdminViewModel
+import com.study.bamboo.view.fragment.admin.paging.viewModel.PagingPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DeleteDialog : DialogFragment() {
@@ -25,6 +27,11 @@ class DeleteDialog : DialogFragment() {
     private val binding get() = _binding!!
     private val args by navArgs<DeleteDialogArgs>()
     private val viewModel: AdminViewModel by viewModels()
+    private  val pagingViewModel: PagingPostViewModel by viewModels()
+    private val deleteAdapter: AdminDeleteAdapter by lazy {
+        AdminDeleteAdapter()
+    }
+
 
     override fun onResume() {
         super.onResume()
@@ -47,34 +54,39 @@ class DeleteDialog : DialogFragment() {
     ): View {
         _binding = DeleteDialogBinding.inflate(inflater, container, false)
 
-
+        Log.d(TAG, "id: ${args.auth}")
         viewModel.readToken.asLiveData().observe(viewLifecycleOwner, {
             token = it.token
+
             Log.d(TAG, "observeUiPreferences: ${it.token}")
 
         })
 
         binding.deleteBtn.setOnClickListener {
+
+
             viewModel.deletePost(
                 token,
-                "",
+                "왤끼요",
                 args.auth,
-
                 )
-            observePatchPost(AdminHomeItemAdapter(DELETEDType))
+            deleteAdapter.notifyDataSetChanged()
             dialog?.hide()
         }
 
         binding.rejectBtn.setOnClickListener {
+            val reject = HashMap<String, String>()
+            reject["status"] = REJECTED
             viewModel.patchPost(
                 token,
                 args.auth,
-               "REJECTED",
-                "",
-                "",
-                ""
+                reject,
             )
-            observePatchPost(AdminHomeItemAdapter(REJECTEDType))
+            viewModel.successData.observe(viewLifecycleOwner){
+                if(it){
+                    updateData()
+                }
+            }
             dialog?.hide()
         }
 
@@ -84,24 +96,14 @@ class DeleteDialog : DialogFragment() {
         return binding.root
     }
 
-    private fun observePatchPost(adapter: AdminHomeItemAdapter) {
-        viewModel.patchPostDto.observe(viewLifecycleOwner, {
-            Log.d(TAG, "observeGetPost: $it")
-            val userPostDto = UserPostDTO(
-                it.content,
-                it.createdAt,
-                it.id,
-                it.number,
-                it.status,
-                it.tag,
-                it.title
-            )
-            Log.d(TAG, "observePatchPost: $it")
-            adapter.setItemList(listOf(userPostDto))
-        })
+    private fun updateData(){
+        lifecycleScope.launch {
+            pagingViewModel.deleteData .collectLatest{
+                deleteAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+            }
+        }
+
     }
-
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

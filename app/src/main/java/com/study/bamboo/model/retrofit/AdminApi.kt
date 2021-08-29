@@ -26,18 +26,16 @@ interface AdminApi {
     suspend fun patchPost(
         @Header("Authorization") Authorization: String,
         @Path("id") id: String,
-        @Body status:  HashMap<String, String>,
+        @Body status: HashMap<String, String>,
     ): Response<UpdateStatus>
     // 수락 수정
 
-    @FormUrlEncoded
     @PATCH("post/{id}/modify")
     suspend fun acceptPatchPost(
         @Header("Authorization") Authorization: String,
         @Path("id") id: String,
-        @Field("title") title: String,
-        @Field("content") content: String,
-        @Field("tag") tag: String,
+        @Body bodyMap: Map<String, String>,
+
     ): Response<AcceptModify>
 
 

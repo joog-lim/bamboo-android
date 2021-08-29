@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         //sendData()
 
+
         navi = binding.bottomNavigationView
         supportActionBar!!.hide()
         navController = findNavController(R.id.navHostFragment)

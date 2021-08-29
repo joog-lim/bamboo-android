@@ -36,8 +36,11 @@ class SignInActivity : BaseActivity() {
 
 
     fun clickUserLogin(view: View) {
-        binding.progressBar.visibility = View.VISIBLE
-        signInViewModel.callGetPost(20, "60b8407473d81a1b4cc591a5", "PENDING")
+        //binding.progressBar.visibility = View.VISIBLE
+        //signInViewModel.callGetPost(20, "60b8407473d81a1b4cc591a5", "PENDING")
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
     }
 
     fun clickAdminLogin(view: View) {

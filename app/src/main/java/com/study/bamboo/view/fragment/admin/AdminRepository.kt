@@ -16,11 +16,10 @@ class AdminRepository @Inject constructor(
     suspend fun acceptPatchPost(
         token: String,
         id: String,
-        title: String,
-        content: String,
-        tag: String
+        bodyMap: HashMap<String, String>,
+
     ) =
-        adminApi.acceptPatchPost(token, id, title, content, tag)
+        adminApi.acceptPatchPost(token, id, bodyMap)
 
 
 }

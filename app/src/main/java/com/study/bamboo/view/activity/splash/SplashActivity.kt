@@ -36,9 +36,14 @@ class SplashActivity : AppCompatActivity() {
 
     private fun observeViewModel(){
         splashViewModel.getVerifyResponse.observe(this, Observer {
-            val intent = Intent(this, SignInActivity::class.java)
-            startActivity(intent)
-            finish()
+            if(it != null){
+                val intent = Intent(this, SignInActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else{
+                callViewModelApi()
+            }
+
         })
     }
 

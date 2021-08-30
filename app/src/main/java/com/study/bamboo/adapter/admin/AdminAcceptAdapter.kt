@@ -70,8 +70,6 @@ class AdminAcceptAdapter(
 
 
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
 
@@ -92,15 +90,15 @@ class AdminAcceptAdapter(
                     holder.binding.postMore.setOnClickListener {
                         val action =
                             AdminMainFragmentDirections.actionAdminMainFragmentToAcceptDialog(
-                                item.id
+                                item.id, holder.bindingAdapterPosition
                             )
                         it.findNavController().navigateUp()
                         it.findNavController().navigate(action)
                     }
                 }
-}
             }
         }
+    }
 //    fun setItemList(data: List<UserPostDTO>) {
 //        Log.d("Adapter", "setItemList: $data")
 //        val recipesDiffUtil = AdminDiffUtil(postList, data)
@@ -109,7 +107,9 @@ class AdminAcceptAdapter(
 //        diffUtilResult.dispatchUpdatesTo(this)
 //    }
 
-    }
+}
+
+
 
 
 

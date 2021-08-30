@@ -16,7 +16,7 @@ import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTED
 import com.study.bamboo.adapter.admin.AdminDeleteAdapter
 import com.study.bamboo.databinding.DeleteDialogBinding
 import com.study.bamboo.view.fragment.admin.AdminViewModel
-import com.study.bamboo.view.fragment.admin.paging.viewModel.PagingPostViewModel
+import com.study.bamboo.data.paging.viewModel.PagingPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

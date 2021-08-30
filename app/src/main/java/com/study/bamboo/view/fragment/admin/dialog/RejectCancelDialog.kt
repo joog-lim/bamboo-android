@@ -19,7 +19,7 @@ import com.study.bamboo.adapter.admin.AdminRejectAdapter
 
 import com.study.bamboo.databinding.RejectCancelDialogBinding
 import com.study.bamboo.view.fragment.admin.AdminViewModel
-import com.study.bamboo.view.fragment.admin.paging.viewModel.PagingPostViewModel
+import com.study.bamboo.data.paging.viewModel.PagingPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

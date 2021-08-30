@@ -2,14 +2,7 @@ package com.study.bamboo.view.activity.signin
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.study.bamboo.data.network.models.user.AdminSignInDTO
-import com.study.bamboo.data.network.models.user.UserGetPostDTO
 import com.study.bamboo.data.network.models.user.UserPostDTO
-import com.study.bamboo.data.retrofit.GetPostAPI
-
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class SignInViewModel : ViewModel() {
 

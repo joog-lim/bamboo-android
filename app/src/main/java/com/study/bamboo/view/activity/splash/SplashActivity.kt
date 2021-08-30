@@ -10,7 +10,9 @@ import com.study.bamboo.R
 import com.study.bamboo.utils.Variable
 import com.study.bamboo.view.activity.signin.SignInActivity
 import com.study.bamboo.view.activity.postcreate.PostCreateViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
 
     private val splashViewModel by viewModels<SplashViewModel>()

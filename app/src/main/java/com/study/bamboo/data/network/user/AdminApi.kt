@@ -2,6 +2,7 @@ package com.study.bamboo.data.network.user
 
 
 import com.study.bamboo.data.network.models.admin.*
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -72,4 +73,9 @@ interface AdminApi {
     suspend fun getCount(
         @Header("Authorization") Authorization: String,
     ): Response<PostCount>
+
+    //관리자로 로그인
+    @Headers("accept: application/json", "content-type: application/json")
+    @POST("auth")
+    fun transferAdminLogin(@Body password: HashMap<String, String>): Call<AdminSignInDTO>?
 }

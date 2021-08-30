@@ -3,12 +3,19 @@ package com.study.bamboo.view.activity.splash
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.study.bamboo.data.network.models.user.GetVerifyDTO
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
-class SplashViewModel : ViewModel() {
+@HiltViewModel
+class SplashViewModel @Inject constructor(
+    private val userRepository: UserRepository
+) : ViewModel() {
 
     //verify 값 받아오기
     val getVerifyResponse get() = _getVerifyResponse
@@ -16,20 +23,14 @@ class SplashViewModel : ViewModel() {
 
 
     //verify 호출로 id와 질문 가져오기
-    fun callGetVerifyAPI(){
-//        val retService = RetrofitClient().getService().create(GetVerifyAPI::class.java)
-//        retService.getVerify().enqueue(object : Callback<GetVerifyDTO> {
-//            override fun onResponse(call: Call<GetVerifyDTO>, response: Response<GetVerifyDTO>) {
-//                Log.d("로그","Verify 값 : ${response.body()?.id}")
-//                if(response.body()?.id != null){
-//                    _getVerifyResponse.value = response.body()
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<GetVerifyDTO>, t: Throwable) {
-//
-//            }
-//
-//        })
+    fun callGetVerifyAPI() = viewModelScope.launch {
+        userRepository.getVerify().let { response ->
+            if (response.isSuccessful)
+                _getVerifyResponse.value = response.body()
+            else
+                Log.d("로그","response.errorBody() : ${response.errorBody()}")
+        }
+
     }
+
 }

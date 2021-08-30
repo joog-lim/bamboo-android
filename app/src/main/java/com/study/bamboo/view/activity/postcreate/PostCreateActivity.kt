@@ -6,24 +6,25 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.study.bamboo.R
 import com.study.bamboo.databinding.ActivityPostCreateBinding
-import com.study.bamboo.utils.ViewModel.postCreateViewModel
-import com.study.bamboo.utils.ViewModel.splashViewModel
+import com.study.bamboo.utils.Variable
 import com.study.bamboo.view.base.BaseActivity
 
 class PostCreateActivity : BaseActivity() {
 
     private val binding by binding<ActivityPostCreateBinding>(R.layout.activity_post_create)
     private var tag = "태그선택"
+    private val postCreateViewModel by viewModels<PostCreateViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post_create)
         binding.activity = this
         supportActionBar!!.hide()
-        binding.question.text = "Q. ${splashViewModel.getVerifyResponse.value?.question}"
+        binding.question.text = "Q. ${Variable.VerifyDTO.question}"
         setupSpinnerTag()
         setupSpinnerHandler()
         observeViewModel()
@@ -61,15 +62,14 @@ class PostCreateActivity : BaseActivity() {
 
             if (questionAnswerTrue(binding.questionAnswer.text.toString())) {
                 binding.progressBar.visibility = View.VISIBLE
-                splashViewModel.getVerifyResponse.value?.let {
                     postCreateViewModel.callPostCreateAPI(
                         binding.title.text.toString(),
                         binding.content.text.toString(),
                         tag,
-                        it.id,
+                        Variable.VerifyDTO.id,
                         binding.questionAnswer.text.toString()
                     )
-                }
+
 
             } else {
                 Toast.makeText(this, "질문에 대한 답이 옳지 않습니다", Toast.LENGTH_SHORT).show()
@@ -82,6 +82,7 @@ class PostCreateActivity : BaseActivity() {
         return answer == "#softmeister01"
     }
 
+    //스피너 설정
     private fun setupSpinnerTag() {
         binding.choiceTag.adapter = ArrayAdapter.createFromResource(
             this,
@@ -90,6 +91,7 @@ class PostCreateActivity : BaseActivity() {
         )
     }
 
+    //스피너 설정
     private fun setupSpinnerHandler() {
         binding.choiceTag.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {

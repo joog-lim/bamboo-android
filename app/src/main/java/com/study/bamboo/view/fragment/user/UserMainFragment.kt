@@ -79,15 +79,15 @@ class UserMainFragment : Fragment() {
         Functions.recyclerViewManager(binding.postRecyclerView, requireContext())
         arguments?.getString("count")
         //binding.postRecyclerView.adapter = UserHomeItemAdapter(signInViewModel.getPostResponse)
-        Log.d("로그", "mainViewModel.getPostResponse : ${mainViewModel.getPostResponse.value}")
+        Log.d("로그","mainViewModel.getPostResponse : ${mainViewModel.getPostResponse.value}")
         binding.postRecyclerView.adapter = UserHomeItemAdapter(mainViewModel.getPostResponse)
 
     }
 
-    private fun observeViewModel() {
+    private fun observeViewModel(){
         mainViewModel.getPostResponse.observe(requireActivity(), Observer {
-            Log.d("로그", "UserMainFragment getPostResponse : $it")
-            if (it != null) {
+            Log.d("로그","UserMainFragment getPostResponse : $it")
+            if (it != null){
                 binding.progressBar.visibility = View.GONE
                 initRecyclerView()
             }

@@ -1,6 +1,11 @@
-package com.study.bamboo.data.retrofit
+package com.study.bamboo.model.retrofit
 
-import com.study.bamboo.data.network.models.admin.*
+import com.study.bamboo.model.dto.UserGetPostDTO
+import com.study.bamboo.model.dto.admin.*
+import com.study.bamboo.model.dto.admin.get.AcceptPost
+import com.study.bamboo.model.dto.admin.get.AdminRejectPost
+import com.study.bamboo.model.dto.admin.get.DeletePost
+import com.study.bamboo.model.dto.admin.get.PendingPost
 import retrofit2.Response
 import retrofit2.http.*
 

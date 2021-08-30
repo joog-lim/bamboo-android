@@ -1,6 +1,7 @@
 package com.study.bamboo.di
 
 import com.study.bamboo.data.network.user.AdminApi
+import com.study.bamboo.data.network.user.UserApi
 import com.study.bamboo.utils.Util.Companion.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -60,9 +61,14 @@ object NetworkModule {
 
     @Provides
     @Singleton
-
     fun provideApiService(retrofit: Retrofit): AdminApi {
         return retrofit.create(AdminApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserApiService(retrofit: Retrofit): UserApi {
+        return retrofit.create(UserApi::class.java)
     }
 
     // 서버로 부터 받아온 데이터 log 찍기

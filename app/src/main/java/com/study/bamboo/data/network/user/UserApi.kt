@@ -6,6 +6,7 @@ import com.study.bamboo.data.network.models.user.UserGetPostDTO
 import com.study.bamboo.data.network.models.user.postcreate.PostCreateRequest
 import com.study.bamboo.data.network.models.user.postcreate.PostCreateResponse
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -13,17 +14,17 @@ import retrofit2.http.Query
 
 interface UserApi {
     @GET("post/AlgorithemList")
-    fun getPost(
+    suspend fun getPost(
         @Query("count") count : Int,
         @Query("cursor") cursor : String,
         @Query("status") status : String
-    ) : Call<UserGetPostDTO>
+    ) : Response<UserGetPostDTO>
 
     @POST("post/create")
-    fun transferPostCreate(
+    suspend fun transferPostCreate(
         @Body request : PostCreateRequest
-    ): Call<PostCreateResponse>
+    ): Response<PostCreateResponse>
 
     @GET("verify")
-    fun getVerify() : Call<GetVerifyDTO>
+    suspend fun getVerify() : Response<GetVerifyDTO>
 }

@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTED
-import com.study.bamboo.model.retrofit.AdminApi
+import com.study.bamboo.data.retrofit.AdminApi
 import com.study.bamboo.utils.Admin
 import retrofit2.HttpException
 import java.io.IOException
@@ -33,8 +33,8 @@ class AcceptPagingSource @Inject constructor(
 
             val totalCount=adminApi.getCount(token)
 
-            val countData=totalCount.body()!![3].count
-            Log.d(TAG, "totalCount accept: $countData ")
+//            val countData=totalCount.body()!![3].count
+//            Log.d(TAG, "totalCount accept: $countData ")
 
 
             Log.d(TAG, "page:$page")

@@ -1,5 +1,6 @@
 package com.study.bamboo.view.activity.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -10,7 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.study.bamboo.R
 import com.study.bamboo.databinding.ActivityAdminBinding
-import com.study.bamboo.databinding.ActivityMainBinding
+import com.study.bamboo.view.activity.signin.SignInActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 // ViewBinding
@@ -38,6 +39,13 @@ class AdminActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navi.setupWithNavController(navController)
 
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this, SignInActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     override fun onSupportNavigateUp(): Boolean {

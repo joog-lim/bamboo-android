@@ -1,4 +1,4 @@
-package com.study.bamboo.view.fragment.home
+package com.study.bamboo.view.fragment.user
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,9 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.study.bamboo.R
@@ -47,9 +45,9 @@ class UserMainFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        binding.progressBar.visibility = View.GONE
+/*        binding.progressBar.visibility = View.GONE
         postCreateViewModel.postCreateSuccess.value = false
-        postCreateViewModel.postCreateResponse.value = null
+        postCreateViewModel.postCreateResponse.value = null*/
     }
 
     override fun onStop() {
@@ -94,6 +92,5 @@ class UserMainFragment : Fragment() {
                 initRecyclerView()
             }
         })
-
     }
 }

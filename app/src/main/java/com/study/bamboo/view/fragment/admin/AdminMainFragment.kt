@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
@@ -27,7 +28,7 @@ import com.study.bamboo.adapter.admin.AdminPendingAdapter
 import com.study.bamboo.adapter.admin.AdminRejectAdapter
 import com.study.bamboo.databinding.FragmentAdminMainBinding
 import com.study.bamboo.base.BaseFragment
-import com.study.bamboo.view.fragment.admin.paging.viewModel.PagingPostViewModel
+import com.study.bamboo.data.paging.viewModel.PagingPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
@@ -47,6 +48,8 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
     private lateinit var viewModel: AdminViewModel
     private lateinit var pagingViewModel: PagingPostViewModel
+
+    private val databaseViewModel: DataBaseViewModel by viewModels()
 
     private val acceptAdapter: AdminAcceptAdapter by lazy {
         AdminAcceptAdapter()
@@ -225,18 +228,17 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
     }
 
     // paging 데이터값 받아옴
-    private fun observePagingData(viewType:Int) {
+    private fun observePagingData(viewType: Int) {
 
         job = lifecycleScope.launch {
 
-            when(viewType){
-                ACCEPTEDType->{
+            when (viewType) {
+                ACCEPTEDType -> {
                     pagingViewModel.acceptData.collectLatest {
                         acceptAdapter.submitData(viewLifecycleOwner.lifecycle, it)
-                        Log.d(TAG, "getPost: $it")
                     }
                 }
-                DELETEDType->{
+                DELETEDType -> {
                     pagingViewModel.deleteData.collectLatest {
 
                         deleteAdapter.submitData(viewLifecycleOwner.lifecycle, it)
@@ -244,7 +246,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                     }
 
                 }
-                PENDINGType->{
+                PENDINGType -> {
                     pagingViewModel.pendingData.collectLatest {
 
 
@@ -254,7 +256,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                     }
 
                 }
-                REJECTEDType->{
+                REJECTEDType -> {
                     pagingViewModel.rejectData.collectLatest {
                         rejectAdapter.submitData(viewLifecycleOwner.lifecycle, it)
                         Log.d(TAG, "getPost: $it")

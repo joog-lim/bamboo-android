@@ -1,30 +1,28 @@
-package com.study.bamboo.view.fragment.admin.paging.viewModel
+package com.study.bamboo.data.paging.viewModel
 
-import android.app.Application
-import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.cachedIn
+import androidx.paging.*
 import com.study.bamboo.data.network.user.AdminApi
-import com.study.bamboo.view.fragment.admin.paging.AcceptPagingSource
-import com.study.bamboo.view.fragment.admin.paging.AcceptPagingSource.Companion.UNSPLASH_STARTING_PAGE_INDEX
-import com.study.bamboo.view.fragment.admin.paging.DeletePagingSource
-import com.study.bamboo.view.fragment.admin.paging.PendingPagingSource
-import com.study.bamboo.view.fragment.admin.paging.RejectPagingSource
+import com.study.bamboo.data.paging.AcceptPagingSource
+import com.study.bamboo.data.paging.AcceptPagingSource.Companion.UNSPLASH_STARTING_PAGE_INDEX
+import com.study.bamboo.data.paging.DeletePagingSource
+import com.study.bamboo.data.paging.PendingPagingSource
+import com.study.bamboo.data.paging.RejectPagingSource
+import com.study.bamboo.data.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import javax.inject.Inject
 
 
 @HiltViewModel
 class PagingPostViewModel @Inject constructor(
-    application: Application,
+    private val repository: Repository,
     private val adminApi: AdminApi
-) : AndroidViewModel(application) {
-    private val TAG = "PagingPostViewModel"
+) : ViewModel() {
 
+    private val viewModelJob = Job()
     val token = MutableLiveData<String>()
     val cursor = MutableLiveData<String>()
 
@@ -48,8 +46,10 @@ class PagingPostViewModel @Inject constructor(
             token.value.toString(),
             cursor.value.toString(),
         )
+
     }.flow
         .cachedIn(viewModelScope)
+
 
     val pendingData = Pager(
 
@@ -96,5 +96,10 @@ class PagingPostViewModel @Inject constructor(
     }.flow
         .cachedIn(viewModelScope)
 
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
 
 }

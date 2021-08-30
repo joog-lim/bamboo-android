@@ -77,5 +77,5 @@ interface AdminApi {
     //관리자로 로그인
     @Headers("accept: application/json", "content-type: application/json")
     @POST("auth")
-    fun transferAdminLogin(@Body password: HashMap<String, String>): Call<AdminSignInDTO>?
+    suspend fun transferAdminLogin(@Body password: HashMap<String, String>): Response<AdminSignInDTO>?
 }

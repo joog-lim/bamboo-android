@@ -12,8 +12,9 @@ import com.study.bamboo.R
 import com.study.bamboo.base.BaseActivity
 import com.study.bamboo.databinding.ActivityPostCreateBinding
 import com.study.bamboo.view.activity.splash.SplashViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class PostCreateActivity : BaseActivity() {
 
     private val binding by binding<ActivityPostCreateBinding>(R.layout.activity_post_create)

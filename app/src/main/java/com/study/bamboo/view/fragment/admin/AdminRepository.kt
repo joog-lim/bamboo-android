@@ -21,5 +21,5 @@ class AdminRepository @Inject constructor(
     ) =
         adminApi.acceptPatchPost(token, id, bodyMap)
 
-
+    suspend fun transferAdminLogin(password: HashMap<String, String>) = adminApi.transferAdminLogin(password)
 }

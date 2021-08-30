@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.study.bamboo.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RulesFragment : Fragment() {
 
 

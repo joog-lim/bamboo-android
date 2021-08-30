@@ -18,36 +18,22 @@ import com.study.bamboo.view.activity.postcreate.PostCreateActivity
 import com.study.bamboo.view.activity.postcreate.PostCreateViewModel
 import com.study.bamboo.view.activity.signin.SignInViewModel
 import com.study.bamboo.view.adapter.UserHomeItemAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class UserMainFragment : Fragment() {
 
-    private val signInViewModel: SignInViewModel by viewModels()
     lateinit var binding: FragmentUserMainBinding
     private val mainViewModel by viewModels<MainViewModel>()
-    private val postCreateViewModel by viewModels<PostCreateViewModel>()
-
-    companion object {
-
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    private var firstStart = true
 
     override fun onStart() {
         super.onStart()
-/*        binding.progressBar.visibility = View.GONE
-        postCreateViewModel.postCreateSuccess.value = false
-        postCreateViewModel.postCreateResponse.value = null*/
-        binding.progressBar.visibility = View.VISIBLE
-    }
-
-    override fun onResume() {
-        super.onResume()
-/*        binding.progressBar.visibility = View.GONE
-        postCreateViewModel.postCreateSuccess.value = false
-        postCreateViewModel.postCreateResponse.value = null*/
+        if (firstStart) {
+            binding.progressBar.visibility = View.VISIBLE
+            firstStart = false
+        } else
+            binding.progressBar.visibility = View.GONE
     }
 
     override fun onStop() {
@@ -78,16 +64,13 @@ class UserMainFragment : Fragment() {
     private fun initRecyclerView() {
         Functions.recyclerViewManager(binding.postRecyclerView, requireContext())
         arguments?.getString("count")
-        //binding.postRecyclerView.adapter = UserHomeItemAdapter(signInViewModel.getPostResponse)
-        Log.d("로그","mainViewModel.getPostResponse : ${mainViewModel.getPostResponse.value}")
         binding.postRecyclerView.adapter = UserHomeItemAdapter(mainViewModel.getPostResponse)
 
     }
 
-    private fun observeViewModel(){
+    private fun observeViewModel() {
         mainViewModel.getPostResponse.observe(requireActivity(), Observer {
-            Log.d("로그","UserMainFragment getPostResponse : $it")
-            if (it != null){
+            if (it != null) {
                 binding.progressBar.visibility = View.GONE
                 initRecyclerView()
             }

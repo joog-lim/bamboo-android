@@ -1,4 +1,4 @@
-package com.study.bamboo.view.fragment
+package com.study.bamboo.view.fragment.user
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.study.bamboo.R
 
-class RulesFragment : Fragment() {
+
+class MoreSeeFragment : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +21,7 @@ class RulesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_rules, container, false)
+        return inflater.inflate(R.layout.fragment_more_see, container, false)
     }
 
 }

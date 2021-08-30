@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface GetPostAPI {
-    @GET("post/get-list")
+    @GET("post/AlgorithemList")
     fun getPost(
         @Query("count") count : Int,
         @Query("cursor") cursor : String,

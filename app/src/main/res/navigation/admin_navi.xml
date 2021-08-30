@@ -81,6 +81,10 @@
         <argument
             android:name="auth"
             app:argType="string" />
+        <argument
+            android:name="position"
+            app:argType="integer" />
+
 
     </dialog>
 

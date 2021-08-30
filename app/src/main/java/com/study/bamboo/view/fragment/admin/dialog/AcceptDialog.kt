@@ -14,12 +14,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter
 import com.study.bamboo.databinding.AcceptDialogBinding
-import com.study.bamboo.utils.Admin
 import com.study.bamboo.view.fragment.admin.AdminViewModel
 import com.study.bamboo.view.fragment.admin.paging.viewModel.PagingPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -92,21 +90,13 @@ class AcceptDialog : DialogFragment() {
         }
 
 
-        updateData()
 
 
     }
 
-    private fun updateData() {
-        lifecycleScope.launch {
-            pagingViewModel.acceptData.collectLatest {
-                acceptAdapter.submitData(lifecycle, it)
-            }
-        }
 
-    }
 
-    fun bodySend(): HashMap<String, String> {
+    private fun bodySend(): HashMap<String, String> {
         val accepted: HashMap<String, String> = HashMap()
         accepted["title"] = binding.updateTitle.text.toString()
         accepted["content"] = binding.updateContent.text.toString()

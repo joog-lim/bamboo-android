@@ -1,4 +1,4 @@
-package com.study.bamboo.view.fragment.admin
+package com.study.bamboo.data.repository
 
 import com.study.bamboo.data.network.user.AdminApi
 import javax.inject.Inject

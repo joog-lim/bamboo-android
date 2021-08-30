@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.study.bamboo.model.dto.GetVerifyDTO
-import com.study.bamboo.model.retrofit.GetVerifyAPI
 import com.study.bamboo.model.retrofit.RetrofitClient
+import com.study.bamboo.model.retrofit.UserApi
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,7 +19,7 @@ class SplashViewModel : ViewModel() {
 
     //verify 호출로 id와 질문 가져오기
     fun callGetVerifyAPI(){
-        val retService = RetrofitClient().getService().create(GetVerifyAPI::class.java)
+        val retService = RetrofitClient().getService().create(UserApi::class.java)
         retService.getVerify().enqueue(object : Callback<GetVerifyDTO> {
             override fun onResponse(call: Call<GetVerifyDTO>, response: Response<GetVerifyDTO>) {
                 Log.d("로그","Verify 값 : ${response.body()?.id}")

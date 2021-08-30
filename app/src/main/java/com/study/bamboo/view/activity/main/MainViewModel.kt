@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.study.bamboo.model.dto.UserGetPostDTO
 import com.study.bamboo.model.dto.UserPostDTO
-import com.study.bamboo.model.retrofit.GetPostAPI
 import com.study.bamboo.model.retrofit.RetrofitClient
+import com.study.bamboo.model.retrofit.UserApi
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,7 +18,7 @@ class MainViewModel : ViewModel() {
 
     //게시물 가져오는 API
     fun callGetPost(count: Int, cursor: String, status: String) {
-        val retService = RetrofitClient().getService().create(GetPostAPI::class.java)
+        val retService = RetrofitClient().getService().create(UserApi::class.java)
         retService.getPost(count, cursor, status).enqueue(object : Callback<UserGetPostDTO> {
             override fun onResponse(
                 call: Call<UserGetPostDTO>,

@@ -1,11 +1,13 @@
 package com.study.bamboo.model.retrofit
 
+import com.study.bamboo.model.dto.AdminSignInDTO
 import com.study.bamboo.model.dto.UserGetPostDTO
 import com.study.bamboo.model.dto.admin.*
 import com.study.bamboo.model.dto.admin.get.AcceptPost
 import com.study.bamboo.model.dto.admin.get.AdminRejectPost
 import com.study.bamboo.model.dto.admin.get.DeletePost
 import com.study.bamboo.model.dto.admin.get.PendingPost
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -76,4 +78,9 @@ interface AdminApi {
     suspend fun getCount(
         @Header("Authorization") Authorization: String,
     ): Response<PostCount>
+
+    //관리자 로그인
+    @Headers("accept: application/json", "content-type: application/json")
+    @POST("auth")
+    fun transferAdminLogin(@Body password: HashMap<String, String>): Call<AdminSignInDTO>?
 }

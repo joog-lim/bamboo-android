@@ -24,9 +24,7 @@ import com.study.bamboo.view.adapter.UserHomeItemAdapter
 
 class UserMainFragment : Fragment() {
 
-    private val signInViewModel: SignInViewModel by viewModels()
     lateinit var binding: FragmentUserMainBinding
-    private val postCreateViewModel by viewModels<PostCreateViewModel>()
 
     private val mainViewModel: MainViewModel by activityViewModels {
         object : ViewModelProvider.Factory {
@@ -51,11 +49,9 @@ class UserMainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user_main, container, false)
         binding.activity = this
         binding.progressBar.visibility = View.GONE
-        //mainViewModel.callGetPost(20, "60b8407473d81a1b4cc591a5", "PENDING")
         observeViewModel()
 
         return binding.root
@@ -69,8 +65,6 @@ class UserMainFragment : Fragment() {
 
     private fun initRecyclerView() {
         Functions.recyclerViewManager(binding.postRecyclerView, requireContext())
-        arguments?.getString("count")
-        //binding.postRecyclerView.adapter = UserHomeItemAdapter(signInViewModel.getPostResponse)
         Log.d("로그","mainViewModel.getPostResponse : ${mainViewModel.getPostResponse.value}")
         binding.postRecyclerView.adapter = UserHomeItemAdapter(mainViewModel.getPostResponse)
 

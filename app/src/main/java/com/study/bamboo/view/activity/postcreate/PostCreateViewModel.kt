@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import com.study.bamboo.model.dto.postcreate.PostCreateRequest
 import com.study.bamboo.model.dto.postcreate.PostCreateResponse
 import com.study.bamboo.model.dto.postcreate.Verifier
-import com.study.bamboo.model.retrofit.PostCreateAPI
 import com.study.bamboo.model.retrofit.RetrofitClient
+import com.study.bamboo.model.retrofit.UserApi
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -42,7 +42,7 @@ class PostCreateViewModel : ViewModel() {
     //게시물 올리기
     fun callPostCreateAPI(title : String, content : String, tag : String, questionId : String, answer : String){
 
-        val retService = RetrofitClient().getService().create(PostCreateAPI::class.java)
+        val retService = RetrofitClient().getService().create(UserApi::class.java)
 
         val verifier = Verifier(questionId,answer)
         val postCreateRequest = PostCreateRequest(title,content,tag,verifier)

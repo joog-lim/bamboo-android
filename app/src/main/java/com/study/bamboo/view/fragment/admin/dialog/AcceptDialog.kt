@@ -15,7 +15,6 @@ import androidx.navigation.fragment.navArgs
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter
 import com.study.bamboo.databinding.AcceptDialogBinding
 import com.study.bamboo.view.fragment.admin.AdminViewModel
-import com.study.bamboo.view.fragment.admin.paging.viewModel.PagingPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -26,7 +25,6 @@ class AcceptDialog : DialogFragment() {
     private val binding get() = _binding!!
     private val args by navArgs<AcceptDialogArgs>()
     private val viewModel: AdminViewModel by viewModels()
-    private val pagingViewModel: PagingPostViewModel by viewModels()
     private val acceptAdapter: AdminAcceptAdapter by lazy {
         AdminAcceptAdapter()
     }
@@ -61,7 +59,7 @@ class AcceptDialog : DialogFragment() {
 
         })
 
-
+        Log.d(TAG, "onCreateView: ${args.position}")
         binding.acceptBtn.setOnClickListener {
 
             updatePost()
@@ -78,7 +76,7 @@ class AcceptDialog : DialogFragment() {
     }
 
 
-    private  fun updatePost() {
+    private fun updatePost() {
         job?.cancel()
         job = lifecycleScope.launch {
 
@@ -88,12 +86,10 @@ class AcceptDialog : DialogFragment() {
                 bodySend()
             )
         }
-
-
-
+//        acceptAdapter.snapshot().toMutableList().apply { removeAt(args.position) }
+//        acceptAdapter.notifyItemRemoved(args.position)
 
     }
-
 
 
     private fun bodySend(): HashMap<String, String> {

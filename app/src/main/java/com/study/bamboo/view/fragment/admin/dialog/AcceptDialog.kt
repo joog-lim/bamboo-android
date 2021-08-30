@@ -80,7 +80,7 @@ class AcceptDialog : DialogFragment() {
     }
 
 
-    private fun updatePost() {
+    private  fun updatePost() {
         job?.cancel()
         job = lifecycleScope.launch {
 
@@ -90,6 +90,20 @@ class AcceptDialog : DialogFragment() {
                 bodySend()
             )
         }
+
+
+        updateData()
+
+
+    }
+
+    private fun updateData() {
+        lifecycleScope.launch {
+            pagingViewModel.acceptData.collectLatest {
+                acceptAdapter.submitData(lifecycle, it)
+            }
+        }
+
     }
 
     fun bodySend(): HashMap<String, String> {
@@ -101,15 +115,6 @@ class AcceptDialog : DialogFragment() {
         return accepted
     }
 
-
-    private fun updateData() {
-        lifecycleScope.launch {
-            pagingViewModel.acceptData.collectLatest {
-                acceptAdapter.submitData(viewLifecycleOwner.lifecycle, it)
-            }
-        }
-
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

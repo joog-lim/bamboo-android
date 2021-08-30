@@ -38,7 +38,7 @@ class AdminAcceptAdapter(
                 oldItem.id == newItem.id
 
             override fun areContentsTheSame(oldItem: Admin.Accept, newItem: Admin.Accept): Boolean =
-                oldItem == newItem
+                oldItem.content == newItem.content
         }
     }
 

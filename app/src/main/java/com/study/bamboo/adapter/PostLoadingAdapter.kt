@@ -25,6 +25,7 @@ class PostLoadingAdapter(private val retry: () -> Unit) :
             binding.apply {
                 progressBar.isVisible = loadState is LoadState.Loading
                 retryBtn.isVisible = loadState !is LoadState.Loading
+                retryText.isVisible = loadState !is LoadState.Loading
             }
         }
 

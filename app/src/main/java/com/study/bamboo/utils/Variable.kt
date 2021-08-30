@@ -1,6 +1,7 @@
 package com.study.bamboo.utils
 
-import com.study.bamboo.model.dto.GetVerifyDTO
+import com.study.bamboo.data.network.models.user.GetVerifyDTO
+
 
 object Variable {
     lateinit var VerifyDTO : GetVerifyDTO

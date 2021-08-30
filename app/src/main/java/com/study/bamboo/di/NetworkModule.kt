@@ -1,6 +1,6 @@
 package com.study.bamboo.di
 
-import com.study.bamboo.data.retrofit.AdminApi
+import com.study.bamboo.data.network.user.AdminApi
 import com.study.bamboo.utils.Util.Companion.BASE_URL
 import dagger.Module
 import dagger.Provides

@@ -6,17 +6,21 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.study.bamboo.R
+import com.study.bamboo.base.BaseActivity
 import com.study.bamboo.databinding.ActivityPostCreateBinding
-import com.study.bamboo.utils.ViewModel.postCreateViewModel
-import com.study.bamboo.utils.ViewModel.splashViewModel
-import com.study.bamboo.view.base.BaseActivity
+import com.study.bamboo.view.activity.splash.SplashViewModel
+
 
 class PostCreateActivity : BaseActivity() {
 
     private val binding by binding<ActivityPostCreateBinding>(R.layout.activity_post_create)
     private var tag = "태그선택"
+
+    private val splashViewModel : SplashViewModel by viewModels()
+    private val postCreateViewModel : PostCreateViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

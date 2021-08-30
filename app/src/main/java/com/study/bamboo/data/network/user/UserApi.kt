@@ -1,9 +1,10 @@
-package com.study.bamboo.model.retrofit
+package com.study.bamboo.data.network.user
 
-import com.study.bamboo.model.dto.GetVerifyDTO
-import com.study.bamboo.model.dto.UserGetPostDTO
-import com.study.bamboo.model.dto.postcreate.PostCreateRequest
-import com.study.bamboo.model.dto.postcreate.PostCreateResponse
+
+import com.study.bamboo.data.network.models.user.GetVerifyDTO
+import com.study.bamboo.data.network.models.user.UserGetPostDTO
+import com.study.bamboo.data.network.models.user.postcreate.PostCreateRequest
+import com.study.bamboo.data.network.models.user.postcreate.PostCreateResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET

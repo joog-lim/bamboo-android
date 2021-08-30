@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTED
-import com.study.bamboo.data.retrofit.AdminApi
+import com.study.bamboo.data.network.user.AdminApi
 import com.study.bamboo.utils.Admin
 import retrofit2.HttpException
 import java.io.IOException

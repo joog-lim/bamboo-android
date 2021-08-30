@@ -1,4 +1,4 @@
-package com.study.bamboo.view.fragment.admin.paging
+package com.study.bamboo.data.paging
 
 import android.util.Log
 import androidx.paging.PagingSource

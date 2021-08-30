@@ -8,8 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.study.bamboo.R
 import com.study.bamboo.databinding.FragmentUserMainBinding
 import com.study.bamboo.utils.Functions
@@ -23,31 +26,20 @@ class UserMainFragment : Fragment() {
 
     private val signInViewModel: SignInViewModel by viewModels()
     lateinit var binding: FragmentUserMainBinding
-    private val mainViewModel by viewModels<MainViewModel>()
     private val postCreateViewModel by viewModels<PostCreateViewModel>()
 
-    companion object {
-
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    private val mainViewModel: MainViewModel by activityViewModels {
+        object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T =
+                MainViewModel() as T
+        }
     }
 
     override fun onStart() {
         super.onStart()
-/*        binding.progressBar.visibility = View.GONE
-        postCreateViewModel.postCreateSuccess.value = false
-        postCreateViewModel.postCreateResponse.value = null*/
-        binding.progressBar.visibility = View.VISIBLE
-    }
-
-    override fun onResume() {
-        super.onResume()
-/*        binding.progressBar.visibility = View.GONE
-        postCreateViewModel.postCreateSuccess.value = false
-        postCreateViewModel.postCreateResponse.value = null*/
+        if (mainViewModel.getPostResponse.value == null){
+            binding.progressBar.visibility = View.VISIBLE
+        }
     }
 
     override fun onStop() {
@@ -63,7 +55,7 @@ class UserMainFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user_main, container, false)
         binding.activity = this
         binding.progressBar.visibility = View.GONE
-        mainViewModel.callGetPost(20, "60b8407473d81a1b4cc591a5", "PENDING")
+        //mainViewModel.callGetPost(20, "60b8407473d81a1b4cc591a5", "PENDING")
         observeViewModel()
 
         return binding.root

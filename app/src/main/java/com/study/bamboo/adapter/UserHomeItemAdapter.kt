@@ -9,7 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.study.bamboo.R
 import com.study.bamboo.databinding.UserPostRecyclerItemBinding
-import com.study.bamboo.model.dto.UserPostDTO
+import com.study.bamboo.data.network.models.user.UserPostDTO
 import java.text.SimpleDateFormat
 import java.util.*
 

@@ -1,6 +1,6 @@
 package com.study.bamboo.view.fragment.admin
 
-import com.study.bamboo.model.retrofit.AdminApi
+import com.study.bamboo.data.retrofit.AdminApi
 import javax.inject.Inject
 
 

@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
@@ -13,7 +14,6 @@ import com.study.bamboo.databinding.ActivityLoginDialogBinding
 import com.study.bamboo.view.activity.main.AdminActivity
 import com.study.bamboo.view.fragment.admin.AdminViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.DelicateCoroutinesApi
 
 @AndroidEntryPoint
 class LoginDialog : DialogFragment() {
@@ -35,12 +35,11 @@ class LoginDialog : DialogFragment() {
         signInViewModel = ViewModelProvider(requireActivity()).get(SignInViewModel::class.java)
     }
 
-    @DelicateCoroutinesApi
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = ActivityLoginDialogBinding.inflate(inflater, container, false)
 
 
@@ -63,18 +62,22 @@ class LoginDialog : DialogFragment() {
         return binding.root
     }
 
-    private fun initDialog(){
+    private fun initDialog() {
         //        //디바이스 크기 확인후 커스텀 다이어로그 팝업 크기 조정
         val params: ViewGroup.LayoutParams? = dialog?.window?.attributes
-        val deviceWidth =arguments?.getInt("displaySizeX")
+        val deviceWidth = arguments?.getInt("displaySizeX")
         if (deviceWidth != null) {
             params?.width = (deviceWidth * 0.9).toInt()
         }
+
         dialog?.window?.attributes = params as WindowManager.LayoutParams
     }
 
+
     private fun loginBtnClick() {
-        Log.d("로그", "edittext password : ${binding.passwordEdittext.text}")
+
+        // editText가 null이면 button click 못하게 막는다.
+        binding.loginBtn.isEnabled = binding.passwordEdittext.text.toString().isEmpty()
 
         signInViewModel.callAdminLoginAPI(binding.passwordEdittext.text.toString())
 
@@ -84,9 +87,11 @@ class LoginDialog : DialogFragment() {
 
         })
         signInViewModel.success.observe(viewLifecycleOwner) {
-            if(it) {
+            if (it) {
                 val intent = Intent(requireContext(), AdminActivity::class.java)
                 startActivity(intent)
+            } else {
+                Toast.makeText(requireContext(), "비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show()
             }
         }
 

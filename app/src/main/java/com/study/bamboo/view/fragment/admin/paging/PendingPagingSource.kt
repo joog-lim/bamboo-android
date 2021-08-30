@@ -3,9 +3,8 @@ package com.study.bamboo.view.fragment.admin.paging
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.study.bamboo.model.retrofit.AdminApi
+import com.study.bamboo.data.retrofit.AdminApi
 import com.study.bamboo.utils.Admin
-import com.study.bamboo.view.fragment.admin.paging.AcceptPagingSource.Companion.UNSPLASH_STARTING_PAGE_INDEX
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
@@ -15,7 +14,7 @@ class PendingPagingSource @Inject constructor(
     private val token: String,
     private val cursor: String?,
 
-) : PagingSource<Int, Admin.Pending>() {
+    ) : PagingSource<Int, Admin.Pending>() {
 
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Admin.Pending> {

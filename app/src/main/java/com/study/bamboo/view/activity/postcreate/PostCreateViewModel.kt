@@ -1,16 +1,8 @@
 package com.study.bamboo.view.activity.postcreate
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.study.bamboo.model.dto.postcreate.PostCreateRequest
-import com.study.bamboo.model.dto.postcreate.PostCreateResponse
-import com.study.bamboo.model.dto.postcreate.Verifier
-import com.study.bamboo.model.retrofit.PostCreateAPI
-import com.study.bamboo.model.retrofit.RetrofitClient
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.study.bamboo.data.network.models.user.postcreate.PostCreateResponse
 
 class PostCreateViewModel : ViewModel() {
 
@@ -42,26 +34,26 @@ class PostCreateViewModel : ViewModel() {
     //게시물 올리기
     fun callPostCreateAPI(title : String, content : String, tag : String, questionId : String, answer : String){
 
-        val retService = RetrofitClient().getService().create(PostCreateAPI::class.java)
-
-        val verifier = Verifier(questionId,answer)
-        val postCreateRequest = PostCreateRequest(title,content,tag,verifier)
-
-        retService.transferPostCreate(postCreateRequest).enqueue(object : Callback<PostCreateResponse> {
-            override fun onResponse(
-                call: Call<PostCreateResponse>,
-                response: Response<PostCreateResponse>
-            ) {
-                Log.d("로그","게시물 게시후 ${response.body()?.id}")
-                Log.d("로그","실패  message : ${response.raw()}, errorBody : ${response.isSuccessful}")
-                _postCreateResponse.value = response.body()
-            }
-
-            override fun onFailure(call: Call<PostCreateResponse>, t: Throwable) {
-                Log.d("로그","onFailure : $call, $t")
-            }
-
-        })
+//        val retService = RetrofitClient().getService().create(PostCreateAPI::class.java)
+//
+//        val verifier = Verifier(questionId,answer)
+//        val postCreateRequest = PostCreateRequest(title,content,tag,verifier)
+//
+//        retService.transferPostCreate(postCreateRequest).enqueue(object : Callback<PostCreateResponse> {
+//            override fun onResponse(
+//                call: Call<PostCreateResponse>,
+//                response: Response<PostCreateResponse>
+//            ) {
+//                Log.d("로그","게시물 게시후 ${response.body()?.id}")
+//                Log.d("로그","실패  message : ${response.raw()}, errorBody : ${response.isSuccessful}")
+//                _postCreateResponse.value = response.body()
+//            }
+//
+//            override fun onFailure(call: Call<PostCreateResponse>, t: Throwable) {
+//                Log.d("로그","onFailure : $call, $t")
+//            }
+//
+//        })
     }
 
 

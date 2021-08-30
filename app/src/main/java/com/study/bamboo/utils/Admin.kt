@@ -1,6 +1,6 @@
 package com.study.bamboo.utils
 
-import com.study.bamboo.model.dto.UserPostDTOBase
+import com.study.bamboo.data.network.models.user.UserPostDTOBase
 
 sealed class Admin {
 

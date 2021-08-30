@@ -7,8 +7,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.study.bamboo.datastore.DataStoreRepository
-import com.study.bamboo.model.dto.admin.AcceptModify
-import com.study.bamboo.model.dto.admin.DeletePostDto
+import com.study.bamboo.data.network.models.admin.AcceptModify
+import com.study.bamboo.data.network.models.admin.DeletePostDto
 
 import com.study.bamboo.utils.Util.Companion.DEFAULT_TOKEN
 import dagger.hilt.android.lifecycle.HiltViewModel

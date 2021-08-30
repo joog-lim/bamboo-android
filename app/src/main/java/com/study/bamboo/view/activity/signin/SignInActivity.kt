@@ -14,7 +14,7 @@ import androidx.lifecycle.Observer
 import com.study.bamboo.R
 import com.study.bamboo.databinding.ActivitySignInBinding
 import com.study.bamboo.view.activity.main.MainActivity
-import com.study.bamboo.view.base.BaseActivity
+import com.study.bamboo.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 

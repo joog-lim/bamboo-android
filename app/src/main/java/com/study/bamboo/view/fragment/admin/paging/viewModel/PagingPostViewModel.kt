@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
-import com.study.bamboo.model.retrofit.AdminApi
+import com.study.bamboo.data.retrofit.AdminApi
 import com.study.bamboo.view.fragment.admin.paging.AcceptPagingSource
 import com.study.bamboo.view.fragment.admin.paging.AcceptPagingSource.Companion.UNSPLASH_STARTING_PAGE_INDEX
 import com.study.bamboo.view.fragment.admin.paging.DeletePagingSource
@@ -85,7 +85,7 @@ class PagingPostViewModel @Inject constructor(
 
         PagingConfig(
             pageSize = UNSPLASH_STARTING_PAGE_INDEX,
-            enablePlaceholders = false
+            enablePlaceholders = false,
         )
     ) {
         DeletePagingSource(

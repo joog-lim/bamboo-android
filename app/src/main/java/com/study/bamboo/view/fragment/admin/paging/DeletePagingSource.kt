@@ -3,7 +3,7 @@ package com.study.bamboo.view.fragment.admin.paging
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.study.bamboo.model.retrofit.AdminApi
+import com.study.bamboo.data.retrofit.AdminApi
 import com.study.bamboo.utils.Admin
 import com.study.bamboo.view.fragment.admin.paging.AcceptPagingSource.Companion.UNSPLASH_STARTING_PAGE_INDEX
 import retrofit2.HttpException
@@ -25,11 +25,11 @@ class DeletePagingSource @Inject constructor(
 
             Log.d(TAG, "page : $page")
 
+
             val response = adminApi.getDeletePost(token, page, cursor, "DELETED")
             Log.d(TAG, "load: ${response.body()}")
 
-            val data = response.body()?.posts ?: emptyList()
-
+            val data = response.body()!!.posts
 
             val totalCount = adminApi.getCount(token)
 
@@ -38,7 +38,7 @@ class DeletePagingSource @Inject constructor(
             Log.d(TAG, "nextPage : ${response.body()!!.hasNext}")
             LoadResult.Page(
                 data = data,
-                prevKey = if (page == 1) null else page.minus(20),
+                prevKey = if (page == 0) null else page.minus(20),
                 nextKey = page.plus(20)
             )
 

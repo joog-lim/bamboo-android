@@ -10,7 +10,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.study.bamboo.LinearLayoutManagerWrapper
+import com.study.bamboo.utils.LinearLayoutManagerWrapper
 import com.study.bamboo.R
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTED
@@ -26,7 +26,7 @@ import com.study.bamboo.adapter.admin.AdminDeleteAdapter
 import com.study.bamboo.adapter.admin.AdminPendingAdapter
 import com.study.bamboo.adapter.admin.AdminRejectAdapter
 import com.study.bamboo.databinding.FragmentAdminMainBinding
-import com.study.bamboo.view.base.BaseFragment
+import com.study.bamboo.base.BaseFragment
 import com.study.bamboo.view.fragment.admin.paging.viewModel.PagingPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -86,7 +86,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
         observeUiPreferences()
         spinnerContact()
-
+        setItemAdapter(ACCEPTEDType)
 
     }
 
@@ -227,7 +227,6 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
     // paging 데이터값 받아옴
     private fun observePagingData(viewType:Int) {
 
-        job?.cancel()
         job = lifecycleScope.launch {
 
             when(viewType){
@@ -239,12 +238,16 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                 }
                 DELETEDType->{
                     pagingViewModel.deleteData.collectLatest {
+
                         deleteAdapter.submitData(viewLifecycleOwner.lifecycle, it)
                         Log.d(TAG, "getPost: $it")
                     }
+
                 }
                 PENDINGType->{
                     pagingViewModel.pendingData.collectLatest {
+
+
                         pendingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
                         Log.d(TAG, "getPost: $it")
 

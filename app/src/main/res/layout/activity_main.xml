@@ -83,6 +83,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:itemIconTint="@drawable/menu_selector_color"
+            app:itemTextColor="@drawable/menu_selector_color"
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/recycler_view_item" />
 

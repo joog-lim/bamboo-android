@@ -57,6 +57,13 @@ class AdminPendingAdapter :
         }
     }
 
+//    fun updateStatus(
+//        position: Int,
+//        status: String
+//    ) {
+//        snapshot()[position]?.status = status
+//    }
+
     override fun onBindViewHolder(holder: AdminPendingItemViewHolder, position: Int) {
         val item=getItem(position)
         if(item!=null) {
@@ -64,7 +71,7 @@ class AdminPendingAdapter :
             holder.binding.postMore.setOnClickListener {
                 val action =
                     AdminMainFragmentDirections.actionAdminMainFragmentToPendingDialog(
-                        item.id
+                        item.id,holder.bindingAdapterPosition
                     )
                 it.findNavController().navigateUp()
                 it.findNavController().navigate(action)

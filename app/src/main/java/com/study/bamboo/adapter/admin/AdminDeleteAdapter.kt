@@ -43,7 +43,7 @@ class AdminDeleteAdapter :
             holder.binding.postMore.setOnClickListener {
                 val action =
                     AdminMainFragmentDirections.actionAdminMainFragmentToDeleteDialog(
-                        item.id
+                        item.id,holder.bindingAdapterPosition
                     )
                 it.findNavController().navigateUp()
                 it.findNavController().navigate(action)
@@ -51,6 +51,19 @@ class AdminDeleteAdapter :
         }
 
     }
+//    fun updateStatus(
+//        position: Int,
+//        status: String
+//    ) {
+//        snapshot()[position]?.status = status
+//    }
+//
+//    fun deletePost(
+//        position: Int
+//    ) {
+//        snapshot().toMutableList().apply { removeAt(position) }
+//        notifyItemChanged(position)
+//    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdminDeleteItemViewHolder {
         return AdminDeleteItemViewHolder.from(parent)

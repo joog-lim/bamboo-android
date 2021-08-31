@@ -17,7 +17,7 @@ import com.study.bamboo.view.fragment.admin.AdminMainFragmentDirections
 
 class AdminAcceptAdapter(
 ) :
-    PagingDataAdapter<Admin.Accept, RecyclerView.ViewHolder>(diffCallback) {
+    PagingDataAdapter<Admin.Accept, AdminAcceptAdapter.AdminAcceptItemViewHolder>(diffCallback) {
 
     companion object {
 
@@ -41,8 +41,6 @@ class AdminAcceptAdapter(
                 oldItem.content == newItem.content
         }
     }
-
-
 
 
     //수락
@@ -69,8 +67,7 @@ class AdminAcceptAdapter(
     }
 
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdminAcceptItemViewHolder {
 
 
         return AdminAcceptItemViewHolder.from(parent)
@@ -78,36 +75,58 @@ class AdminAcceptAdapter(
 
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+//    fun markItemAsRead(
+//        position: Int,
+//        patchModify: Admin.Accept
+//    ) {
+//
+//        try{
+//            if(snapshot().size.toString().isNotEmpty()){
+//                Log.d(TAG, "markItemAsRead: 성공")
+//                Log.d(TAG, "markItemAsRead: 성공 id ${snapshot().size}")
+//                Log.d(TAG, "markItemAsRead: 성공 id ${ snapshot()[position]?.id}")
+//                Log.d(TAG, "markItemAsRead: 성공 id ${patchModify.id}")
+//                Log.d(TAG, "markItemAsRead: 성공 id ${patchModify.id}")
+//                Log.d(TAG, "markItemAsRead: 성공 id ${patchModify.id}")
+//                Log.d(TAG, "markItemAsRead: 성공 id ${patchModify.id}")
+//                Log.d(TAG, "markItemAsRead: 성공 id ${patchModify.id}")
+//
+//                snapshot()[position]?.id = patchModify.id
+//            snapshot()[position]?.content = patchModify.content
+//            snapshot()[position]?.createdAt = patchModify.createdAt
+//            snapshot()[position]?.number = patchModify.number
+//            snapshot()[position]?.status = patchModify.status
+//            snapshot()[position]?.tag = patchModify.tag
+//            snapshot()[position]?.title = patchModify.title
+//            notifyItemChanged(position)
+//        }else{
+//                Log.d(TAG, "markItemAsRead: ${snapshot().size} 은 null 입니다")
+//            }
+//        }
+//        catch (e:Exception){
+//            Log.d(TAG, "markItemAsRead: $e")
+//        }
+//    }
+
+    override fun onBindViewHolder(holder: AdminAcceptItemViewHolder, position: Int) {
         val item = getItem(position)
         if (item != null) {
 
-            when (holder) {
 
-
-                is AdminAcceptItemViewHolder -> {
-                    holder.bind(item)
-                    holder.binding.postMore.setOnClickListener {
-                        val action =
-                            AdminMainFragmentDirections.actionAdminMainFragmentToAcceptDialog(
-                                item.id, holder.bindingAdapterPosition
-                            )
-                        it.findNavController().navigateUp()
-                        it.findNavController().navigate(action)
-                    }
-                }
+            holder.bind(item)
+            holder.binding.postMore.setOnClickListener {
+                val action =
+                    AdminMainFragmentDirections.actionAdminMainFragmentToAcceptDialog(
+                        item.id, holder.bindingAdapterPosition
+                    )
+                it.findNavController().navigateUp()
+                it.findNavController().navigate(action)
             }
         }
     }
-//    fun setItemList(data: List<UserPostDTO>) {
-//        Log.d("Adapter", "setItemList: $data")
-//        val recipesDiffUtil = AdminDiffUtil(postList, data)
-//        val diffUtilResult = DiffUtil.calculateDiff(recipesDiffUtil)
-//        postList = data as MutableList<UserPostDTO>
-//        diffUtilResult.dispatchUpdatesTo(this)
-//    }
-
 }
+
+
 
 
 

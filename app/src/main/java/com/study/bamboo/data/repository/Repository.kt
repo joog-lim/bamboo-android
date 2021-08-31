@@ -1,5 +1,6 @@
 package com.study.bamboo.data.repository
 
+import com.study.bamboo.data.repository.remote.AdminRepository
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import javax.inject.Inject
 
@@ -7,10 +8,10 @@ import javax.inject.Inject
 @ActivityRetainedScoped
 class Repository @Inject constructor(
     remoteDataSource: AdminRepository,
-    localDataSource: AdminLocalRepository,
+//    localDataSource: AdminLocalRepository,
     dataStore: DataStoreRepository
 ) {
     val remote = remoteDataSource
-    val local = localDataSource
+//    val local = localDataSource
     val dataStore = dataStore
 }

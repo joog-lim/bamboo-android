@@ -5,14 +5,13 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.study.bamboo.utils.LinearLayoutManagerWrapper
 import com.study.bamboo.R
+import com.study.bamboo.adapter.PostLoadingAdapter
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTED
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTEDType
@@ -22,13 +21,13 @@ import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.PENDING
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.PENDINGType
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTED
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTEDType
-import com.study.bamboo.adapter.PostLoadingAdapter
 import com.study.bamboo.adapter.admin.AdminDeleteAdapter
 import com.study.bamboo.adapter.admin.AdminPendingAdapter
 import com.study.bamboo.adapter.admin.AdminRejectAdapter
-import com.study.bamboo.databinding.FragmentAdminMainBinding
 import com.study.bamboo.base.BaseFragment
 import com.study.bamboo.data.paging.viewModel.PagingPostViewModel
+import com.study.bamboo.databinding.FragmentAdminMainBinding
+import com.study.bamboo.utils.LinearLayoutManagerWrapper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
@@ -49,7 +48,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
     private lateinit var viewModel: AdminViewModel
     private lateinit var pagingViewModel: PagingPostViewModel
 
-    private val databaseViewModel: DataBaseViewModel by viewModels()
+//    private val databaseViewModel: DataBaseViewModel by viewModels()
 
     private val acceptAdapter: AdminAcceptAdapter by lazy {
         AdminAcceptAdapter()
@@ -361,7 +360,18 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+
+//        CoroutineScope(Dispatchers.IO).launch {
+//            databaseViewModel.clearAccept()
+//            databaseViewModel.clearReject()
+//            databaseViewModel.clearPending()
+//            databaseViewModel.clearDelete()
+//        }
+    }
 }
+
 
 
 

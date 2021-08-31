@@ -34,6 +34,12 @@ class AdminRejectAdapter :
 
         }
     }
+//    fun updateStatus(
+//        position: Int,
+//        status: String
+//    ) {
+//        snapshot()[position]?.status = status
+//    }
 
     //거부
     class AdminRejectItemViewHolder(val binding: AdminPostRejectRecyclerItemBinding) :
@@ -65,7 +71,7 @@ class AdminRejectAdapter :
             holder.binding.postMore.setOnClickListener {
                 val action =
                     AdminMainFragmentDirections.actionAdminMainFragmentToRejectCancelDialog(
-                        item.id
+                        item.id,holder.bindingAdapterPosition
                     )
                 it.findNavController().navigateUp()
                 it.findNavController().navigate(action)

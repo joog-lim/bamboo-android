@@ -1,4 +1,4 @@
-package com.study.bamboo.data.paging
+package com.study.bamboo.data.paging.page
 
 import android.util.Log
 import androidx.paging.PagingSource
@@ -15,9 +15,10 @@ class AcceptPagingSource @Inject constructor(
     private val adminApi: AdminApi,
     private val token: String,
     private val cursor: String?,
+//    private val sampleRepository: SampleRepository,
 
 
-    ) : PagingSource<Int, Admin.Accept>() {
+) : PagingSource<Int, Admin.Accept>() {
     companion object {
         const val TAG = "PostPagingSource"
         const val UNSPLASH_STARTING_PAGE_INDEX = 20
@@ -26,18 +27,17 @@ class AcceptPagingSource @Inject constructor(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Admin.Accept> {
         return try {
+//            val page = sampleRepository.getNextPage(lastSeenId = params.key ?: 0)
             val page = params.key ?: 0
 
 
-            val response = adminApi.getAcceptPost(token, page, cursor, ACCEPTED)
-
-            val totalCount=adminApi.getCount(token)
+//            val totalCount = adminApi.getCount(token)
 
 //            val countData=totalCount.body()!![3].count
 //            Log.d(TAG, "totalCount accept: $countData ")
 
+            val response = adminApi.getAcceptPost(token, page, cursor, ACCEPTED)
 
-            Log.d(TAG, "page:$page")
             val data = response.body()?.posts ?: emptyList()
 
 
@@ -53,10 +53,10 @@ class AcceptPagingSource @Inject constructor(
             return LoadResult.Error(e)
         } catch (e: HttpException) {
             Log.d(TAG, "HttpException: $e")
-         return   LoadResult.Error(e)
+            return LoadResult.Error(e)
         } catch (e: IOException) {
-             Log.d(TAG, "IOException: $e")
-            return  LoadResult.Error(e)
+            Log.d(TAG, "IOException: $e")
+            return LoadResult.Error(e)
         }
 
 

@@ -1,5 +1,6 @@
 package com.study.bamboo.view.activity.signin
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -24,9 +25,10 @@ class SignInViewModel @Inject constructor(
     private val _getPostResponse: MutableLiveData<List<UserPostDTO>?> =
         MutableLiveData<List<UserPostDTO>?>()
 
-    val success= MutableLiveData<Boolean>()
+  private  val _success= MutableLiveData<Boolean>()
+    val success: LiveData<Boolean> get()=_success
     init {
-        success.value=false
+        _success.value=false
     }
 
 
@@ -40,7 +42,7 @@ class SignInViewModel @Inject constructor(
                 if (response != null) {
                     if (response.isSuccessful) {
                         _adminLoginResponse.value = response.body()?.token.toString()
-                        success.value = true
+                        _success.value = true
                     }
                 }
             }

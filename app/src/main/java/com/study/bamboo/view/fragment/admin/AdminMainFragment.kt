@@ -79,6 +79,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
     }
 
     var token = ""
+    var cursor = ""
     override fun FragmentAdminMainBinding.onCreateView() {
         binding.activitySpinner.adapter = ArrayAdapter.createFromResource(
             requireContext(),
@@ -88,6 +89,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
         observeUiPreferences()
         spinnerContact()
+//        observeCursor()
         setItemAdapter(ACCEPTEDType)
 
     }
@@ -105,6 +107,15 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
         })
 
     }
+
+//    private fun observeCursor() {
+//        viewModel.cursor.observe(viewLifecycleOwner, { cursorData ->
+//            cursor = cursorData
+//            Log.d(TAG, "observeCursor: $cursor")
+//
+//        })
+//
+//    }
 
 
     private fun spinnerContact() {
@@ -129,7 +140,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                             lifecycleScope.launch {
                                 observeNetwork(
                                     token,
-                                    "",
+                                    cursor,
                                     ACCEPTED
                                 )
                             }
@@ -143,7 +154,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                                 observeNetwork(
                                     token,
 
-                                    "",
+                                    cursor,
                                     PENDING
                                 )
                             }
@@ -157,7 +168,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                                 observeNetwork(
                                     token,
 
-                                    "",
+                                    cursor,
                                     REJECTED
 
                                 )
@@ -173,7 +184,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                                 observeNetwork(
                                     token,
 
-                                    "",
+                                    cursor,
                                     DELETED
 
                                 )
@@ -188,7 +199,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                             lifecycleScope.launch {
                                 observeNetwork(
                                     token,
-                                    "",
+                                    cursor,
                                     ACCEPTED
                                 )
                             }
@@ -224,6 +235,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
     // paging에 먼저 피마리터 값 보내줌
     private fun observeGetData(token: String, cursor: String, status: String) {
         pagingViewModel.getData(token, cursor, status)
+//        viewModel.getPost(token, cursor, status)
     }
 
     // paging 데이터값 받아옴

@@ -23,8 +23,6 @@ class AdminViewModel @Inject constructor(
     val readToken = repository.dataStore.readToken
     private val TAG = "AdminViewModel"
 
-    private val _deletePostData = MutableLiveData<DeletePostDto>()
-    val deletePostDtoDto: LiveData<DeletePostDto> get() = _deletePostData
 
     private val _patchPostData = MutableLiveData<AcceptModify>()
     val patchPostDto: LiveData<AcceptModify> get() = _patchPostData
@@ -76,7 +74,6 @@ class AdminViewModel @Inject constructor(
         repository.remote.deletePost(token, reason, id).let { response ->
 
             if (response.isSuccessful) {
-                _deletePostData.value = response.body()
             } else {
                 Log.d(TAG, "deletePost: ${response.errorBody()}")
             }

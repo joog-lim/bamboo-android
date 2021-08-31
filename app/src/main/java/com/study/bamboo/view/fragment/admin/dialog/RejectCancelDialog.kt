@@ -30,10 +30,11 @@ class RejectCancelDialog : DialogFragment() {
     private val binding get() = _binding!!
     private val args by navArgs<RejectCancelDialogArgs>()
     private val viewModel: AdminViewModel by viewModels()
-    private  val pagingViewModel: PagingPostViewModel by viewModels()
-    private val rejectAdapter: AdminRejectAdapter by lazy{
+    private val pagingViewModel: PagingPostViewModel by viewModels()
+    private val rejectAdapter: AdminRejectAdapter by lazy {
         AdminRejectAdapter()
     }
+
     override fun onResume() {
         super.onResume()
         dialogCorner()
@@ -67,18 +68,14 @@ class RejectCancelDialog : DialogFragment() {
         binding.rejectCancelBtn.setOnClickListener {
 
             val accept = HashMap<String, String>()
-            accept["status"] = AdminAcceptAdapter.ACCEPTED
+            accept["status"] = ACCEPTED
             viewModel.patchPost(
                 token,
                 args.auth,
                 accept,
 
-            )
-            viewModel.successData.observe(viewLifecycleOwner){
-                if(it){
-                    updateData()
-                }
-            }
+                )
+//            rejectAdapter.updateStatus(args.position, ACCEPTED)
             dialog?.hide()
         }
 
@@ -88,6 +85,7 @@ class RejectCancelDialog : DialogFragment() {
 
         return binding.root
     }
+
     private fun updateData() {
         lifecycleScope.launch {
             pagingViewModel.rejectData.collectLatest {

@@ -44,7 +44,6 @@ class AdminAcceptAdapter(
 
 
 
-
     //수락
     class AdminAcceptItemViewHolder(val binding: AdminPostAcceptedRecyclerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {

@@ -1,7 +1,6 @@
 package com.study.bamboo.view.fragment.admin.paging.viewModel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -33,6 +32,7 @@ class PagingPostViewModel @Inject constructor(
         this.token.value = token
         this.cursor.value = cursor
     }
+
 
 
     val acceptData = Pager(

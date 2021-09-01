@@ -9,6 +9,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.study.bamboo.data.network.models.user.GetVerifyDTO
 import com.study.bamboo.data.network.models.user.UserPostDTO
 import com.study.bamboo.data.network.models.user.getcount.GetCount
 import com.study.bamboo.data.network.user.UserApi
@@ -31,6 +32,8 @@ class MainViewModel @Inject constructor(
     val getCountResponse: LiveData<GetCount> get() = _getCountResponse
     private val _getCountResponse = MutableLiveData<GetCount>()
 
+    val getVerifyResponse: LiveData<GetVerifyDTO> get() = _getVerifyResponse
+    private val _getVerifyResponse = MutableLiveData<GetVerifyDTO>()
 
     //게시물 가져오는 API
     fun callGetPost(count: Int, cursor: String, status: String) = viewModelScope.launch {
@@ -60,7 +63,13 @@ class MainViewModel @Inject constructor(
 
     }
 
-
+    fun callGetVerify()= viewModelScope.launch {
+        userRepository.getVerify().let { response ->
+            if (response.isSuccessful){
+                _getVerifyResponse.value = response.body()
+            }
+        }
+    }
 
      fun findAccepted(response : GetCount?) : Int{
         var count = 0

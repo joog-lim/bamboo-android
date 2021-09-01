@@ -3,10 +3,11 @@ package com.study.bamboo.view.fragment.user
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -14,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.study.bamboo.R
+import com.study.bamboo.data.network.models.user.GetVerifyDTO
 import com.study.bamboo.data.network.models.user.getcount.GetCount
 import com.study.bamboo.databinding.FragmentUserMainBinding
 import com.study.bamboo.utils.Functions
@@ -31,10 +33,11 @@ class UserMainFragment : Fragment() {
 
     lateinit var binding: FragmentUserMainBinding
     private val mainViewModel by activityViewModels<MainViewModel>()
-    lateinit var userHomeItemAdapter : UserHomeItemAdapter
+    lateinit var userHomeItemAdapter: UserHomeItemAdapter
 
-    companion object{
+    companion object {
         private var firstStart = true
+        var getVerifyResponse: GetVerifyDTO? = null
 
     }
 
@@ -48,7 +51,7 @@ class UserMainFragment : Fragment() {
         if (firstStart) {
             binding.progressBar.visibility = View.VISIBLE
             firstStart = false
-        } else{
+        } else {
             binding.progressBar.visibility = View.GONE
         }
     }
@@ -63,20 +66,28 @@ class UserMainFragment : Fragment() {
         binding.progressBar.visibility = View.GONE
         observeViewModel()
 
+
         return binding.root
     }
 
     fun addPostBtnClick(view: View) {
         binding.progressBar.visibility = View.VISIBLE
-        val intent = Intent(requireContext(), PostCreateActivity::class.java)
-        startActivity(intent)
+        if (getVerifyResponse != null){
+            binding.progressBar.visibility = View.GONE
+            val intent = Intent(requireContext(), PostCreateActivity::class.java)
+            startActivity(intent)
+        }else{
+            mainViewModel.callGetVerify()
+        }
     }
 
     private fun initRecyclerView() {
         Functions.recyclerViewManager(binding.postRecyclerView, requireContext())
         arguments?.getString("count")
-        binding.postRecyclerView.adapter = UserHomeItemAdapter(mainViewModel.getPostResponse, getPostCountResponse)
-        userHomeItemAdapter = UserHomeItemAdapter(mainViewModel.getPostResponse, getPostCountResponse)
+        binding.postRecyclerView.adapter =
+            UserHomeItemAdapter(mainViewModel.getPostResponse, getPostCountResponse)
+        userHomeItemAdapter =
+            UserHomeItemAdapter(mainViewModel.getPostResponse, getPostCountResponse)
 
         lifecycleScope.launchWhenCreated {
             mainViewModel.getListData(getPostCountResponse).collect {
@@ -86,13 +97,24 @@ class UserMainFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        Log.d("로그","post : ${mainViewModel.getPostResponse.value}, count : ${mainViewModel.getCountResponse.value}")
+        Log.d(
+            "로그",
+            "post : ${mainViewModel.getPostResponse.value}, count : ${mainViewModel.getCountResponse.value}"
+        )
         mainViewModel.getPostResponse.observe(requireActivity(), Observer {
-            Log.d("로그","in post : $it")
+            Log.d("로그", "in post : $it")
             if (it != null) {
                 binding.progressBar.visibility = View.GONE
                 initRecyclerView()
-                //recyclerViewEnd(binding.postRecyclerView)
+            }
+        })
+
+        mainViewModel.getVerifyResponse.observe(requireActivity(), Observer {
+            if (it != null) {
+                binding.progressBar.visibility = View.GONE
+                getVerifyResponse = it
+                val intent = Intent(requireContext(), PostCreateActivity::class.java)
+                startActivity(intent)
             }
         })
     }

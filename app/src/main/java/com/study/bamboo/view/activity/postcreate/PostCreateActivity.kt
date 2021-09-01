@@ -2,6 +2,7 @@ package com.study.bamboo.view.activity.postcreate
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -11,7 +12,9 @@ import androidx.lifecycle.Observer
 import com.study.bamboo.R
 import com.study.bamboo.base.BaseActivity
 import com.study.bamboo.databinding.ActivityPostCreateBinding
+import com.study.bamboo.view.activity.main.MainViewModel
 import com.study.bamboo.view.activity.splash.SplashViewModel
+import com.study.bamboo.view.fragment.user.UserMainFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,11 +30,11 @@ class PostCreateActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post_create)
         binding.activity = this
+        observeViewModel()
         supportActionBar!!.hide()
-        binding.question.text = "Q. ${splashViewModel.getVerifyResponse.value?.question}"
+        binding.question.text = "Q. ${UserMainFragment.getVerifyResponse?.question}"
         setupSpinnerTag()
         setupSpinnerHandler()
-        observeViewModel()
     }
 
     private fun observeViewModel() {
@@ -50,6 +53,8 @@ class PostCreateActivity : BaseActivity() {
                 finish()
             }
         })
+
+
     }
 
     fun backBtnClick(view: View) {
@@ -66,7 +71,8 @@ class PostCreateActivity : BaseActivity() {
 
             if (questionAnswerTrue(binding.questionAnswer.text.toString())) {
                 binding.progressBar.visibility = View.VISIBLE
-                splashViewModel.getVerifyResponse.value?.let {
+
+                UserMainFragment.getVerifyResponse?.let {
                     postCreateViewModel.callPostCreateAPI(
                         binding.title.text.toString(),
                         binding.content.text.toString(),
@@ -75,6 +81,7 @@ class PostCreateActivity : BaseActivity() {
                         binding.questionAnswer.text.toString()
                     )
                 }
+
 
             } else {
                 Toast.makeText(this, "질문에 대한 답이 옳지 않습니다", Toast.LENGTH_SHORT).show()

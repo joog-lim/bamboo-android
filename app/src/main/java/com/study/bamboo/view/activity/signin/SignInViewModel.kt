@@ -1,10 +1,12 @@
 package com.study.bamboo.view.activity.signin
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.study.bamboo.data.network.models.user.UserPostDTO
 import com.study.bamboo.data.network.models.user.getcount.GetCount
+import com.study.bamboo.data.network.models.user.postcreate.PostCreateResponse
 import com.study.bamboo.data.repository.remote.AdminRepository
 import com.study.bamboo.view.activity.splash.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,26 +21,25 @@ class SignInViewModel @Inject constructor(
 ) : ViewModel() {
 
 
-     private val _adminLoginResponse: MutableLiveData<String> = MutableLiveData<String>()
-    val adminLoginResponse : MutableLiveData<String> get() = _adminLoginResponse
+    private val _adminLoginResponse = MutableLiveData<String>()
+    val adminLoginResponse: LiveData<String> get() = _adminLoginResponse
 
-    val getPostResponse get() = _getPostResponse
-    private val _getPostResponse: MutableLiveData<List<UserPostDTO>?> = MutableLiveData<List<UserPostDTO>?>()
+    val getPostResponse: LiveData<List<UserPostDTO>?> get() = _getPostResponse
+    private val _getPostResponse = MutableLiveData<List<UserPostDTO>?>()
 
-    val getCountResponse get() = _getCountResponse
-    private val _getCountResponse: MutableLiveData<Int> = MutableLiveData<Int>()
+    val getCountResponse: LiveData<Int> get() = _getCountResponse
+    private val _getCountResponse = MutableLiveData<Int>()
 
 
-    val success= MutableLiveData<Boolean>()
+    val success = MutableLiveData<Boolean>()
 
     init {
-        success.value=false
+        success.value = false
     }
 
 
-
     //관리자 로그인 API
-    fun callAdminLoginAPI(password : String) {
+    fun callAdminLoginAPI(password: String) {
         val passwordRequest = HashMap<String, String>()
         passwordRequest.put("password", password)
         viewModelScope.launch {
@@ -56,7 +57,7 @@ class SignInViewModel @Inject constructor(
     //게시물 가져오는 API
     fun callGetPost(count: Int, cursor: String, status: String) = viewModelScope.launch {
         userRepository.getPost(count, cursor, status).let { response ->
-            if (response.isSuccessful){
+            if (response.isSuccessful) {
                 _getPostResponse.value = response.body()?.posts
             }
         }
@@ -71,10 +72,9 @@ class SignInViewModel @Inject constructor(
     }
 
 
-
-    fun findAccepted(response : Response<GetCount>) : Int{
+    fun findAccepted(response: Response<GetCount>): Int {
         var count = 0
-        if (response != null){
+        if (response != null) {
             for (get in 0..3) {
                 if (response.body()?.get(get)?._id == "ACCEPTED") {
                     count = response.body()!!.get(get).count

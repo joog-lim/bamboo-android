@@ -1,6 +1,7 @@
 package com.study.bamboo.view.activity.postcreate
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -22,17 +23,16 @@ class PostCreateViewModel @Inject constructor(
 
 
     //게시물 업로드 후 리스폰스 받아오기
-    val postCreateResponse get() = _postCreateResponse
-    private val _postCreateResponse: MutableLiveData<PostCreateResponse> =
-        MutableLiveData<PostCreateResponse>()
+    val postCreateResponse: LiveData<PostCreateResponse> get() = _postCreateResponse
+    private val _postCreateResponse = MutableLiveData<PostCreateResponse>()
 
     //게시물 업로드 후 리스폰스 받아오기
-    val postCreateSuccess get() = _postCreateSuccess
-    private val _postCreateSuccess: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
+    val postCreateSuccess: LiveData<Boolean> get() = _postCreateSuccess
+    private val _postCreateSuccess = MutableLiveData<Boolean>()
 
 
-    val choiceTag get() = _choiceTag
-    private val _choiceTag: MutableLiveData<String> = MutableLiveData<String>()
+    val choiceTag: LiveData<String> get() = _choiceTag
+    private val _choiceTag = MutableLiveData<String>()
 
     init {
         _postCreateSuccess.value = false
@@ -65,21 +65,7 @@ class PostCreateViewModel @Inject constructor(
         }
     }
 
-//        retService.transferPostCreate(postCreateRequest).enqueue(object : Callback<PostCreateResponse> {
-//            override fun onResponse(
-//                call: Call<PostCreateResponse>,
-//                response: Response<PostCreateResponse>
-//            ) {
-//                Log.d("로그","게시물 게시후 ${response.body()?.id}")
-//                Log.d("로그","실패  message : ${response.raw()}, errorBody : ${response.isSuccessful}")
-//                _postCreateResponse.value = response.body()
-//            }
-//
-//            override fun onFailure(call: Call<PostCreateResponse>, t: Throwable) {
-//                Log.d("로그","onFailure : $call, $t")
-//            }
-//
-//        })
-
-
+    fun setPostCreateSuccess(postCreateSuccess : Boolean){
+        _postCreateSuccess.value = postCreateSuccess
+    }
 }

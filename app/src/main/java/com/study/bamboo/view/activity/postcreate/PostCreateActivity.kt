@@ -39,7 +39,7 @@ class PostCreateActivity : BaseActivity() {
         postCreateViewModel.postCreateResponse.observe(this, Observer {
             binding.progressBar.visibility = View.GONE
             if (it != null) {
-                postCreateViewModel.postCreateSuccess.value = true
+                postCreateViewModel.setPostCreateSuccess(true)
             }
         })
 

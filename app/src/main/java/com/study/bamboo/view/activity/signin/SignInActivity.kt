@@ -40,10 +40,8 @@ class SignInActivity : BaseActivity() {
 
 
     fun clickUserLogin(view: View) {
-        //binding.progressBar.visibility = View.VISIBLE
-        //signInViewModel.callGetPost(20, "60b8407473d81a1b4cc591a5", "PENDING")
+        binding.progressBar.visibility = View.VISIBLE
         signInViewModel.callGetCount()
-
     }
 
     fun clickAdminLogin(view: View) {
@@ -89,6 +87,7 @@ class SignInActivity : BaseActivity() {
         signInViewModel.getCountResponse.observe(this, Observer {
             Log.d("로그","로그인 화면 count : $it")
             getPostCountResponse = it
+            binding.progressBar.visibility = View.GONE
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()

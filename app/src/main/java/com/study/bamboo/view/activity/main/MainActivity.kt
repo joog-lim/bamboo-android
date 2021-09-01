@@ -11,13 +11,14 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.study.bamboo.R
+import com.study.bamboo.base.BaseActivity
 import com.study.bamboo.databinding.ActivityMainBinding
 import com.study.bamboo.view.activity.signin.SignInActivity.Companion.getPostCountResponse
 import dagger.hilt.android.AndroidEntryPoint
 
 // ViewBinding
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     lateinit var navi: BottomNavigationView
     private lateinit var navController: NavController
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }

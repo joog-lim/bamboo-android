@@ -26,7 +26,7 @@ interface UserApi {
     ): Response<PostCreateResponse>
 
     @GET("verify")
-    suspend fun getVerify() : Response<GetVerifyDTO>
+    suspend fun getVerify() : Response<GetVerifyDTO?>
 
     @GET("post/count")
     suspend fun getCount() : Response<GetCount>

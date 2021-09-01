@@ -1,14 +1,15 @@
 package com.study.bamboo.view.activity.signin
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.study.bamboo.data.network.models.user.UserPostDTO
+import com.study.bamboo.data.network.models.user.getcount.GetCount
 import com.study.bamboo.data.repository.remote.AdminRepository
 import com.study.bamboo.view.activity.splash.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,13 +23,16 @@ class SignInViewModel @Inject constructor(
     val adminLoginResponse : MutableLiveData<String> get() = _adminLoginResponse
 
     val getPostResponse get() = _getPostResponse
-    private val _getPostResponse: MutableLiveData<List<UserPostDTO>?> =
-        MutableLiveData<List<UserPostDTO>?>()
+    private val _getPostResponse: MutableLiveData<List<UserPostDTO>?> = MutableLiveData<List<UserPostDTO>?>()
 
-  private  val _success= MutableLiveData<Boolean>()
-    val success: LiveData<Boolean> get()=_success
+    val getCountResponse get() = _getCountResponse
+    private val _getCountResponse: MutableLiveData<Int> = MutableLiveData<Int>()
+
+
+    val success= MutableLiveData<Boolean>()
+
     init {
-        _success.value=false
+        success.value=false
     }
 
 
@@ -42,40 +46,12 @@ class SignInViewModel @Inject constructor(
                 if (response != null) {
                     if (response.isSuccessful) {
                         _adminLoginResponse.value = response.body()?.token.toString()
-                        _success.value = true
+                        success.value = true
                     }
                 }
             }
         }
     }
-
-
-
-//        val retService = RetrofitClient().getService().create(AdminLoginAPI::class.java)
-
-
-//        val passwordRequest = HashMap<String, String>()
-//        passwordRequest.put("password", password)
-//
-//        retService.transferAdminLogin(passwordRequest)?.enqueue(object : Callback<AdminSignInDTO> {
-//            override fun onResponse(
-//                call: Call<AdminSignInDTO>,
-//                response: Response<AdminSignInDTO>
-//            ) {
-//                if (response.isSuccessful) {
-//                    _adminLoginResponse.value = response.body()?.token.toString()
-//                    success.value=true
-//                }
-//
-//            }
-//
-//            override fun onFailure(call: Call<AdminSignInDTO>, t: Throwable) {
-//
-//            }
-//
-//        })
-
-
 
     //게시물 가져오는 API
     fun callGetPost(count: Int, cursor: String, status: String) = viewModelScope.launch {
@@ -86,24 +62,28 @@ class SignInViewModel @Inject constructor(
         }
     }
 
-//    val retService = RetrofitClient().getService().create(GetPostAPI::class.java)
-//    retService.getPost(count, cursor, status).enqueue(object : Callback<UserGetPostDTO> {
-//        override fun onResponse(
-//            call: Call<UserGetPostDTO>,
-//            response: Response<UserGetPostDTO>
-//        ) {
-//            //Log.d("로그", "리스폰스 : ${response.body()?.posts?.get(0)?.title}")
-//            _getPostResponse.value = response.body()?.posts
-//            /*       Log.d(
-//                       "로그",
-//                       "리스폰스 : ${_getPostResponse.value?.get(0)?.title}, 사이즈 : ${_getPostResponse.value?.size}"
-//                   )*/
-//        }
-//
-//        override fun onFailure(call: Call<UserGetPostDTO>, t: Throwable) {
-//            TODO("Not yet implemented")
-//        }
-//
-//    })
+    //게시물 크기 가져오는 API
+    fun callGetCount() = viewModelScope.launch {
+        userRepository.getCount().let { response ->
+            val count = findAccepted(response)
+            _getCountResponse.value = count
+        }
+    }
+
+
+
+    fun findAccepted(response : Response<GetCount>) : Int{
+        var count = 0
+        if (response != null){
+            for (get in 0..3) {
+                if (response.body()?.get(get)?._id == "ACCEPTED") {
+                    count = response.body()!!.get(get).count
+                }
+            }
+        }
+
+        return count
+    }
+
 
 }

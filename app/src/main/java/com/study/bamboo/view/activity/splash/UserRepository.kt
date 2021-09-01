@@ -8,4 +8,5 @@ class UserRepository @Inject constructor(private val userApi: UserApi){
     suspend fun getPost(count : Int, cursor : String, status : String) = userApi.getPost(count, cursor, status)
     suspend fun transferPostCreate(request : PostCreateRequest) = userApi.transferPostCreate(request)
     suspend fun getVerify() = userApi.getVerify()
+    suspend fun getCount() = userApi.getCount()
 }

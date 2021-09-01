@@ -25,6 +25,10 @@ class SignInActivity : BaseActivity() {
     private val loginDialog = LoginDialog()
     private val signInViewModel: SignInViewModel by viewModels()
 
+    companion object{
+        var getPostCountResponse = 0
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
@@ -36,11 +40,8 @@ class SignInActivity : BaseActivity() {
 
 
     fun clickUserLogin(view: View) {
-        //binding.progressBar.visibility = View.VISIBLE
-        //signInViewModel.callGetPost(20, "60b8407473d81a1b4cc591a5", "PENDING")
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+        binding.progressBar.visibility = View.VISIBLE
+        signInViewModel.callGetCount()
     }
 
     fun clickAdminLogin(view: View) {
@@ -71,6 +72,8 @@ class SignInActivity : BaseActivity() {
             }
         })
 
+
+
         signInViewModel.adminLoginResponse.observe(this, Observer {
             Log.d("로그", "어드민 로그인 API : ${it}")
             if (it == "null") {
@@ -80,5 +83,16 @@ class SignInActivity : BaseActivity() {
                 Toast.makeText(this, "안녕하세요 관리자님!", Toast.LENGTH_SHORT).show()
             }
         })
+
+        signInViewModel.getCountResponse.observe(this, Observer {
+            Log.d("로그","로그인 화면 count : $it")
+            getPostCountResponse = it
+            binding.progressBar.visibility = View.GONE
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        })
+
+
     }
 }

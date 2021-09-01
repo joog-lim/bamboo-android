@@ -8,11 +8,12 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.study.bamboo.data.network.user.AdminApi
-import com.study.bamboo.view.fragment.admin.paging.AcceptPagingSource
-import com.study.bamboo.view.fragment.admin.paging.AcceptPagingSource.Companion.UNSPLASH_STARTING_PAGE_INDEX
-import com.study.bamboo.view.fragment.admin.paging.DeletePagingSource
-import com.study.bamboo.view.fragment.admin.paging.PendingPagingSource
-import com.study.bamboo.view.fragment.admin.paging.RejectPagingSource
+import com.study.bamboo.data.paging.page.AcceptPagingSource
+import com.study.bamboo.data.paging.page.AcceptPagingSource.Companion.UNSPLASH_STARTING_PAGE_INDEX
+import com.study.bamboo.data.paging.page.DeletePagingSource
+import com.study.bamboo.data.paging.page.PendingPagingSource
+import com.study.bamboo.data.paging.page.RejectPagingSource
+
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.study.bamboo.view.fragment.admin
+package com.study.bamboo.data.repository.remote
 
 import com.study.bamboo.data.network.user.AdminApi
 import javax.inject.Inject
@@ -22,4 +22,9 @@ class AdminRepository @Inject constructor(
         adminApi.acceptPatchPost(token, id, bodyMap)
 
     suspend fun transferAdminLogin(password: HashMap<String, String>) = adminApi.transferAdminLogin(password)
+
+    suspend fun getAcceptPost( token:String, count:Int, cursor:String, status:String) =adminApi.getAcceptPost(token,count,cursor,status)
+
+
+
 }

@@ -13,9 +13,9 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter
+import com.study.bamboo.data.paging.viewModel.PagingPostViewModel
 import com.study.bamboo.databinding.AcceptDialogBinding
 import com.study.bamboo.view.fragment.admin.AdminViewModel
-import com.study.bamboo.view.fragment.admin.paging.viewModel.PagingPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -26,10 +26,10 @@ class AcceptDialog : DialogFragment() {
     private val binding get() = _binding!!
     private val args by navArgs<AcceptDialogArgs>()
     private val viewModel: AdminViewModel by viewModels()
-    private val pagingViewModel: PagingPostViewModel by viewModels()
-    private val acceptAdapter: AdminAcceptAdapter by lazy {
-        AdminAcceptAdapter()
-    }
+//    private val pagingViewModel: PagingPostViewModel by viewModels()
+//    private val acceptAdapter: AdminAcceptAdapter by lazy {
+//        AdminAcceptAdapter()
+//    }
     private var job: Job? = null
 
     override fun onResume() {
@@ -61,7 +61,7 @@ class AcceptDialog : DialogFragment() {
 
         })
 
-
+        Log.d(TAG, "onCreateView: ${args.position}")
         binding.acceptBtn.setOnClickListener {
 
             updatePost()
@@ -78,7 +78,7 @@ class AcceptDialog : DialogFragment() {
     }
 
 
-    private  fun updatePost() {
+    private fun updatePost() {
         job?.cancel()
         job = lifecycleScope.launch {
 
@@ -89,11 +89,22 @@ class AcceptDialog : DialogFragment() {
             )
         }
 
-
-
+//        viewModel.patchPostDto.observe(viewLifecycleOwner, {
+//
+//            val adminAccept = Admin.Accept(
+//                it.content, it.createdAt, it.id, it.number, it.status, it.tag, it.title
+//            )
+//            pagingViewModel.onViewEvent(SampleViewEvents.Edit(adminAccept))
+//
+//            pagingViewModel.pagingDataViewStates.observe(viewLifecycleOwner, Observer { pagingData ->
+//                acceptAdapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
+//            })
+//            acceptAdapter.markItemAsRead(args.position,adminAccept)
+//
+//
+//        })
 
     }
-
 
 
     private fun bodySend(): HashMap<String, String> {

@@ -5,13 +5,13 @@ import com.study.bamboo.data.network.models.user.UserPostDTOBase
 sealed class Admin {
 
     data class Accept(
-        override val content: String,
-        override val createdAt: Long,
-        override val id: String,
-        override val number: Int,
-        override val status: String,
-        override val tag: String,
-        override val title: String
+        override var content: String,
+        override var createdAt: Long,
+        override var id: String,
+        override var number: Int,
+        override var status: String,
+        override var tag: String,
+        override var title: String
     ) : UserPostDTOBase
 
     data class Delete(
@@ -19,7 +19,7 @@ sealed class Admin {
         override val createdAt: Long,
         override val id: String,
         override val number: Int,
-        override val status: String,
+        override var status: String,
         override val tag: String,
         override val title: String
     ) : UserPostDTOBase
@@ -29,7 +29,7 @@ sealed class Admin {
         override val createdAt: Long,
         override val id: String,
         override val number: Int,
-        override val status: String,
+        override var status: String,
         override val tag: String,
         override val title: String
     ) : UserPostDTOBase
@@ -39,7 +39,7 @@ sealed class Admin {
         override val createdAt: Long,
         override val id: String,
         override val number: Int,
-        override val status: String,
+        override var status: String,
         override val tag: String,
         override val title: String
     ) : UserPostDTOBase

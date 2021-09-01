@@ -10,8 +10,8 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.study.bamboo.utils.LinearLayoutManagerWrapper
 import com.study.bamboo.R
+import com.study.bamboo.adapter.PostLoadingAdapter
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTED
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTEDType
@@ -21,13 +21,13 @@ import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.PENDING
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.PENDINGType
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTED
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTEDType
-import com.study.bamboo.adapter.PostLoadingAdapter
 import com.study.bamboo.adapter.admin.AdminDeleteAdapter
 import com.study.bamboo.adapter.admin.AdminPendingAdapter
 import com.study.bamboo.adapter.admin.AdminRejectAdapter
-import com.study.bamboo.databinding.FragmentAdminMainBinding
 import com.study.bamboo.base.BaseFragment
-import com.study.bamboo.view.fragment.admin.paging.viewModel.PagingPostViewModel
+import com.study.bamboo.data.paging.viewModel.PagingPostViewModel
+import com.study.bamboo.databinding.FragmentAdminMainBinding
+import com.study.bamboo.utils.LinearLayoutManagerWrapper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
@@ -47,6 +47,8 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
     private lateinit var viewModel: AdminViewModel
     private lateinit var pagingViewModel: PagingPostViewModel
+
+//    private val databaseViewModel: DataBaseViewModel by viewModels()
 
     private val acceptAdapter: AdminAcceptAdapter by lazy {
         AdminAcceptAdapter()
@@ -77,6 +79,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
     }
 
     var token = ""
+    var cursor = ""
     override fun FragmentAdminMainBinding.onCreateView() {
         binding.activitySpinner.adapter = ArrayAdapter.createFromResource(
             requireContext(),
@@ -86,6 +89,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
         observeUiPreferences()
         spinnerContact()
+//        observeCursor()
         setItemAdapter(ACCEPTEDType)
 
     }
@@ -103,6 +107,15 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
         })
 
     }
+
+//    private fun observeCursor() {
+//        viewModel.cursor.observe(viewLifecycleOwner, { cursorData ->
+//            cursor = cursorData
+//            Log.d(TAG, "observeCursor: $cursor")
+//
+//        })
+//
+//    }
 
 
     private fun spinnerContact() {
@@ -127,7 +140,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                             lifecycleScope.launch {
                                 observeNetwork(
                                     token,
-                                    "",
+                                    cursor,
                                     ACCEPTED
                                 )
                             }
@@ -141,7 +154,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                                 observeNetwork(
                                     token,
 
-                                    "",
+                                    cursor,
                                     PENDING
                                 )
                             }
@@ -155,7 +168,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                                 observeNetwork(
                                     token,
 
-                                    "",
+                                    cursor,
                                     REJECTED
 
                                 )
@@ -171,7 +184,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                                 observeNetwork(
                                     token,
 
-                                    "",
+                                    cursor,
                                     DELETED
 
                                 )
@@ -186,7 +199,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                             lifecycleScope.launch {
                                 observeNetwork(
                                     token,
-                                    "",
+                                    cursor,
                                     ACCEPTED
                                 )
                             }
@@ -222,21 +235,21 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
     // paging에 먼저 피마리터 값 보내줌
     private fun observeGetData(token: String, cursor: String, status: String) {
         pagingViewModel.getData(token, cursor, status)
+//        viewModel.getPost(token, cursor, status)
     }
 
     // paging 데이터값 받아옴
-    private fun observePagingData(viewType:Int) {
+    private fun observePagingData(viewType: Int) {
 
         job = lifecycleScope.launch {
 
-            when(viewType){
-                ACCEPTEDType->{
+            when (viewType) {
+                ACCEPTEDType -> {
                     pagingViewModel.acceptData.collectLatest {
                         acceptAdapter.submitData(viewLifecycleOwner.lifecycle, it)
-                        Log.d(TAG, "getPost: $it")
                     }
                 }
-                DELETEDType->{
+                DELETEDType -> {
                     pagingViewModel.deleteData.collectLatest {
 
                         deleteAdapter.submitData(viewLifecycleOwner.lifecycle, it)
@@ -244,7 +257,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                     }
 
                 }
-                PENDINGType->{
+                PENDINGType -> {
                     pagingViewModel.pendingData.collectLatest {
 
 
@@ -254,7 +267,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                     }
 
                 }
-                REJECTEDType->{
+                REJECTEDType -> {
                     pagingViewModel.rejectData.collectLatest {
                         rejectAdapter.submitData(viewLifecycleOwner.lifecycle, it)
                         Log.d(TAG, "getPost: $it")
@@ -359,7 +372,18 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+
+//        CoroutineScope(Dispatchers.IO).launch {
+//            databaseViewModel.clearAccept()
+//            databaseViewModel.clearReject()
+//            databaseViewModel.clearPending()
+//            databaseViewModel.clearDelete()
+//        }
+    }
 }
+
 
 
 

@@ -16,7 +16,7 @@ import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTED
 import com.study.bamboo.adapter.admin.AdminDeleteAdapter
 import com.study.bamboo.databinding.DeleteDialogBinding
 import com.study.bamboo.view.fragment.admin.AdminViewModel
-import com.study.bamboo.view.fragment.admin.paging.viewModel.PagingPostViewModel
+import com.study.bamboo.data.paging.viewModel.PagingPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -62,33 +62,30 @@ class DeleteDialog : DialogFragment() {
 
         })
 
-        binding.deleteBtn.setOnClickListener {
-
-
-            viewModel.deletePost(
-                token,
-                "왤끼요",
-                args.auth,
-                )
-            deleteAdapter.notifyDataSetChanged()
-            dialog?.hide()
-        }
-
-        binding.rejectBtn.setOnClickListener {
-            val reject = HashMap<String, String>()
-            reject["status"] = REJECTED
-            viewModel.patchPost(
-                token,
-                args.auth,
-                reject,
-            )
-            viewModel.successData.observe(viewLifecycleOwner){
-                if(it){
-                    updateData()
-                }
-            }
-            dialog?.hide()
-        }
+//        binding.deleteBtn.setOnClickListener {
+//
+//
+//            viewModel.deletePost(
+//                token,
+//                "왤끼요",
+//                args.auth,
+//                )
+//            deleteAdapter.deletePost(args.position)
+//
+//            dialog?.hide()
+//        }
+//
+//        binding.rejectBtn.setOnClickListener {
+//            val reject = HashMap<String, String>()
+//            reject["status"] = REJECTED
+//            viewModel.patchPost(
+//                token,
+//                args.auth,
+//                reject,
+//            )
+//            deleteAdapter.updateStatus(args.position,REJECTED)
+//            dialog?.hide()
+//        }
 
 
 

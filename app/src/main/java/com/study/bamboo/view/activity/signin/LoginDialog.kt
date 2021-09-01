@@ -87,11 +87,9 @@ class LoginDialog : DialogFragment() {
 
         })
         signInViewModel.success.observe(viewLifecycleOwner) {
-            if (it) {
+            if (it==true) {
                 val intent = Intent(requireContext(), AdminActivity::class.java)
                 startActivity(intent)
-            } else {
-                Toast.makeText(requireContext(), "비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show()
             }
         }
 

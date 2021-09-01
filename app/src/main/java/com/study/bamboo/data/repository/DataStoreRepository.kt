@@ -1,4 +1,4 @@
-package com.study.bamboo.datastore
+package com.study.bamboo.data.repository
 
 import android.content.Context
 import android.util.Log
@@ -7,7 +7,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.study.bamboo.datastore.DataStoreRepository.PreferencesKeys.dataStoreToken
+import com.study.bamboo.data.repository.DataStoreRepository.PreferencesKeys.dataStoreToken
 import com.study.bamboo.utils.Util.Companion.DEFAULT_TOKEN
 import com.study.bamboo.utils.Util.Companion.PREFERENCES_TOKEN
 import com.study.bamboo.utils.Util.Companion.PREFERENCE_NAME

@@ -10,17 +10,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTED
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTED
 import com.study.bamboo.adapter.admin.AdminPendingAdapter
+import com.study.bamboo.data.paging.viewModel.PagingPostViewModel
 import com.study.bamboo.databinding.PendingDialogBinding
 import com.study.bamboo.view.fragment.admin.AdminViewModel
-import com.study.bamboo.view.fragment.admin.paging.viewModel.PagingPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PendingDialog : DialogFragment() {
@@ -28,11 +25,11 @@ class PendingDialog : DialogFragment() {
     private val binding get() = _binding!!
     private val args by navArgs<PendingDialogArgs>()
     private val viewModel: AdminViewModel by viewModels()
-    private  val pagingViewModel: PagingPostViewModel by viewModels()
-
-    private val pendingAdapter: AdminPendingAdapter by lazy {
-        AdminPendingAdapter()
-    }
+//    private  val pagingViewModel: PagingPostViewModel by viewModels()
+//
+//    private val pendingAdapter: AdminPendingAdapter by lazy {
+//        AdminPendingAdapter()
+//    }
 
 
     override fun onResume() {
@@ -74,12 +71,10 @@ class PendingDialog : DialogFragment() {
                 accepted
             )
 
+//            pendingAdapter.updateStatus(args.position, ACCEPTED)
 
-            viewModel.successData.observe(viewLifecycleOwner){
-                if(it){
-                    updateData()
-                }
-            }
+
+
             dialog?.hide()
         }
 
@@ -93,11 +88,7 @@ class PendingDialog : DialogFragment() {
                 reject,
 
                 )
-            viewModel.successData.observe(viewLifecycleOwner){
-                if(it){
-                    updateData()
-                }
-            }
+//            pendingAdapter.updateStatus(args.position, REJECTED)
             dialog?.hide()
         }
 
@@ -108,14 +99,7 @@ class PendingDialog : DialogFragment() {
         return binding.root
     }
 
-    private fun updateData(){
-        lifecycleScope.launch {
-            pagingViewModel.pendingData .collectLatest{
-                pendingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
-            }
-        }
 
-    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

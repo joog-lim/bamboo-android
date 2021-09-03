@@ -8,10 +8,8 @@ import javax.inject.Inject
 @ActivityRetainedScoped
 class Repository @Inject constructor(
     remoteDataSource: AdminRepository,
-//    localDataSource: AdminLocalRepository,
     dataStore: DataStoreRepository
 ) {
     val remote = remoteDataSource
-//    val local = localDataSource
     val dataStore = dataStore
 }

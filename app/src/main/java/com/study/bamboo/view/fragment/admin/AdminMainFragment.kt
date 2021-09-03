@@ -46,25 +46,9 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
     }
 
-    private var firstStart = true
 
 
-    override fun onResume() {
-        super.onResume()
-        if (firstStart) {
-            binding.progressBar.visibility = View.VISIBLE
-            firstStart = false
-        } else {
-            binding.progressBar.visibility = View.GONE
-        }
-        Log.d("onResume", "onResume")
-    }
 
-
-    override fun onStop() {
-        super.onStop()
-        binding.progressBar.visibility = View.GONE
-    }
 
     private val viewModel: AdminViewModel by viewModels()
     private lateinit var pagingViewModel: PagingPostViewModel
@@ -115,6 +99,8 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
         binding.refreshLayout.setOnRefreshListener{
             acceptAdapter.refresh()
             rejectAdapter.refresh()
+            pendingAdapter.refresh()
+            deleteAdapter.refresh()
             refreshLayout.isRefreshing = false
         }
 

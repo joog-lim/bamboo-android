@@ -23,7 +23,6 @@ class AdminRepository @Inject constructor(
 
     suspend fun transferAdminLogin(password: HashMap<String, String>) = adminApi.transferAdminLogin(password)
 
-    suspend fun getAcceptPost( token:String, count:Int, cursor:String, status:String) =adminApi.getAcceptPost(token,count,cursor,status)
 
 
 

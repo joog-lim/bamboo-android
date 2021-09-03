@@ -27,7 +27,6 @@ class PagingPostViewModel @Inject constructor(
 
     fun getData(token: String, cursor: String, status: String) {
         this.token.value = token
-        this.token.postValue(token)
         this.cursor.value = cursor
     }
     val acceptData = Pager(

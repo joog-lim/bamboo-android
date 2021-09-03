@@ -3,6 +3,7 @@ package com.study.bamboo.data.paging.page
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTED
 import com.study.bamboo.data.network.user.AdminApi
 import com.study.bamboo.utils.Admin
 import retrofit2.HttpException
@@ -24,15 +25,10 @@ class RejectPagingSource @Inject constructor(
             Log.d(TAG, "page : $page")
 
 
-            val response = adminApi.getRejectPost(token, page, cursor, "REJECTED")
+            val response = adminApi.getRejectPost(token, page, cursor, REJECTED)
 
             val data = response.body()?.posts ?: emptyList()
-            Log.d(TAG, "load: ${data[0].status}")
 
-
-//            val totalCount=adminApi.getCount(token)
-//            val countData=totalCount.body()!![0].count
-//            Log.d(AcceptPagingSource.TAG, "totalCount reject: $countData ")
 
             Log.d(TAG, "count: ${response.body()!!.count}")
             Log.d(TAG, "nextPage : ${response.body()!!.hasNext}")

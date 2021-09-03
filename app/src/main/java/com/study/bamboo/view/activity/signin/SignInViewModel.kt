@@ -1,12 +1,12 @@
 package com.study.bamboo.view.activity.signin
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.study.bamboo.data.network.models.user.UserPostDTO
 import com.study.bamboo.data.network.models.user.getcount.GetCount
-import com.study.bamboo.data.network.models.user.postcreate.PostCreateResponse
 import com.study.bamboo.data.repository.remote.AdminRepository
 import com.study.bamboo.view.activity.splash.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -74,9 +74,11 @@ class SignInViewModel @Inject constructor(
 
     fun findAccepted(response: Response<GetCount>): Int {
         var count = 0
-        if (response != null) {
-            for (get in 0..3) {
-                if (response.body()?.get(get)?._id == "ACCEPTED") {
+        if (response.body() != null) {
+            val size : Int = response.body()!!.size
+            Log.i("로그","findAccepted response<GetCount> : ${response.body()?.get(0)?._id}, size : $size")
+            for (get in 0 until  size) {
+                if (response.body()?.get(get)?._id  == "ACCEPTED") {
                     count = response.body()!!.get(get).count
                 }
             }

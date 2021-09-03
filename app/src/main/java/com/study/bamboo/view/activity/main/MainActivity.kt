@@ -29,7 +29,7 @@ class MainActivity : BaseActivity() {
         super.onStart()
         observeViewModel()
         mainViewModel.callGetPost(getPostCountResponse, "", "ACCEPTED")
-        mainViewModel.callGetCount()
+        //mainViewModel.callGetCount()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

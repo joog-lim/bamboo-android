@@ -44,14 +44,14 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun callGetCount() = viewModelScope.launch {
+/*    fun callGetCount() = viewModelScope.launch {
         userRepository.getCount().let { response ->
-            if (response.isSuccessful){
+            if (response.isSuccessful) {
                 _getCountResponse.value = response.body()
-                findAccepted(response.body())
+                findAccepted(response)
             }
         }
-    }
+    }*/
 
     fun getListData(count: Int): Flow<PagingData<UserPostDTO>> {
 
@@ -63,22 +63,25 @@ class MainViewModel @Inject constructor(
 
     }
 
-    fun callGetVerify()= viewModelScope.launch {
+    fun callGetVerify() = viewModelScope.launch {
         userRepository.getVerify().let { response ->
-            if (response.isSuccessful){
+            if (response.isSuccessful) {
                 _getVerifyResponse.value = response.body()
             }
         }
     }
 
-     fun findAccepted(response : GetCount?) : Int{
+/*    fun findAccepted(response: GetCount?): Int {
         var count = 0
-        for (get in 0..3) {
-            if (response?.get(get)?._id == "ACCEPTED") {
-                count = response.get(get).count
+        if (response.body() != null) {
+            for (get in 0..(response.body()?.size ?: 0)) {
+                if (response.body()?.get(get)?._id ?: 0 == "ACCEPTED") {
+                    count = response.body()!!.get(get).count
+                }
             }
         }
+
         return count
-    }
+    }*/
 
 }

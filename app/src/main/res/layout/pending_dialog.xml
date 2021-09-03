@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/accept_btn"
+                    android:id="@+id/pending_btn"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
                     android:textSize="17sp"
                     app:layout_constraintBottom_toBottomOf="parent" />
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/pending_btn"
+                    android:id="@+id/accept_btn"
                     android:layout_width="0dp"
                     android:layout_weight="1"                        android:layout_height="wrap_content"
                     android:background="@color/main_color"

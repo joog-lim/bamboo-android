@@ -60,7 +60,7 @@ class DeleteDialog : DialogFragment() {
 
             viewModel.deletePost(
                 token,
-                "왤끼요",
+                binding.deleteWhy.text.toString(),
                 args.auth,
             )
             viewModel.successPatchData.observe(viewLifecycleOwner){

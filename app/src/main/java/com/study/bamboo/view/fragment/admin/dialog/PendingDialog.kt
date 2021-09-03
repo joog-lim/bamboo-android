@@ -13,8 +13,6 @@ import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.navArgs
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTED
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTED
-import com.study.bamboo.adapter.admin.AdminPendingAdapter
-import com.study.bamboo.data.paging.viewModel.PagingPostViewModel
 import com.study.bamboo.databinding.PendingDialogBinding
 import com.study.bamboo.view.fragment.admin.AdminViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,11 +23,6 @@ class PendingDialog : DialogFragment() {
     private val binding get() = _binding!!
     private val args by navArgs<PendingDialogArgs>()
     private val viewModel: AdminViewModel by viewModels()
-//    private  val pagingViewModel: PagingPostViewModel by viewModels()
-//
-//    private val pendingAdapter: AdminPendingAdapter by lazy {
-//        AdminPendingAdapter()
-//    }
 
 
     override fun onResume() {
@@ -71,11 +64,11 @@ class PendingDialog : DialogFragment() {
                 accepted
             )
 
-//            pendingAdapter.updateStatus(args.position, ACCEPTED)
+          dialog?.hide()
 
 
 
-            dialog?.hide()
+
         }
 
 
@@ -88,8 +81,7 @@ class PendingDialog : DialogFragment() {
                 reject,
 
                 )
-//            pendingAdapter.updateStatus(args.position, REJECTED)
-            dialog?.hide()
+        dialog?.hide()
         }
 
 
@@ -107,5 +99,7 @@ class PendingDialog : DialogFragment() {
 
     companion object {
         const val TAG = "LoginDialog"
+
+
     }
 }

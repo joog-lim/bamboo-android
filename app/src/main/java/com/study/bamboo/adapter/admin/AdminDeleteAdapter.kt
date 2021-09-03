@@ -51,19 +51,7 @@ class AdminDeleteAdapter :
         }
 
     }
-//    fun updateStatus(
-//        position: Int,
-//        status: String
-//    ) {
-//        snapshot()[position]?.status = status
-//    }
-//
-//    fun deletePost(
-//        position: Int
-//    ) {
-//        snapshot().toMutableList().apply { removeAt(position) }
-//        notifyItemChanged(position)
-//    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdminDeleteItemViewHolder {
         return AdminDeleteItemViewHolder.from(parent)

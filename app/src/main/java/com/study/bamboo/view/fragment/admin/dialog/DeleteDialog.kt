@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
@@ -14,6 +15,7 @@ import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.navArgs
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTED
 import com.study.bamboo.databinding.DeleteDialogBinding
+import com.study.bamboo.view.activity.signin.SignInActivity
 import com.study.bamboo.view.fragment.admin.AdminViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,7 +31,7 @@ class DeleteDialog : DialogFragment() {
     override fun onResume() {
         super.onResume()
         dialogCorner()
-
+        initDialog()
     }
 
     private var token = ""
@@ -89,7 +91,16 @@ class DeleteDialog : DialogFragment() {
         return binding.root
     }
 
+    private fun initDialog() {
+        //        //디바이스 크기 확인후 커스텀 다이어로그 팝업 크기 조정
+        val params: ViewGroup.LayoutParams? = dialog?.window?.attributes
+        val deviceWidth = SignInActivity.deviceSizeX
+        Log.d("로그","acceptDialog : $deviceWidth")
+        params?.width = (deviceWidth * 0.9).toInt()
 
+
+        dialog?.window?.attributes = params as WindowManager.LayoutParams
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

@@ -15,38 +15,39 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="제목"
-            app:layout_constraintBottom_toTopOf="@+id/update_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/update_content" />
 
         <EditText
             android:id="@+id/update_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="내용"
-            app:layout_constraintBottom_toTopOf="@+id/update_tag"
-            app:layout_constraintEnd_toEndOf="@+id/update_title"
-            app:layout_constraintStart_toStartOf="@+id/update_title" />
+            app:layout_constraintBottom_toTopOf="@+id/update_tag" />
 
-        <EditText
+        <Spinner
             android:id="@+id/update_tag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:entries="@array/PostCreateTagList"
             android:hint="태그"
-            app:layout_constraintBottom_toTopOf="@+id/accept_btn"
-            app:layout_constraintEnd_toEndOf="@+id/update_content"
-            app:layout_constraintStart_toStartOf="@+id/update_content" />
+            app:layout_constraintBottom_toTopOf="@+id/update_tag_text" />
+
+
+        <TextView
+            android:id="@+id/update_tag_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ㅇㅇ"
+            app:layout_constraintBottom_toTopOf="@+id/accept_btn" />
 
         <androidx.appcompat.widget.AppCompatButton
-
             android:id="@+id/accept_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="수정"
-            app:layout_constraintTop_toBottomOf="@id/update_tag"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/update_content"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 

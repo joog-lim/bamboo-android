@@ -34,12 +34,7 @@ class AdminRejectAdapter :
 
         }
     }
-//    fun updateStatus(
-//        position: Int,
-//        status: String
-//    ) {
-//        snapshot()[position]?.status = status
-//    }
+
 
     //거부
     class AdminRejectItemViewHolder(val binding: AdminPostRejectRecyclerItemBinding) :
@@ -66,7 +61,9 @@ class AdminRejectAdapter :
 
     override fun onBindViewHolder(holder: AdminRejectItemViewHolder, position: Int) {
         val item=getItem(position)
+
         if(item!=null) {
+
             holder.bind(item)
             holder.binding.postMore.setOnClickListener {
                 val action =

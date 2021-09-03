@@ -16,8 +16,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_alignParentTop="true">
+            android:layout_alignParentTop="true"
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/top_layout"
@@ -61,13 +61,14 @@
 
 
                 <LinearLayout
+                    android:id="@+id/linearLayout4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
+                    android:layout_marginRight="13dp"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:layout_marginRight="13dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -94,16 +95,28 @@
                         android:entries="@array/AdminItemList" />
 
                 </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/update_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="새로고침"
+                    app:layout_constraintEnd_toStartOf="@+id/linearLayout4" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/refresh_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/post_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/admin_post_accepted_recycler_item"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/top_layout" />
+                app:layout_constraintTop_toBottomOf="@+id/top_layout"
+                tools:listitem="@layout/admin_post_accepted_recycler_item" />
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         </LinearLayout>
 
     </RelativeLayout>

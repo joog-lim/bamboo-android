@@ -1,10 +1,8 @@
 package com.study.bamboo.view.activity.main
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -13,22 +11,25 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.study.bamboo.R
+import com.study.bamboo.base.BaseActivity
 import com.study.bamboo.databinding.ActivityMainBinding
-import com.study.bamboo.view.fragment.user.UserMainFragment
+import com.study.bamboo.view.activity.signin.SignInActivity.Companion.getPostCountResponse
 import dagger.hilt.android.AndroidEntryPoint
 
 // ViewBinding
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     lateinit var navi: BottomNavigationView
     private lateinit var navController: NavController
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val mainViewModel by viewModels<MainViewModel>()
 
+
     override fun onStart() {
         super.onStart()
         observeViewModel()
-        mainViewModel.callGetPost(20, "60b8407473d81a1b4cc591a5", "PENDING")
+        mainViewModel.callGetPost(getPostCountResponse, "", "ACCEPTED")
+        mainViewModel.callGetCount()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,13 +51,14 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navi.setupWithNavController(navController)
 
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    private fun observeViewModel(){
+    private fun observeViewModel() {
         mainViewModel.getPostResponse.observe(this, Observer {
 
         })

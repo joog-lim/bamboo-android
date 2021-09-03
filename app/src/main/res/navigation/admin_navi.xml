@@ -49,6 +49,9 @@
         <argument
             android:name="position"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_pendingDialog_to_adminMainFragment"
+            app:destination="@id/adminMainFragment" />
 
     </dialog>
 
@@ -64,6 +67,9 @@
         <argument
             android:name="position"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_deleteDialog_to_adminMainFragment"
+            app:destination="@id/adminMainFragment" />
     </dialog>
     <dialog
         android:id="@+id/rejectCancelDialog"
@@ -77,6 +83,9 @@
         <argument
             android:name="position"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_rejectCancelDialog_to_adminMainFragment"
+            app:destination="@id/adminMainFragment" />
 
     </dialog>
 
@@ -92,6 +101,9 @@
         <argument
             android:name="position"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_acceptDialog_to_adminMainFragment"
+            app:destination="@id/adminMainFragment" />
 
 
     </dialog>

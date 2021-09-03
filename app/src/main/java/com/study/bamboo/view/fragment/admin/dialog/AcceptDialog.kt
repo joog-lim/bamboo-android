@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.AdapterView
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
@@ -154,6 +155,10 @@ class AcceptDialog : DialogFragment() {
                 args.auth,
                 bodySend()
             )
+
+            viewModel.successAcceptData.observe(viewLifecycleOwner){
+                Toast.makeText(requireContext(),it,Toast.LENGTH_SHORT).show()
+            }
 
             dialog?.hide()
 

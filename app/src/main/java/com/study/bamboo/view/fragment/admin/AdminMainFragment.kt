@@ -115,6 +115,9 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
         binding.updateBtn.setOnClickListener{
             acceptAdapter.refresh()
+            rejectAdapter.refresh()
+            pendingAdapter.refresh()
+            deleteAdapter.refresh()
         }
 
         observeUiPreferences()

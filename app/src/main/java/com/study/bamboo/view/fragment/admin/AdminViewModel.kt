@@ -71,7 +71,7 @@ class AdminViewModel @Inject constructor(
                 val beforeStatus = response.body()?.beforeStatus
                 val afterStatus = response.body()?.afterStatus
                 if (response.isSuccessful) {
-                    _successPatchData.value = "$beforeStatus status 를 $afterStatus 로 바꾸었습니다."
+                    _successPatchData.value = "$beforeStatus 상태를 $afterStatus 로 바꾸었습니다."
 
                     Log.d(TAG, "patchPost: 성공!")
                 }else{

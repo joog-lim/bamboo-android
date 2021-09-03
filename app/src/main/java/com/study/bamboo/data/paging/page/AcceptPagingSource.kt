@@ -36,6 +36,8 @@ class AcceptPagingSource @Inject constructor(
 //            val countData=totalCount.body()!![3].count
 //            Log.d(TAG, "totalCount accept: $countData ")
 
+            Log.d(TAG, "load: $page")
+
             val response = adminApi.getAcceptPost(token, page, cursor, ACCEPTED)
 
             val data = response.body()?.posts ?: emptyList()
@@ -43,7 +45,7 @@ class AcceptPagingSource @Inject constructor(
 
             LoadResult.Page(
                 data = data,
-                prevKey = if (page == 0) null else page.minus(20),
+                prevKey = null,
                 nextKey = page.plus(20)
             )
 
@@ -63,10 +65,10 @@ class AcceptPagingSource @Inject constructor(
     }
 
     override fun getRefreshKey(state: PagingState<Int, Admin.Accept>): Int? {
-        Log.d(TAG, "getRefreshKey: ")
+        Log.d(TAG, "getRefreshKey:${state.anchorPosition} ")
         return state.anchorPosition?.let { anchorPosition ->
-            val anchorPage = state.closestPageToPosition(anchorPosition)
-            anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
+            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(20)
+                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(20)
         }
 
     }

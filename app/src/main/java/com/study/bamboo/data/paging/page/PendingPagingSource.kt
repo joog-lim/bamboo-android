@@ -26,9 +26,9 @@ class PendingPagingSource @Inject constructor(
 
 
             val response = adminApi.getPendingPost(token, page, cursor, "PENDING")
-            val totalCount=adminApi.getCount(token)
-            val countData=totalCount.body()!![2].count
-            Log.d(AcceptPagingSource.TAG, "totalCount pending: $countData ")
+//            val totalCount=adminApi.getCount(token)
+//            val countData=totalCount.body()!![2].count
+//            Log.d(AcceptPagingSource.TAG, "totalCount pending: $countData ")
             val data = response.body()?.posts ?: emptyList()
 
 
@@ -36,7 +36,7 @@ class PendingPagingSource @Inject constructor(
             Log.d(TAG, "nextPage : ${response.body()!!.hasNext}")
             LoadResult.Page(
                 data = data,
-                prevKey = if (page == 0) null else page.minus(20),
+                prevKey =null,
                 nextKey =page.plus(20)
             )
 
@@ -57,8 +57,8 @@ class PendingPagingSource @Inject constructor(
 
     override fun getRefreshKey(state: PagingState<Int, Admin.Pending>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
-            val anchorPage = state.closestPageToPosition(anchorPosition)
-            anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
+            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
+                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
         }
 
     }

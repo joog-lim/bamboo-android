@@ -30,14 +30,14 @@ class DeletePagingSource @Inject constructor(
 
             val data = response.body()!!.posts
 
-            val totalCount = adminApi.getCount(token)
+//            val totalCount = adminApi.getCount(token)
 
-            val countData = totalCount.body()!![1].count
-            Log.d(AcceptPagingSource.TAG, "totalCount delete: $countData ")
+//            val countData = totalCount.body()!![1].count
+//            Log.d(AcceptPagingSource.TAG, "totalCount delete: $countData ")
             Log.d(TAG, "nextPage : ${response.body()!!.hasNext}")
             LoadResult.Page(
                 data = data,
-                prevKey = if (page == 0) null else page.minus(20),
+                prevKey =null,
                 nextKey = page.plus(20)
             )
 

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.study.bamboo.data.network.models.admin.AcceptModify
 import com.study.bamboo.data.repository.Repository
+import com.study.bamboo.utils.Admin
 import com.study.bamboo.utils.Util.Companion.DEFAULT_TOKEN
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -25,19 +26,11 @@ class AdminViewModel @Inject constructor(
     private val TAG = "AdminViewModel"
 
 
-    private val _patchPostData = MutableLiveData<AcceptModify>()
-    val patchPostDto: LiveData<AcceptModify> get() = _patchPostData
-
-    private val _successData = MutableLiveData<Boolean>()
-    val successData: LiveData<Boolean> get() = _successData
 
     private val _cursor = MutableLiveData<String>()
     val cursor: LiveData<String> get() = _cursor
 
-    init {
-        _successData.value = false
-        _cursor.value=""
-    }
+
 
     // 토큰을 저장한다.
     fun saveToken(token: String) =
@@ -56,8 +49,10 @@ class AdminViewModel @Inject constructor(
         repository.remote.acceptPatchPost(token, id, bodyMap).let { response ->
 
             if (response.isSuccessful) {
-                _successData.value = true
-                _patchPostData.value = response.body()
+                Log.d(TAG, "acceptPatchPost: 성공")
+
+            }else{
+                Log.d(TAG, "acceptPatchPost: ${response.message()}")
             }
         }
     }
@@ -69,9 +64,9 @@ class AdminViewModel @Inject constructor(
                 if (it.isSuccessful) {
 
                     Log.d(TAG, "patchPost: 성공!")
-                    _successData.value = true
                 }
-                it.errorBody()
+
+                Log.d(TAG, "patchPost: ${it.errorBody()}")
             }
         }
 
@@ -86,19 +81,9 @@ class AdminViewModel @Inject constructor(
         }
     }
 
-//    fun getPost(token: String, count: Int, cursor: String,status:String) = viewModelScope.launch {
-//        repository.remote.getAcceptPost(token, count, cursor, status).let { response ->
-//
-//
-//            if (response.isSuccessful) {
-//                response.body()?.posts?.filter {it.status==status  }.apply {
-//                    _cursor.value = response.body()?.cursor
-//                }
-//            } else {
-//                Log.d(TAG, "deletePost: ${response.errorBody()}")
-//            }
-//        }
-//    }
+
+
+
 
 
 }

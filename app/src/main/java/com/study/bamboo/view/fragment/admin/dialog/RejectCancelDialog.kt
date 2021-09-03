@@ -1,5 +1,6 @@
 package com.study.bamboo.view.fragment.admin.dialog
 
+
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -10,19 +11,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.study.bamboo.adapter.admin.AdminAcceptAdapter
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTED
 import com.study.bamboo.adapter.admin.AdminRejectAdapter
-
-
+import com.study.bamboo.data.paging.viewModel.PagingPostViewModel
 import com.study.bamboo.databinding.RejectCancelDialogBinding
 import com.study.bamboo.view.fragment.admin.AdminViewModel
-import com.study.bamboo.data.paging.viewModel.PagingPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RejectCancelDialog : DialogFragment() {
@@ -30,10 +25,7 @@ class RejectCancelDialog : DialogFragment() {
     private val binding get() = _binding!!
     private val args by navArgs<RejectCancelDialogArgs>()
     private val viewModel: AdminViewModel by viewModels()
-    private val pagingViewModel: PagingPostViewModel by viewModels()
-    private val rejectAdapter: AdminRejectAdapter by lazy {
-        AdminRejectAdapter()
-    }
+
 
     override fun onResume() {
         super.onResume()
@@ -59,8 +51,7 @@ class RejectCancelDialog : DialogFragment() {
 
         viewModel.readToken.asLiveData().observe(viewLifecycleOwner, {
             token = it.token
-            Log.d(TAG, "onCreateView: ${args.auth}")
-            Log.d(TAG, "observeUiPreferences: ${it.token}")
+
 
         })
 
@@ -75,7 +66,7 @@ class RejectCancelDialog : DialogFragment() {
                 accept,
 
                 )
-//            rejectAdapter.updateStatus(args.position, ACCEPTED)
+
             dialog?.hide()
         }
 
@@ -86,14 +77,7 @@ class RejectCancelDialog : DialogFragment() {
         return binding.root
     }
 
-    private fun updateData() {
-        lifecycleScope.launch {
-            pagingViewModel.rejectData.collectLatest {
-                rejectAdapter.submitData(viewLifecycleOwner.lifecycle, it)
-            }
 
-        }
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

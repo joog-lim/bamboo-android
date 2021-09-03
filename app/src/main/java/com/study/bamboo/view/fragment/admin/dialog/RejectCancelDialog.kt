@@ -79,7 +79,7 @@ class RejectCancelDialog : DialogFragment() {
 
                 )
             viewModel.successPatchData.observe(viewLifecycleOwner){
-                Toast.makeText(requireContext(),it, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),it, Toast.LENGTH_LONG).show()
             }
 
             dialog?.hide()

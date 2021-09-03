@@ -99,7 +99,9 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/update_btn"
                     android:layout_width="wrap_content"
+                    android:layout_marginRight="10dp"
                     android:layout_height="match_parent"
+                    android:background="@drawable/refresh_btn"
                     android:text="새로고침"
                     app:layout_constraintEnd_toStartOf="@+id/linearLayout4" />
             </androidx.constraintlayout.widget.ConstraintLayout>

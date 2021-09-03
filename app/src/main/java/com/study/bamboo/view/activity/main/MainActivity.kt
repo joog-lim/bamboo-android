@@ -1,5 +1,6 @@
 package com.study.bamboo.view.activity.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.study.bamboo.R
 import com.study.bamboo.base.BaseActivity
 import com.study.bamboo.databinding.ActivityMainBinding
+import com.study.bamboo.view.activity.signin.SignInActivity
 import com.study.bamboo.view.activity.signin.SignInActivity.Companion.getPostCountResponse
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -62,6 +64,13 @@ class MainActivity : BaseActivity() {
         mainViewModel.getPostResponse.observe(this, Observer {
 
         })
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this, SignInActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
 

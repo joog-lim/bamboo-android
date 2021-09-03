@@ -15,8 +15,9 @@ import com.study.bamboo.view.fragment.admin.AdminMainFragmentDirections
 // TODO: 2021-08-16 어댑터를 나누자 각각의 상황에맞게
 
 
-class AdminAcceptAdapter(
-) :
+class AdminAcceptAdapter
+
+ :
     PagingDataAdapter<Admin.Accept, AdminAcceptAdapter.AdminAcceptItemViewHolder>(diffCallback) {
 
     companion object {
@@ -35,10 +36,10 @@ class AdminAcceptAdapter(
         private val diffCallback = object : DiffUtil.ItemCallback<Admin.Accept>() {
             override fun areItemsTheSame(oldItem: Admin.Accept, newItem: Admin.Accept): Boolean =
 
-                oldItem.id == newItem.id
+                oldItem == newItem
 
             override fun areContentsTheSame(oldItem: Admin.Accept, newItem: Admin.Accept): Boolean =
-                oldItem.content == newItem.content
+                oldItem == newItem
         }
     }
 
@@ -51,7 +52,9 @@ class AdminAcceptAdapter(
         fun bind(data: Admin.Accept) {
             binding.data = data
             binding.executePendingBindings()
+
         }
+
 
         companion object {
             fun from(parent: ViewGroup): AdminAcceptItemViewHolder {
@@ -75,38 +78,6 @@ class AdminAcceptAdapter(
 
     }
 
-//    fun markItemAsRead(
-//        position: Int,
-//        patchModify: Admin.Accept
-//    ) {
-//
-//        try{
-//            if(snapshot().size.toString().isNotEmpty()){
-//                Log.d(TAG, "markItemAsRead: 성공")
-//                Log.d(TAG, "markItemAsRead: 성공 id ${snapshot().size}")
-//                Log.d(TAG, "markItemAsRead: 성공 id ${ snapshot()[position]?.id}")
-//                Log.d(TAG, "markItemAsRead: 성공 id ${patchModify.id}")
-//                Log.d(TAG, "markItemAsRead: 성공 id ${patchModify.id}")
-//                Log.d(TAG, "markItemAsRead: 성공 id ${patchModify.id}")
-//                Log.d(TAG, "markItemAsRead: 성공 id ${patchModify.id}")
-//                Log.d(TAG, "markItemAsRead: 성공 id ${patchModify.id}")
-//
-//                snapshot()[position]?.id = patchModify.id
-//            snapshot()[position]?.content = patchModify.content
-//            snapshot()[position]?.createdAt = patchModify.createdAt
-//            snapshot()[position]?.number = patchModify.number
-//            snapshot()[position]?.status = patchModify.status
-//            snapshot()[position]?.tag = patchModify.tag
-//            snapshot()[position]?.title = patchModify.title
-//            notifyItemChanged(position)
-//        }else{
-//                Log.d(TAG, "markItemAsRead: ${snapshot().size} 은 null 입니다")
-//            }
-//        }
-//        catch (e:Exception){
-//            Log.d(TAG, "markItemAsRead: $e")
-//        }
-//    }
 
     override fun onBindViewHolder(holder: AdminAcceptItemViewHolder, position: Int) {
         val item = getItem(position)

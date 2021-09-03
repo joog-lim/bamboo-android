@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.AdapterView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
@@ -14,6 +15,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.study.bamboo.databinding.AcceptDialogBinding
+import com.study.bamboo.view.activity.signin.SignInActivity.Companion.deviceSizeX
 import com.study.bamboo.view.fragment.admin.AdminViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -36,6 +38,7 @@ class AcceptDialog : DialogFragment() {
     override fun onResume() {
         super.onResume()
         dialogCorner()
+        initDialog()
 
     }
 
@@ -75,6 +78,17 @@ class AcceptDialog : DialogFragment() {
 
 
         return binding.root
+    }
+
+    private fun initDialog() {
+        //        //디바이스 크기 확인후 커스텀 다이어로그 팝업 크기 조정
+        val params: ViewGroup.LayoutParams? = dialog?.window?.attributes
+        val deviceWidth = deviceSizeX
+        Log.d("로그","acceptDialog : $deviceWidth")
+            params?.width = (deviceWidth * 0.9).toInt()
+
+
+        dialog?.window?.attributes = params as WindowManager.LayoutParams
     }
 
     fun spinnerText() {

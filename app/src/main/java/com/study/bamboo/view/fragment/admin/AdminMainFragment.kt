@@ -1,10 +1,14 @@
 package com.study.bamboo.view.fragment.admin
 
+import android.content.Context
+import android.graphics.Point
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
@@ -29,6 +33,7 @@ import com.study.bamboo.base.BaseFragment
 import com.study.bamboo.data.paging.viewModel.PagingPostViewModel
 import com.study.bamboo.databinding.FragmentAdminMainBinding
 import com.study.bamboo.utils.LinearLayoutManagerWrapper
+import com.study.bamboo.view.fragment.admin.dialog.AcceptDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
@@ -52,6 +57,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
     private val viewModel: AdminViewModel by viewModels()
     private lateinit var pagingViewModel: PagingPostViewModel
+    private lateinit var acceptDialog:AcceptDialog
 
 
     private  val acceptAdapter: AdminAcceptAdapter by lazy{
@@ -87,6 +93,9 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
     @ExperimentalPagingApi
     override fun FragmentAdminMainBinding.onCreateView() {
+
+        acceptDialog = AcceptDialog()
+
         binding.activitySpinner.adapter = ArrayAdapter.createFromResource(
             requireContext(),
             R.array.AdminItemList,
@@ -107,6 +116,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
         binding.updateBtn.setOnClickListener{
             acceptAdapter.refresh()
         }
+
         observeUiPreferences()
         spinnerContact()
         setItemAdapter(ACCEPTEDType)

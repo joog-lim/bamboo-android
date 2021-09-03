@@ -15,6 +15,7 @@ import com.study.bamboo.R
 import com.study.bamboo.databinding.ActivitySignInBinding
 import com.study.bamboo.view.activity.main.MainActivity
 import com.study.bamboo.base.BaseActivity
+import com.study.bamboo.view.fragment.admin.dialog.AcceptDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -27,6 +28,7 @@ class SignInActivity : BaseActivity() {
 
     companion object{
         var getPostCountResponse = 0
+        var deviceSizeX : Int = 0
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,7 +53,8 @@ class SignInActivity : BaseActivity() {
         val display = windowManager.defaultDisplay
         val size = Point()
         display.getSize(size)
-        initBundle(size.x)
+        deviceSizeX = size.x
+        initBundle(deviceSizeX)
     }
 
     private fun initBundle(display_size_x: Int) {

@@ -11,6 +11,7 @@ import com.study.bamboo.R
 import com.study.bamboo.databinding.AdminPostAcceptedRecyclerItemBinding
 import com.study.bamboo.utils.Admin
 import com.study.bamboo.view.fragment.admin.AdminMainFragmentDirections
+import com.study.bamboo.view.fragment.admin.dialog.AcceptDialog
 
 // TODO: 2021-08-16 어댑터를 나누자 각각의 상황에맞게
 

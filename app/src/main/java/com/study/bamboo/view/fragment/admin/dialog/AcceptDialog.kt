@@ -7,13 +7,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.study.bamboo.adapter.admin.AdminAcceptAdapter
-import com.study.bamboo.data.paging.viewModel.PagingPostViewModel
 import com.study.bamboo.databinding.AcceptDialogBinding
 import com.study.bamboo.view.fragment.admin.AdminViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,15 +21,17 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AcceptDialog : DialogFragment() {
+
     private var _binding: AcceptDialogBinding? = null
     private val binding get() = _binding!!
     private val args by navArgs<AcceptDialogArgs>()
     private val viewModel: AdminViewModel by viewModels()
-//    private val pagingViewModel: PagingPostViewModel by viewModels()
-//    private val acceptAdapter: AdminAcceptAdapter by lazy {
-//        AdminAcceptAdapter()
-//    }
+
     private var job: Job? = null
+
+
+
+
 
     override fun onResume() {
         super.onResume()
@@ -53,7 +54,7 @@ class AcceptDialog : DialogFragment() {
     ): View {
         _binding = AcceptDialogBinding.inflate(inflater, container, false)
 
-
+        spinnerText()
 
         viewModel.readToken.asLiveData().observe(viewLifecycleOwner, {
             token = it.token
@@ -65,7 +66,6 @@ class AcceptDialog : DialogFragment() {
         binding.acceptBtn.setOnClickListener {
 
             updatePost()
-            dialog?.hide()
 
         }
 
@@ -77,9 +77,62 @@ class AcceptDialog : DialogFragment() {
         return binding.root
     }
 
+    fun spinnerText() {
+        binding.updateTag.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                when (position) {
+                    0 -> {
+                        binding.updateTagText.text = "태그선택"
+                    }
+                    1 -> {
+                        binding.updateTagText.text = "유머"
+
+                    }
+                    2 -> {
+                        binding.updateTagText.text = "공부"
+
+                    }
+                    3 -> {
+                        binding.updateTagText.text = "일상"
+
+                    }
+                    4 -> {
+                        binding.updateTagText.text = "학교"
+
+                    }
+                    5 -> {
+                        binding.updateTagText.text = "취업"
+
+                    }
+                    6 -> {
+                        binding.updateTagText.text = "관계"
+
+                    }
+                    7 -> {
+                        binding.updateTagText.text = "기타"
+
+                    }
+                    else -> {
+                        binding.updateTagText.text = "태그선택"
+                    }
+                }
+
+            }
+        }
+
+
+    }
 
     private fun updatePost() {
-        job?.cancel()
         job = lifecycleScope.launch {
 
             viewModel.acceptPatchPost(
@@ -87,31 +140,24 @@ class AcceptDialog : DialogFragment() {
                 args.auth,
                 bodySend()
             )
+
+            dialog?.hide()
+
+
         }
 
-//        viewModel.patchPostDto.observe(viewLifecycleOwner, {
-//
-//            val adminAccept = Admin.Accept(
-//                it.content, it.createdAt, it.id, it.number, it.status, it.tag, it.title
-//            )
-//            pagingViewModel.onViewEvent(SampleViewEvents.Edit(adminAccept))
-//
-//            pagingViewModel.pagingDataViewStates.observe(viewLifecycleOwner, Observer { pagingData ->
-//                acceptAdapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
-//            })
-//            acceptAdapter.markItemAsRead(args.position,adminAccept)
-//
-//
-//        })
 
     }
+
+
+
 
 
     private fun bodySend(): HashMap<String, String> {
         val accepted: HashMap<String, String> = HashMap()
         accepted["title"] = binding.updateTitle.text.toString()
         accepted["content"] = binding.updateContent.text.toString()
-        accepted["tag"] = binding.updateTag.text.toString()
+        accepted["tag"] = binding.updateTagText.text.toString()
 
         return accepted
     }

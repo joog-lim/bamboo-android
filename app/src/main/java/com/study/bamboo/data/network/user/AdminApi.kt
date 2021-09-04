@@ -9,12 +9,11 @@ interface AdminApi {
 
 
     //게시물 삭제
-    @FormUrlEncoded
     @HTTP(method = "DELETE", path = "post/{id}/delete", hasBody = true)
     suspend fun deletePost(
         @Header("Authorization") Authorization: String,
         @Path("id") arg: String,
-        @Field("reason") reason: String,
+        @Body reason: HashMap<String, String>,
     ): Response<DeletePostDto>
 
     //게시물 상태 수정 가능(수락 상태, 거절 상태 등)

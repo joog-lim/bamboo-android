@@ -58,11 +58,11 @@ class DeleteDialog : DialogFragment() {
         })
 
         binding.deleteBtn.setOnClickListener {
-
-
+            val reason: HashMap<String, String> = HashMap()
+            reason["reason"] = binding.deleteWhy.text.toString()
             viewModel.deletePost(
                 token,
-                binding.deleteWhy.text.toString(),
+                reason,
                 args.auth,
             )
             viewModel.successPatchData.observe(viewLifecycleOwner){

@@ -40,11 +40,15 @@ class AcceptPagingSource @Inject constructor(
 
             val response = adminApi.getAcceptPost(token, page, cursor, ACCEPTED)
 
-            val data = response.body()?.posts ?: emptyList()
+            Log.d(TAG, "load sortBy: ${ response.body()?.posts?.sortedBy { it.number }}")
 
+
+
+            val data = response.body()?.posts ?: emptyList()
+            data.sortedBy { it.number }
 
             LoadResult.Page(
-                data = data,
+                data = data.sortedByDescending { it.number },
                 prevKey = null,
                 nextKey = page.plus(20)
             )

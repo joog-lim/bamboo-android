@@ -1,19 +1,17 @@
 package com.study.bamboo.view.fragment.admin
 
-import android.content.Context
-import android.graphics.Point
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.study.bamboo.R
 import com.study.bamboo.adapter.PostLoadingAdapter
@@ -35,7 +33,6 @@ import com.study.bamboo.databinding.FragmentAdminMainBinding
 import com.study.bamboo.utils.LinearLayoutManagerWrapper
 import com.study.bamboo.view.fragment.admin.dialog.AcceptDialog
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -52,15 +49,12 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
     }
 
 
-
-
-
     private val viewModel: AdminViewModel by viewModels()
     private lateinit var pagingViewModel: PagingPostViewModel
-    private lateinit var acceptDialog:AcceptDialog
+    private lateinit var acceptDialog: AcceptDialog
 
 
-    private  val acceptAdapter: AdminAcceptAdapter by lazy{
+    private val acceptAdapter: AdminAcceptAdapter by lazy {
         AdminAcceptAdapter()
     }
 
@@ -79,7 +73,6 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
         AdminPendingAdapter()
     }
-    private var job: Job? = null
 
     var status: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,6 +86,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
     @ExperimentalPagingApi
     override fun FragmentAdminMainBinding.onCreateView() {
+        setItemAdapter(ACCEPTEDType)
 
         acceptDialog = AcceptDialog()
 
@@ -105,7 +99,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
 
 
-        binding.refreshLayout.setOnRefreshListener{
+        binding.refreshLayout.setOnRefreshListener {
             acceptAdapter.refresh()
             rejectAdapter.refresh()
             pendingAdapter.refresh()
@@ -113,16 +107,16 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
             refreshLayout.isRefreshing = false
         }
 
-        binding.updateBtn.setOnClickListener{
+        binding.updateBtn.setOnClickListener {
             acceptAdapter.refresh()
             rejectAdapter.refresh()
             pendingAdapter.refresh()
             deleteAdapter.refresh()
         }
 
+
         observeUiPreferences()
         spinnerContact()
-        setItemAdapter(ACCEPTEDType)
 
 
     }
@@ -238,9 +232,6 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
     }
 
 
-
-
-
     // paging에 먼저 피마리터 값 보내줌
     private fun observeGetData(token: String, cursor: String, status: String) {
         pagingViewModel.getData(token, cursor, status)
@@ -254,7 +245,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
         if (view != null) {
             when (viewType) {
                 ACCEPTEDType -> {
-                    job = lifecycleScope.launch {
+                   lifecycleScope.launch {
                         pagingViewModel.acceptData.collectLatest {
                             acceptAdapter.submitData(it)
                         }
@@ -264,7 +255,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
                 }
                 DELETEDType -> {
-                    job = lifecycleScope.launch {
+                    lifecycleScope.launch {
                         pagingViewModel.deleteData.collectLatest {
                             deleteAdapter.submitData(it)
                             Log.d(TAG, "getPost: $it")
@@ -275,7 +266,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                 }
                 PENDINGType -> {
 
-                    job = lifecycleScope.launch {
+                     lifecycleScope.launch {
                         pagingViewModel.pendingData.collectLatest {
                             pendingAdapter.submitData(it)
                         }
@@ -286,7 +277,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                 }
                 REJECTEDType -> {
 
-                    job = lifecycleScope.launch {
+                     lifecycleScope.launch {
 
                         pagingViewModel.rejectData.collectLatest {
                             rejectAdapter.submitData(it)
@@ -332,6 +323,95 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
     }
 
+    private fun stateAdapter(adapter: PagingDataAdapter<*, *>) {
+
+        when (adapter) {
+            acceptAdapter -> {
+                acceptAdapter.addLoadStateListener { combinedLoadStates ->
+                    if (combinedLoadStates.append.endOfPaginationReached
+                        && acceptAdapter.itemCount < 1
+                    ) {
+                        binding.postRecyclerView.isVisible = false
+                        binding.notFoundBtn.isVisible = true
+                        binding.notFoundImg.isVisible = true
+                        binding.notFoundText.isVisible = true
+                        retrySetButton(acceptAdapter)
+
+                    } else {
+                        binding.postRecyclerView.isVisible = true
+                        binding.notFoundBtn.isVisible = false
+                        binding.notFoundImg.isVisible = false
+                        binding.notFoundText.isVisible = false
+                    }
+
+                }
+            }
+            pendingAdapter -> {
+                pendingAdapter.addLoadStateListener { combinedLoadStates ->
+                    if ( pendingAdapter.itemCount < 1
+                    ) {
+                        Log.d(TAG, "stateAdapter: pendingAdapter")
+                        binding.postRecyclerView.isVisible = false
+                        binding.notFoundBtn.isVisible = true
+                        binding.notFoundImg.isVisible = true
+                        binding.notFoundText.isVisible = true
+                        retrySetButton(pendingAdapter)
+
+                    } else {
+                        binding.postRecyclerView.isVisible = true
+                        binding.notFoundBtn.isVisible = false
+                        binding.notFoundImg.isVisible = false
+                        binding.notFoundText.isVisible = false
+                    }
+
+                }
+            }
+            rejectAdapter -> {
+                rejectAdapter.addLoadStateListener { combinedLoadStates ->
+                    if (rejectAdapter.itemCount < 1
+                    ) {
+                        binding.postRecyclerView.isVisible = false
+                        binding.notFoundBtn.isVisible = true
+                        binding.notFoundImg.isVisible = true
+                        binding.notFoundText.isVisible = true
+                        retrySetButton(rejectAdapter)
+
+                    } else {
+                        binding.postRecyclerView.isVisible = true
+                        binding.notFoundBtn.isVisible = false
+                        binding.notFoundImg.isVisible = false
+                        binding.notFoundText.isVisible = false
+                    }
+
+                }
+            }
+            deleteAdapter -> {
+                deleteAdapter.addLoadStateListener { combinedLoadStates ->
+                    if ( deleteAdapter.itemCount < 1
+                    ) {
+                        binding.postRecyclerView.isVisible = false
+                        binding.notFoundBtn.isVisible = true
+                        binding.notFoundImg.isVisible = true
+                        binding.notFoundText.isVisible = true
+                        retrySetButton(deleteAdapter)
+
+                    } else {
+                        binding.postRecyclerView.isVisible = true
+                        binding.notFoundBtn.isVisible = false
+                        binding.notFoundImg.isVisible = false
+                        binding.notFoundText.isVisible = false
+                    }
+
+                }
+            }
+        }
+    }
+
+    private fun retrySetButton(adapter: PagingDataAdapter<*, *>){
+        binding.notFoundBtn.setOnClickListener{
+            adapter.retry()
+        }
+    }
 
     private fun setItemAdapter(viewType: Int) {
 
@@ -350,9 +430,8 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                         footer = PostLoadingAdapter { acceptAdapter.retry() }
                     )
                     this.layoutManager = linearLayoutManagerWrapepr
-
-
                 }
+                stateAdapter(acceptAdapter)
             }
             DELETEDType -> {
                 binding.postRecyclerView.apply {
@@ -365,7 +444,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
 
                 }
-
+                stateAdapter(deleteAdapter)
             }
             REJECTEDType -> {
                 binding.postRecyclerView.apply {
@@ -378,6 +457,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
 
                 }
+                stateAdapter(rejectAdapter)
 
             }
             PENDINGType -> {
@@ -388,9 +468,8 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                         footer = PostLoadingAdapter { pendingAdapter.retry() }
                     )
                     this.layoutManager = linearLayoutManagerWrapepr
-
-
                 }
+                stateAdapter(pendingAdapter)
             }
         }
     }

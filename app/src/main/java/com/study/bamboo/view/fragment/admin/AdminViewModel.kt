@@ -33,8 +33,8 @@ class AdminViewModel @Inject constructor(
     private val _successAcceptData = MutableLiveData<String?>()
     val successAcceptData: MutableLiveData<String?> get() = _successAcceptData
 
-    private val _successDeleteData = MutableLiveData<String?>()
-    val successDeleteData: MutableLiveData<String?> get() = _successDeleteData
+    private val _successDeleteData = MutableLiveData<String>()
+    val successDeleteData: MutableLiveData<String> get() = _successDeleteData
 
 
     // 토큰을 저장한다.
@@ -75,20 +75,20 @@ class AdminViewModel @Inject constructor(
 
                     Log.d(TAG, "patchPost: 성공!")
                 }else{
-                    _successPatchData.value=response.message()
+                    _successPatchData.value="게시물 변경 실패"
                 }
 
             }
         }
 
-    fun deletePost(token: String, reason: String, id: String) = viewModelScope.launch {
+    fun deletePost(token: String, reason: HashMap<String, String>, id: String) = viewModelScope.launch {
 
         repository.remote.deletePost(token, reason, id).let { response ->
             var number = response.body()?.number
             if (response.isSuccessful) {
-                _successDeleteData.value = "$number 의 게시물을 제거했습니다."
+                _successDeleteData.value = "$number 의 게시물을 삭제했습니다."
             } else {
-                Log.d(TAG, "deletePost: ${response.errorBody()}")
+                _successDeleteData.value = "$number 의 게시물 삭제 실패"
             }
         }
     }

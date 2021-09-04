@@ -31,11 +31,9 @@ class SignInViewModel @Inject constructor(
     private val _getCountResponse = MutableLiveData<Int>()
 
 
-    val success = MutableLiveData<Boolean>()
+    private val _loginSuccess = MutableLiveData<String>()
+    val loginSuccess: LiveData<String> get() = _loginSuccess
 
-    init {
-        success.value = false
-    }
 
 
     //관리자 로그인 API
@@ -47,8 +45,13 @@ class SignInViewModel @Inject constructor(
                 if (response != null) {
                     if (response.isSuccessful) {
                         _adminLoginResponse.value = response.body()?.token.toString()
-                        success.value = true
                     }
+                    if (response.code() == 400) {
+                        _loginSuccess.value = "비밀번호가 잘못되었습니다."
+                    }else{
+                        _loginSuccess.value = ""
+                    }
+
                 }
             }
         }
@@ -75,10 +78,13 @@ class SignInViewModel @Inject constructor(
     fun findAccepted(response: Response<GetCount>): Int {
         var count = 0
         if (response.body() != null) {
-            val size : Int = response.body()!!.size
-            Log.i("로그","findAccepted response<GetCount> : ${response.body()?.get(0)?._id}, size : $size")
-            for (get in 0 until  size) {
-                if (response.body()?.get(get)?._id  == "ACCEPTED") {
+            val size: Int = response.body()!!.size
+            Log.i(
+                "로그",
+                "findAccepted response<GetCount> : ${response.body()?.get(0)?._id}, size : $size"
+            )
+            for (get in 0 until size) {
+                if (response.body()?.get(get)?._id == "ACCEPTED") {
                     count = response.body()!!.get(get).count
                 }
             }

@@ -1,5 +1,6 @@
 package com.study.bamboo.view.activity.signin
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -23,6 +24,7 @@ class LoginDialog : DialogFragment() {
 
     private lateinit var signInViewModel: SignInViewModel
     private lateinit var adminViewModel: AdminViewModel
+    var toast: Toast? = null
 
     override fun onResume() {
         super.onResume()
@@ -74,8 +76,8 @@ class LoginDialog : DialogFragment() {
     }
 
 
+    @SuppressLint("ShowToast")
     private fun loginBtnClick() {
-
         // editText가 null이면 button click 못하게 막는다.
         binding.loginBtn.isEnabled = binding.passwordEdittext.text.toString().isEmpty()
 
@@ -85,12 +87,22 @@ class LoginDialog : DialogFragment() {
         signInViewModel.adminLoginResponse.observe(requireActivity(), {
             adminViewModel.saveToken(it)
 
-        })
-        signInViewModel.success.observe(viewLifecycleOwner) {
-            if (it==true) {
+            if (it.isNotEmpty()) {
                 val intent = Intent(requireContext(), AdminActivity::class.java)
                 startActivity(intent)
             }
+
+        })
+        signInViewModel.loginSuccess.observe(viewLifecycleOwner) {
+            Log.d(TAG, "loginBtnClick: $it")
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT)
+            if(toast==null)
+            toast = Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT)
+           else
+               toast?.cancel()
+            toast?.show()
+
+
         }
 
     }

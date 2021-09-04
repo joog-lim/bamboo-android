@@ -65,7 +65,7 @@ class DeleteDialog : DialogFragment() {
                 reason,
                 args.auth,
             )
-            viewModel.successPatchData.observe(viewLifecycleOwner){
+            viewModel.successDeleteData.observe(viewLifecycleOwner){
                 Toast.makeText(requireContext(),it,Toast.LENGTH_SHORT).show()
             }
             dialog?.hide()
@@ -79,7 +79,7 @@ class DeleteDialog : DialogFragment() {
                 args.auth,
                 reject,
             )
-            viewModel.successDeleteData.observe(viewLifecycleOwner){
+            viewModel.successPatchData.observe(viewLifecycleOwner){
                 Toast.makeText(requireContext(),it, Toast.LENGTH_LONG).show()
             }
             dialog?.hide()

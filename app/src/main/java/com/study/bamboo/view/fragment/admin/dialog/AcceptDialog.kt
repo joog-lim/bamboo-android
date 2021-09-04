@@ -62,11 +62,9 @@ class AcceptDialog : DialogFragment() {
 
         viewModel.readToken.asLiveData().observe(viewLifecycleOwner, {
             token = it.token
-            Log.d(TAG, "observeUiPreferences: ${it.token}")
 
         })
 
-        Log.d(TAG, "onCreateView: ${args.position}")
         binding.acceptBtn.setOnClickListener {
 
             updatePost()
@@ -187,7 +185,5 @@ class AcceptDialog : DialogFragment() {
         _binding = null
     }
 
-    companion object {
-        const val TAG = "LoginDialog"
-    }
+
 }

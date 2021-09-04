@@ -155,7 +155,6 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                     when (position) {
                         0 -> {
                             setItemAdapter(ACCEPTEDType)
-                            acceptAdapter.refresh()
                             Log.d(TAG, "onItemSelected: $position token :$token")
 
                             lifecycleScope.launch {
@@ -169,7 +168,6 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                         }
                         1 -> {
                             setItemAdapter(PENDINGType)
-                            pendingAdapter.refresh()
                             Log.d(TAG, "onItemSelected: $position token :$token")
                             lifecycleScope.launch {
                                 observeNetwork(
@@ -183,7 +181,6 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                         }
                         2 -> {
                             setItemAdapter(REJECTEDType)
-                            rejectAdapter.refresh()
                             Log.d(TAG, "onItemSelected: $position token :$token")
                             lifecycleScope.launch {
                                 observeNetwork(
@@ -199,7 +196,6 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                         }
                         3 -> {
                             setItemAdapter(DELETEDType)
-                            deleteAdapter.refresh()
                             Log.d(TAG, "onItemSelected: $position token :$token")
                             lifecycleScope.launch {
                                 observeNetwork(
@@ -215,7 +211,6 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                         }
                         else -> {
                             setItemAdapter(ACCEPTEDType)
-                            acceptAdapter.refresh()
                             Log.d(TAG, "onItemSelected: $position token :$token")
                             lifecycleScope.launch {
                                 observeNetwork(

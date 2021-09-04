@@ -96,14 +96,17 @@
 
                 </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <ImageButton
                     android:id="@+id/update_btn"
-                    android:layout_width="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginRight="10dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/refresh_btn"
+                    android:background="@drawable/refresh"
                     android:text="새로고침"
-                    app:layout_constraintEnd_toStartOf="@+id/linearLayout4" />
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -111,13 +114,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/post_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/top_layout"
-                tools:listitem="@layout/admin_post_accepted_recycler_item" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/post_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/top_layout"
+                    tools:listitem="@layout/admin_post_accepted_recycler_item" />
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         </LinearLayout>
 

@@ -32,16 +32,21 @@ class AcceptPagingSource @Inject constructor(
             val page = params.key ?: 0
 
 
-//            val totalCount = adminApi.getCount(token)
-
-//            val countData=totalCount.body()!![3].count
+//           val totalCount = adminApi.getCount(token)
+//
+//
+//
+//            val countData=totalCount.body()?.filter {it._id== ACCEPTED }.apply{
+//
+//
+//
+//            }
 //            Log.d(TAG, "totalCount accept: $countData ")
 
-            Log.d(TAG, "load: $page")
+            Log.d(TAG, "page size   : $page loadSize : ${params.loadSize}")
 
             val response = adminApi.getAcceptPost(token, page, cursor, ACCEPTED)
 
-            Log.d(TAG, "load sortBy: ${ response.body()?.posts?.sortedBy { it.number }}")
 
             val data = response.body()?.posts ?: emptyList()
             data.sortedBy { it.number }
@@ -49,7 +54,7 @@ class AcceptPagingSource @Inject constructor(
             LoadResult.Page(
                 data = data.sortedByDescending { it.number },
                 prevKey = if (page == 0) null else page - 20,
-                nextKey =  if (page == params.loadSize) null else page + 20,
+                nextKey =  if (data.isEmpty()) null else page + 20,
             )
 
 

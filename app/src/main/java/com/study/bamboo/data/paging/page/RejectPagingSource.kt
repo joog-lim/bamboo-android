@@ -17,27 +17,21 @@ class RejectPagingSource @Inject constructor(
 ) : PagingSource<Int, Admin.Reject>() {
 
 
-
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Admin.Reject> {
-        val TAG="RejectPagingSource"
+        val TAG = "RejectPagingSource"
         return try {
             val page = params.key ?: 0
             Log.d(TAG, "page : $page")
             Log.d(TAG, "params.loadSize : ${params.loadSize}")
 
 
-
             val response = adminApi.getRejectPost(token, page, cursor, REJECTED)
 
             val data = response.body()?.posts ?: emptyList()
-
-
-            Log.d(TAG, "count: ${response.body()!!.count}")
-            Log.d(TAG, "nextPage : ${response.body()!!.hasNext}")
             LoadResult.Page(
                 data = data,
                 prevKey = if (page == 0) null else page - 20,
-                nextKey =  if (page == params.loadSize) null else page + 20,
+                nextKey = if (data.isEmpty()) null else page + 20,
             )
 
 

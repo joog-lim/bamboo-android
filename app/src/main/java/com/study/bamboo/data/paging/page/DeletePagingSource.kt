@@ -28,8 +28,7 @@ class DeletePagingSource @Inject constructor(
             val response = adminApi.getDeletePost(token, page, cursor, "DELETED")
             Log.d(TAG, "load: ${response.body()}")
 
-            val data = response.body()!!.posts
-
+            val data = response.body()?.posts ?: emptyList()
 //            val totalCount = adminApi.getCount(token)
 
 //            val countData = totalCount.body()!![1].count
@@ -38,7 +37,7 @@ class DeletePagingSource @Inject constructor(
             LoadResult.Page(
                 data = data,
                 prevKey = if (page == 0) null else page - 20,
-                nextKey =  if (page == params.loadSize) null else page + 20,
+                nextKey =  if (data.isEmpty()) null else page + 20,
             )
 
 

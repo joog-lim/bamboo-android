@@ -33,6 +33,7 @@ class LoginDialog : DialogFragment() {
 
     override fun onResume() {
         super.onResume()
+        binding.passwordEdittext.setText("")
         initDialog()
     }
 
@@ -48,8 +49,6 @@ class LoginDialog : DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = ActivityLoginDialogBinding.inflate(inflater, container, false)
-
-
         adminViewModel.readToken.asLiveData().observe(viewLifecycleOwner, { value ->
             token = value.token
             Log.d(TAG, "readToken: $token")

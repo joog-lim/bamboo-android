@@ -43,7 +43,7 @@ class RejectCancelDialog : DialogFragment() {
     }
 
     private fun initDialog() {
-        //        //디바이스 크기 확인후 커스텀 다이어로그 팝업 크기 조정
+        //디바이스 크기 확인후 커스텀 다이어로그 팝업 크기 조정
         val params: ViewGroup.LayoutParams? = dialog?.window?.attributes
         val deviceWidth = SignInActivity.deviceSizeX
         Log.d("로그","acceptDialog : $deviceWidth")

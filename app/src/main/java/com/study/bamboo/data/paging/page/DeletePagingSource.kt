@@ -37,8 +37,8 @@ class DeletePagingSource @Inject constructor(
             Log.d(TAG, "nextPage : ${response.body()!!.hasNext}")
             LoadResult.Page(
                 data = data,
-                prevKey =null,
-                nextKey = page.plus(20)
+                prevKey = if (page == 0) null else page - 20,
+                nextKey =  if (page == params.loadSize) null else page + 20,
             )
 
 

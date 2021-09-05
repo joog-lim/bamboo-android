@@ -23,6 +23,8 @@ class RejectPagingSource @Inject constructor(
         return try {
             val page = params.key ?: 0
             Log.d(TAG, "page : $page")
+            Log.d(TAG, "params.loadSize : ${params.loadSize}")
+
 
 
             val response = adminApi.getRejectPost(token, page, cursor, REJECTED)
@@ -34,8 +36,8 @@ class RejectPagingSource @Inject constructor(
             Log.d(TAG, "nextPage : ${response.body()!!.hasNext}")
             LoadResult.Page(
                 data = data,
-                prevKey = null,
-                nextKey = page.plus(20)
+                prevKey = if (page == 0) null else page - 20,
+                nextKey =  if (page == params.loadSize) null else page + 20,
             )
 
 

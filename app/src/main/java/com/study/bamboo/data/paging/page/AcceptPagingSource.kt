@@ -1,6 +1,7 @@
 package com.study.bamboo.data.paging.page
 
 import android.util.Log
+import androidx.core.os.persistableBundleOf
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTED
@@ -42,15 +43,13 @@ class AcceptPagingSource @Inject constructor(
 
             Log.d(TAG, "load sortBy: ${ response.body()?.posts?.sortedBy { it.number }}")
 
-
-
             val data = response.body()?.posts ?: emptyList()
             data.sortedBy { it.number }
 
             LoadResult.Page(
                 data = data.sortedByDescending { it.number },
-                prevKey = null,
-                nextKey = page.plus(20)
+                prevKey = if (page == 0) null else page - 20,
+                nextKey =  if (page == params.loadSize) null else page + 20,
             )
 
 
@@ -67,6 +66,7 @@ class AcceptPagingSource @Inject constructor(
 
 
     }
+
 
     override fun getRefreshKey(state: PagingState<Int, Admin.Accept>): Int? {
         Log.d(TAG, "getRefreshKey:${state.anchorPosition} ")

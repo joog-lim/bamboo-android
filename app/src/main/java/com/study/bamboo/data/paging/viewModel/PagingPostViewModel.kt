@@ -25,7 +25,7 @@ class PagingPostViewModel @Inject constructor(
     val token = MutableLiveData<String>()
     val cursor = MutableLiveData<String>()
 
-    fun getData(token: String, cursor: String, status: String) {
+    fun getData(token: String, cursor: String) {
         this.token.value = token
         this.cursor.value = cursor
     }

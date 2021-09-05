@@ -1,5 +1,6 @@
 package com.study.bamboo.bindingadapter
 
+import android.annotation.SuppressLint
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import java.text.SimpleDateFormat
@@ -20,16 +21,17 @@ object PostBindingAdapter {
 
     }
 
+    @SuppressLint("SetTextI18n")
     @BindingAdapter("app:number", "app:status")
     @JvmStatic
     fun getNumber(text: TextView, number: Int, status: String) {
 
         when (status) {
 
-            "ACCEPTED" -> text.text = "${number}번째 알고리즘"
-            "DELETED" -> text.text = "${number}번째 삭제요청"
-            "REJECTED" -> text.text = "${number}번째 거절됨"
-            "PENDING" -> text.text = "${number}번째 대기중"
+            "ACCEPTED" -> text.text = "#${number}번째 알고리즘"
+            "DELETED" -> text.text = "#${number}번째 삭제요청"
+            "REJECTED" -> text.text = "#${number}번째 거절됨"
+            "PENDING" -> text.text = "#${number}번째 대기중"
         }
 
 

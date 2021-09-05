@@ -17,13 +17,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.study.bamboo.R
 import com.study.bamboo.adapter.PostLoadingAdapter
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter
-import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTED
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTEDType
-import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.DELETED
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.DELETEDType
-import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.PENDING
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.PENDINGType
-import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTED
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTEDType
 import com.study.bamboo.adapter.admin.AdminDeleteAdapter
 import com.study.bamboo.adapter.admin.AdminPendingAdapter
@@ -184,7 +180,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                                 observeNetwork(
                                     token,
                                     cursor,
-                                    ACCEPTED
+                                    acceptAdapter
                                 )
                             }
 
@@ -198,7 +194,8 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                                     token,
 
                                     cursor,
-                                    PENDING
+                                    pendingAdapter
+
                                 )
                             }
 
@@ -212,7 +209,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                                     token,
 
                                     cursor,
-                                    REJECTED
+                                    rejectAdapter
 
                                 )
 
@@ -228,7 +225,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                                     token,
 
                                     cursor,
-                                    DELETED
+                                    deleteAdapter
 
                                 )
 
@@ -243,7 +240,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                                 observeNetwork(
                                     token,
                                     cursor,
-                                    ACCEPTED
+                                    acceptAdapter
                                 )
                             }
                         }
@@ -255,8 +252,8 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
 
     // paging에 먼저 피마리터 값 보내줌
-    private fun observeGetData(token: String, cursor: String, status: String) {
-        pagingViewModel.getData(token, cursor, status)
+    private fun observeGetData(token: String, cursor: String) {
+        pagingViewModel.getData(token, cursor)
     }
 
     // paging 데이터값 받아옴
@@ -318,26 +315,26 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
 
     @ExperimentalPagingApi
-    fun observeNetwork(token: String, cursor: String, status: String) {
-        when (status) {
-            ACCEPTED -> {
+    fun observeNetwork(token: String, cursor: String,adapter:PagingDataAdapter<*,*>) {
+        when (adapter) {
+            acceptAdapter -> {
                 // 데이터값을 보냄 (Paging x)
-                observeGetData(token, cursor, status)
+                observeGetData(token, cursor)
                 observePagingData(ACCEPTEDType)
 
 
             }
-            PENDING -> {
+            pendingAdapter -> {
                 // 데이터값을 보냄 (Paging x)
-                observeGetData(token, cursor, status)
+                observeGetData(token, cursor)
                 observePagingData(PENDINGType)
             }
-            REJECTED -> {
-                observeGetData(token, cursor, status)
+            rejectAdapter -> {
+                observeGetData(token, cursor)
                 observePagingData(REJECTEDType)
             }
-            DELETED -> {
-                observeGetData(token, cursor, status)
+            deleteAdapter -> {
+                observeGetData(token, cursor)
                 observePagingData(DELETEDType)
             }
 

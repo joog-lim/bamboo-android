@@ -59,7 +59,7 @@ class AdminViewModel @Inject constructor(
                 _successAcceptData.value = "${number}번째 게시물을 수정했습니다."
 
             } else {
-                _successAcceptData.value = " ${response.message()}"
+                _successAcceptData.value = "해당 게시물을 찾을 수 없습니다."
             }
         }
     }
@@ -74,24 +74,26 @@ class AdminViewModel @Inject constructor(
                     _successPatchData.value = "$beforeStatus 상태를 $afterStatus 로 바꾸었습니다."
 
                     Log.d(TAG, "patchPost: 성공!")
-                }else{
-                    _successPatchData.value="게시물 변경 실패"
+                }
+               else{
+                    _successPatchData.value = "게시물 변경 실패"
                 }
 
             }
         }
 
-    fun deletePost(token: String, reason: HashMap<String, String>, id: String) = viewModelScope.launch {
+    fun deletePost(token: String, reason: HashMap<String, String>, id: String) =
+        viewModelScope.launch {
 
-        repository.remote.deletePost(token, reason, id).let { response ->
-            var number = response.body()?.number
-            if (response.isSuccessful) {
-                _successDeleteData.value = "$number 의 게시물을 삭제했습니다."
-            } else {
-                _successDeleteData.value = "$number 의 게시물 삭제 실패"
+            repository.remote.deletePost(token, reason, id).let { response ->
+                var number = response.body()?.number
+                if (response.isSuccessful) {
+                    _successDeleteData.value = "$number 의 게시물을 삭제했습니다."
+                } else {
+                    _successDeleteData.value = "$number 의 게시물 삭제 실패"
+                }
             }
         }
-    }
 
 
 }

@@ -76,6 +76,8 @@
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/login_dialog_password_edittext"
                 android:elevation="10dp"
+                android:singleLine="true"
+                android:imeOptions="actionDone"
                 android:fontFamily="@font/nanumsquareround_otfb"
                 android:hint="비밀번호를 입력해주세요."
                 android:padding="12dp"

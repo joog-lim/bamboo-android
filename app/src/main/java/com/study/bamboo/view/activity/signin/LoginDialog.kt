@@ -1,12 +1,15 @@
 package com.study.bamboo.view.activity.signin
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
@@ -16,15 +19,17 @@ import com.study.bamboo.view.activity.main.AdminActivity
 import com.study.bamboo.view.fragment.admin.AdminViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class LoginDialog : DialogFragment() {
     private var _binding: ActivityLoginDialogBinding? = null
     private val binding get() = _binding!!
     var token = ""
 
+
     private lateinit var signInViewModel: SignInViewModel
     private lateinit var adminViewModel: AdminViewModel
-    var toast: Toast? = null
+    private var toast: Toast? = null
 
     override fun onResume() {
         super.onResume()
@@ -79,6 +84,8 @@ class LoginDialog : DialogFragment() {
     @SuppressLint("ShowToast")
     private fun loginBtnClick() {
         // editText가 null이면 button click 못하게 막는다.
+        view?.let { it1 -> hideKeyboardFrom(requireContext(), it1) }
+
         binding.loginBtn.isEnabled = binding.passwordEdittext.text.toString().isEmpty()
 
         signInViewModel.callAdminLoginAPI(binding.passwordEdittext.text.toString())
@@ -90,6 +97,7 @@ class LoginDialog : DialogFragment() {
             if (it.isNotEmpty()) {
                 val intent = Intent(requireContext(), AdminActivity::class.java)
                 startActivity(intent)
+
             }
 
         })
@@ -101,6 +109,7 @@ class LoginDialog : DialogFragment() {
                     toast = Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT)
                 else
                     toast?.cancel()
+
                 toast?.show()
             }
 
@@ -108,8 +117,10 @@ class LoginDialog : DialogFragment() {
         }
 
     }
-
-
+    fun hideKeyboardFrom(context: Context, view: View) {
+        val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0);
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

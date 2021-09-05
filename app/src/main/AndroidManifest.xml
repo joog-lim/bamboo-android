@@ -17,7 +17,8 @@
         <activity android:name=".view.activity.postcreate.PostCreateActivity">
 
         </activity>
-        <activity android:name=".view.activity.signin.SignInActivity">
+        <activity android:name=".view.activity.signin.SignInActivity"
+            android:windowSoftInputMode="adjustResize">
 
         </activity>
         <activity android:name=".view.activity.main.AdminActivity"/>

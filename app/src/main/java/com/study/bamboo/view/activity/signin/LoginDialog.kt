@@ -104,13 +104,13 @@ class LoginDialog : DialogFragment() {
         signInViewModel.loginSuccess.observe(viewLifecycleOwner) {
             Log.d(TAG, "loginBtnClick: $it")
             if(it!="") {
-                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT)
-                if (toast == null)
+                if (toast == null) {
                     toast = Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT)
+                    toast?.show()
+                }
                 else
                     toast?.cancel()
 
-                toast?.show()
             }
 
 

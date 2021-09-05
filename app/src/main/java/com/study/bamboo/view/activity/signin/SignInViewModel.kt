@@ -45,11 +45,10 @@ class SignInViewModel @Inject constructor(
                 if (response != null) {
                     if (response.isSuccessful) {
                         _adminLoginResponse.value = response.body()?.token.toString()
+                        _loginSuccess.value = "안녕하세요 관리자님!"
                     }
                     if (response.code() == 400) {
                         _loginSuccess.value = "비밀번호가 잘못되었습니다."
-                    }else{
-                        _loginSuccess.value = ""
                     }
 
                 }

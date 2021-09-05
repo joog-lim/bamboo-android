@@ -14,12 +14,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="14dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/home_fragment_recycler_frame"
-        android:elevation="5dp"
+        android:elevation="3dp"
         android:orientation="vertical"
         android:padding="20dp">
 
@@ -63,7 +63,7 @@
                     android:textColor="@color/main_color"
                     app:getTag="@{data.tag}"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginRight="13dp"
+                    android:layout_marginEnd="13dp"
 
                     app:layout_constraintEnd_toStartOf="@+id/post_more"
                     app:layout_constraintTop_toTopOf="parent"
@@ -91,7 +91,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nanumsquareround_otfb"
-            android:layout_marginTop="3dp"
             android:gravity="start"
             android:textColor="#C4C4C4"
             android:textSize="@dimen/post_time"

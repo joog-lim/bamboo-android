@@ -14,12 +14,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="14dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/home_fragment_recycler_frame"
-        android:elevation="5dp"
+        android:elevation="3dp"
         android:orientation="vertical"
         android:padding="20dp">
 

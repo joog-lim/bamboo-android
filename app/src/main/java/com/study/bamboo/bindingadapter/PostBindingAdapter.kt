@@ -16,7 +16,7 @@ object PostBindingAdapter {
     fun getDay(text: TextView, day: Long) {
 
         val toTimeStamp = Date(day)
-        val date= SimpleDateFormat("yyyy년 MM월 dd일 aa", Locale.forLanguageTag("ko"))
+        val date = SimpleDateFormat("yyyy년 MM월 dd일 aa", Locale.forLanguageTag("ko"))
         text.text = date.format(toTimeStamp)
 
     }
@@ -52,6 +52,15 @@ object PostBindingAdapter {
 
     }
 
+    @SuppressLint("SetTextI18n")
+    @BindingAdapter("app:getTag")
+    @JvmStatic
+    fun getTag(text: TextView, tag: String) {
+
+        text.text = "#${tag}"
+
+
+    }
 
 
     //user
@@ -62,7 +71,7 @@ object PostBindingAdapter {
     fun getUserDay(text: TextView, day: Long) {
 
         val toTimeStamp = Date(day)
-        val date= SimpleDateFormat("yyyy년 MM월 dd일 aa", Locale.forLanguageTag("ko"))
+        val date = SimpleDateFormat("yyyy년 MM월 dd일 aa", Locale.forLanguageTag("ko"))
         text.text = date.format(toTimeStamp)
     }
 

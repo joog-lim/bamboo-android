@@ -10,6 +10,7 @@ import androidx.lifecycle.asLiveData
 import com.study.bamboo.databinding.ActivityLoginDialogBinding
 import com.study.bamboo.databinding.ActivityNoWifiDialogBinding
 import com.study.bamboo.view.activity.signin.LoginDialog
+import com.study.bamboo.view.activity.splash.SplashActivity.Companion.deviceSizeX
 
 class WifiDialog : DialogFragment() {
 
@@ -40,10 +41,8 @@ class WifiDialog : DialogFragment() {
     private fun initDialog() {
         //        //디바이스 크기 확인후 커스텀 다이어로그 팝업 크기 조정
         val params: ViewGroup.LayoutParams? = dialog?.window?.attributes
-        val deviceWidth = arguments?.getInt("displaySizeX")
-        if (deviceWidth != null) {
-            params?.width = (deviceWidth * 0.9).toInt()
-        }
+        val deviceWidth = deviceSizeX
+        params?.width = (deviceWidth * 0.9).toInt()
 
         dialog?.window?.attributes = params as WindowManager.LayoutParams
     }

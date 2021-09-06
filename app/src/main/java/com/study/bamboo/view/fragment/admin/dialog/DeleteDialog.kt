@@ -16,6 +16,7 @@ import androidx.navigation.fragment.navArgs
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTED
 import com.study.bamboo.databinding.DeleteDialogBinding
 import com.study.bamboo.view.activity.signin.SignInActivity
+import com.study.bamboo.view.activity.splash.SplashActivity.Companion.deviceSizeX
 import com.study.bamboo.view.fragment.admin.AdminViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -94,7 +95,7 @@ class DeleteDialog : DialogFragment() {
     private fun initDialog() {
         //        //디바이스 크기 확인후 커스텀 다이어로그 팝업 크기 조정
         val params: ViewGroup.LayoutParams? = dialog?.window?.attributes
-        val deviceWidth = SignInActivity.deviceSizeX
+        val deviceWidth = deviceSizeX
         Log.d("로그","acceptDialog : $deviceWidth")
         params?.width = (deviceWidth * 0.9).toInt()
 

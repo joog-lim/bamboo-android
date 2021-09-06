@@ -15,6 +15,7 @@ import com.study.bamboo.R
 import com.study.bamboo.databinding.ActivitySignInBinding
 import com.study.bamboo.view.activity.main.MainActivity
 import com.study.bamboo.base.BaseActivity
+import com.study.bamboo.view.activity.splash.SplashActivity.Companion.deviceSizeX
 import com.study.bamboo.view.fragment.admin.dialog.AcceptDialog
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Exception
@@ -29,7 +30,6 @@ class SignInActivity : BaseActivity() {
 
     companion object{
         var getPostCountResponse = 0
-        var deviceSizeX : Int = 0
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

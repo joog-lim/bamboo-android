@@ -30,8 +30,8 @@ class RejectPagingSource @Inject constructor(
             val data = response.body()?.posts ?: emptyList()
             LoadResult.Page(
                 data = data,
-                prevKey = if (page == 0) null else page - 20,
-                nextKey = if (data.isEmpty()) null else page + 20,
+                prevKey = null,
+                nextKey = if (data.isEmpty()) null else page.inc(),
             )
 
 

@@ -315,7 +315,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
 
     @ExperimentalPagingApi
-    fun observeNetwork(token: String, cursor: String,adapter:PagingDataAdapter<*,*>) {
+    fun observeNetwork(token: String, cursor: String, adapter: PagingDataAdapter<*, *>) {
         when (adapter) {
             acceptAdapter -> {
                 // 데이터값을 보냄 (Paging x)
@@ -348,13 +348,16 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
             acceptAdapter -> {
                 acceptAdapter.addLoadStateListener { combinedLoadStates ->
 
-                    binding.errorRetryBtn.isVisible =
-                        combinedLoadStates.source.refresh is LoadState.Error
-                    binding.errorText.isVisible =
-                        combinedLoadStates.source.refresh is LoadState.Error
-                    binding.errorImg.isVisible =
-                        combinedLoadStates.source.refresh is LoadState.Error
-                    retrySetButton(acceptAdapter)
+
+                        binding.errorRetryBtn.isVisible =
+                            combinedLoadStates.source.refresh is LoadState.Error
+                        binding.errorText.isVisible =
+                            combinedLoadStates.source.refresh is LoadState.Error
+                        binding.errorImg.isVisible =
+                            combinedLoadStates.source.refresh is LoadState.Error
+                        binding.postRecyclerView.isVisible =  combinedLoadStates.source.refresh is LoadState.Error
+                        retrySetButton(acceptAdapter)
+
 
 
 
@@ -383,6 +386,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                         combinedLoadStates.source.refresh is LoadState.Error
                     binding.errorImg.isVisible =
                         combinedLoadStates.source.refresh is LoadState.Error
+                    binding.postRecyclerView.isVisible =  combinedLoadStates.source.refresh is LoadState.Error
                     retrySetButton(pendingAdapter)
 
                     if (combinedLoadStates.source.refresh is LoadState.NotLoading
@@ -410,6 +414,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                         combinedLoadStates.source.refresh is LoadState.Error
                     binding.errorImg.isVisible =
                         combinedLoadStates.source.refresh is LoadState.Error
+                    binding.postRecyclerView.isVisible =  combinedLoadStates.source.refresh is LoadState.Error
                     retrySetButton(rejectAdapter)
 
                     if (combinedLoadStates.source.refresh is LoadState.NotLoading
@@ -437,6 +442,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                         combinedLoadStates.source.refresh is LoadState.Error
                     binding.errorImg.isVisible =
                         combinedLoadStates.source.refresh is LoadState.Error
+                    binding.postRecyclerView.isVisible =  combinedLoadStates.source.refresh is LoadState.Error
                     retrySetButton(deleteAdapter)
 
                     if (combinedLoadStates.source.refresh is LoadState.NotLoading

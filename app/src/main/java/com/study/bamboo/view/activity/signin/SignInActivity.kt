@@ -17,6 +17,7 @@ import com.study.bamboo.view.activity.main.MainActivity
 import com.study.bamboo.base.BaseActivity
 import com.study.bamboo.view.fragment.admin.dialog.AcceptDialog
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.Exception
 
 
 @AndroidEntryPoint
@@ -48,13 +49,18 @@ class SignInActivity : BaseActivity() {
 
     fun clickAdminLogin(view: View) {
         //다이얼로그
-        loginDialog.show(supportFragmentManager, "AdminLoginDialog")
-        val windowManager = this.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val display = windowManager.defaultDisplay
-        val size = Point()
-        display.getSize(size)
-        deviceSizeX = size.x
-        initBundle(deviceSizeX)
+        try {
+            loginDialog.show(supportFragmentManager, "AdminLoginDialog")
+            val windowManager = this.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+            val display = windowManager.defaultDisplay
+            val size = Point()
+            display.getSize(size)
+            deviceSizeX = size.x
+            initBundle(deviceSizeX)
+        }catch (e : Exception){
+            Log.d("로그","로그인 다이얼로그 오류 : $e")
+        }
+
     }
 
     private fun initBundle(display_size_x: Int) {

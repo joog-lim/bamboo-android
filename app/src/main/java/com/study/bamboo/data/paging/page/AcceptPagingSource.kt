@@ -7,6 +7,7 @@ import androidx.paging.PagingState
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTED
 import com.study.bamboo.data.network.user.AdminApi
 import com.study.bamboo.utils.Admin
+import okhttp3.internal.notify
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
@@ -43,7 +44,7 @@ class AcceptPagingSource @Inject constructor(
 //            }
 //            Log.d(TAG, "totalCount accept: $countData ")
 
-            Log.d(TAG, "page size   : $page loadSize : ${params.loadSize}")
+            Log.d(TAG, "page size   : ${page} loadSize : ${params.loadSize}")
 
             val response = adminApi.getAcceptPost(token, page, cursor, ACCEPTED)
 
@@ -53,8 +54,8 @@ class AcceptPagingSource @Inject constructor(
 
             LoadResult.Page(
                 data = data.sortedByDescending { it.number },
-                prevKey = if (page == 0) null else page - 20,
-                nextKey =  if (data.isEmpty()) null else page + 20,
+                prevKey = null,
+                nextKey =  if (data.isEmpty()) null else page.inc(),
             )
 
 

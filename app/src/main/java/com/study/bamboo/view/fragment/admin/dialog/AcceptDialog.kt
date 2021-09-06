@@ -16,7 +16,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.study.bamboo.databinding.AcceptDialogBinding
-import com.study.bamboo.view.activity.signin.SignInActivity.Companion.deviceSizeX
+import com.study.bamboo.view.activity.splash.SplashActivity.Companion.deviceSizeX
 import com.study.bamboo.view.fragment.admin.AdminViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job

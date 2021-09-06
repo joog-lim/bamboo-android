@@ -22,7 +22,9 @@ class SplashActivity : BaseActivity() {
     private lateinit var networkHandler: NetworkHandler
     private val splashViewModel by viewModels<SplashViewModel>()
     private lateinit var wifiDialog : WifiDialog
-
+    companion object{
+        var deviceSizeX : Int = 0
+    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -61,7 +63,7 @@ class SplashActivity : BaseActivity() {
         val display = windowManager.defaultDisplay
         val size = Point()
         display.getSize(size)
-        SignInActivity.deviceSizeX = size.x
+        deviceSizeX = size.x
     }
 
 

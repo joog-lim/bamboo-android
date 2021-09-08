@@ -5,7 +5,9 @@ import android.content.Intent
 import android.graphics.Point
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
@@ -78,6 +80,12 @@ class SplashActivity : BaseActivity() {
                 callViewModelApi()
             }
 
+        })
+
+        splashViewModel.errorResponse.observe(this, Observer {
+            if (it != null){
+                Toast.makeText(this,"서버오류 발생",Toast.LENGTH_SHORT).show()
+            }
         })
     }
 

@@ -9,6 +9,7 @@ import com.study.bamboo.data.network.models.user.GetVerifyDTO
 import com.study.bamboo.data.network.models.user.postcreate.PostCreateResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,6 +24,8 @@ class SplashViewModel @Inject constructor(
     val getVerifyResponse: LiveData<GetVerifyDTO> get() = _getVerifyResponse
     private val _getVerifyResponse = MutableLiveData<GetVerifyDTO>()
 
+    val errorResponse: LiveData<ResponseBody> get() = _errorResponse
+    private val _errorResponse = MutableLiveData<ResponseBody>()
 
     //verify 호출로 id와 질문 가져오기
     fun callGetVerifyAPI() = viewModelScope.launch {
@@ -30,7 +33,7 @@ class SplashViewModel @Inject constructor(
             if (response.isSuccessful)
                 _getVerifyResponse.value = response.body()
             else
-                Log.d("로그", "response.errorBody() : ${response.errorBody()}")
+                _errorResponse.value = response.errorBody()
         }
 
     }

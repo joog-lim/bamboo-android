@@ -31,11 +31,11 @@ class PendingPagingSource @Inject constructor(
 //            Log.d(AcceptPagingSource.TAG, "totalCount pending: $countData ")
             val data = response.body()?.posts ?: emptyList()
 
-
+            val prevKey = if (page == 1) null else page - 1
             LoadResult.Page(
                 data = data,
-                prevKey = null,
-                nextKey =  if (data.isEmpty()) null else page.inc(),
+                prevKey = prevKey,
+                nextKey =  if (data.isEmpty()) null else page.plus(1),
             )
 
 

@@ -28,10 +28,11 @@ class RejectPagingSource @Inject constructor(
             val response = adminApi.getRejectPost(token, page, REJECTED)
 
             val data = response.body()?.posts ?: emptyList()
+            val prevKey = if (page == 1) null else page - 1
             LoadResult.Page(
                 data = data,
-                prevKey = if(page==1) null else page.minus(1),
-                nextKey = if (data.isEmpty() ) null else page.inc(),
+                prevKey = prevKey,
+                nextKey = if (data.isEmpty() ) null else page.plus(1),
             )
 
 

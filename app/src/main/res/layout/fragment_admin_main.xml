@@ -187,6 +187,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/post_recycler_view"
                     android:layout_width="match_parent"
+                    android:scrollbars="vertical"
+                    android:scrollbarFadeDuration="0"
                     android:layout_height="match_parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/top_layout"

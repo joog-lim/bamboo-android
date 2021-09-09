@@ -114,9 +114,9 @@
                 android:id="@+id/not_found_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="100dp"
-                android:src="@drawable/free_post"
                 android:visibility="gone"
+                android:layout_marginBottom="100dp"
+                android:src="@drawable/error_img"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:adjustViewBounds="true"
@@ -141,39 +141,44 @@
                 android:id="@+id/error_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="100dp"
-                android:src="@drawable/free_post"
                 android:visibility="gone"
+                android:layout_marginBottom="100dp"
+                android:src="@drawable/loading_img"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:adjustViewBounds="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/top_layout" />
 
-            <TextView
-                android:id="@+id/not_found_text"
-                android:layout_width="wrap_content"
-                android:layout_marginStart="15dp"
-                android:textColor="@color/carbon_red_a700"
-                android:layout_height="wrap_content"
-                android:text="게시물을 찾을 수 없습니다."
-                android:textSize="20sp"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/not_found_img" />
+
             <TextView
                 android:id="@+id/error_text"
                 android:layout_width="wrap_content"
                 android:layout_marginStart="15dp"
-                android:textColor="@color/carbon_red_a700"
+                android:textColor="@color/black"
                 android:layout_height="wrap_content"
-                android:text="데이터 로드에 실패했습니다."
+                android:text="인터넷 연결"
                 android:visibility="gone"
+                android:layout_marginTop="27dp"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/error_img" />
+
+            <TextView
+                android:id="@+id/error_n_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:layout_marginStart="15dp"
+                android:text="오픈라인 상태입니다. 인터넷 연결을 확인해주세요"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/error_text" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/error_retry_btn"
@@ -193,19 +198,21 @@
                 android:id="@+id/refresh_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="52dp"
                 app:layout_constraintTop_toBottomOf="@+id/top_layout"
-                tools:layout_editor_absoluteX="59dp">
+                tools:layout_editor_absoluteX="16dp">
 
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/post_recycler_view"
                     android:layout_width="match_parent"
-                    android:scrollbars="vertical"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="90dp"
                     android:scrollbarFadeDuration="0"
-                    android:layout_height="match_parent"
+                    android:scrollbars="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/top_layout"
+                    tools:itemCount="30"
                     tools:listitem="@layout/admin_post_accepted_recycler_item" />
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -98,9 +98,22 @@
         <argument
             android:name="auth"
             app:argType="string" />
+
+
         <argument
             android:name="position"
             app:argType="integer" />
+
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="content"
+            app:argType="string" />
+
+        <argument
+            android:name="tag"
+            app:argType="string" />
         <action
             android:id="@+id/action_acceptDialog_to_adminMainFragment"
             app:destination="@id/adminMainFragment" />

@@ -34,7 +34,9 @@ interface AdminApi {
     ): Response<AcceptModify>
 
 
-    @GET("post/AlgorithemList")
+
+
+    @GET("post/AlgorithemPage")
     suspend fun getAcceptPost(
         @Header("Authorization") Authorization: String,
         @Query("count") count: Int,
@@ -42,28 +44,32 @@ interface AdminApi {
         @Query("status") status: String
     ): Response<AcceptPost>
 
-    @GET("post/AlgorithemList")
+    @GET("post/AlgorithemPage")
+    suspend fun getAcceptPage(
+        @Header("Authorization") Authorization:String,
+        @Query("page") page:Int,
+        @Query("status") status:String
+    ): Response<AcceptPost>
+
+    @GET("post/AlgorithemPage")
     suspend fun getPendingPost(
         @Header("Authorization") Authorization: String,
-        @Query("count") count: Int,
-        @Query("cursor") cursor: String?,
-        @Query("status") status: String
+        @Query("page") page:Int,
+        @Query("status") status:String
     ): Response<PendingPost>
 
-    @GET("post/AlgorithemList")
+    @GET("post/AlgorithemPage   ")
     suspend fun getDeletePost(
         @Header("Authorization") Authorization: String,
-        @Query("count") count: Int,
-        @Query("cursor") cursor: String?,
-        @Query("status") status: String
+        @Query("page") page:Int,
+        @Query("status") status:String
     ): Response<DeletePost>
 
-    @GET("post/AlgorithemList")
+    @GET("post/AlgorithemPage")
     suspend fun getRejectPost(
         @Header("Authorization") Authorization: String,
-        @Query("count") count: Int,
-        @Query("cursor") cursor: String?,
-        @Query("status") status: String
+        @Query("page") page:Int,
+        @Query("status") status:String
     ): Response<AdminRejectPost>
 
     //각각의 status 게시물 가져오기

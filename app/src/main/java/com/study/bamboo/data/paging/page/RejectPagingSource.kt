@@ -20,18 +20,18 @@ class RejectPagingSource @Inject constructor(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Admin.Reject> {
         val TAG = "RejectPagingSource"
         return try {
-            val page = params.key ?: 0
+            val page = params.key ?: 1
             Log.d(TAG, "page : $page")
             Log.d(TAG, "params.loadSize : ${params.loadSize}")
 
 
-            val response = adminApi.getRejectPost(token, page, cursor, REJECTED)
+            val response = adminApi.getRejectPost(token, page, REJECTED)
 
             val data = response.body()?.posts ?: emptyList()
             LoadResult.Page(
                 data = data,
-                prevKey = null,
-                nextKey = if (data.isEmpty()) null else page.inc(),
+                prevKey = if(page==1) null else page.minus(1),
+                nextKey = if (data.isEmpty() ) null else page.inc(),
             )
 
 

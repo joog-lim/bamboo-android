@@ -1,13 +1,11 @@
 package com.study.bamboo.data.paging.page
 
 import android.util.Log
-import androidx.core.os.persistableBundleOf
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTED
 import com.study.bamboo.data.network.user.AdminApi
 import com.study.bamboo.utils.Admin
-import okhttp3.internal.notify
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
@@ -17,45 +15,35 @@ class AcceptPagingSource @Inject constructor(
     private val adminApi: AdminApi,
     private val token: String,
     private val cursor: String?,
-//    private val sampleRepository: SampleRepository,
 
 
 ) : PagingSource<Int, Admin.Accept>() {
     companion object {
         const val TAG = "PostPagingSource"
-        const val UNSPLASH_STARTING_PAGE_INDEX = 20
 
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Admin.Accept> {
         return try {
-//            val page = sampleRepository.getNextPage(lastSeenId = params.key ?: 0)
-            val page = params.key ?: 0
+            val page = params.key ?: 1
+            val response = adminApi.getAcceptPage(token, page, ACCEPTED)
+            Log.d(TAG, "params.key: $page totalPage : ${response.body()?.totalPage}")
 
 
-//           val totalCount = adminApi.getCount(token)
-//
-//
-//
-//            val countData=totalCount.body()?.filter {it._id== ACCEPTED }.apply{
-//
-//
-//
-//            }
-//            Log.d(TAG, "totalCount accept: $countData ")
+            Log.d(
+                TAG,
+                "page size   : $page loadSize : ${params.loadSize} size: ${response.body()?.posts?.size}"
+            )
 
-            Log.d(TAG, "page size   : ${page} loadSize : ${params.loadSize}")
-
-            val response = adminApi.getAcceptPost(token, page, cursor, ACCEPTED)
-
-
+            val responseData = mutableListOf<Admin.Accept>()
             val data = response.body()?.posts ?: emptyList()
-            data.sortedBy { it.number }
+            responseData.addAll(data)
 
+            val prevKey = if (page == 1) null else page - 1
             LoadResult.Page(
-                data = data.sortedByDescending { it.number },
-                prevKey = null,
-                nextKey =  if (data.isEmpty()) null else page.inc(),
+                data = responseData.sortedByDescending { it.number },
+                prevKey = prevKey,
+                nextKey = if (data.isEmpty()) null else page.plus(1),
             )
 
 
@@ -77,11 +65,12 @@ class AcceptPagingSource @Inject constructor(
     override fun getRefreshKey(state: PagingState<Int, Admin.Accept>): Int? {
         Log.d(TAG, "getRefreshKey:${state.anchorPosition} ")
         return state.anchorPosition?.let { anchorPosition ->
-            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(20)
-                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(20)
+            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
+                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
         }
 
     }
+
 
 }
 

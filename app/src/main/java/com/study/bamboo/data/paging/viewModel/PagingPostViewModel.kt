@@ -7,8 +7,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.study.bamboo.data.network.user.AdminApi
-import com.study.bamboo.data.paging.page.AcceptPagingSource
-import com.study.bamboo.data.paging.page.AcceptPagingSource.Companion.UNSPLASH_STARTING_PAGE_INDEX
+import com.study.bamboo.data.paging.page.   AcceptPagingSource
 import com.study.bamboo.data.paging.page.DeletePagingSource
 import com.study.bamboo.data.paging.page.PendingPagingSource
 import com.study.bamboo.data.paging.page.RejectPagingSource
@@ -32,7 +31,7 @@ class PagingPostViewModel @Inject constructor(
     val acceptData = Pager(
 
         PagingConfig(
-            pageSize = UNSPLASH_STARTING_PAGE_INDEX,
+            pageSize = 20,
             enablePlaceholders = false
         )
     ) {

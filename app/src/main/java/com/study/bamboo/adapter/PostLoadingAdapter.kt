@@ -1,5 +1,6 @@
 package com.study.bamboo.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -23,9 +24,9 @@ class PostLoadingAdapter(private val retry: () -> Unit) :
 
         fun bind(loadState: LoadState) {
             binding.apply {
+                Log.d("PostLoadingAdapter", "bind: $loadState")
                 progressBar.isVisible = loadState is LoadState.Loading
                 retryBtn.isVisible = loadState !is LoadState.Loading
-                retryText.isVisible = loadState !is LoadState.Loading
             }
         }
 

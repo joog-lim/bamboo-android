@@ -148,26 +148,31 @@ class AcceptDialog : DialogFragment() {
     private fun updatePost() {
         job = lifecycleScope.launch {
 
-            viewModel.acceptPatchPost(
-                token,
-                args.auth,
-                bodySend()
-            )
 
-            viewModel.successAcceptData.observe(viewLifecycleOwner){
-                Toast.makeText(requireContext(),it, Toast.LENGTH_LONG).show()
+
+            if (binding.updateTagText.text.toString() == "태그선택") {
+                Toast.makeText(requireContext(), "잘못된 태그입니다.", Toast.LENGTH_SHORT).show()
+            }else{
+
+                viewModel.acceptPatchPost(
+                    token,
+                    args.auth,
+                    bodySend()
+                )
+
+                viewModel.successAcceptData.observe(viewLifecycleOwner) {
+                    Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+                }
+                dialog?.hide()
+
             }
 
-            dialog?.hide()
 
 
         }
 
 
     }
-
-
-
 
 
     private fun bodySend(): HashMap<String, String> {

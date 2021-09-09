@@ -10,7 +10,7 @@ class Util {
         const val PREFERENCES_TOKEN = "preferences_token"
 
         // base_url
-        const val BASE_URL = "https://ket73grkcf.execute-api.ap-northeast-2.amazonaws.com/apiV2/"
+        const val BASE_URL = "https://server.joog-lim.info/apiV2/"
 
 
     }

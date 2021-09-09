@@ -33,8 +33,12 @@ class AcceptDialog : DialogFragment() {
     private var job: Job? = null
 
 
-
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        _binding?.updateTitle?.setText(args.title)
+        _binding?.updateContent?.setText(args.content)
+        Log.d("TAG", "onViewCreated: ${args.tag}")
+    }
 
     override fun onResume() {
         super.onResume()
@@ -102,9 +106,10 @@ class AcceptDialog : DialogFragment() {
                 position: Int,
                 id: Long
             ) {
+                _binding?.updateTagText?.text = args.tag
                 when (position) {
                     0 -> {
-                        binding.updateTagText.text = "태그선택"
+                        binding.updateTagText.text = args.tag
                     }
                     1 -> {
                         binding.updateTagText.text = "유머"

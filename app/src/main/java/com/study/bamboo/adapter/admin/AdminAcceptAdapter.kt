@@ -90,7 +90,7 @@ class AdminAcceptAdapter
             holder.binding.postMore.setOnClickListener {
                 val action =
                     AdminMainFragmentDirections.actionAdminMainFragmentToAcceptDialog(
-                        item.id, holder.bindingAdapterPosition
+                        item.id, holder.bindingAdapterPosition,item.title,item.content,item.tag
                     )
                 it.findNavController().navigateUp()
                 it.findNavController().navigate(action)

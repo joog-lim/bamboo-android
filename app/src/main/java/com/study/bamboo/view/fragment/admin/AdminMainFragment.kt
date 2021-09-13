@@ -5,11 +5,16 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.annotation.IdRes
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
@@ -17,9 +22,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.study.bamboo.R
 import com.study.bamboo.adapter.PostLoadingAdapter
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTED
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTEDType
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.DELETED
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.DELETEDType
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.PENDING
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.PENDINGType
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTED
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTEDType
 import com.study.bamboo.adapter.admin.AdminDeleteAdapter
 import com.study.bamboo.adapter.admin.AdminPendingAdapter
@@ -28,7 +37,7 @@ import com.study.bamboo.base.BaseFragment
 import com.study.bamboo.data.paging.viewModel.PagingPostViewModel
 import com.study.bamboo.databinding.FragmentAdminMainBinding
 import com.study.bamboo.utils.LinearLayoutManagerWrapper
-import com.study.bamboo.view.fragment.admin.dialog.AcceptDialog
+import com.study.bamboo.utils.Util.Companion.DIALOG_RESULT_KEY
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -41,35 +50,16 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
     companion object {
         const val TAG = "AdminMainFragment"
-
-
     }
-
 
     private val viewModel: AdminViewModel by viewModels()
     private lateinit var pagingViewModel: PagingPostViewModel
-    private lateinit var acceptDialog: AcceptDialog
 
 
-    private val acceptAdapter: AdminAcceptAdapter by lazy {
-        AdminAcceptAdapter()
-    }
-
-    private val deleteAdapter: AdminDeleteAdapter by lazy {
-
-        AdminDeleteAdapter()
-    }
-
-    private val rejectAdapter: AdminRejectAdapter by lazy {
-        AdminRejectAdapter()
-
-    }
-
-    private val pendingAdapter: AdminPendingAdapter by lazy {
-
-
-        AdminPendingAdapter()
-    }
+    private val acceptAdapter: AdminAcceptAdapter by lazy { AdminAcceptAdapter() }
+    private val deleteAdapter: AdminDeleteAdapter by lazy { AdminDeleteAdapter() }
+    private val rejectAdapter: AdminRejectAdapter by lazy { AdminRejectAdapter() }
+    private val pendingAdapter: AdminPendingAdapter by lazy { AdminPendingAdapter() }
 
     var status: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,7 +75,6 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
     override fun FragmentAdminMainBinding.onCreateView() {
         setItemAdapter(ACCEPTEDType)
 
-        acceptDialog = AcceptDialog()
 
         binding.activitySpinner.adapter = ArrayAdapter.createFromResource(
             requireContext(),
@@ -101,6 +90,19 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
 
     override fun FragmentAdminMainBinding.onViewCreated() {
+        val id = findNavController().currentDestination?.id
+
+        id?.let {
+            getDialogNavResult<String>(navId = it) { result ->
+                when (result) {
+                    ACCEPTED -> acceptAdapter.refresh()
+                    DELETED->deleteAdapter.refresh()
+                    REJECTED->rejectAdapter.refresh()
+                    PENDING->pendingAdapter.refresh()
+
+                }
+            }
+        }
     }
 
 
@@ -166,9 +168,11 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
                     when (position) {
                         0 -> {
+
                             setItemAdapter(ACCEPTEDType)
                             Log.d(TAG, "onItemSelected: $position token :$token")
                             refreshButtonAndLayout(acceptAdapter)
+
                             lifecycleScope.launch {
                                 observeNetwork(
                                     token,
@@ -348,17 +352,19 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                         combinedLoadStates.source.refresh is LoadState.Error
                     binding.errorImg.isVisible =
                         combinedLoadStates.source.refresh is LoadState.Error
-                    binding.postRecyclerView.isVisible =  combinedLoadStates.source.refresh is LoadState.Error
+                    binding.postRecyclerView.isVisible =
+                        combinedLoadStates.source.refresh is LoadState.Error
 
-                    binding.errorNText.isVisible=   combinedLoadStates.source.refresh is LoadState.Error
+                    binding.errorNText.isVisible =
+                        combinedLoadStates.source.refresh is LoadState.Error
                     retrySetButton(acceptAdapter)
 
 
-                  when(combinedLoadStates.source.refresh){
-                      is LoadState.NotLoading-> Log.d(TAG, "stateAdapter: 로딩중이아님")
-                      is LoadState.Loading-> Log.d(TAG, "stateAdapter: 로딩중")
-                      is LoadState.Error-> Log.d(TAG, "stateAdapter: 에러")
-                  }
+                    when (combinedLoadStates.source.refresh) {
+                        is LoadState.NotLoading -> Log.d(TAG, "stateAdapter: 로딩중이아님")
+                        is LoadState.Loading -> Log.d(TAG, "stateAdapter: 로딩중")
+                        is LoadState.Error -> Log.d(TAG, "stateAdapter: 에러")
+                    }
 
                     if (combinedLoadStates.source.refresh is LoadState.NotLoading
                         && combinedLoadStates.append.endOfPaginationReached
@@ -386,8 +392,10 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                     binding.errorImg.isVisible =
 
                         combinedLoadStates.source.refresh is LoadState.Error
-                    binding.errorNText.isVisible=   combinedLoadStates.source.refresh is LoadState.Error
-                    binding.postRecyclerView.isVisible =  combinedLoadStates.source.refresh is LoadState.Error
+                    binding.errorNText.isVisible =
+                        combinedLoadStates.source.refresh is LoadState.Error
+                    binding.postRecyclerView.isVisible =
+                        combinedLoadStates.source.refresh is LoadState.Error
                     retrySetButton(pendingAdapter)
 
                     if (combinedLoadStates.source.refresh is LoadState.NotLoading
@@ -413,10 +421,12 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                         combinedLoadStates.source.refresh is LoadState.Error
                     binding.errorText.isVisible =
                         combinedLoadStates.source.refresh is LoadState.Error
-                    binding.errorNText.isVisible=   combinedLoadStates.source.refresh is LoadState.Error
+                    binding.errorNText.isVisible =
+                        combinedLoadStates.source.refresh is LoadState.Error
                     binding.errorImg.isVisible =
                         combinedLoadStates.source.refresh is LoadState.Error
-                    binding.postRecyclerView.isVisible =  combinedLoadStates.source.refresh is LoadState.Error
+                    binding.postRecyclerView.isVisible =
+                        combinedLoadStates.source.refresh is LoadState.Error
                     retrySetButton(rejectAdapter)
 
                     if (combinedLoadStates.source.refresh is LoadState.NotLoading
@@ -440,12 +450,14 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                 deleteAdapter.addLoadStateListener { combinedLoadStates ->
                     binding.errorRetryBtn.isVisible =
                         combinedLoadStates.source.refresh is LoadState.Error
-                    binding.errorNText.isVisible=   combinedLoadStates.source.refresh is LoadState.Error
+                    binding.errorNText.isVisible =
+                        combinedLoadStates.source.refresh is LoadState.Error
                     binding.errorText.isVisible =
                         combinedLoadStates.source.refresh is LoadState.Error
                     binding.errorImg.isVisible =
                         combinedLoadStates.source.refresh is LoadState.Error
-                    binding.postRecyclerView.isVisible =  combinedLoadStates.source.refresh is LoadState.Error
+                    binding.postRecyclerView.isVisible =
+                        combinedLoadStates.source.refresh is LoadState.Error
                     retrySetButton(deleteAdapter)
 
                     if (combinedLoadStates.source.refresh is LoadState.NotLoading
@@ -535,6 +547,30 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
         }
     }
 
+
+    inline fun <T> getDialogNavResult(
+        @IdRes navId: Int,
+        key: String = DIALOG_RESULT_KEY,
+        crossinline onChanged: (T?) -> Unit
+    ) {
+        val backStackEntry = findNavController().getBackStackEntry(navId)
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_RESUME && backStackEntry.savedStateHandle.contains(key)) {
+                val result = backStackEntry.savedStateHandle.get<T>(key)
+                onChanged(result)
+                backStackEntry.savedStateHandle.remove<T>(key)
+            }
+        }
+        backStackEntry.lifecycle.addObserver(observer)
+
+        viewLifecycleOwner.lifecycle.addObserver(
+            LifecycleEventObserver { _, event ->
+                if (event == Lifecycle.Event.ON_DESTROY) {
+                    backStackEntry.lifecycle.removeObserver(observer)
+                }
+            }
+        )
+    }
 
 }
 

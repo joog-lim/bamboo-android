@@ -14,10 +14,9 @@ import javax.inject.Inject
 class AcceptPagingSource @Inject constructor(
     private val adminApi: AdminApi,
     private val token: String,
-    private val cursor: String?,
 
 
-) : PagingSource<Int, Admin.Accept>() {
+    ) : PagingSource<Int, Admin.Accept>() {
     companion object {
         const val TAG = "PostPagingSource"
 
@@ -26,22 +25,20 @@ class AcceptPagingSource @Inject constructor(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Admin.Accept> {
         return try {
             val page = params.key ?: 1
-            val response = adminApi.getAcceptPage(token, page, ACCEPTED)
-            Log.d(TAG, "params.key: $page totalPage : ${response.body()?.totalPage}")
+            val response = adminApi.getAcceptPage("", page, ACCEPTED)
 
-
-            Log.d(
-                TAG,
-                "page size   : $page loadSize : ${params.loadSize} size: ${response.body()?.posts?.size}"
-            )
 
             val responseData = mutableListOf<Admin.Accept>()
             val data = response.body()?.posts ?: emptyList()
+
             responseData.addAll(data)
+
+            Log.d(TAG, "dataSet ${response.body()?.posts?.map { it.number }}")
+
 
             val prevKey = if (page == 1) null else page - 1
             LoadResult.Page(
-                data = responseData.sortedByDescending { it.number },
+                data = responseData,
                 prevKey = prevKey,
                 nextKey = if (data.isEmpty()) null else page.plus(1),
             )

@@ -38,7 +38,6 @@ class PagingPostViewModel @Inject constructor(
         AcceptPagingSource(
             adminApi,
             token.value.toString(),
-            cursor.value.toString(),
 
             )
 

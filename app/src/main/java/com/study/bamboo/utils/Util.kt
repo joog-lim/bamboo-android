@@ -12,6 +12,8 @@ class Util {
         // base_url
         const val BASE_URL = "https://server.joog-lim.info/apiV2/"
 
+        const val DIALOG_RESULT_KEY = "DialogResult"
+
 
     }
 }

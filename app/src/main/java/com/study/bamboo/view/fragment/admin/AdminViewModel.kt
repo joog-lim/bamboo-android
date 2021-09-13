@@ -52,14 +52,17 @@ class AdminViewModel @Inject constructor(
 
     ) = viewModelScope.launch {
         repository.remote.acceptPatchPost(token, id, bodyMap).let { response ->
+            try {
+                val number = response.body()?.number
+                if (response.isSuccessful) {
+                    Log.d(TAG, "acceptPatchPost: 성공")
+                    _successAcceptData.value = "${number}번째 게시물을 수정했습니다."
 
-            var number = response.body()?.number
-            if (response.isSuccessful) {
-                Log.d(TAG, "acceptPatchPost: 성공")
-                _successAcceptData.value = "${number}번째 게시물을 수정했습니다."
-
-            } else {
-                _successAcceptData.value = "해당 게시물을 찾을 수 없습니다."
+                } else {
+                    _successAcceptData.value = "해당 게시물을 찾을 수 없습니다."
+                }
+            }catch (e:Exception){
+                _successAcceptData.value= e.toString()
             }
         }
     }
@@ -68,17 +71,21 @@ class AdminViewModel @Inject constructor(
         viewModelScope.launch {
             repository.remote.patchPost(token, id, status).let { response ->
 
-                val beforeStatus = response.body()?.beforeStatus
-                val afterStatus = response.body()?.afterStatus
-                if (response.isSuccessful) {
-                    _successPatchData.value = "$beforeStatus 상태를 $afterStatus 로 바꾸었습니다."
+                try {
 
-                    Log.d(TAG, "patchPost: 성공!")
-                }
-               else{
-                    _successPatchData.value = "게시물 변경 실패"
-                }
+                    val beforeStatus = response.body()?.beforeStatus
+                    val afterStatus = response.body()?.afterStatus
+                    if (response.isSuccessful) {
+                        _successPatchData.value = "$beforeStatus 상태를 $afterStatus 로 바꾸었습니다."
 
+                        Log.d(TAG, "patchPost: 성공!")
+                    } else {
+                        _successPatchData.value = "게시물 변경 실패"
+                    }
+
+                }catch (e:Exception){
+                    _successPatchData.value=e.toString()
+                }
             }
         }
 
@@ -86,11 +93,15 @@ class AdminViewModel @Inject constructor(
         viewModelScope.launch {
 
             repository.remote.deletePost(token, reason, id).let { response ->
-                var number = response.body()?.number
-                if (response.isSuccessful) {
-                    _successDeleteData.value = "$number 의 게시물을 삭제했습니다."
-                } else {
-                    _successDeleteData.value = "$number 의 게시물 삭제 실패"
+                try {
+                    val number = response.body()?.number
+                    if (response.isSuccessful) {
+                        _successDeleteData.value = "$number 의 게시물을 삭제했습니다."
+                    } else {
+                        _successDeleteData.value = "$number 의 게시물 삭제 실패"
+                    }
+                }catch (e:Exception){
+                    _successDeleteData.value=e.toString()
                 }
             }
         }

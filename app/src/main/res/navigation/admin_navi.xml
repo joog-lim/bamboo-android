@@ -25,6 +25,12 @@
         <action
             android:id="@+id/action_adminMainFragment_to_acceptDialog"
             app:destination="@id/acceptDialog" />
+        <argument
+            android:name="type"
+            app:nullable="false"
+            android:defaultValue="false"
+            app:argType="string" />
+
     </fragment>
 
     <fragment

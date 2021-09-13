@@ -10,12 +10,17 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTED
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.PENDING
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTED
 import com.study.bamboo.databinding.PendingDialogBinding
+import com.study.bamboo.utils.Util
 import com.study.bamboo.view.activity.signin.SignInActivity
 import com.study.bamboo.view.activity.splash.SplashActivity.Companion.deviceSizeX
 import com.study.bamboo.view.fragment.admin.AdminViewModel
@@ -80,9 +85,14 @@ class PendingDialog : DialogFragment() {
             )
 
             viewModel.successPatchData.observe(viewLifecycleOwner) {
+                val denied = it?.isEmpty() == true
+                if (denied) return@observe
+
                 Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+
+                setNavResult(data = PENDING)
+                findNavController().popBackStack()
             }
-            dialog?.hide()
 
 
         }
@@ -98,9 +108,14 @@ class PendingDialog : DialogFragment() {
 
                 )
             viewModel.successPatchData.observe(viewLifecycleOwner) {
+                val denied = it?.isEmpty() == true
+                if (denied) return@observe
+
                 Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+
+                setNavResult(data = PENDING)
+                findNavController().popBackStack()
             }
-            dialog?.hide()
         }
 
 
@@ -110,7 +125,11 @@ class PendingDialog : DialogFragment() {
         return binding.root
     }
 
-
+    private fun <T> Fragment.setNavResult(key: String = Util.DIALOG_RESULT_KEY, data: T) {
+        findNavController().previousBackStackEntry?.also { stack ->
+            stack.savedStateHandle.set(key, data)
+        }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

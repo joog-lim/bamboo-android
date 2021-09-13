@@ -11,12 +11,15 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTED
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTED
 import com.study.bamboo.databinding.RejectCancelDialogBinding
-import com.study.bamboo.view.activity.signin.SignInActivity
+import com.study.bamboo.utils.Util
 import com.study.bamboo.view.activity.splash.SplashActivity.Companion.deviceSizeX
 import com.study.bamboo.view.fragment.admin.AdminViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -79,11 +82,15 @@ class RejectCancelDialog : DialogFragment() {
                 accept,
 
                 )
-            viewModel.successPatchData.observe(viewLifecycleOwner){
-                Toast.makeText(requireContext(),it, Toast.LENGTH_LONG).show()
-            }
+            viewModel.successPatchData.observe(viewLifecycleOwner) {
+                val denied = it?.isEmpty() == true
+                if (denied) return@observe
 
-            dialog?.hide()
+                Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+
+                setNavResult(data = REJECTED)
+                findNavController().popBackStack()
+            }
         }
 
 
@@ -94,7 +101,11 @@ class RejectCancelDialog : DialogFragment() {
     }
 
 
-
+    private fun <T> Fragment.setNavResult(key: String = Util.DIALOG_RESULT_KEY, data: T) {
+        findNavController().previousBackStackEntry?.also { stack ->
+            stack.savedStateHandle.set(key, data)
+        }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

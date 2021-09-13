@@ -10,16 +10,20 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTED
 import com.study.bamboo.databinding.AcceptDialogBinding
+import com.study.bamboo.utils.Util.Companion.DIALOG_RESULT_KEY
 import com.study.bamboo.view.activity.splash.SplashActivity.Companion.deviceSizeX
 import com.study.bamboo.view.fragment.admin.AdminViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -29,8 +33,6 @@ class AcceptDialog : DialogFragment() {
     private val binding get() = _binding!!
     private val args by navArgs<AcceptDialogArgs>()
     private val viewModel: AdminViewModel by viewModels()
-
-    private var job: Job? = null
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -87,8 +89,8 @@ class AcceptDialog : DialogFragment() {
         //        //디바이스 크기 확인후 커스텀 다이어로그 팝업 크기 조정
         val params: ViewGroup.LayoutParams? = dialog?.window?.attributes
         val deviceWidth = deviceSizeX
-        Log.d("로그","acceptDialog : $deviceWidth")
-            params?.width = (deviceWidth * 0.9).toInt()
+        Log.d("로그", "acceptDialog : $deviceWidth")
+        params?.width = (deviceWidth * 0.9).toInt()
 
 
         dialog?.window?.attributes = params as WindowManager.LayoutParams
@@ -150,14 +152,15 @@ class AcceptDialog : DialogFragment() {
 
     }
 
-    private fun updatePost() {
-        job = lifecycleScope.launch {
 
+    private fun updatePost() {
+        lifecycleScope.launch {
 
 
             if (binding.updateTagText.text.toString() == "태그선택") {
                 Toast.makeText(requireContext(), "잘못된 태그입니다.", Toast.LENGTH_SHORT).show()
-            }else{
+
+            } else {
 
                 viewModel.acceptPatchPost(
                     token,
@@ -166,19 +169,27 @@ class AcceptDialog : DialogFragment() {
                 )
 
                 viewModel.successAcceptData.observe(viewLifecycleOwner) {
+                    val denied = it?.isEmpty() == true
+                    binding.progressBar.isVisible = denied
+                    if (denied) return@observe
+
                     Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+
+                    setNavResult(data = ACCEPTED)
+                    findNavController().popBackStack()
                 }
-                dialog?.hide()
-
             }
-
-
 
         }
 
 
     }
 
+    private fun <T> Fragment.setNavResult(key: String = DIALOG_RESULT_KEY, data: T) {
+        findNavController().previousBackStackEntry?.also { stack ->
+            stack.savedStateHandle.set(key, data)
+        }
+    }
 
     private fun bodySend(): HashMap<String, String> {
         val accepted: HashMap<String, String> = HashMap()
@@ -193,6 +204,7 @@ class AcceptDialog : DialogFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+
     }
 
 

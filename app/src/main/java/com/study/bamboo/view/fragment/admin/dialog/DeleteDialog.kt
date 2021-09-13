@@ -9,12 +9,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.DELETED
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTED
 import com.study.bamboo.databinding.DeleteDialogBinding
+import com.study.bamboo.utils.Util
 import com.study.bamboo.view.activity.signin.SignInActivity
 import com.study.bamboo.view.activity.splash.SplashActivity.Companion.deviceSizeX
 import com.study.bamboo.view.fragment.admin.AdminViewModel
@@ -66,10 +72,16 @@ class DeleteDialog : DialogFragment() {
                 reason,
                 args.auth,
             )
-            viewModel.successDeleteData.observe(viewLifecycleOwner){
-                Toast.makeText(requireContext(),it,Toast.LENGTH_SHORT).show()
+
+            viewModel.successDeleteData.observe(viewLifecycleOwner) {
+                val denied = it?.isEmpty() == true
+                if (denied) return@observe
+
+                Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+
+                setNavResult(data = DELETED)
+                findNavController().popBackStack()
             }
-            dialog?.hide()
         }
 
         binding.rejectBtn.setOnClickListener {
@@ -80,10 +92,15 @@ class DeleteDialog : DialogFragment() {
                 args.auth,
                 reject,
             )
-            viewModel.successPatchData.observe(viewLifecycleOwner){
-                Toast.makeText(requireContext(),it, Toast.LENGTH_LONG).show()
+            viewModel.successPatchData.observe(viewLifecycleOwner) {
+                val denied = it?.isEmpty() == true
+                if (denied) return@observe
+
+                Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+
+                setNavResult(data = DELETED)
+                findNavController().popBackStack()
             }
-            dialog?.hide()
         }
 
 
@@ -107,6 +124,11 @@ class DeleteDialog : DialogFragment() {
         _binding = null
     }
 
+    private fun <T> Fragment.setNavResult(key: String = Util.DIALOG_RESULT_KEY, data: T) {
+        findNavController().previousBackStackEntry?.also { stack ->
+            stack.savedStateHandle.set(key, data)
+        }
+    }
     companion object {
         const val TAG = "DeleteDialog"
     }

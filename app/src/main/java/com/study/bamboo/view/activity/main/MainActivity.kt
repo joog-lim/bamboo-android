@@ -30,8 +30,7 @@ class MainActivity : BaseActivity() {
     override fun onStart() {
         super.onStart()
         observeViewModel()
-        mainViewModel.callGetPost(getPostCountResponse, "", "ACCEPTED")
-        //mainViewModel.callGetCount()
+        mainViewModel.callGetPost(20, "ACCEPTED")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,6 +71,4 @@ class MainActivity : BaseActivity() {
         startActivity(intent)
         finish()
     }
-
-
 }

@@ -1,6 +1,5 @@
 package com.study.bamboo.view.activity.postcreate
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,12 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.study.bamboo.data.network.models.user.postcreate.PostCreateRequest
 import com.study.bamboo.data.network.models.user.postcreate.PostCreateResponse
 import com.study.bamboo.data.network.models.user.postcreate.Verifier
-import com.study.bamboo.view.activity.splash.UserRepository
+import com.study.bamboo.data.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel

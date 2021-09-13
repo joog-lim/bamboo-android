@@ -64,7 +64,9 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
                 tools:listitem="@layout/user_post_recycler_item"
-                android:overScrollMode="never"
+                android:scrollbarFadeDuration="0"
+                android:scrollbars="vertical"
+                android:scrollbarSize="20dp"
                 android:layout_marginBottom="17dp"/>
 
 

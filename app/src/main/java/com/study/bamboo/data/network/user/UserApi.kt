@@ -13,10 +13,9 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface UserApi {
-    @GET("post/AlgorithemList")
+    @GET("post/AlgorithemPage")
     suspend fun getPost(
-        @Query("count") count : Int,
-        @Query("cursor") cursor : String,
+        @Query("page") page : Int,
         @Query("status") status : String
     ) : Response<UserGetPostDTO>
 

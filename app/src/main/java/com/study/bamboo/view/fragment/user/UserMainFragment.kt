@@ -7,28 +7,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.study.bamboo.R
 import com.study.bamboo.base.BaseFragment
 import com.study.bamboo.data.network.models.user.GetVerifyDTO
-import com.study.bamboo.data.network.models.user.getcount.GetCount
 import com.study.bamboo.databinding.FragmentUserMainBinding
 import com.study.bamboo.utils.Functions
 import com.study.bamboo.view.activity.main.MainViewModel
 import com.study.bamboo.view.activity.postcreate.PostCreateActivity
-import com.study.bamboo.view.adapter.UserHomeItemAdapter
-import com.study.bamboo.view.fragment.admin.AdminMainFragment
-import com.study.bamboo.data.paging.GetPostSource
+import com.study.bamboo.adapter.user.UserHomeItemAdapter
 import com.study.bamboo.view.activity.signin.SignInActivity.Companion.getPostCountResponse
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment_user_main) {
@@ -74,11 +70,11 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
 
     fun addPostBtnClick(view: View) {
         binding.progressBar.visibility = View.VISIBLE
-        if (getVerifyResponse != null){
+        if (getVerifyResponse != null) {
             binding.progressBar.visibility = View.GONE
             val intent = Intent(requireContext(), PostCreateActivity::class.java)
             startActivity(intent)
-        }else{
+        } else {
             mainViewModel.callGetVerify()
         }
     }
@@ -87,13 +83,21 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
         Functions.recyclerViewManager(binding.postRecyclerView, requireContext())
         arguments?.getString("count")
         binding.postRecyclerView.adapter =
-            UserHomeItemAdapter(mainViewModel.getPostResponse, getPostCountResponse)
+            UserHomeItemAdapter()
         userHomeItemAdapter =
-            UserHomeItemAdapter(mainViewModel.getPostResponse, getPostCountResponse)
+            UserHomeItemAdapter()
 
-        lifecycleScope.launchWhenCreated {
+/*        lifecycleScope.launchWhenCreated {
             mainViewModel.getListData(getPostCountResponse).collect {
                 userHomeItemAdapter.submitData(it)
+            }
+        }*/
+
+        lifecycleScope.launch {
+            mainViewModel.pagingData.collectLatest {
+                (binding.postRecyclerView.adapter as UserHomeItemAdapter).submitData(
+                    it
+                )
             }
         }
     }
@@ -117,8 +121,8 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
                 getVerifyResponse = it
                 val intent = Intent(requireContext(), PostCreateActivity::class.java)
                 startActivity(intent)
-            }else{
-                Toast.makeText(requireContext(), "서버와 연결에 실패했습니다",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "서버와 연결에 실패했습니다", Toast.LENGTH_SHORT).show()
                 binding.progressBar.visibility = View.GONE
             }
         })

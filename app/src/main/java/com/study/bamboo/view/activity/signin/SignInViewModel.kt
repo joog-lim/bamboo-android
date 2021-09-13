@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.study.bamboo.data.network.models.user.UserPostDTO
 import com.study.bamboo.data.network.models.user.getcount.GetCount
 import com.study.bamboo.data.repository.remote.AdminRepository
-import com.study.bamboo.view.activity.splash.UserRepository
+import com.study.bamboo.data.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -52,15 +52,6 @@ class SignInViewModel @Inject constructor(
                     }
 
                 }
-            }
-        }
-    }
-
-    //게시물 가져오는 API
-    fun callGetPost(count: Int, cursor: String, status: String) = viewModelScope.launch {
-        userRepository.getPost(count, cursor, status).let { response ->
-            if (response.isSuccessful) {
-                _getPostResponse.value = response.body()?.posts
             }
         }
     }

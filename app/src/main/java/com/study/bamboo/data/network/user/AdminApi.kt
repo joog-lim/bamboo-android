@@ -36,13 +36,7 @@ interface AdminApi {
 
 
 
-    @GET("post/AlgorithemPage")
-    suspend fun getAcceptPost(
-        @Header("Authorization") Authorization: String,
-        @Query("count") count: Int,
-        @Query("cursor") cursor: String?,
-        @Query("status") status: String
-    ): Response<AcceptPost>
+
 
     @GET("post/AlgorithemPage")
     suspend fun getAcceptPage(

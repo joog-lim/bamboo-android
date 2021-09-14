@@ -72,6 +72,7 @@ class AcceptDialog : DialogFragment() {
         })
 
         binding.acceptBtn.setOnClickListener {
+            binding.progressBar.visibility = View.VISIBLE
 
             updatePost()
 
@@ -155,7 +156,6 @@ class AcceptDialog : DialogFragment() {
 
     private fun updatePost() {
         lifecycleScope.launch {
-
 
             if (binding.updateTagText.text.toString() == "태그선택") {
                 Toast.makeText(requireContext(), "잘못된 태그입니다.", Toast.LENGTH_SHORT).show()

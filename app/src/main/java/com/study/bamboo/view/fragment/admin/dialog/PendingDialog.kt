@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -74,6 +75,7 @@ class PendingDialog : DialogFragment() {
         })
 
         binding.acceptBtn.setOnClickListener {
+            binding.progressBar.visibility = View.VISIBLE
             Log.d(TAG, "PendingDialog token: $token, id : ${args.auth}, status: $ACCEPTED")
             val accepted = HashMap<String, String>()
             accepted["status"] = ACCEPTED
@@ -86,6 +88,7 @@ class PendingDialog : DialogFragment() {
 
             viewModel.successPatchData.observe(viewLifecycleOwner) {
                 val denied = it?.isEmpty() == true
+                binding.progressBar.isVisible = denied
                 if (denied) return@observe
 
                 Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
@@ -99,6 +102,7 @@ class PendingDialog : DialogFragment() {
 
 
         binding.pendingBtn.setOnClickListener {
+            binding.progressBar.visibility = View.VISIBLE
             val reject = HashMap<String, String>()
             reject["status"] = REJECTED
             viewModel.patchPost(
@@ -109,6 +113,7 @@ class PendingDialog : DialogFragment() {
                 )
             viewModel.successPatchData.observe(viewLifecycleOwner) {
                 val denied = it?.isEmpty() == true
+                binding.progressBar.isVisible = denied
                 if (denied) return@observe
 
                 Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()

@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -73,7 +74,7 @@ class RejectCancelDialog : DialogFragment() {
 
 
         binding.rejectCancelBtn.setOnClickListener {
-
+            binding.progressBar.visibility = View.VISIBLE
             val accept = HashMap<String, String>()
             accept["status"] = ACCEPTED
             viewModel.patchPost(
@@ -84,6 +85,7 @@ class RejectCancelDialog : DialogFragment() {
                 )
             viewModel.successPatchData.observe(viewLifecycleOwner) {
                 val denied = it?.isEmpty() == true
+                binding.progressBar.isVisible = denied
                 if (denied) return@observe
 
                 Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()

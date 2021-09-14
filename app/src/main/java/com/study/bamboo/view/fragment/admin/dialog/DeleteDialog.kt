@@ -65,6 +65,7 @@ class DeleteDialog : DialogFragment() {
         })
 
         binding.deleteBtn.setOnClickListener {
+            binding.progressBar.visibility = View.VISIBLE
             val reason: HashMap<String, String> = HashMap()
             reason["reason"] = binding.deleteWhy.text.toString()
             viewModel.deletePost(
@@ -75,6 +76,7 @@ class DeleteDialog : DialogFragment() {
 
             viewModel.successDeleteData.observe(viewLifecycleOwner) {
                 val denied = it?.isEmpty() == true
+                binding.progressBar.isVisible = denied
                 if (denied) return@observe
 
                 Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
@@ -85,6 +87,7 @@ class DeleteDialog : DialogFragment() {
         }
 
         binding.rejectBtn.setOnClickListener {
+            binding.progressBar.visibility = View.VISIBLE
             val reject = HashMap<String, String>()
             reject["status"] = REJECTED
             viewModel.patchPost(
@@ -94,6 +97,7 @@ class DeleteDialog : DialogFragment() {
             )
             viewModel.successPatchData.observe(viewLifecycleOwner) {
                 val denied = it?.isEmpty() == true
+                binding.progressBar.isVisible = denied
                 if (denied) return@observe
 
                 Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()

@@ -76,26 +76,8 @@ class PendingDialog : DialogFragment() {
 
         binding.acceptBtn.setOnClickListener {
             binding.progressBar.visibility = View.VISIBLE
-            Log.d(TAG, "PendingDialog token: $token, id : ${args.auth}, status: $ACCEPTED")
-            val accepted = HashMap<String, String>()
-            accepted["status"] = ACCEPTED
 
-            viewModel.patchPost(
-                token = token,
-                args.auth,
-                accepted
-            )
-
-            viewModel.successPatchData.observe(viewLifecycleOwner) {
-                val denied = it?.isEmpty() == true
-                binding.progressBar.isVisible = denied
-                if (denied) return@observe
-
-                Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
-
-                setNavResult(data = PENDING)
-                findNavController().popBackStack()
-            }
+            acceptPost()
 
 
         }
@@ -103,24 +85,8 @@ class PendingDialog : DialogFragment() {
 
         binding.pendingBtn.setOnClickListener {
             binding.progressBar.visibility = View.VISIBLE
-            val reject = HashMap<String, String>()
-            reject["status"] = REJECTED
-            viewModel.patchPost(
-                token,
-                args.auth,
-                reject,
 
-                )
-            viewModel.successPatchData.observe(viewLifecycleOwner) {
-                val denied = it?.isEmpty() == true
-                binding.progressBar.isVisible = denied
-                if (denied) return@observe
-
-                Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
-
-                setNavResult(data = PENDING)
-                findNavController().popBackStack()
-            }
+            deletePost()
         }
 
 
@@ -130,6 +96,48 @@ class PendingDialog : DialogFragment() {
         return binding.root
     }
 
+    private fun acceptPost(){
+        val accepted = HashMap<String, String>()
+        accepted["status"] = ACCEPTED
+
+        viewModel.patchPost(
+            token = token,
+            args.auth,
+            accepted
+        )
+
+        viewModel.successPatchData.observe(viewLifecycleOwner) {
+            val denied = it?.isEmpty() == true
+            binding.progressBar.isVisible = denied
+            if (denied) return@observe
+
+            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+
+            setNavResult(data = PENDING)
+            findNavController().popBackStack()
+        }
+    }
+
+    private fun deletePost(){
+        val reject = HashMap<String, String>()
+        reject["status"] = REJECTED
+        viewModel.patchPost(
+            token,
+            args.auth,
+            reject,
+
+            )
+        viewModel.successPatchData.observe(viewLifecycleOwner) {
+            val denied = it?.isEmpty() == true
+            binding.progressBar.isVisible = denied
+            if (denied) return@observe
+
+            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+
+            setNavResult(data = PENDING)
+            findNavController().popBackStack()
+        }
+    }
     private fun <T> Fragment.setNavResult(key: String = Util.DIALOG_RESULT_KEY, data: T) {
         findNavController().previousBackStackEntry?.also { stack ->
             stack.savedStateHandle.set(key, data)

@@ -51,7 +51,7 @@ class RejectCancelDialog : DialogFragment() {
         //디바이스 크기 확인후 커스텀 다이어로그 팝업 크기 조정
         val params: ViewGroup.LayoutParams? = dialog?.window?.attributes
         val deviceWidth = deviceSizeX
-        Log.d("로그","acceptDialog : $deviceWidth")
+        Log.d("로그", "acceptDialog : $deviceWidth")
         params?.width = (deviceWidth * 0.9).toInt()
 
 
@@ -75,24 +75,8 @@ class RejectCancelDialog : DialogFragment() {
 
         binding.rejectCancelBtn.setOnClickListener {
             binding.progressBar.visibility = View.VISIBLE
-            val accept = HashMap<String, String>()
-            accept["status"] = ACCEPTED
-            viewModel.patchPost(
-                token,
-                args.auth,
-                accept,
 
-                )
-            viewModel.successPatchData.observe(viewLifecycleOwner) {
-                val denied = it?.isEmpty() == true
-                binding.progressBar.isVisible = denied
-                if (denied) return@observe
-
-                Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
-
-                setNavResult(data = REJECTED)
-                findNavController().popBackStack()
-            }
+            rejectDialog()
         }
 
 
@@ -102,12 +86,33 @@ class RejectCancelDialog : DialogFragment() {
         return binding.root
     }
 
+    private fun rejectDialog() {
+        val accept = HashMap<String, String>()
+        accept["status"] = ACCEPTED
+        viewModel.patchPost(
+            token,
+            args.auth,
+            accept,
+
+            )
+        viewModel.successPatchData.observe(viewLifecycleOwner) {
+            val denied = it?.isEmpty() == true
+            binding.progressBar.isVisible = denied
+            if (denied) return@observe
+
+            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+
+            setNavResult(data = REJECTED)
+            findNavController().popBackStack()
+        }
+    }
 
     private fun <T> Fragment.setNavResult(key: String = Util.DIALOG_RESULT_KEY, data: T) {
         findNavController().previousBackStackEntry?.also { stack ->
             stack.savedStateHandle.set(key, data)
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

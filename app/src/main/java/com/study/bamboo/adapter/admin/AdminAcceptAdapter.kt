@@ -1,5 +1,6 @@
 package com.study.bamboo.adapter.admin
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -83,18 +84,26 @@ class AdminAcceptAdapter
 
     override fun onBindViewHolder(holder: AdminAcceptItemViewHolder, position: Int) {
         val item = getItem(position)
-        if (item != null) {
+        try {
+            if (item != null) {
 
 
-            holder.bind(item)
-            holder.binding.postMore.setOnClickListener {
-                val action =
-                    AdminMainFragmentDirections.actionAdminMainFragmentToAcceptDialog(
-                        item.id, holder.bindingAdapterPosition,item.title,item.content,item.tag
-                    )
-                it.findNavController().navigateUp()
-                it.findNavController().navigate(action)
+                holder.bind(item)
+                holder.binding.postMore.setOnClickListener {
+                    val action =
+                        AdminMainFragmentDirections.actionAdminMainFragmentToAcceptDialog(
+                            item.id,
+                            holder.bindingAdapterPosition,
+                            item.title,
+                            item.content,
+                            item.tag
+                        )
+                    it.findNavController().navigateUp()
+                    it.findNavController().navigate(action)
+                }
             }
+        }catch (e:Exception){
+            Log.d(TAG, "onBindViewHolder: 네비게이션 찾을수 없음")
         }
     }
 }

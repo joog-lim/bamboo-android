@@ -1,5 +1,6 @@
 package com.study.bamboo.adapter.admin
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -62,17 +63,20 @@ class AdminRejectAdapter :
     override fun onBindViewHolder(holder: AdminRejectItemViewHolder, position: Int) {
         val item=getItem(position)
 
-        if(item!=null) {
-
-            holder.bind(item)
-            holder.binding.postMore.setOnClickListener {
-                val action =
-                    AdminMainFragmentDirections.actionAdminMainFragmentToRejectCancelDialog(
-                        item.id,holder.bindingAdapterPosition
-                    )
-                it.findNavController().navigateUp()
-                it.findNavController().navigate(action)
+        try {
+            if (item != null) {
+                holder.bind(item)
+                holder.binding.postMore.setOnClickListener {
+                    val action =
+                        AdminMainFragmentDirections.actionAdminMainFragmentToRejectCancelDialog(
+                            item.id, holder.bindingAdapterPosition
+                        )
+                    it.findNavController().navigateUp()
+                    it.findNavController().navigate(action)
+                }
             }
+        }catch (e:Exception){
+            Log.d("RejectAdapter", "onBindViewHolder: 네비게이션없음")
         }
     }
 

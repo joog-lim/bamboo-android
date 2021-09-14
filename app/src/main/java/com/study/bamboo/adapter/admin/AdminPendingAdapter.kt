@@ -1,5 +1,6 @@
 package com.study.bamboo.adapter.admin
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -57,25 +58,24 @@ class AdminPendingAdapter :
         }
     }
 
-//    fun updateStatus(
-//        position: Int,
-//        status: String
-//    ) {
-//        snapshot()[position]?.status = status
-//    }
+
 
     override fun onBindViewHolder(holder: AdminPendingItemViewHolder, position: Int) {
         val item=getItem(position)
-        if(item!=null) {
-            holder.bind(item)
-            holder.binding.postMore.setOnClickListener {
-                val action =
-                    AdminMainFragmentDirections.actionAdminMainFragmentToPendingDialog(
-                        item.id,holder.bindingAdapterPosition
-                    )
-                it.findNavController().navigateUp()
-                it.findNavController().navigate(action)
+        try {
+            if (item != null) {
+                holder.bind(item)
+                holder.binding.postMore.setOnClickListener {
+                    val action =
+                        AdminMainFragmentDirections.actionAdminMainFragmentToPendingDialog(
+                            item.id, holder.bindingAdapterPosition
+                        )
+                    it.findNavController().navigateUp()
+                    it.findNavController().navigate(action)
+                }
             }
+        }catch (e:Exception){
+            Log.d("PendingAdapter", "onBindViewHolder: 네비게이션 없음 ")
         }
     }
 

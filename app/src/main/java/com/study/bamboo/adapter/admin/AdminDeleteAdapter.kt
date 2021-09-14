@@ -1,5 +1,6 @@
 package com.study.bamboo.adapter.admin
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -37,19 +38,23 @@ class AdminDeleteAdapter :
 
     override fun onBindViewHolder(holder: AdminDeleteItemViewHolder, position: Int) {
         val item = getItem(position)
-        if (item != null) {
+        try {
+            if (item != null) {
 
-            holder.bind(item)
-            holder.binding.postMore.setOnClickListener {
-                val action =
-                    AdminMainFragmentDirections.actionAdminMainFragmentToDeleteDialog(
-                        item.id,holder.bindingAdapterPosition
-                    )
-                it.findNavController().navigateUp()
-                it.findNavController().navigate(action)
+                holder.bind(item)
+                holder.binding.postMore.setOnClickListener {
+                    val action =
+                        AdminMainFragmentDirections.actionAdminMainFragmentToDeleteDialog(
+                            item.id, holder.bindingAdapterPosition
+                        )
+                    it.findNavController().navigateUp()
+                    it.findNavController().navigate(action)
+                }
             }
-        }
 
+        }catch (e:Exception){
+            Log.d("DeleteAdapter", "onBindViewHolder: 네비게이션 문제있음")
+        }
     }
 
 

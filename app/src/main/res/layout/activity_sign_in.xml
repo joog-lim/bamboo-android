@@ -22,7 +22,7 @@
             android:layout_height="@dimen/signin_logo"
             android:layout_marginTop="120dp"
             android:layout_marginBottom="501dp"
-            android:src="@drawable/ic_bamboo_logo"
+            android:src="@drawable/ic__logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -10,7 +10,7 @@
         android:layout_width="@dimen/splash_logo"
         android:layout_height="@dimen/splash_logo"
         android:layout_centerInParent="true"
-        android:src="@drawable/ic_bamboo_logo"
+        android:src="@drawable/ic__logo"
         />
 
 </RelativeLayout>

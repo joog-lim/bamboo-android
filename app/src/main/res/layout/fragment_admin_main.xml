@@ -35,7 +35,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
 
-                    android:layout_marginStart="14dp"
+                    android:layout_marginStart="20dp"
                     android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -97,17 +97,7 @@
 
                 </LinearLayout>
 
-                <ImageButton
-                    android:id="@+id/update_btn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/refresh"
-                    android:text="새로고침"
 
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
-                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView

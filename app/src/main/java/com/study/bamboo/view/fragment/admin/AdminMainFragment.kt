@@ -138,14 +138,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                 }
             }
         }
-        binding.updateBtn.setOnClickListener {
-            when (adapter) {
-                acceptAdapter -> acceptAdapter.refresh()
-                rejectAdapter -> rejectAdapter.refresh()
-                pendingAdapter -> pendingAdapter.refresh()
-                deleteAdapter -> pendingAdapter.refresh()
-            }
-        }
+
 
     }
 

@@ -67,6 +67,7 @@
                 android:scrollbarFadeDuration="0"
                 android:scrollbars="vertical"
                 android:scrollbarSize="20dp"
+                android:overScrollMode="never"
                 android:layout_marginBottom="17dp"/>
 
 

@@ -130,7 +130,7 @@
                     android:fontFamily="@font/nanumsquareround_otfb"
                     android:gravity="top|start"
                     android:hint="내용을 입력하세요."
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     android:padding="10dp"
                     android:textSize="15sp" />
 

@@ -70,7 +70,6 @@
                 android:overScrollMode="never"
                 android:layout_marginBottom="17dp"/>
 
-
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

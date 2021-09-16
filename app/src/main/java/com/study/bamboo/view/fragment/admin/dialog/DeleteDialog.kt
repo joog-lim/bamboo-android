@@ -34,7 +34,6 @@ class DeleteDialog : DialogFragment() {
     private val viewModel: AdminViewModel by viewModels()
 
 
-
     override fun onResume() {
         super.onResume()
         dialogCorner()
@@ -65,42 +64,17 @@ class DeleteDialog : DialogFragment() {
         })
 
         binding.deleteBtn.setOnClickListener {
-            val reason: HashMap<String, String> = HashMap()
-            reason["reason"] = binding.deleteWhy.text.toString()
-            viewModel.deletePost(
-                token,
-                reason,
-                args.auth,
-            )
+            binding.progressBar.visibility = View.VISIBLE
 
-            viewModel.successDeleteData.observe(viewLifecycleOwner) {
-                val denied = it?.isEmpty() == true
-                if (denied) return@observe
+            deletePost()
 
-                Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
-
-                setNavResult(data = DELETED)
-                findNavController().popBackStack()
-            }
         }
 
         binding.rejectBtn.setOnClickListener {
-            val reject = HashMap<String, String>()
-            reject["status"] = REJECTED
-            viewModel.patchPost(
-                token,
-                args.auth,
-                reject,
-            )
-            viewModel.successPatchData.observe(viewLifecycleOwner) {
-                val denied = it?.isEmpty() == true
-                if (denied) return@observe
+            binding.progressBar.visibility = View.VISIBLE
 
-                Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+            rejectPost()
 
-                setNavResult(data = DELETED)
-                findNavController().popBackStack()
-            }
         }
 
 
@@ -109,16 +83,58 @@ class DeleteDialog : DialogFragment() {
         return binding.root
     }
 
+    private fun deletePost() {
+        val reason: HashMap<String, String> = HashMap()
+        reason["reason"] = binding.deleteWhy.text.toString()
+        viewModel.deletePost(
+            token,
+            reason,
+            args.auth,
+        )
+
+        viewModel.successDeleteData.observe(viewLifecycleOwner) {
+            val denied = it?.isEmpty() == true
+            binding.progressBar.isVisible = denied
+            if (denied) return@observe
+
+            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+
+            setNavResult(data = DELETED)
+            findNavController().popBackStack()
+        }
+    }
+
+    private fun rejectPost(){
+        val reject = HashMap<String, String>()
+        reject["status"] = REJECTED
+        viewModel.patchPost(
+            token,
+            args.auth,
+            reject,
+        )
+        viewModel.successPatchData.observe(viewLifecycleOwner) {
+            val denied = it?.isEmpty() == true
+            binding.progressBar.isVisible = denied
+            if (denied) return@observe
+
+            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+
+            setNavResult(data = DELETED)
+            findNavController().popBackStack()
+        }
+    }
+
     private fun initDialog() {
         //        //디바이스 크기 확인후 커스텀 다이어로그 팝업 크기 조정
         val params: ViewGroup.LayoutParams? = dialog?.window?.attributes
         val deviceWidth = deviceSizeX
-        Log.d("로그","acceptDialog : $deviceWidth")
+        Log.d("로그", "acceptDialog : $deviceWidth")
         params?.width = (deviceWidth * 0.9).toInt()
 
 
         dialog?.window?.attributes = params as WindowManager.LayoutParams
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -129,6 +145,7 @@ class DeleteDialog : DialogFragment() {
             stack.savedStateHandle.set(key, data)
         }
     }
+
     companion object {
         const val TAG = "DeleteDialog"
     }

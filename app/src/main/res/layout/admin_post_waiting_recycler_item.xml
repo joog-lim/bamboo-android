@@ -11,7 +11,6 @@
 
     </data>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,7 +31,7 @@
             android:orientation="horizontal">
 
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -49,50 +48,55 @@
                     android:textColor="@color/text_waiting_color"
                     android:textSize="@dimen/post_md"
 
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:number="@{data.number}"
                     app:status="@{data.status}"
-                    tools:text="#192번째 대기중" />
+                    tools:text="#192번째 알고리즘" />
 
-                <TextView
-                    android:id="@+id/post_time"
-                    android:layout_width="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nanumsquareround_otfb"
-                    android:gravity="start"
-                    android:textColor="#C4C4C4"
-                    android:textSize="@dimen/post_time"
-                    app:day="@{data.createdAt}"
-                    tools:text="2021년 3월 12일 새벽" />
 
                 <TextView
                     android:id="@+id/post_tag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="@{data.tag}"
                     android:textColor="@color/main_color"
-                    android:textSize="@dimen/post_tag"
-                    tools:text="#공부"
+                    app:getTag="@{data.tag}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginEnd="13dp"
 
-                    />
+                    app:layout_constraintEnd_toStartOf="@+id/post_more"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="#공부" />
 
                 <TextView
                     android:id="@+id/post_more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
                     android:background="@drawable/admin_reject_spinner"
                     android:fontFamily="@font/nanumsquareround_otfb"
-                    android:gravity="start"
                     android:textColor="#C4C4C4"
                     android:textSize="@dimen/post_more"
                     app:chooseStatus="@{data.status}"
-                    tools:hint="더보기" />
-            </LinearLayout>
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:hint="수정" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/post_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumsquareround_otfb"
+            android:gravity="start"
+            android:textColor="#C4C4C4"
+            android:textSize="@dimen/post_time"
+            app:day="@{data.createdAt}"
+
+            tools:text="2021년 3월 12일 새벽" />
 
         <TextView
             android:id="@+id/post_md"

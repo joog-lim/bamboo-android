@@ -66,7 +66,8 @@
                 tools:listitem="@layout/user_post_recycler_item"
                 android:scrollbarFadeDuration="0"
                 android:scrollbars="vertical"
-                android:scrollbarSize="5dp"
+                android:scrollbarSize="20dp"
+                android:overScrollMode="never"
                 android:layout_marginBottom="17dp"/>
 
         </LinearLayout>

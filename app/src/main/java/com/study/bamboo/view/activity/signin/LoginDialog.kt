@@ -95,7 +95,7 @@ class LoginDialog : DialogFragment() {
             if (it.isNotEmpty()) {
                 val intent = Intent(requireContext(), AdminActivity::class.java)
                 startActivity(intent)
-
+                (activity as SignInActivity).finish()
             }
 
         })

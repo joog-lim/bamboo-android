@@ -46,9 +46,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
                         android:fontFamily="@font/nanumsquareround_otfb"
-                        app:userPostNumber="@{data.number}"
                         android:textColor="@color/main_color"
                         android:textSize="@dimen/post_number"
+                        app:userPostNumber="@{data.number}"
                         tools:text="#192번째 알고리즘" />
 
 
@@ -59,14 +59,27 @@
                     android:id="@+id/user_post_tag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:userPostTag="@{data.tag}"
-                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
+                    android:layout_toStartOf="@id/declaration_btn"
                     android:fontFamily="@font/nanumsquareround_otfb"
                     android:gravity="start"
                     android:textColor="#C4C4C4"
                     android:textSize="@dimen/post_tag"
+                    app:userPostTag="@{data.tag}"
                     tools:text="#공부" />
+
+                <TextView
+                    android:id="@+id/declaration_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/nanumsquareround_otfb"
+                    android:gravity="start"
+                    android:textColor="#E75858"
+                    android:textSize="@dimen/post_tag"
+                    android:text="신고" />
             </RelativeLayout>
 
 

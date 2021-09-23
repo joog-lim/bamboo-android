@@ -5,6 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.study.bamboo.data.network.models.user.UserPostDTO
 import com.study.bamboo.data.network.models.user.postcreate.PostCreateRequest
+import com.study.bamboo.data.network.models.user.report.ReportRequest
 import com.study.bamboo.data.network.user.UserApi
 import com.study.bamboo.data.paging.GetPostSource
 import kotlinx.coroutines.flow.Flow
@@ -16,5 +17,5 @@ class UserRepository @Inject constructor(private val userApi: UserApi){
     suspend fun getVerify() = userApi.getVerify()
     suspend fun getCount() = userApi.getCount()
     fun getPagingData(): Flow<PagingData<UserPostDTO>> { return Pager(PagingConfig(pageSize = 20)) { GetPostSource(userApi) }.flow }
-
+    suspend fun report(id : String, body: ReportRequest) = userApi.report(id, body)
 }

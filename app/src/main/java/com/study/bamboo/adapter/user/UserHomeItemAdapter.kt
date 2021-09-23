@@ -5,12 +5,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
+import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.study.bamboo.R
-import com.study.bamboo.databinding.UserPostRecyclerItemBinding
 import com.study.bamboo.data.network.models.user.UserPostDTO
+import com.study.bamboo.databinding.UserPostRecyclerItemBinding
+import com.study.bamboo.view.fragment.user.UserMainFragmentDirections
 
 class UserHomeItemAdapter(
 ) :
@@ -33,6 +36,10 @@ class UserHomeItemAdapter(
             holder.bind(item)
         }
 
+        holder.binding.declarationBtn.setOnClickListener {
+            val direction: NavDirections = UserMainFragmentDirections.actionUserMainFragmentToDeclarationFragment(item!!.id)
+            it.findNavController().navigate(direction)
+        }
     }
 
     class UserHomeItemViewHolder(val binding: UserPostRecyclerItemBinding) :

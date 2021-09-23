@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.fragment.user.DeclarationFragment">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="신고하기"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:textColor="#E75858"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/login_dialog_password_edittext"
+        android:elevation="5dp"
+        android:fontFamily="@font/nanumsquareround_otfb"
+        android:text="알고리즘을 신고합니다"
+        android:textColor="@color/black"
+        android:padding="10dp"
+        android:textSize="12sp" />
+    <EditText
+        android:id="@+id/delete_why"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/login_dialog_password_edittext"
+        android:elevation="5dp"
+        android:fontFamily="@font/nanumsquareround_otfb"
+        android:hint="사유를 입력해 주세요."
+        android:inputType="textMultiLine"
+        android:gravity="top|start"
+        android:padding="10dp"
+        android:textColorHint="#C4C4C4"
+        android:textSize="12sp" />
+
+
+</LinearLayout>

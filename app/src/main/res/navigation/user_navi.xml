@@ -10,7 +10,11 @@
         android:id="@+id/userMainFragment"
         tools:layout="@layout/fragment_user_main"
         android:name="com.study.bamboo.view.fragment.user.UserMainFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_userMainFragment_to_declarationFragment"
+            app:destination="@id/declarationFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/userRulesFragment"
@@ -22,5 +26,16 @@
         android:name="com.study.bamboo.view.fragment.user.MoreSeeFragment"
         android:label="fragment_more_see"
         tools:layout="@layout/fragment_more_see" />
+    <fragment
+        android:id="@+id/declarationFragment"
+        android:name="com.study.bamboo.view.fragment.user.DeclarationFragment"
+        android:label="DeclarationFragment"
+        tools:layout="@layout/fragment_declaration">
+        <argument
+            android:name="id"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="true"/>
+    </fragment>
 
 </navigation>

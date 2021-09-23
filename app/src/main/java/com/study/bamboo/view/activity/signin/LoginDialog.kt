@@ -101,26 +101,17 @@ class LoginDialog : DialogFragment() {
         })
 
         signInViewModel.loginSuccess.observe(viewLifecycleOwner) {
-            if(it!="") {
-                if (toast == null) {
-                    toast = Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT)
-                    toast?.show()
-                }
-                else{
-                    toast?.cancel()
-                    toast?.show()
-                }
-
-            }
-
+            toast = Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT)
+            toast?.show()
 
         }
-
     }
+
     fun hideKeyboardFrom(context: Context, view: View) {
         val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0);
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

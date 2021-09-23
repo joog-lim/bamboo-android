@@ -85,7 +85,6 @@ class LoginDialog : DialogFragment() {
         // editText가 null이면 button click 못하게 막는다.
         view?.let { it1 -> hideKeyboardFrom(requireContext(), it1) }
 
-        binding.loginBtn.isEnabled = binding.passwordEdittext.text.toString().isEmpty()
 
         signInViewModel.callAdminLoginAPI(binding.passwordEdittext.text.toString())
 
@@ -100,15 +99,17 @@ class LoginDialog : DialogFragment() {
             }
 
         })
+
         signInViewModel.loginSuccess.observe(viewLifecycleOwner) {
-            Log.d(TAG, "loginBtnClick: $it")
             if(it!="") {
                 if (toast == null) {
                     toast = Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT)
                     toast?.show()
                 }
-                else
+                else{
                     toast?.cancel()
+                    toast?.show()
+                }
 
             }
 

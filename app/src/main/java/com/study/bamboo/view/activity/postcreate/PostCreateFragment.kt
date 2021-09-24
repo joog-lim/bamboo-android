@@ -3,43 +3,56 @@ package com.study.bamboo.view.activity.postcreate
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import com.study.bamboo.R
-import com.study.bamboo.base.BaseActivity
-import com.study.bamboo.databinding.ActivityPostCreateBinding
-import com.study.bamboo.view.activity.main.MainViewModel
+import com.study.bamboo.databinding.FragmentPostCreateBinding
 import com.study.bamboo.view.activity.splash.SplashViewModel
 import com.study.bamboo.view.fragment.user.UserMainFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PostCreateActivity : BaseActivity() {
+class PostCreateFragment : Fragment() {
+    private lateinit var binding : FragmentPostCreateBinding
+    private val splashViewModel : SplashViewModel by activityViewModels()
+    private val postCreateViewModel : PostCreateViewModel by activityViewModels()
+    var choiceTag = "태그선택"
 
-    private val binding by binding<ActivityPostCreateBinding>(R.layout.activity_post_create)
-    private var tag = "태그선택"
-
-    private val splashViewModel : SplashViewModel by viewModels()
-    private val postCreateViewModel : PostCreateViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_post_create)
-        binding.activity = this
+
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_post_create,container,false)
+        binding.fragment = this
         observeViewModel()
-        supportActionBar!!.hide()
         binding.question.text = "Q. ${UserMainFragment.getVerifyResponse?.question}"
         setupSpinnerTag()
         setupSpinnerHandler()
+        return binding.root
     }
+
+
 
     private fun observeViewModel() {
         //게시물을 전송하기 버튼 클릭 후 질문 답 확인
-        postCreateViewModel.postCreateResponse.observe(this, Observer {
+        postCreateViewModel.postCreateResponse.observe(requireActivity(), Observer {
             binding.progressBar.visibility = View.GONE
             if (it != null) {
                 postCreateViewModel.setPostCreateSuccess(true)
@@ -48,17 +61,19 @@ class PostCreateActivity : BaseActivity() {
 
 
         //게시물을 성공적으로 전송했는지 확인
-        postCreateViewModel.postCreateSuccess.observe(this, Observer {
+        postCreateViewModel.postCreateSuccess.observe(requireActivity(), Observer {
             if (it == true) {
-                finish()
+                this.findNavController().popBackStack()
             }
         })
 
 
     }
 
+
     fun backBtnClick(view: View) {
-        finish()
+        Log.d("로그","여기 눌렀다잉")
+        this.findNavController().popBackStack()
     }
 
     fun postCreateBtnClick(view: View) {
@@ -66,7 +81,7 @@ class PostCreateActivity : BaseActivity() {
                 binding.questionAnswer.text.toString()
             )
         ) {
-            Toast.makeText(this, "필수항목을 작성해 주세요", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "필수항목을 작성해 주세요", Toast.LENGTH_SHORT).show()
         } else {
 
             if (questionAnswerTrue(binding.questionAnswer.text.toString())) {
@@ -76,7 +91,7 @@ class PostCreateActivity : BaseActivity() {
                     postCreateViewModel.callPostCreateAPI(
                         binding.title.text.toString(),
                         binding.content.text.toString(),
-                        tag,
+                        choiceTag,
                         it.id,
                         binding.questionAnswer.text.toString()
                     )
@@ -84,7 +99,7 @@ class PostCreateActivity : BaseActivity() {
 
 
             } else {
-                Toast.makeText(this, "질문에 대한 답이 옳지 않습니다", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "질문에 대한 답이 옳지 않습니다", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -96,7 +111,7 @@ class PostCreateActivity : BaseActivity() {
 
     private fun setupSpinnerTag() {
         binding.choiceTag.adapter = ArrayAdapter.createFromResource(
-            this,
+            requireContext(),
             R.array.PostCreateTagList,
             R.layout.post_create_tag_spinner_item
         )
@@ -116,44 +131,43 @@ class PostCreateActivity : BaseActivity() {
             ) {
                 when (position) {
                     0 -> {
-                        tag = "태그선택"
+                        choiceTag = "태그선택"
                     }
                     1 -> {
-                        tag = "유머"
+                        choiceTag = "유머"
 
                     }
                     2 -> {
-                        tag = "공부"
+                        choiceTag = "공부"
 
                     }
                     3 -> {
-                        tag = "일상"
+                        choiceTag = "일상"
 
                     }
                     4 -> {
-                        tag = "학교"
+                        choiceTag = "학교"
 
                     }
                     5 -> {
-                        tag = "취업"
+                        choiceTag = "취업"
 
                     }
                     6 -> {
-                        tag = "관계"
+                        choiceTag = "관계"
 
                     }
                     7 -> {
-                        tag = "기타"
+                        choiceTag = "기타"
 
                     }
                     else -> {
-                        tag = "태그선택"
+                        choiceTag = "태그선택"
                     }
                 }
-                postCreateViewModel.setChoiceTag(tag)
+                postCreateViewModel.setChoiceTag(choiceTag)
             }
         }
 
     }
-
 }

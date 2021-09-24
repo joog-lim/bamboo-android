@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
-            name="activity"
-            type="com.study.bamboo.view.activity.postcreate.PostCreateActivity" />
+            name="fragment"
+            type="com.study.bamboo.view.activity.postcreate.PostCreateFragment" />
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".view.activity.postcreate.PostCreateActivity">
-
+        tools:context=".view.activity.postcreate.PostCreateFragment">
 
 
         <LinearLayout
@@ -41,7 +39,7 @@
                     android:textSize="20sp" />
                 <ImageView
                     android:id="@+id/back_btn"
-                    android:onClick="@{activity::backBtnClick}"
+                    android:onClick="@{fragment::backBtnClick}"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:padding="10dp"
@@ -192,7 +190,7 @@
             android:background="@drawable/post_create_upload_btn"
             android:text="전송하기"
             android:padding="20dp"
-            android:onClick="@{activity::postCreateBtnClick}"
+            android:onClick="@{fragment::postCreateBtnClick}"
             android:textColor="@color/white"
             android:fontFamily="@font/nanumsquareround_otfb"
             android:textSize="20sp"

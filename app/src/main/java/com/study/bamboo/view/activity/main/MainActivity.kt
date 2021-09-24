@@ -67,8 +67,8 @@ class MainActivity : BaseActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        val intent = Intent(this, SignInActivity::class.java)
+   /*     val intent = Intent(this, SignInActivity::class.java)
         startActivity(intent)
-        finish()
+        finish()*/
     }
 }

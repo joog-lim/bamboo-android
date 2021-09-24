@@ -1,13 +1,13 @@
 package com.study.bamboo.view.fragment.admin.dialog
 
+import android.app.Activity
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
+import android.view.*
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
@@ -98,6 +98,7 @@ class PendingDialog : DialogFragment() {
     }
 
     private fun acceptPost() {
+        view?.let { it1 -> hideKeyboardFrom(requireContext(), it1) }
         val accepted = HashMap<String, String>()
         accepted["status"] = ACCEPTED
         val data = SetStatusRequest(ACCEPTED, "")
@@ -120,7 +121,7 @@ class PendingDialog : DialogFragment() {
     }
 
     private fun deletePost() {
-
+        view?.let { it1 -> hideKeyboardFrom(requireContext(), it1) }
         val data =
             SetStatusRequest(status = REJECTED, reason = binding.rejectReasonText.text.toString())
         viewModel.patchPost(
@@ -134,13 +135,18 @@ class PendingDialog : DialogFragment() {
             binding.progressBar.isVisible = denied
             if (denied) return@observe
 
-            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+            val toast = Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT)
+            toast.setGravity(Gravity.BOTTOM, 400, 550)
+            toast.show()
 
             setNavResult(data = PENDING)
             findNavController().popBackStack()
         }
     }
-
+    fun hideKeyboardFrom(context: Context, view: View) {
+        val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0);
+    }
     private fun <T> Fragment.setNavResult(key: String = Util.DIALOG_RESULT_KEY, data: T) {
         findNavController().previousBackStackEntry?.also { stack ->
             stack.savedStateHandle.set(key, data)

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="deploymentTargetDropDown">
+    <runningDeviceTargetSelectedWithDropDown>
+      <Target>
+        <type value="RUNNING_DEVICE_TARGET" />
+        <deviceKey>
+          <Key>
+            <type value="SERIAL_NUMBER" />
+            <value value="RF9R30631WH" />
+          </Key>
+        </deviceKey>
+      </Target>
+    </runningDeviceTargetSelectedWithDropDown>
+    <timeTargetWasSelectedWithDropDown value="2021-09-24T04:27:28.852476200Z" />
+  </component>
+</project>

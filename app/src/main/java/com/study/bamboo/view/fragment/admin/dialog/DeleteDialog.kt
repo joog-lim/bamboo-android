@@ -1,5 +1,7 @@
 package com.study.bamboo.view.fragment.admin.dialog
 
+import android.app.Activity
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -8,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
@@ -85,6 +88,7 @@ class DeleteDialog : DialogFragment() {
     }
 
     private fun deletePost() {
+        view?.let { it1 -> hideKeyboardFrom(requireContext(), it1) }
         val reason: HashMap<String, String> = HashMap()
         reason["reason"] = binding.deleteWhy.text.toString()
         viewModel.deletePost(
@@ -104,7 +108,10 @@ class DeleteDialog : DialogFragment() {
             findNavController().popBackStack()
         }
     }
-
+    fun hideKeyboardFrom(context: Context, view: View) {
+        val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0);
+    }
     private fun rejectPost(){
         val reject = HashMap<String, String>()
         reject["status"] = REJECTED

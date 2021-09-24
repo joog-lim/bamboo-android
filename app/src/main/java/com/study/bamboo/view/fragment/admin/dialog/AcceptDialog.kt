@@ -1,5 +1,7 @@
 package com.study.bamboo.view.fragment.admin.dialog
 
+import android.app.Activity
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -25,6 +27,9 @@ import com.study.bamboo.view.activity.splash.SplashActivity.Companion.deviceSize
 import com.study.bamboo.view.fragment.admin.AdminViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import android.view.Gravity
+import android.view.inputmethod.InputMethodManager
+
 
 @AndroidEntryPoint
 class AcceptDialog : DialogFragment() {
@@ -155,6 +160,7 @@ class AcceptDialog : DialogFragment() {
 
 
     private fun updatePost() {
+        view?.let { it1 -> hideKeyboardFrom(requireContext(), it1) }
         lifecycleScope.launch {
 
             if (binding.updateTagText.text.toString() == "태그선택") {
@@ -173,7 +179,9 @@ class AcceptDialog : DialogFragment() {
                     binding.progressBar.isVisible = denied
                     if (denied) return@observe
 
-                    Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+                    val toast = Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT)
+                    toast.show()
+
 
                     setNavResult(data = ACCEPTED)
                     findNavController().popBackStack()
@@ -185,6 +193,10 @@ class AcceptDialog : DialogFragment() {
 
     }
 
+    fun hideKeyboardFrom(context: Context, view: View) {
+        val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0);
+    }
     private fun <T> Fragment.setNavResult(key: String = DIALOG_RESULT_KEY, data: T) {
         findNavController().previousBackStackEntry?.also { stack ->
             stack.savedStateHandle.set(key, data)

@@ -20,6 +20,7 @@ import com.study.bamboo.adapter.admin.AdminAcceptAdapter
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTED
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.PENDING
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTED
+import com.study.bamboo.data.network.models.admin.SetStatusRequest
 import com.study.bamboo.databinding.PendingDialogBinding
 import com.study.bamboo.utils.Util
 import com.study.bamboo.view.activity.signin.SignInActivity
@@ -53,7 +54,7 @@ class PendingDialog : DialogFragment() {
         //        //디바이스 크기 확인후 커스텀 다이어로그 팝업 크기 조정
         val params: ViewGroup.LayoutParams? = dialog?.window?.attributes
         val deviceWidth = deviceSizeX
-        Log.d("로그","acceptDialog : $deviceWidth")
+        Log.d("로그", "acceptDialog : $deviceWidth")
         params?.width = (deviceWidth * 0.9).toInt()
 
 
@@ -96,14 +97,14 @@ class PendingDialog : DialogFragment() {
         return binding.root
     }
 
-    private fun acceptPost(){
+    private fun acceptPost() {
         val accepted = HashMap<String, String>()
         accepted["status"] = ACCEPTED
-
+        val data = SetStatusRequest(ACCEPTED, "")
         viewModel.patchPost(
             token = token,
             args.auth,
-            accepted
+            data
         )
 
         viewModel.successPatchData.observe(viewLifecycleOwner) {
@@ -118,13 +119,14 @@ class PendingDialog : DialogFragment() {
         }
     }
 
-    private fun deletePost(){
-        val reject = HashMap<String, String>()
-        reject["status"] = REJECTED
+    private fun deletePost() {
+
+        val data =
+            SetStatusRequest(status = REJECTED, reason = binding.rejectReasonText.text.toString())
         viewModel.patchPost(
             token,
             args.auth,
-            reject,
+            data,
 
             )
         viewModel.successPatchData.observe(viewLifecycleOwner) {
@@ -138,11 +140,13 @@ class PendingDialog : DialogFragment() {
             findNavController().popBackStack()
         }
     }
+
     private fun <T> Fragment.setNavResult(key: String = Util.DIALOG_RESULT_KEY, data: T) {
         findNavController().previousBackStackEntry?.also { stack ->
             stack.savedStateHandle.set(key, data)
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

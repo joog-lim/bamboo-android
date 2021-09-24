@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.study.bamboo.data.network.models.admin.SetStatusRequest
 import com.study.bamboo.data.repository.Repository
 import com.study.bamboo.utils.Util.Companion.DEFAULT_TOKEN
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -67,9 +68,9 @@ class AdminViewModel @Inject constructor(
         }
     }
 
-    fun patchPost(token: String, id: String, status: HashMap<String, String>) =
+    fun patchPost(token: String, id: String,request:SetStatusRequest) =
         viewModelScope.launch {
-            repository.remote.patchPost(token, id, status).let { response ->
+            repository.remote.patchPost(token, id, request).let { response ->
 
                 try {
 

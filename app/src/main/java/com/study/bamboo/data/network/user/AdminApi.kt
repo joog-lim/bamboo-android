@@ -21,7 +21,7 @@ interface AdminApi {
     suspend fun patchPost(
         @Header("Authorization") Authorization: String,
         @Path("id") id: String,
-        @Body status: HashMap<String, String>,
+        @Body request:SetStatusRequest,
     ): Response<UpdateStatus>
     // 수락 수정
 

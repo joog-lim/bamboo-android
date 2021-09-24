@@ -19,6 +19,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTED
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTED
+import com.study.bamboo.data.network.models.admin.SetStatusRequest
 import com.study.bamboo.databinding.RejectCancelDialogBinding
 import com.study.bamboo.utils.Util
 import com.study.bamboo.view.activity.splash.SplashActivity.Companion.deviceSizeX
@@ -89,10 +90,12 @@ class RejectCancelDialog : DialogFragment() {
     private fun rejectDialog() {
         val accept = HashMap<String, String>()
         accept["status"] = ACCEPTED
+
+        val data=SetStatusRequest(ACCEPTED,"")
         viewModel.patchPost(
             token,
             args.auth,
-            accept,
+            data,
 
             )
         viewModel.successPatchData.observe(viewLifecycleOwner) {

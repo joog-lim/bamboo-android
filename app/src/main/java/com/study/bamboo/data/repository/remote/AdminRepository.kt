@@ -1,5 +1,6 @@
 package com.study.bamboo.data.repository.remote
 
+import com.study.bamboo.data.network.models.admin.SetStatusRequest
 import com.study.bamboo.data.network.user.AdminApi
 import javax.inject.Inject
 
@@ -10,8 +11,8 @@ class AdminRepository @Inject constructor(
     suspend fun deletePost( token:String,reason: HashMap<String, String>, id: String) =
         adminApi.deletePost(token ,arg = id, reason)
 
-    suspend fun patchPost(token: String, id: String, status:  HashMap<String, String>) =
-        adminApi.patchPost(token, id, status)
+    suspend fun patchPost(token: String, id: String, request: SetStatusRequest) =
+        adminApi.patchPost(token, id, request)
 
     suspend fun acceptPatchPost(
         token: String,

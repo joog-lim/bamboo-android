@@ -72,6 +72,23 @@
                     android:text="정말로 이 게시물을 승인하시겠습니까?"
                     android:textColor="@color/main_color"
                     android:textSize="17sp" />
+                <EditText
+                    android:id="@+id/reject_reason_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/login_dialog_password_edittext"
+                    android:elevation="10dp"
+                    android:fontFamily="@font/nanumsquareround_otfb"
+                    android:hint="타당한 이유를 간단히 적어주세요."
+                    android:inputType="text"
+                    android:padding="10dp"
+                    android:textColorHint="#C4C4C4"
+                    android:textSize="12sp" />
+
 
             </LinearLayout>
 

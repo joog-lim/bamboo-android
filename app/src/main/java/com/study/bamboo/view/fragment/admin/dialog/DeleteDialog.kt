@@ -19,6 +19,7 @@ import androidx.navigation.fragment.navArgs
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.DELETED
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.REJECTED
+import com.study.bamboo.data.network.models.admin.SetStatusRequest
 import com.study.bamboo.databinding.DeleteDialogBinding
 import com.study.bamboo.utils.Util
 import com.study.bamboo.view.activity.signin.SignInActivity
@@ -107,10 +108,12 @@ class DeleteDialog : DialogFragment() {
     private fun rejectPost(){
         val reject = HashMap<String, String>()
         reject["status"] = REJECTED
+
+        val data=SetStatusRequest(REJECTED,"")
         viewModel.patchPost(
             token,
             args.auth,
-            reject,
+            data,
         )
         viewModel.successPatchData.observe(viewLifecycleOwner) {
             val denied = it?.isEmpty() == true

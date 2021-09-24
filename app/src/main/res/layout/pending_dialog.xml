@@ -83,8 +83,8 @@
                     android:background="@drawable/login_dialog_password_edittext"
                     android:elevation="10dp"
                     android:fontFamily="@font/nanumsquareround_otfb"
-                    android:hint="타당한 이유를 간단히 적어주세요."
-                    android:inputType="text"
+                    android:hint="거절 : 타당한 이유를 간단히 적어주세요."
+                    android:inputType="textMultiLine"
                     android:padding="10dp"
                     android:textColorHint="#C4C4C4"
                     android:textSize="12sp" />

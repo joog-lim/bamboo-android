@@ -14,6 +14,10 @@
         <action
             android:id="@+id/action_userMainFragment_to_declarationFragment"
             app:destination="@id/declarationFragment" />
+        <action
+            android:id="@+id/action_userMainFragment_to_postCreateFragment"
+            app:destination="@id/postCreateFragment"
+            app:popUpTo="@id/userMainFragment" />
     </fragment>
 
     <fragment
@@ -37,5 +41,10 @@
             app:nullable="true"
             android:defaultValue="true"/>
     </fragment>
+    <fragment
+        android:id="@+id/postCreateFragment"
+        android:name="com.study.bamboo.view.activity.postcreate.PostCreateFragment"
+        android:label="PostCreateFragment"
+        tools:layout="@layout/fragment_post_create"/>
 
 </navigation>

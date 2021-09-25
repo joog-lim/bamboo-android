@@ -120,6 +120,10 @@
         <argument
             android:name="tag"
             app:argType="string" />
+
+        <argument
+            android:name="status"
+            app:argType="string" />
         <action
             android:id="@+id/action_acceptDialog_to_adminMainFragment"
             app:destination="@id/adminMainFragment" />

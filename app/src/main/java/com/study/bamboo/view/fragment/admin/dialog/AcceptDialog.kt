@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -21,14 +22,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.ACCEPTED
+import com.study.bamboo.adapter.admin.AdminAcceptAdapter.Companion.PENDING
 import com.study.bamboo.databinding.AcceptDialogBinding
 import com.study.bamboo.utils.Util.Companion.DIALOG_RESULT_KEY
 import com.study.bamboo.view.activity.splash.SplashActivity.Companion.deviceSizeX
 import com.study.bamboo.view.fragment.admin.AdminViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import android.view.Gravity
-import android.view.inputmethod.InputMethodManager
 
 
 @AndroidEntryPoint
@@ -182,9 +182,17 @@ class AcceptDialog : DialogFragment() {
                     val toast = Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT)
                     toast.show()
 
+                    Log.d("TAG", "updatePost: ${args.status}")
 
-                    setNavResult(data = ACCEPTED)
-                    findNavController().popBackStack()
+
+                    if(args.status==PENDING){
+                        setNavResult(data = PENDING)
+                        findNavController().popBackStack()
+                    }
+                    else {
+                        setNavResult(data = ACCEPTED)
+                        findNavController().popBackStack()
+                    }
                 }
             }
 

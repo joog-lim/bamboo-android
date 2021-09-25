@@ -37,6 +37,7 @@
                     android:layout_toEndOf="@id/back_btn"
                     android:textColor="@color/main_color"
                     android:textSize="20sp" />
+
                 <ImageView
                     android:id="@+id/back_btn"
                     android:onClick="@{fragment::backBtnClick}"
@@ -51,6 +52,7 @@
                     android:layout_marginEnd="10dp"
                     android:src="@drawable/ic_back_btn" />
             </carbon.widget.RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -193,8 +195,8 @@
             android:onClick="@{fragment::postCreateBtnClick}"
             android:textColor="@color/white"
             android:fontFamily="@font/nanumsquareround_otfb"
-            android:textSize="20sp"
-            />
+            android:textSize="20sp" />
+
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyle"
@@ -202,6 +204,7 @@
             android:layout_height="wrap_content"
             android:visibility="gone"
             android:indeterminateTint="@color/main_color"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true" />
+
     </RelativeLayout>
 </layout>

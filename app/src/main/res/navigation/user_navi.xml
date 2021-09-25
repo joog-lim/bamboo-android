@@ -16,8 +16,7 @@
             app:destination="@id/declarationFragment" />
         <action
             android:id="@+id/action_userMainFragment_to_postCreateFragment"
-            app:destination="@id/postCreateFragment"
-            app:popUpTo="@id/userMainFragment" />
+            app:destination="@id/postCreateFragment" />
     </fragment>
 
     <fragment
@@ -31,6 +30,12 @@
         android:label="fragment_more_see"
         tools:layout="@layout/fragment_more_see" />
     <fragment
+        android:id="@+id/postCreateFragment"
+        android:name="com.study.bamboo.view.activity.postcreate.PostCreateFragment"
+        android:label="PostCreateFragment"
+        tools:layout="@layout/fragment_post_create"/>
+
+    <fragment
         android:id="@+id/declarationFragment"
         android:name="com.study.bamboo.view.fragment.user.DeclarationFragment"
         android:label="DeclarationFragment"
@@ -41,10 +46,4 @@
             app:nullable="true"
             android:defaultValue="true"/>
     </fragment>
-    <fragment
-        android:id="@+id/postCreateFragment"
-        android:name="com.study.bamboo.view.activity.postcreate.PostCreateFragment"
-        android:label="PostCreateFragment"
-        tools:layout="@layout/fragment_post_create"/>
-
 </navigation>

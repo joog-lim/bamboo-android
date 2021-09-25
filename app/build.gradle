@@ -10,7 +10,14 @@ plugins {
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
-
+    kapt {
+        javacOptions {
+            // These options are normally set automatically via the Hilt Gradle plugin, but we
+            // set them manually to workaround a bug in the Kotlin 1.5.20
+            option("-Adagger.fastInit=ENABLED")
+            option("-Adagger.hilt.android.internal.disableAndroidSuperclassValidation=true")
+        }
+    }
     defaultConfig {
         applicationId "com.study.bamboo"
         minSdkVersion 21
@@ -80,8 +87,8 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences:1.0.0-beta01"
 
     // dager hilt
-    implementation "com.google.dagger:hilt-android:2.35.1"
-    kapt "com.google.dagger:hilt-android-compiler:2.35.1"
+    implementation "com.google.dagger:hilt-android:2.38.1"
+    kapt "com.google.dagger:hilt-android-compiler:2.38.1"
 
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"

@@ -496,7 +496,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
 
     private fun retrySetButton(adapter: PagingDataAdapter<*, *>) {
         binding.errorRetryBtn.setOnClickListener {
-            adapter.refresh()
+            adapter.retry()
         }
     }
 

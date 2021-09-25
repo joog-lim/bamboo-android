@@ -46,7 +46,6 @@ class AdminAcceptAdapter
     }
 
 
-
     //수락
     class AdminAcceptItemViewHolder(val binding: AdminPostAcceptedRecyclerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -96,13 +95,14 @@ class AdminAcceptAdapter
                             holder.bindingAdapterPosition,
                             item.title,
                             item.content,
-                            item.tag
+                            item.tag,
+                            item.status
                         )
                     it.findNavController().navigateUp()
                     it.findNavController().navigate(action)
                 }
             }
-        }catch (e:Exception){
+        } catch (e: Exception) {
             Log.d(TAG, "onBindViewHolder: 네비게이션 찾을수 없음")
         }
     }

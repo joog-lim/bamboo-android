@@ -38,6 +38,7 @@ import com.study.bamboo.base.BaseFragment
 import com.study.bamboo.data.paging.viewModel.PagingPostViewModel
 import com.study.bamboo.databinding.FragmentAdminMainBinding
 import com.study.bamboo.utils.LinearLayoutManagerWrapper
+import com.study.bamboo.utils.Util.Companion.DEFAULT_TOKEN
 import com.study.bamboo.utils.Util.Companion.DIALOG_RESULT_KEY
 import com.study.bamboo.view.activity.main.MainActivity
 import com.study.bamboo.view.activity.signin.LoginDialog
@@ -100,17 +101,15 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
             getDialogNavResult<String>(navId = it) { result ->
                 when (result) {
                     ACCEPTED -> acceptAdapter.refresh()
-                    DELETED->deleteAdapter.refresh()
-                    REJECTED->rejectAdapter.refresh()
-                    PENDING->pendingAdapter.refresh()
+                    DELETED -> deleteAdapter.refresh()
+                    REJECTED -> rejectAdapter.refresh()
+                    PENDING -> pendingAdapter.refresh()
 
                 }
             }
         }
         onClickUser()
     }
-
-
 
 
     private fun observeUiPreferences() {
@@ -254,10 +253,10 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
         pagingViewModel.getData(token, cursor)
     }
 
-    private fun tokenNull(token:String){
-        val loginDialog=LoginDialog()
-        if(token.isEmpty())
-            loginDialog.show(childFragmentManager,"AdminMainFragment")
+    private fun tokenNull(token: String) {
+        val loginDialog = LoginDialog()
+        if (token == DEFAULT_TOKEN)
+            loginDialog.show(childFragmentManager, "AdminMainFragment")
 
     }
 

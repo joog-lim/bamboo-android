@@ -86,18 +86,41 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <TextView
-            android:id="@+id/post_time"
-            android:layout_width="wrap_content"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nanumsquareround_otfb"
-            android:gravity="start"
-            android:textColor="#C4C4C4"
-            android:textSize="@dimen/post_time"
-            app:day="@{data.createdAt}"
+            android:orientation="horizontal">
 
-            tools:text="2021년 3월 12일 새벽" />
+            <TextView
+                android:id="@+id/post_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nanumsquareround_otfb"
+                android:gravity="start"
+                android:textColor="#C4C4C4"
+                android:textSize="@dimen/post_time"
+                app:day="@{data.createdAt}"
 
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="2021년 3월 12일 새벽" />
+
+            <TextView
+                android:id="@+id/post_modify_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nanumsquareround_otfb"
+                android:text="게시물 수정"
+                android:layout_marginTop="5dp"
+                android:textColor="#A0A0A6"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
             android:id="@+id/post_md"
             android:layout_width="match_parent"
@@ -108,6 +131,7 @@
             android:includeFontPadding="false"
             android:text="@{data.title}"
             android:textColor="@color/black"
+            android:inputType="textMultiLine"
             android:textSize="@dimen/post_md"
             android:textStyle="bold"
             tools:text="역시 개발은 새벽이지~" />

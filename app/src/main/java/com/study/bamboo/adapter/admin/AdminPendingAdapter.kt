@@ -29,7 +29,7 @@ class AdminPendingAdapter :
                 oldItem: Admin.Pending,
                 newItem: Admin.Pending
             ): Boolean =
-                oldItem.content == newItem.content
+                oldItem == newItem
 
 
         }
@@ -73,6 +73,19 @@ class AdminPendingAdapter :
                     it.findNavController().navigateUp()
                     it.findNavController().navigate(action)
                 }
+             holder.binding.postModifyText.setOnClickListener {
+                 val action =
+                     AdminMainFragmentDirections.actionAdminMainFragmentToAcceptDialog(
+                         item.id,
+                         holder.bindingAdapterPosition,
+                         item.title,
+                         item.content,
+                         item.tag,
+                         item.status
+                     )
+                 it.findNavController().navigateUp()
+                 it.findNavController().navigate(action)
+             }
             }
         }catch (e:Exception){
             Log.d("PendingAdapter", "onBindViewHolder: 네비게이션 없음 ")

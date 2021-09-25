@@ -1,5 +1,6 @@
 package com.study.bamboo.view.fragment.admin
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -38,6 +39,8 @@ import com.study.bamboo.data.paging.viewModel.PagingPostViewModel
 import com.study.bamboo.databinding.FragmentAdminMainBinding
 import com.study.bamboo.utils.LinearLayoutManagerWrapper
 import com.study.bamboo.utils.Util.Companion.DIALOG_RESULT_KEY
+import com.study.bamboo.view.activity.main.MainActivity
+import com.study.bamboo.view.activity.signin.LoginDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -83,6 +86,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
         )
 
         observeUiPreferences()
+
         spinnerContact()
 
 
@@ -103,12 +107,16 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
                 }
             }
         }
+        onClickUser()
     }
+
+
 
 
     private fun observeUiPreferences() {
         viewModel.readToken.asLiveData().observe(viewLifecycleOwner, {
             token = it.token
+            tokenNull(token)
             Log.d(TAG, "observeUiPreferences: ${it.token}")
 
         })
@@ -246,6 +254,20 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
         pagingViewModel.getData(token, cursor)
     }
 
+    private fun tokenNull(token:String){
+        val loginDialog=LoginDialog()
+        if(token.isEmpty())
+            loginDialog.show(childFragmentManager,"AdminMainFragment")
+
+    }
+
+
+    private fun onClickUser(){
+        binding.userText.setOnClickListener{
+            val intent : Intent = Intent(requireContext(),MainActivity::class.java)
+            startActivity(intent)
+        }
+    }
     // paging 데이터값 받아옴
     @ExperimentalPagingApi
     private fun observePagingData(viewType: Int) {

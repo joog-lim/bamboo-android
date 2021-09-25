@@ -4,12 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.study.bamboo.data.network.models.user.GetVerifyDTO
 import com.study.bamboo.data.network.models.user.postcreate.PostCreateRequest
 import com.study.bamboo.data.network.models.user.postcreate.PostCreateResponse
 import com.study.bamboo.data.network.models.user.postcreate.Verifier
 import com.study.bamboo.data.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,20 +21,23 @@ class PostCreateViewModel @Inject constructor(
 
 
     //게시물 업로드 후 리스폰스 받아오기
-    val postCreateResponse: LiveData<PostCreateResponse> get() = _postCreateResponse
-    private val _postCreateResponse = MutableLiveData<PostCreateResponse>()
+    val postCreateResponse: LiveData<PostCreateResponse?> get() = _postCreateResponse
+    private val _postCreateResponse = MutableLiveData<PostCreateResponse?>()
 
     //게시물 업로드 후 리스폰스 받아오기
-    val postCreateSuccess: LiveData<Boolean> get() = _postCreateSuccess
-    private val _postCreateSuccess = MutableLiveData<Boolean>()
-
+    val postCreateSuccess: LiveData<Boolean?> get() = _postCreateSuccess
+    private val _postCreateSuccess = MutableLiveData<Boolean?>()
 
     val choiceTag: LiveData<String> get() = _choiceTag
     private val _choiceTag = MutableLiveData<String>()
 
+    val getVerifyResponse: LiveData<Response<GetVerifyDTO?>?> get() = _getVerifyResponse
+    private val _getVerifyResponse = MutableLiveData<Response<GetVerifyDTO?>?>()
+
     init {
-        _postCreateSuccess.value = false
+
     }
+
 
     //스피너로 tag변경할때 tag 값 변경
     fun setChoiceTag(tag: String) {
@@ -61,7 +66,23 @@ class PostCreateViewModel @Inject constructor(
         }
     }
 
-    fun setPostCreateSuccess(postCreateSuccess : Boolean){
+    fun setPostCreateSuccess(postCreateSuccess: Boolean?) {
         _postCreateSuccess.value = postCreateSuccess
+    }
+
+    fun setGetVerifyResponse(getVerifyResponse: Response<GetVerifyDTO?>?) {
+        _getVerifyResponse.value = getVerifyResponse
+    }
+
+    fun setPostCreateResponse(postCreateResponse: PostCreateResponse?) {
+        _postCreateResponse.value = postCreateResponse
+    }
+
+    fun callGetVerify() = viewModelScope.launch {
+        userRepository.getVerify().let { response ->
+            if (response.isSuccessful) {
+                _getVerifyResponse.value = response
+            }
+        }
     }
 }

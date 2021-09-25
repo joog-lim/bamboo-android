@@ -1,26 +1,34 @@
 package com.study.bamboo.view.fragment.user
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.study.bamboo.R
+import com.study.bamboo.adapter.user.UserHomeItemAdapter
 import com.study.bamboo.base.BaseFragment
 import com.study.bamboo.data.network.models.user.GetVerifyDTO
+import com.study.bamboo.data.network.models.user.getcount.GetCount
 import com.study.bamboo.databinding.FragmentUserMainBinding
 import com.study.bamboo.utils.Functions
 import com.study.bamboo.view.activity.main.MainViewModel
-import com.study.bamboo.adapter.user.UserHomeItemAdapter
+import com.study.bamboo.data.paging.GetPostSource
+import com.study.bamboo.view.activity.postcreate.PostCreateViewModel
+import com.study.bamboo.view.activity.signin.SignInActivity.Companion.getPostCountResponse
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -30,6 +38,7 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
     //lateinit var binding: FragmentUserMainBinding
     private val mainViewModel by activityViewModels<MainViewModel>()
     lateinit var userHomeItemAdapter: UserHomeItemAdapter
+    private val postCreateViewModel : PostCreateViewModel by activityViewModels()
 
     companion object {
         private var firstStart = true
@@ -66,24 +75,19 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
         return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        mainViewModel.callGetVerify()
-
-    }
-
     fun addPostBtnClick(view: View) {
-        binding.progressBar.visibility = View.VISIBLE
-        if (getVerifyResponse != null) {
+/*        binding.progressBar.visibility = View.VISIBLE
+        if (getVerifyResponse != null){
             binding.progressBar.visibility = View.GONE
-            /*val intent = Intent(requireContext(), PostCreateActivity::class.java)
-            startActivity(intent)*/
-            view.findNavController().navigate(R.id.action_userMainFragment_to_postCreateFragment)
-        } else {
-            Toast.makeText(requireContext(),"다시 시도해 주세요",Toast.LENGTH_SHORT).show()
+            val intent = Intent(requireContext(), PostCreateActivity::class.java)
+            startActivity(intent)
+        }else{
             mainViewModel.callGetVerify()
-        }
+        }*/
+       //postCreateViewModel.setPostCreateSuccess(false)
+        view.findNavController().navigate(R.id.action_userMainFragment_to_postCreateFragment)
     }
+
 
     private fun initRecyclerView() {
         Functions.recyclerViewManager(binding.postRecyclerView, requireContext())
@@ -108,6 +112,7 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
         }
     }
 
+
     private fun observeViewModel() {
         Log.d(
             "로그",
@@ -121,22 +126,16 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
             }
         })
 
-        mainViewModel.getVerifyResponse.observe(requireActivity(), Observer {
+/*        mainViewModel.getVerifyResponse.observe(requireActivity(), Observer {
             if (it != null) {
                 binding.progressBar.visibility = View.GONE
                 getVerifyResponse = it
-               /* val intent = Intent(requireContext(), PostCreateActivity::class.java)
-                startActivity(intent)*/
-                Log.d("로그","이거다잉 : $it")
-               // if (mainViewModel.getPostResponse.value.toString() != "[]" &&  mainViewModel.getVerifyResponse.toString() != "[]"){
-                   // this.findNavController().navigate(R.id.action_userMainFragment_to_postCreateFragment)
-
-                //}
-
-            } else {
-                Toast.makeText(requireContext(), "서버와 연결에 실패했습니다", Toast.LENGTH_SHORT).show()
+                val intent = Intent(requireContext(), PostCreateActivity::class.java)
+                startActivity(intent)
+            }else{
+                Toast.makeText(requireContext(), "서버와 연결에 실패했습니다",Toast.LENGTH_SHORT).show()
                 binding.progressBar.visibility = View.GONE
             }
-        })
+        })*/
     }
 }

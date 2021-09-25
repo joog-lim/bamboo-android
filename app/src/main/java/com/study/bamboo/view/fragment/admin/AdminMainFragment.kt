@@ -42,6 +42,7 @@ import com.study.bamboo.utils.Util.Companion.DEFAULT_TOKEN
 import com.study.bamboo.utils.Util.Companion.DIALOG_RESULT_KEY
 import com.study.bamboo.view.activity.main.MainActivity
 import com.study.bamboo.view.activity.signin.LoginDialog
+import com.study.bamboo.view.fragment.admin.AdminViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -587,10 +588,3 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
     }
 
 }
-
-
-
-
-
-
-

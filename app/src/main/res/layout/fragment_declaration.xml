@@ -68,6 +68,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <TextView
+            android:id="@+id/btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#E75858"

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -25,8 +26,10 @@ import javax.inject.Inject
 class DeclarationFragment : Fragment(
 ) {
     private lateinit var binding: FragmentDeclarationBinding
-    private val viewModel by activityViewModels<DeclarationViewModel>()
+    private val viewModel by viewModels<DeclarationViewModel>()
     private val args by navArgs<DeclarationFragmentArgs>()
+    private var checkPopBackStack = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -38,9 +41,17 @@ class DeclarationFragment : Fragment(
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_declaration, container, false)
         binding.fragment = this
+        viewModel.setMessage("none")
+        checkPopBackStack = false
 
         observeViewModel()
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkPopBackStack = false
+
     }
 
     private fun observeViewModel() {
@@ -48,14 +59,22 @@ class DeclarationFragment : Fragment(
             when (it) {
                 "success" -> {
                     Toast.makeText(requireContext(), "신고에 성공했습니다", Toast.LENGTH_SHORT).show()
-                    this@DeclarationFragment.findNavController().popBackStack()
+                    viewModel.setMessage("none")
+                    Log.d("로그","신고 성공 후 $checkPopBackStack")
+                    if (!checkPopBackStack){
+                        checkPopBackStack = true
+                        this@DeclarationFragment.findNavController().popBackStack()
+                    }
                 }
-                "fail" -> Toast.makeText(requireContext(), "신고에 실패했습니다", Toast.LENGTH_SHORT).show()
+                "fail" ->{ Toast.makeText(requireContext(), "신고에 실패했습니다", Toast.LENGTH_SHORT).show()
+                    binding.btn.visibility = View.VISIBLE
+                }
             }
         })
     }
 
     fun uploadBtn(view: View) {
+        binding.btn.visibility = View.INVISIBLE
         val body = ReportRequest(binding.contents.text.toString())
         Log.d("로그", "안에 인 : ${args.id}")
         viewModel.report(args.id, body)

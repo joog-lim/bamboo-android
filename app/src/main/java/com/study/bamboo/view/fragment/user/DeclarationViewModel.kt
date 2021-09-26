@@ -18,6 +18,10 @@ class DeclarationViewModel @Inject constructor(
     private val _message = MutableLiveData<String>()
     val message: LiveData<String> get() = _message
 
+    fun setMessage(message : String){
+        _message.value = message
+    }
+
     fun report(id : String?, body : ReportRequest) = viewModelScope.launch {
         if (id != null) {
             repository.report(id, body).let { response ->

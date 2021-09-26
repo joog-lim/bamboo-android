@@ -1,5 +1,6 @@
 package com.study.bamboo.view.activity.signin
 
+import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Point
@@ -10,6 +11,8 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.os.bundleOf
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import com.study.bamboo.R
 import com.study.bamboo.databinding.ActivitySignInBinding
@@ -49,8 +52,12 @@ class SignInActivity : BaseActivity() {
 
     fun clickAdminLogin(view: View) {
         //다이얼로그
+
         try {
-            loginDialog.show(supportFragmentManager, "AdminLoginDialog")
+            if (!loginDialog.isAdded) {
+                loginDialog.show(supportFragmentManager, "AdminLoginDialog")
+
+            }
             val windowManager = this.getSystemService(Context.WINDOW_SERVICE) as WindowManager
             val display = windowManager.defaultDisplay
             val size = Point()

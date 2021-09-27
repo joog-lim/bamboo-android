@@ -33,7 +33,11 @@
         android:id="@+id/postCreateFragment"
         android:name="com.study.bamboo.view.activity.postcreate.PostCreateFragment"
         android:label="PostCreateFragment"
-        tools:layout="@layout/fragment_post_create"/>
+        tools:layout="@layout/fragment_post_create">
+        <action
+            android:id="@+id/action_postCreateFragment_to_userMainFragment"
+            app:destination="@id/userMainFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/declarationFragment"

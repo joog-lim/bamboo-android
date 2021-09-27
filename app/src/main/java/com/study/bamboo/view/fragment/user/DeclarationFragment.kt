@@ -1,5 +1,6 @@
 package com.study.bamboo.view.fragment.user
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -67,16 +68,19 @@ class DeclarationFragment : Fragment(
                     }
                 }
                 "fail" ->{ Toast.makeText(requireContext(), "신고에 실패했습니다", Toast.LENGTH_SHORT).show()
-                    binding.btn.visibility = View.VISIBLE
-                }
+                    binding.btn.isEnabled = true
+                    binding.btn.setBackgroundColor(Color.parseColor("#E75858"))
+                 }
             }
         })
     }
 
     fun uploadBtn(view: View) {
-        binding.btn.visibility = View.INVISIBLE
+        binding.btn.isEnabled = false
+        binding.btn.setBackgroundColor(Color.parseColor("#C2C1C1"))
         val body = ReportRequest(binding.contents.text.toString())
         Log.d("로그", "안에 인 : ${args.id}")
+
         viewModel.report(args.id, body)
     }
 }

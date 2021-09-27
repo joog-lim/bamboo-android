@@ -53,9 +53,7 @@ class PostCreateFragment : Fragment() {
         postCreateViewModel.setPostCreateResponse(null)
         postCreateViewModel.setPostCreateSuccess(null)
         postCreateViewModel.setGetVerifyResponse(null)
-        Log.d("로그","initResult : ${postCreateViewModel.postCreateResponse.value}, ${postCreateViewModel.postCreateSuccess.value}, ${postCreateViewModel.getVerifyResponse.value}")
     }
-
 
     private fun observeViewModel() {
         //게시물을 전송하기 버튼 클릭 후 질문 답 확인
@@ -77,18 +75,6 @@ class PostCreateFragment : Fragment() {
         postCreateViewModel.getVerifyResponse.observe(requireActivity(), Observer {
             binding.question.text = "Q. ${it?.body()?.question}"
         })
-
-
-        //게시물을 성공적으로 전송했는지 확인
-        postCreateViewModel.postCreateSuccess.observe(requireActivity(), Observer {
-            if (it == true) {
-                Log.d("로그","여djdj기 눌렸다 $it")
-                postCreateViewModel.setPostCreateSuccess(null)
-               // this.findNavController().popBackStack()
-            }
-        })
-
-
     }
 
     fun backBtnClick(view: View) {
@@ -96,7 +82,6 @@ class PostCreateFragment : Fragment() {
     }
 
     fun postCreateBtnClick(view: View) {
-        Log.d("로그","뉼렸도ㅑ")
         if (TextUtils.isEmpty(binding.title.text.toString()) || TextUtils.isEmpty(binding.content.text.toString()) || postCreateViewModel.choiceTag.value == "태그선택" || TextUtils.isEmpty(
                 binding.questionAnswer.text.toString()
             )

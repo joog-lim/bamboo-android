@@ -29,8 +29,6 @@ class MainActivity : BaseActivity() {
 
     override fun onStart() {
         super.onStart()
-        observeViewModel()
-        mainViewModel.callGetPost(20, "ACCEPTED")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,12 +55,6 @@ class MainActivity : BaseActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
-    }
-
-    private fun observeViewModel() {
-        mainViewModel.getPostResponse.observe(this, Observer {
-
-        })
     }
 
     override fun onBackPressed() {

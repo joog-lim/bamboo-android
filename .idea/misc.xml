@@ -22,6 +22,7 @@
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/admin_post_waiting_recycler_item.xml" value="0.8" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/delete_dialog.xml" value="0.264" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/fragment_admin_main.xml" value="0.3894927536231884" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/fragment_declaration.xml" value="0.45208333333333334" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/fragment_more_see.xml" value="0.536" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/fragment_rules.xml" value="0.4" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/fragment_user_main.xml" value="0.264" />
@@ -48,10 +49,6 @@
         <entry key="..\:/Users/apple/AndroidStudioProjects/bamboo-android/app/src/main/res/layout/post_loading.xml" value="0.4" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/bamboo-android/app/src/main/res/layout/reject_cancel_dialog.xml" value="0.264" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/bamboo-android/app/src/main/res/layout/user_post_recycler_item.xml" value="0.13451086956521738" />
-        <entry key="..\:/Users/apple/StudioProjects/bamboo-android/app/src/main/res/drawable/post_create_spinner_frame.xml" value="0.3046875" />
-        <entry key="..\:/Users/apple/StudioProjects/bamboo-android/app/src/main/res/layout/fragment_declaration.xml" value="0.17806484295845998" />
-        <entry key="..\:/Users/apple/StudioProjects/bamboo-android/app/src/main/res/layout/fragment_post_create.xml" value="0.22" />
-        <entry key="..\:/Users/apple/StudioProjects/bamboo-android/app/src/main/res/layout/post_create_tag_spinner_item.xml" value="0.1403242147922999" />
       </map>
     </option>
   </component>

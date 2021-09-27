@@ -3,7 +3,6 @@ package com.study.bamboo.view.activity.postcreate
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +10,13 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.study.bamboo.R
 import com.study.bamboo.databinding.FragmentPostCreateBinding
-import com.study.bamboo.view.fragment.user.UserMainFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -64,7 +64,9 @@ class PostCreateFragment : Fragment() {
                 if (!checkPopBackStack){
                     Log.d("로그","제발 눌리지 말라고 두번..")
                     checkPopBackStack= true
-                    this.findNavController().popBackStack()
+                    lifecycleScope.launchWhenResumed {
+                        findNavController().navigate(R.id.action_postCreateFragment_to_userMainFragment)
+                    }
                 }
 
 

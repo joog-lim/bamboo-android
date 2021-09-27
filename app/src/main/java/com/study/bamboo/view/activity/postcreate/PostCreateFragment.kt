@@ -1,5 +1,6 @@
 package com.study.bamboo.view.activity.postcreate
 
+import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -62,13 +63,12 @@ class PostCreateFragment : Fragment() {
             binding.progressBar.visibility = View.GONE
             if (it != null) {
                 if (!checkPopBackStack){
-                    Log.d("로그","제발 눌리지 말라고 두번..")
                     checkPopBackStack= true
                     this.findNavController().popBackStack()
                 }
-
-
-                //postCreateViewModel.setPostCreateSuccess(true)
+            }else{
+                binding.uploadBtn.isEnabled = true
+                binding.uploadBtn.resources.getColor(R.color.main_color)
             }
         })
 
@@ -94,6 +94,7 @@ class PostCreateFragment : Fragment() {
     }
 
     fun postCreateBtnClick(view: View) {
+        Log.d("로그","뉼렸도ㅑ")
         if (TextUtils.isEmpty(binding.title.text.toString()) || TextUtils.isEmpty(binding.content.text.toString()) || postCreateViewModel.choiceTag.value == "태그선택" || TextUtils.isEmpty(
                 binding.questionAnswer.text.toString()
             )
@@ -103,6 +104,8 @@ class PostCreateFragment : Fragment() {
 
             if (questionAnswerTrue(binding.questionAnswer.text.toString())) {
                 binding.progressBar.visibility = View.VISIBLE
+                binding.uploadBtn.isEnabled = false
+                binding.uploadBtn.setBackgroundColor(Color.parseColor("#C2C1C1"))
 
                 postCreateViewModel.getVerifyResponse.let {
                     postCreateViewModel.callPostCreateAPI(

@@ -46,8 +46,12 @@ class SignInActivity : BaseActivity() {
 
 
     fun clickUserLogin(view: View) {
-        binding.progressBar.visibility = View.VISIBLE
-        signInViewModel.callGetCount()
+       /* binding.progressBar.visibility = View.VISIBLE
+        signInViewModel.callGetCount()*/
+
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     fun clickAdminLogin(view: View) {
@@ -100,14 +104,14 @@ class SignInActivity : BaseActivity() {
             }
         })
 
-        signInViewModel.getCountResponse.observe(this, Observer {
+    /*    signInViewModel.getCountResponse.observe(this, Observer {
             Log.d("로그","로그인 화면 count : $it")
             getPostCountResponse = it
             binding.progressBar.visibility = View.GONE
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
-        })
+        })*/
 
 
     }

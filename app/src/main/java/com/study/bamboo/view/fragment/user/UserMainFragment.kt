@@ -91,7 +91,6 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
 
     private fun initRecyclerView() {
         Functions.recyclerViewManager(binding.postRecyclerView, requireContext())
-        arguments?.getString("count")
         binding.postRecyclerView.adapter =
             UserHomeItemAdapter()
         userHomeItemAdapter =

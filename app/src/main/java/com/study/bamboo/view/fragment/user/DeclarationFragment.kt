@@ -75,6 +75,11 @@ class DeclarationFragment : Fragment(
         })
     }
 
+    fun backBtnClick(view: View) {
+        this.findNavController().popBackStack()
+    }
+
+
     fun uploadBtn(view: View) {
         binding.btn.isEnabled = false
         binding.btn.setBackgroundColor(Color.parseColor("#C2C1C1"))

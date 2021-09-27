@@ -16,19 +16,41 @@
         tools:context=".view.fragment.user.DeclarationFragment">
 
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+        <carbon.widget.RelativeLayout
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="신고하기"
-            android:textColor="#E75858"
-            android:textSize="18sp"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="@dimen/declaration_margin"
-            android:layout_marginEnd="@dimen/declaration_margin"
+            android:background="@color/white"
+            app:carbon_elevation="8dp"
+            app:carbon_elevationShadowColor="@color/main_color"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/back_btn"
+                android:fontFamily="@font/nanumsquareround_otfeb"
+                android:text="신고하기"
+                android:textColor="#E75858"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/back_btn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:onClick="@{fragment::backBtnClick}"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
+                android:padding="10dp"
+                android:src="@drawable/declaration_back_btn" />
+        </carbon.widget.RelativeLayout>
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
@@ -45,7 +67,7 @@
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/title_bar" />
 
         <EditText
             android:id="@+id/contents"

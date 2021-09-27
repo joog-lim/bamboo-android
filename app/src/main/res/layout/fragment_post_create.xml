@@ -31,10 +31,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nanumsquareround_otfeb"
-                    android:text="글 입력하기"
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@id/back_btn"
+                    android:fontFamily="@font/nanumsquareround_otfeb"
+                    android:text="글 입력하기"
                     android:textColor="@color/main_color"
                     android:textSize="20sp" />
 

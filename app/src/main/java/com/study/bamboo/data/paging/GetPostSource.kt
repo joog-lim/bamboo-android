@@ -21,7 +21,7 @@ class GetPostSource @Inject constructor(
         return try {
             val page = params.key ?: FIRST_PAGE_INDEX
 
-            val getPostResponse = userApi.getPost(FIRST_PAGE_INDEX, "ACCEPTED")
+            val getPostResponse = userApi.getPost(page, "ACCEPTED")
 
             val data = getPostResponse.body()?.posts ?: emptyList()
             FIRST_PAGE_INDEX += 1

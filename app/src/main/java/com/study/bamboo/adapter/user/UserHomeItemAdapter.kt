@@ -45,6 +45,7 @@ class UserHomeItemAdapter(
     class UserHomeItemViewHolder(val binding: UserPostRecyclerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: UserPostDTO) {
+            Log.d("로그","userHomeItemAdapter bind data : $data")
             binding.data = data
             binding.executePendingBindings()
         }

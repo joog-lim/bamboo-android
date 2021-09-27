@@ -10,7 +10,7 @@ class Util {
         const val PREFERENCES_TOKEN = "preferences_token"
 
         // base_url
-        const val BASE_URL = "https://server.joog-lim.info/test/"
+        const val BASE_URL = "https://server.joog-lim.info/apiV2/"
 
         const val DIALOG_RESULT_KEY = "DialogResult"
 

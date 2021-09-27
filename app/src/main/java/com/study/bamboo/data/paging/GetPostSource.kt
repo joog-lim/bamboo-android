@@ -13,14 +13,14 @@ class GetPostSource @Inject constructor(
 ) : PagingSource<Int, UserPostDTO>() {
 
     companion object {
-        private var FIRST_PAGE_INDEX = 1
+        var FIRST_PAGE_INDEX = 1
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, UserPostDTO> {
-
+        Log.d("로그","GetPostSource FIRST_PAGE_INDEX : $FIRST_PAGE_INDEX")
         return try {
             val page = params.key ?: FIRST_PAGE_INDEX
-
+            Log.d("로그","GetPostSource page : $page")
             val getPostResponse = userApi.getPost(page, "ACCEPTED")
 
             val data = getPostResponse.body()?.posts ?: emptyList()

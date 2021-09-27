@@ -45,11 +45,15 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun callGetVerify() = viewModelScope.launch {
+    fun setGetPostResponse(getPostResponse :List<UserPostDTO>? ){
+        _getPostResponse.value = getPostResponse
+    }
+
+/*    fun callGetVerify() = viewModelScope.launch {
         userRepository.getVerify().let { response ->
             if (response.isSuccessful) {
                 _getVerifyResponse.value = response.body()
             }
         }
-    }
+    }*/
 }

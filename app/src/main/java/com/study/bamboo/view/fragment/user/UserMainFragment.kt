@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -25,6 +26,7 @@ import com.study.bamboo.databinding.FragmentUserMainBinding
 import com.study.bamboo.utils.Functions
 import com.study.bamboo.view.activity.main.MainViewModel
 import com.study.bamboo.data.paging.GetPostSource
+import com.study.bamboo.data.paging.GetPostSource.Companion.FIRST_PAGE_INDEX
 import com.study.bamboo.view.activity.postcreate.PostCreateViewModel
 import com.study.bamboo.view.activity.signin.SignInActivity.Companion.getPostCountResponse
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,23 +38,28 @@ import kotlinx.coroutines.launch
 class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment_user_main) {
 
     //lateinit var binding: FragmentUserMainBinding
-    private val mainViewModel by activityViewModels<MainViewModel>()
-    lateinit var userHomeItemAdapter: UserHomeItemAdapter
-    private val postCreateViewModel : PostCreateViewModel by activityViewModels()
+    private val mainViewModel by viewModels<MainViewModel>()
 
-    companion object {
         private var firstStart = true
-        var getVerifyResponse: GetVerifyDTO? = null
 
-    }
 
     override fun onStop() {
         super.onStop()
         binding.progressBar.visibility = View.GONE
     }
 
+    override fun onStart() {
+        super.onStart()
+        Log.d("로그","시작됨 start")
+        firstStart = true
+        //initRecyclerView()
+        // mainViewModel.setGetPostResponse(null)
+    }
+
     override fun onResume() {
         super.onResume()
+        Log.d("로그","시작됨 resume")
+        mainViewModel.callGetPost(20, "ACCEPTED")
         if (firstStart) {
             binding.progressBar.visibility = View.VISIBLE
             firstStart = false
@@ -65,9 +72,9 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user_main, container, false)
         binding.activity = this
+        Log.d("로그","시작됨 createview")
         binding.progressBar.visibility = View.GONE
         observeViewModel()
 
@@ -76,35 +83,22 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
     }
 
     fun addPostBtnClick(view: View) {
-/*        binding.progressBar.visibility = View.VISIBLE
-        if (getVerifyResponse != null){
-            binding.progressBar.visibility = View.GONE
-            val intent = Intent(requireContext(), PostCreateActivity::class.java)
-            startActivity(intent)
-        }else{
-            mainViewModel.callGetVerify()
-        }*/
-       //postCreateViewModel.setPostCreateSuccess(false)
         view.findNavController().navigate(R.id.action_userMainFragment_to_postCreateFragment)
     }
 
 
     private fun initRecyclerView() {
-        Functions.recyclerViewManager(binding.postRecyclerView, requireContext())
+        //Functions.recyclerViewManager(binding.postRecyclerView, requireContext())
+        binding.postRecyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        val userHomeItemAdapter =
+            UserHomeItemAdapter()
         binding.postRecyclerView.adapter =
-            UserHomeItemAdapter()
-        userHomeItemAdapter =
-            UserHomeItemAdapter()
-
-/*        lifecycleScope.launchWhenCreated {
-            mainViewModel.getListData(getPostCountResponse).collect {
-                userHomeItemAdapter.submitData(it)
-            }
-        }*/
+            userHomeItemAdapter
 
         lifecycleScope.launch {
             mainViewModel.pagingData.collectLatest {
-                (binding.postRecyclerView.adapter as UserHomeItemAdapter).submitData(
+                (userHomeItemAdapter).submitData(
                     it
                 )
             }
@@ -118,9 +112,10 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
             "post : ${mainViewModel.getPostResponse.value}, count : ${mainViewModel.getCountResponse.value}"
         )
         mainViewModel.getPostResponse.observe(requireActivity(), Observer {
-            Log.d("로그", "in post : $it")
+            Log.d("로그", "in post : ${it?.size}")
             if (it != null) {
                 binding.progressBar.visibility = View.GONE
+                FIRST_PAGE_INDEX =1
                 initRecyclerView()
             }
         })

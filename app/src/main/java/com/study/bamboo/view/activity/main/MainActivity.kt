@@ -57,10 +57,4 @@ class MainActivity : BaseActivity() {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-   /*     val intent = Intent(this, SignInActivity::class.java)
-        startActivity(intent)
-        finish()*/
-    }
 }

@@ -1,5 +1,6 @@
 package com.study.bamboo.view.fragment.user
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -30,10 +32,25 @@ class DeclarationFragment : Fragment(
     private val viewModel by viewModels<DeclarationViewModel>()
     private val args by navArgs<DeclarationFragmentArgs>()
     private var checkPopBackStack = false
-
+    private lateinit var callback: OnBackPressedCallback
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+    }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Log.d("TAG", "handleOnBackPressed: ")
+                findNavController().navigate(R.id.action_declarationFragment_to_userMainFragment)
+
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
     }
 
     override fun onCreateView(

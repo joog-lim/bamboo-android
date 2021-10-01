@@ -1,36 +1,27 @@
 package com.study.bamboo.view.fragment.user
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.fragment.app.Fragment
-
+import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.study.bamboo.R
 import com.study.bamboo.adapter.user.UserHomeItemAdapter
 import com.study.bamboo.base.BaseFragment
-import com.study.bamboo.data.network.models.user.GetVerifyDTO
-import com.study.bamboo.data.network.models.user.getcount.GetCount
-import com.study.bamboo.databinding.FragmentUserMainBinding
-import com.study.bamboo.utils.Functions
-import com.study.bamboo.view.activity.main.MainViewModel
-import com.study.bamboo.data.paging.GetPostSource
 import com.study.bamboo.data.paging.GetPostSource.Companion.FIRST_PAGE_INDEX
-import com.study.bamboo.view.activity.postcreate.PostCreateViewModel
-import com.study.bamboo.view.activity.signin.SignInActivity.Companion.getPostCountResponse
+import com.study.bamboo.databinding.FragmentUserMainBinding
+import com.study.bamboo.view.activity.main.MainViewModel
+import com.study.bamboo.view.activity.signin.SignInActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -40,9 +31,9 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
     //lateinit var binding: FragmentUserMainBinding
     private val mainViewModel by viewModels<MainViewModel>()
 
-        private var firstStart = true
+    private var firstStart = true
 
-
+    private lateinit var callback: OnBackPressedCallback
     override fun onStop() {
         super.onStop()
         binding.progressBar.visibility = View.GONE
@@ -50,7 +41,7 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
 
     override fun onStart() {
         super.onStart()
-        Log.d("로그","시작됨 start")
+        Log.d("로그", "시작됨 start")
         firstStart = true
         //initRecyclerView()
         // mainViewModel.setGetPostResponse(null)
@@ -58,7 +49,7 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
 
     override fun onResume() {
         super.onResume()
-        Log.d("로그","시작됨 resume")
+        Log.d("로그", "시작됨 resume")
         mainViewModel.callGetPost(20, "ACCEPTED")
         if (firstStart) {
             binding.progressBar.visibility = View.VISIBLE
@@ -74,7 +65,7 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user_main, container, false)
         binding.activity = this
-        Log.d("로그","시작됨 createview")
+        Log.d("로그", "시작됨 createview")
         binding.progressBar.visibility = View.GONE
         observeViewModel()
 
@@ -105,6 +96,18 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
         }
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Log.d("TAG", "handleOnBackPressed: ")
+                startActivity(Intent(requireContext(), SignInActivity::class.java))
+
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
 
     private fun observeViewModel() {
         Log.d(
@@ -115,7 +118,7 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
             Log.d("로그", "in post : ${it?.size}")
             if (it != null) {
                 binding.progressBar.visibility = View.GONE
-                FIRST_PAGE_INDEX =1
+                FIRST_PAGE_INDEX = 1
                 initRecyclerView()
             }
         })

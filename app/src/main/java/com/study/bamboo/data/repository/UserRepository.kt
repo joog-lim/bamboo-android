@@ -18,4 +18,7 @@ class UserRepository @Inject constructor(private val userApi: UserApi){
     suspend fun getCount() = userApi.getCount()
     fun getPagingData(): Flow<PagingData<UserPostDTO>> { return Pager(PagingConfig(pageSize = 20)) { GetPostSource(userApi) }.flow }
     suspend fun report(id : String, body: ReportRequest) = userApi.report(id, body)
+
+    suspend fun postEmoji(token : String) = userApi.postEmoji(token)
+    suspend fun deleteEmoji(token : String) = userApi.deleteEmoji(token)
 }

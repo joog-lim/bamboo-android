@@ -11,18 +11,15 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.study.bamboo.R
 import com.study.bamboo.data.network.models.user.report.ReportRequest
-import com.study.bamboo.data.repository.UserRepository
 import com.study.bamboo.databinding.FragmentDeclarationBinding
-import com.study.bamboo.view.fragment.admin.dialog.AcceptDialogArgs
+import com.study.bamboo.view.fragment.user.viewmodel.DeclarationViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 
 @AndroidEntryPoint

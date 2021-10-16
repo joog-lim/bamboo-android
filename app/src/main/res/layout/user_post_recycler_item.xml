@@ -77,9 +77,9 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/nanumsquareround_otfb"
                     android:gravity="start"
+                    android:text="신고"
                     android:textColor="#E75858"
-                    android:textSize="@dimen/post_tag"
-                    android:text="신고" />
+                    android:textSize="@dimen/post_tag" />
             </RelativeLayout>
 
 
@@ -92,8 +92,8 @@
                 android:fontFamily="@font/nanumsquareround_otfb"
                 android:gravity="start"
                 android:textColor="#C4C4C4"
-                app:userDay="@{data.createdAt}"
                 android:textSize="@dimen/post_time"
+                app:userDay="@{data.createdAt}"
                 tools:text="2021년 3월 12일 새벽" />
 
             <TextView
@@ -105,10 +105,10 @@
                 android:fontFamily="@font/nanumsquareround_otfeb"
                 android:gravity="start"
                 android:includeFontPadding="false"
-                app:userPostTitle="@{data.title}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/post_md"
                 android:textStyle="bold"
+                app:userPostTitle="@{data.title}"
                 tools:text="역시 개발은 새벽이지~" />
 
             <TextView
@@ -119,13 +119,63 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/nanumsquareround_otfl"
                 android:gravity="start"
-                app:userPostContent="@{data.content}"
                 android:includeFontPadding="false"
                 android:textColor="@color/black"
                 android:textSize="@dimen/post_con"
                 android:textStyle="bold"
+                app:userPostContent="@{data.content}"
                 tools:text="새벽 코딩이 개꿀임. 진심 집중도 잘 되고 뭔가 날 방해하는 것도 없어. 이걸 참아??????????????????? 가능???????????" />
         </RelativeLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/good_emoji"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_good_no_img"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/good_emoji_text"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/good_emoji_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textColor="@color/no_click_color"
+                android:layout_marginRight="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/sad_emoji"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/sad_emoji"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_sad_no_img"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginRight="10dp"
+                app:layout_constraintEnd_toStartOf="@+id/sad_emoji_text"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/sad_emoji_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textColor="@color/no_click_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 </layout>

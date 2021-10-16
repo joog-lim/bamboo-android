@@ -1,6 +1,7 @@
 package com.study.bamboo.data.network.user
 
 
+import com.study.bamboo.data.network.models.Emoji
 import com.study.bamboo.data.network.models.admin.AcceptModify
 import com.study.bamboo.data.network.models.user.GetVerifyDTO
 import com.study.bamboo.data.network.models.user.report.ReportRequest
@@ -35,5 +36,15 @@ interface UserApi {
         @Path("id") id: String,
         @Body body: ReportRequest,
         ): Response<ReportResponse>
+
+    @POST("{emoji}")
+    suspend fun postEmoji(
+        @Header("Authorization") Authorization: String,
+    ) : Response<Emoji>
+
+    @POST("{emoji}")
+    suspend fun deleteEmoji(
+        @Header("Authorization") Authorization: String,
+    ) : Response<Emoji>
 
 }

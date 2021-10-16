@@ -11,4 +11,7 @@
     <color name="main_background">#E5E5E5</color>
     <color name="text_waiting_color">#ECD06B</color>
     <color name="text_reject_color" >#E75858</color>
+    <color name="good_emoji_color">#4D70CC</color>
+    <color name="sad_emoji_color">#E75858</color>
+    <color name="no_click_color">#C4C4C4</color>
 </resources>

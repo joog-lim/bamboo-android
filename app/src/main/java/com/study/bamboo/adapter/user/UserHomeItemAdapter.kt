@@ -1,5 +1,6 @@
 package com.study.bamboo.adapter.user
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -14,8 +15,10 @@ import com.study.bamboo.R
 import com.study.bamboo.data.network.models.user.UserPostDTO
 import com.study.bamboo.databinding.UserPostRecyclerItemBinding
 import com.study.bamboo.view.fragment.user.UserMainFragmentDirections
+import com.study.bamboo.view.fragment.user.viewmodel.UserViewModel
 
 class UserHomeItemAdapter(
+    private val viewModel: UserViewModel
 ) :
     PagingDataAdapter<UserPostDTO, UserHomeItemAdapter.UserHomeItemViewHolder>(DiffUtilCallBack()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserHomeItemViewHolder {
@@ -32,20 +35,56 @@ class UserHomeItemAdapter(
 
     override fun onBindViewHolder(holder: UserHomeItemViewHolder, position: Int) {
         val item = getItem(position)
-        if (item !=null){
+        if (item != null) {
             holder.bind(item)
         }
+        var good = 0
+        var sad = 0
 
         holder.binding.declarationBtn.setOnClickListener {
-            val direction: NavDirections = UserMainFragmentDirections.actionUserMainFragmentToDeclarationFragment(item!!.id)
+            val direction: NavDirections =
+                UserMainFragmentDirections.actionUserMainFragmentToDeclarationFragment(item!!.id)
             it.findNavController().navigate(direction)
+        }
+        holder.binding.goodEmoji.setOnClickListener {
+            when (good) {
+                0 -> {
+                    holder.binding.goodEmoji.setBackgroundResource(R.drawable.ic_good_img)
+
+                    viewModel.postEmoji("")
+                    good = 1
+                }
+                1 -> {
+                    holder.binding.goodEmoji.setBackgroundResource(R.drawable.ic_good_no_img)
+                    viewModel
+                    good = 0
+                }
+            }
+
+        }
+
+        holder.binding.sadEmoji.setOnClickListener {
+            when (sad) {
+                0 -> {
+                    holder.binding.sadEmoji.setBackgroundResource(R.drawable.ic_sad_img)
+
+                    viewModel.postEmoji("")
+                    sad = 1
+                }
+                1 -> {
+                    holder.binding.goodEmoji.setBackgroundResource(R.drawable.ic_sad_no_img)
+                    viewModel.deleteEmoji("")
+                    sad = 0
+                }
+            }
+
         }
     }
 
     class UserHomeItemViewHolder(val binding: UserPostRecyclerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: UserPostDTO) {
-            Log.d("로그","userHomeItemAdapter bind data : $data")
+            Log.d("로그", "userHomeItemAdapter bind data : $data")
             binding.data = data
             binding.executePendingBindings()
         }

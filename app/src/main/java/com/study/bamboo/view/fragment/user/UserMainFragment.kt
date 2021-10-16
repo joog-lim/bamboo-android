@@ -21,6 +21,7 @@ import com.study.bamboo.data.paging.GetPostSource.Companion.FIRST_PAGE_INDEX
 import com.study.bamboo.databinding.FragmentUserMainBinding
 import com.study.bamboo.view.activity.main.MainViewModel
 import com.study.bamboo.view.activity.signin.SignInActivity
+import com.study.bamboo.view.fragment.user.viewmodel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -30,6 +31,7 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
 
     //lateinit var binding: FragmentUserMainBinding
     private val mainViewModel by viewModels<MainViewModel>()
+    private val userViewModel by viewModels<UserViewModel>()
 
     private var firstStart = true
 
@@ -83,7 +85,7 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
         binding.postRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         val userHomeItemAdapter =
-            UserHomeItemAdapter()
+            UserHomeItemAdapter(userViewModel)
         binding.postRecyclerView.adapter =
             userHomeItemAdapter
 

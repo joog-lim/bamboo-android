@@ -1,4 +1,4 @@
-package com.study.bamboo.view.fragment.user
+package com.study.bamboo.view.fragment.user.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

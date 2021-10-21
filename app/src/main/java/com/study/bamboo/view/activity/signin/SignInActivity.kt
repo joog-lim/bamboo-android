@@ -74,6 +74,10 @@ class SignInActivity : BaseActivity() {
 
     }
 
+    fun clickUserGoogleLogin(view: View) {
+        //유저가 구글 로그인을 할때
+    }
+
     private fun initBundle(display_size_x: Int) {
         //bundleOf를 이용한 데이터 전달
         val bundle = bundleOf("displaySizeX" to display_size_x)

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".view.activity.signin.UserGoogleDialog">
+
+
+    <TextView
+        android:id="@+id/login_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logo_img"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/nanumsquareround_otfb"
+        android:text="로그인하기"
+        android:textColor="#C4C4C4"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo_img" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="30dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/who_login_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/nanumsquareround_otfb"
+            android:text="학교 계정으로 로그인해주세요"
+            android:textColor="@color/main_color"
+            android:textSize="17sp" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/user_dialog_google_login"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/google_logo_img"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/google_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="SIGN IN WITH GOOGLE"
+                android:gravity="center"
+                android:textColor="#C4C4C4"
+                android:fontFamily="@font/nanumsquareround_otfr"
+                android:layout_alignParentEnd="true"
+                android:textSize="17sp"
+                android:layout_toEndOf="@+id/google_logo_img" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

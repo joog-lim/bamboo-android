@@ -31,43 +31,73 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="25dp"
+            app:layout_constraintBottom_toTopOf="@+id/view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/signin_btn"
-                android:elevation="10dp"
-                android:layout_marginStart="@dimen/signin_btn_margin_start_end"
-                android:layout_marginEnd="@dimen/signin_btn_margin_start_end"
-                android:onClick="@{activity::clickUserLogin}"
-                android:fontFamily="@font/nanumsquareround_otfb"
-                android:includeFontPadding="false"
-                android:text="사용자로 시작하기"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/signin_btn_margin_start_end"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="@dimen/signin_btn_margin_start_end"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/signin_btn"
                 android:elevation="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="@dimen/signin_btn_margin_start_end"
-                android:layout_marginEnd="@dimen/signin_btn_margin_start_end"
-                android:onClick="@{activity::clickAdminLogin}"
-                android:layout_marginBottom="10dp"
                 android:fontFamily="@font/nanumsquareround_otfb"
                 android:includeFontPadding="false"
-                android:text="관리자로 시작하기"
+                android:onClick="@{activity::clickUserGoogleLogin}"
+                android:text="사용자"
                 android:textColor="@color/white"
-                android:textSize="15sp" />
+                android:textSize="20sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/signin_btn_margin_start_end"
+                android:layout_marginEnd="@dimen/signin_btn_margin_start_end"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/signin_btn"
+                android:elevation="10dp"
+                android:fontFamily="@font/nanumsquareround_otfb"
+                android:includeFontPadding="false"
+                android:onClick="@{activity::clickAdminLogin}"
+                android:text="관리자"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/nanumsquareround_otfb"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:onClick="@{activity::clickUserLogin}"
+            android:text="게스트로 사용하기"
+            android:textColor="#878787"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/signin_btn_margin_start_end"
+            android:layout_marginEnd="@dimen/signin_btn_margin_start_end"
+            android:layout_marginBottom="40dp"
+            android:background="#878787"
+            app:layout_constraintBottom_toTopOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ProgressBar
             android:id="@+id/progressBar"

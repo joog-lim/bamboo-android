@@ -49,7 +49,7 @@
                 android:elevation="10dp"
                 android:fontFamily="@font/nanumsquareround_otfb"
                 android:includeFontPadding="false"
-                android:onClick="@{activity::clickAdminLogin}"
+                android:onClick="@{activity::clickUserGoogleLogin}"
                 android:text="사용자"
                 android:textColor="@color/white"
                 android:textSize="20sp" />

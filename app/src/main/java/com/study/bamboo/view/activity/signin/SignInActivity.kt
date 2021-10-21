@@ -75,23 +75,7 @@ class SignInActivity : BaseActivity() {
     }
 
     fun clickUserGoogleLogin(view: View) {
-        //다이얼로그
-
-        try {
-            if (!loginDialog.isAdded) {
-                loginDialog.show(supportFragmentManager, "AdminLoginDialog")
-
-            }
-            val windowManager = this.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-            val display = windowManager.defaultDisplay
-            val size = Point()
-            display.getSize(size)
-            deviceSizeX = size.x
-            initBundle(deviceSizeX)
-        }catch (e : Exception){
-            Log.d("로그","로그인 다이얼로그 오류 : $e")
-        }
-
+        //유저가 구글 로그인을 할때
     }
 
     private fun initBundle(display_size_x: Int) {

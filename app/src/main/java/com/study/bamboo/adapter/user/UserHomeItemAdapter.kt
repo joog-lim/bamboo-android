@@ -38,8 +38,8 @@ class UserHomeItemAdapter(
         if (item != null) {
             holder.bind(item)
         }
-        var good = 0
-        var sad = 0
+        var good = false
+        var sad = false
 
         holder.binding.declarationBtn.setOnClickListener {
             val direction: NavDirections =
@@ -47,35 +47,36 @@ class UserHomeItemAdapter(
             it.findNavController().navigate(direction)
         }
         holder.binding.goodEmoji.setOnClickListener {
-            when (good) {
-                0 -> {
-                    holder.binding.goodEmoji.setBackgroundResource(R.drawable.ic_good_img)
 
-                    viewModel.postEmoji("")
-                    good = 1
-                }
-                1 -> {
-                    holder.binding.goodEmoji.setBackgroundResource(R.drawable.ic_good_no_img)
-                    viewModel
-                    good = 0
-                }
+            good = if (good) {
+
+                holder.binding.goodEmoji.setBackgroundResource(R.drawable.ic_good_no_img)
+                viewModel.postEmoji("")
+                false
+
+
+            } else {
+
+                holder.binding.goodEmoji.setBackgroundResource(R.drawable.ic_good_img)
+                viewModel.postEmoji("")
+                true
             }
-
         }
 
-        holder.binding.sadEmoji.setOnClickListener {
-            when (sad) {
-                0 -> {
-                    holder.binding.sadEmoji.setBackgroundResource(R.drawable.ic_sad_img)
 
-                    viewModel.postEmoji("")
-                    sad = 1
-                }
-                1 -> {
-                    holder.binding.goodEmoji.setBackgroundResource(R.drawable.ic_sad_no_img)
-                    viewModel.deleteEmoji("")
-                    sad = 0
-                }
+        holder.binding.sadEmoji.setOnClickListener {
+            sad = if (sad) {
+
+
+                holder.binding.goodEmoji.setBackgroundResource(R.drawable.ic_sad_no_img)
+                viewModel.deleteEmoji("")
+                false
+            } else {
+
+                holder.binding.sadEmoji.setBackgroundResource(R.drawable.ic_sad_img)
+                viewModel.postEmoji("")
+                true
+
             }
 
         }

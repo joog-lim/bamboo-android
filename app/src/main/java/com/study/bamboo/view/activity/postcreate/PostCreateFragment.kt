@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
@@ -18,9 +17,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.study.bamboo.R
 import com.study.bamboo.databinding.FragmentPostCreateBinding
 import dagger.hilt.android.AndroidEntryPoint
+import com.study.bamboo.R
+
 
 @AndroidEntryPoint
 class PostCreateFragment : Fragment() {
@@ -131,11 +131,8 @@ class PostCreateFragment : Fragment() {
     }
 
     private fun setupSpinnerTag() {
-        binding.choiceTag.adapter = ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.PostCreateTagList,
-            R.layout.post_create_tag_spinner_item
-        )
+        val tag = resources.getStringArray(R.array.PostCreateTagList)
+        binding.choiceTag.adapter=  TagSpinnerAdapter(requireContext(),tag)
     }
 
     private fun setupSpinnerHandler() {
@@ -186,6 +183,7 @@ class PostCreateFragment : Fragment() {
                         postTag = "태그선택"
                     }
                 }
+                Log.d("로그","스피너 변동 발생 $postTag")
                 postCreateViewModel.setChoiceTag(postTag)
             }
         }

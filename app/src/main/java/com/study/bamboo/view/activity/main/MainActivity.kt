@@ -2,6 +2,7 @@ package com.study.bamboo.view.activity.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -50,15 +51,30 @@ class MainActivity : BaseActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navi.setupWithNavController(navController)
 
-
+        initNavigation()
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
+    private fun initNavigation() {
+
+        val navController = findNavController(R.id.navHostFragment)
+        navi.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            // fragment id 가 아닐 시 bottom navigation 안뜸
+            if (destination.id == R.id.userMainFragment || destination.id == R.id.userRulesFragment || destination.id == R.id.userMoreSeeFragment) {
+                navi.visibility = View.VISIBLE
+            } else {
+                navi.visibility = View.GONE
+            }
+        }
+    }
+
     override fun onBackPressed() {
         super.onBackPressed()
-        finish()
+
     }
 }

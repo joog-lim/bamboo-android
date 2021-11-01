@@ -22,6 +22,9 @@ import com.study.bamboo.R
 import com.study.bamboo.databinding.FragmentPostCreateBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+import android.graphics.drawable.GradientDrawable
+
+
 @AndroidEntryPoint
 class PostCreateFragment : Fragment() {
     private val postCreateViewModel: PostCreateViewModel by activityViewModels()
@@ -32,21 +35,26 @@ class PostCreateFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 Log.d("TAG", "handleOnBackPressed: ")
+
                 findNavController().navigate(R.id.action_postCreateFragment_to_userMainFragment)
+                findNavController().navigateUp()
 
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
+
     override fun onDetach() {
         super.onDetach()
         callback.remove()
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -76,13 +84,13 @@ class PostCreateFragment : Fragment() {
         postCreateViewModel.postCreateResponse.observe(requireActivity(), Observer {
             binding.progressBar.visibility = View.GONE
             if (it != null) {
-                if (!checkPopBackStack){
-                    checkPopBackStack= true
+                if (!checkPopBackStack) {
+                    checkPopBackStack = true
                     lifecycleScope.launchWhenResumed {
                         findNavController().navigate(R.id.action_postCreateFragment_to_userMainFragment)
                     }
                 }
-            }else{
+            } else {
                 binding.uploadBtn.isEnabled = true
                 binding.uploadBtn.resources.getColor(R.color.main_color)
             }
@@ -136,6 +144,7 @@ class PostCreateFragment : Fragment() {
             R.array.PostCreateTagList,
             R.layout.post_create_tag_spinner_item
         )
+
     }
 
     private fun setupSpinnerHandler() {

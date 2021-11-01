@@ -43,6 +43,8 @@ class DeclarationFragment : Fragment(
             override fun handleOnBackPressed() {
                 Log.d("TAG", "handleOnBackPressed: ")
                 findNavController().navigate(R.id.action_declarationFragment_to_userMainFragment)
+                findNavController().navigateUp()
+
 
             }
         }

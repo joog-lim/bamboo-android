@@ -67,6 +67,8 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
         binding.activity = this
         Log.d("로그", "시작됨 createview")
         binding.progressBar.visibility = View.GONE
+        initRecyclerView()
+
         observeViewModel()
 
 
@@ -101,8 +103,8 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
         callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 Log.d("TAG", "handleOnBackPressed: ")
-                startActivity(Intent(requireContext(), SignInActivity::class.java))
 
+                activity?.finish()
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
@@ -119,7 +121,6 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
             if (it != null) {
                 binding.progressBar.visibility = View.GONE
                 FIRST_PAGE_INDEX = 1
-                initRecyclerView()
             }
         })
 

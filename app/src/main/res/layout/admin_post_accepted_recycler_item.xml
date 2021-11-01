@@ -7,8 +7,11 @@
 
         <variable
             name="data"
-            type="com.study.bamboo.utils.Admin.Accept" />
+            type="com.study.bamboo.util.Admin.Accept" />
 
+        <variable
+            name="viewHolder"
+            type="com.study.bamboo.adapter.admin.AdminAdapter" />
     </data>
 
     <LinearLayout
@@ -60,10 +63,10 @@
                     android:id="@+id/post_tag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="13dp"
                     android:textColor="@color/main_color"
                     app:getTag="@{data.tag}"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginEnd="13dp"
 
                     app:layout_constraintEnd_toStartOf="@+id/post_more"
                     app:layout_constraintTop_toTopOf="parent"
@@ -86,6 +89,7 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <TextView
             android:id="@+id/post_time"
             android:layout_width="wrap_content"

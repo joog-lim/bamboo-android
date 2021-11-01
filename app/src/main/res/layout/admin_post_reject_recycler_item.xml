@@ -7,7 +7,11 @@
 
         <variable
             name="data"
-            type="com.study.bamboo.utils.Admin.Reject" />
+            type="com.study.bamboo.data.network.models.user.UserPostDTOBase" />
+
+        <variable
+            name="viewHolder"
+            type="com.study.bamboo.adapter.admin.AdminAdapter" />
 
     </data>
 
@@ -77,6 +81,7 @@
                     android:fontFamily="@font/nanumsquareround_otfb"
                     android:textColor="#C4C4C4"
                     android:textSize="@dimen/post_more"
+
                     app:chooseStatus="@{data.status}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -95,7 +100,6 @@
             android:textColor="#C4C4C4"
             android:textSize="@dimen/post_time"
             app:day="@{data.createdAt}"
-
             tools:text="2021년 3월 12일 새벽" />
 
         <TextView

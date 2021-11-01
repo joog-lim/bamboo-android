@@ -36,6 +36,10 @@
         tools:layout="@layout/fragment_post_create">
         <action
             android:id="@+id/action_postCreateFragment_to_userMainFragment"
+            app:popUpTo="@id/userMainFragment"
+            app:destination="@id/userMainFragment" />
+        <action
+            android:id="@+id/action_postCreateFragment_to_userMainFragment2"
             app:destination="@id/userMainFragment" />
     </fragment>
 
@@ -51,6 +55,10 @@
             android:defaultValue="true"/>
         <action
             android:id="@+id/action_declarationFragment_to_userMainFragment"
+            app:popUpTo="@id/userMainFragment"
+            app:destination="@id/userMainFragment" />
+        <action
+            android:id="@+id/action_declarationFragment_to_userMainFragment2"
             app:destination="@id/userMainFragment" />
 
     </fragment>

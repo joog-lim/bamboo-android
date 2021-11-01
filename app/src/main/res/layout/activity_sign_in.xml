@@ -31,8 +31,8 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginBottom="25dp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -81,7 +81,7 @@
             android:includeFontPadding="false"
             android:onClick="@{activity::clickUserLogin}"
             android:text="게스트로 사용하기"
-            android:textColor="#878787"
+            android:textColor="#C4C4C4"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +94,7 @@
             android:layout_marginStart="@dimen/signin_btn_margin_start_end"
             android:layout_marginEnd="@dimen/signin_btn_margin_start_end"
             android:layout_marginBottom="40dp"
-            android:background="#878787"
+            android:background="#C4C4C4"
             app:layout_constraintBottom_toTopOf="@+id/textView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

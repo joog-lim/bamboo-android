@@ -7,5 +7,4 @@
     android:padding="10dp"
     android:fontFamily="@font/nanumsquareround_otfb"
     android:textColor="@color/white"
-    android:background="@drawable/post_create_spinner_frame"
     android:textSize="14sp" />

@@ -1,5 +1,6 @@
 package com.example.data.network.user
 
+
 interface UserApi {
     @GET("post/AlgorithemPage")
     suspend fun getPost(
@@ -43,5 +44,6 @@ interface UserApi {
         @Path("emoji") emoji: String,
         @Body body : EmojiRequest?
     ) : Response<Emoji>
+
 
 }

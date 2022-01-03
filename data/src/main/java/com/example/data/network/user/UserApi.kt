@@ -1,23 +1,28 @@
 package com.example.data.network.user
 
 
-interface UserApi {
-    @GET("post/AlgorithemPage")
-    suspend fun getPost(
-        @Query("page") page : Int,
-        @Query("status") status : String
-    ) : Response<UserGetPostDTO>
+import com.example.data.model.user.response.GetVerifyResponse
+import com.example.data.model.user.response.create.AlgorithmCreateResponse
+import com.example.data.model.user.request.AlgorithmCreateRequest
+import com.example.data.model.user.request.EmojiRequest
+import com.example.data.model.user.request.ReportRequest
+import com.example.data.model.user.response.ReportResponse
+import com.example.data.model.user.response.SignResponse
+import retrofit2.Response
+import retrofit2.http.*
 
-    @POST("post/create")
-    suspend fun transferPostCreate(
-        @Body request : PostCreateRequest
-    ): Response<PostCreateResponse>
+interface UserApi {
+
+
+    // 게시물 생성
+    @POST("algorithm/")
+    suspend fun algorithmCreate(
+        @Body request: AlgorithmCreateRequest
+    ): Response<AlgorithmCreateResponse>
 
     @GET("verify")
-    suspend fun getVerify() : Response<GetVerifyDTO?>
+    suspend fun getVerify(): Response<GetVerifyResponse?>
 
-    @GET("post/count")
-    suspend fun getCount() : Response<GetCount>
 
     @PATCH("post/{id}/report")
     suspend fun report(
@@ -26,24 +31,28 @@ interface UserApi {
     ): Response<ReportResponse>
 
 
-    @POST("account/account/login")
+    @POST("login")
     suspend fun postLogin(
         @Header("Authorization") Authorization: String,
-    ): Response<LoginResponse>
+    ): Response<SignResponse>
 
-    @POST("account/emoji/{emoji}")
-    suspend fun postEmoji(
-        @Header("Authorization") Authorization: String,
-        @Path("emoji") emoji: String,
-        @Body body : EmojiRequest?
-    ) : Response<Emoji>
 
-    @DELETE("account/emoji/{emoji}")
-    suspend fun deleteEmoji(
-        @Header("Authorization") Authorization: String,
-        @Path("emoji") emoji: String,
-        @Body body : EmojiRequest?
-    ) : Response<Emoji>
+    @DELETE("logout")
+    suspend fun deleteLogOut(
+        @Header("Authorization") authorization: String
+    ): Response<Void>
+
+
+    // 이모지
+    suspend fun postLeaf(
+        @Header("Authorization") authorization: String,
+        @Body body: EmojiRequest
+    ): Response<Void>
+
+    suspend fun deleteLeaf(
+        @Header("Authorization") authorization: String,
+        @Body body: EmojiRequest
+    ): Response<Void>
 
 
 }

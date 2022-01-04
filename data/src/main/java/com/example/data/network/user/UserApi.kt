@@ -1,14 +1,16 @@
 package com.example.data.network.user
 
 
+import com.example.data.base.BaseDataResponse
+import com.example.data.base.BaseResponse
 import com.example.data.model.user.response.GetVerifyResponse
-import com.example.data.model.user.response.create.AlgorithmCreateResponse
+import com.example.data.model.user.response.AlgorithmCreateResponse
 import com.example.data.model.user.request.AlgorithmCreateRequest
 import com.example.data.model.user.request.EmojiRequest
 import com.example.data.model.user.request.ReportRequest
 import com.example.data.model.user.response.ReportResponse
 import com.example.data.model.user.response.SignResponse
-import retrofit2.Response
+import io.reactivex.rxjava3.core.Single
 import retrofit2.http.*
 
 interface UserApi {
@@ -16,43 +18,44 @@ interface UserApi {
 
     // 게시물 생성
     @POST("algorithm/")
-    suspend fun algorithmCreate(
+    fun algorithmCreate(
         @Body request: AlgorithmCreateRequest
-    ): Response<AlgorithmCreateResponse>
+    ): Single<BaseDataResponse<AlgorithmCreateResponse>>
+
 
     @GET("verify")
-    suspend fun getVerify(): Response<GetVerifyResponse?>
+    fun getVerify(): Single<BaseDataResponse<GetVerifyResponse>>
 
 
     @PATCH("post/{id}/report")
-    suspend fun report(
+    fun patchReport(
         @Path("id") id: String,
         @Body body: ReportRequest,
-    ): Response<ReportResponse>
+    ): Single<BaseDataResponse<ReportResponse>>
 
 
     @POST("login")
-    suspend fun postLogin(
+    fun postLogin(
         @Header("Authorization") Authorization: String,
-    ): Response<SignResponse>
+    ): Single<BaseDataResponse<SignResponse>>
 
 
     @DELETE("logout")
-    suspend fun deleteLogOut(
+    fun deleteLogOut(
         @Header("Authorization") authorization: String
-    ): Response<Void>
+    ): Single<BaseResponse>
 
 
     // 이모지
-    suspend fun postLeaf(
+    fun postEmoji(
         @Header("Authorization") authorization: String,
         @Body body: EmojiRequest
-    ): Response<Void>
+    ): Single<BaseResponse>
 
-    suspend fun deleteLeaf(
+    fun deleteEmoji(
         @Header("Authorization") authorization: String,
         @Body body: EmojiRequest
-    ): Response<Void>
+    ): Single<BaseResponse>
 
 
 }

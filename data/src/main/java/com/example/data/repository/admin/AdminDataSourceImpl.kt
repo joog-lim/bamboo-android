@@ -7,6 +7,7 @@ import com.example.data.model.admin.request.AlgorithmModifyRequest
 import com.example.data.model.admin.request.SetStatusRequest
 import com.example.data.model.admin.response.AlgorithmResponse
 import com.example.data.network.admin.AdminApi
+import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
 import javax.inject.Inject
@@ -38,7 +39,7 @@ class AdminDataSourceImpl @Inject constructor(override val service: AdminApi) : 
         count: Int,
         page: Int,
         status: String
-    ): Single<BaseDataResponse<AlgorithmResponse>> {
+    ): Flowable<BaseDataResponse<AlgorithmResponse>> {
         return service.getAlgorithmPage(token, count, page, status)
     }
 }

@@ -8,7 +8,7 @@ import com.example.data.model.user.request.ReportRequest
 import com.example.data.model.user.response.GetVerifyResponse
 import com.example.data.model.user.response.ReportResponse
 import com.example.data.model.user.response.SignResponse
-import com.example.data.model.user.response.create.AlgorithmCreateResponse
+import com.example.data.model.user.response.AlgorithmCreateResponse
 import io.reactivex.rxjava3.core.Single
 
 
@@ -21,14 +21,14 @@ interface UserDataSource {
     ): Single<BaseDataResponse<ReportResponse>>
 
     suspend fun postLogin(authorization: String): Single<BaseDataResponse<SignResponse>>
-    suspend fun deleteLogOut(authorization: String): BaseResponse
+    suspend fun deleteLogOut(authorization: String): Single<BaseResponse>
     suspend fun postEmoji(
         authorization: String,
         body: EmojiRequest
-    ): BaseResponse
+    ): Single<BaseResponse>
 
     suspend fun deleteEmoji(
         authorization: String,
         body: EmojiRequest
-    ): BaseResponse
+    ): Single<BaseResponse>
 }

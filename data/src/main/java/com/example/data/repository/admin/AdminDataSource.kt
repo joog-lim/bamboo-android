@@ -5,6 +5,7 @@ import com.example.data.base.BaseResponse
 import com.example.data.model.admin.request.AlgorithmModifyRequest
 import com.example.data.model.admin.request.SetStatusRequest
 import com.example.data.model.admin.response.AlgorithmResponse
+import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
 
 interface AdminDataSource {
@@ -28,5 +29,5 @@ interface AdminDataSource {
         count: Int,
         page: Int,
         status: String
-    ): Single<BaseDataResponse<AlgorithmResponse>>
+    ): Flowable<BaseDataResponse<AlgorithmResponse>>
 }

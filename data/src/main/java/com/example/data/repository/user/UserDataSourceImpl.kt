@@ -9,7 +9,7 @@ import com.example.data.model.user.request.ReportRequest
 import com.example.data.model.user.response.GetVerifyResponse
 import com.example.data.model.user.response.ReportResponse
 import com.example.data.model.user.response.SignResponse
-import com.example.data.model.user.response.create.AlgorithmCreateResponse
+import com.example.data.model.user.response.AlgorithmCreateResponse
 import com.example.data.network.user.UserApi
 import io.reactivex.rxjava3.core.Single
 
@@ -36,21 +36,21 @@ class UserDataSourceImpl(override val service: UserApi) : UserDataSource,
         return service.postLogin(authorization)
     }
 
-    override suspend fun deleteLogOut(authorization: String): BaseResponse {
+    override suspend fun deleteLogOut(authorization: String): Single<BaseResponse> {
         return service.deleteLogOut(authorization)
     }
 
     override suspend fun postEmoji(
         authorization: String,
         body: EmojiRequest
-    ): BaseResponse {
+    ): Single<BaseResponse> {
         return service.postEmoji(authorization, body)
     }
 
     override suspend fun deleteEmoji(
         authorization: String,
         body: EmojiRequest
-    ): BaseResponse {
+    ): Single<BaseResponse> {
         return service.deleteEmoji(authorization, body)
     }
 

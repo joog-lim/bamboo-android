@@ -1,4 +1,4 @@
-package com.example.data.model.user.report
+package com.example.data.model.user.response
 
 data class ReportResponse(
     val __v: Int,

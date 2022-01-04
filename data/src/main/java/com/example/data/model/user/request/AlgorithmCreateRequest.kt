@@ -1,6 +1,6 @@
-package com.example.data.model.user.postcreate
+package com.example.data.model.user.request
 
-data class PostCreateRequest(
+data class AlgorithmCreateRequest(
     val title: String,
     val content: String,
     val tag: String,

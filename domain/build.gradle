@@ -1,0 +1,45 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdkVersion 31
+
+    defaultConfig {
+        minSdkVersion 30
+        targetSdkVersion 31
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation  Google.HILT_ANDROID
+    implementation  Google.HILT_ANDROID_COMPILER
+    implementation RX.RX_ANDROID
+    implementation RX.RX_JAVA
+    implementation RX.RX_KOTLIN
+    implementation RX.RX_BINDING
+    implementation Kotlin.CORE_KTX
+    implementation AndroidX.APP_COMPAT
+    implementation Google.MATERIAL
+    implementation AndroidX.CONSTRAINTLAYOUT
+    androidTestImplementation AndroidTest.ANDROID_JUNIT
+    androidTestImplementation AndroidTest.ESPRESSO_CORE
+}

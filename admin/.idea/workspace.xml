@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="87ad33ed-e50a-4ec1-803d-56d4164d9509" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/admin/utls/Admin.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/mapper/admin/AdminMapper.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/mapper/user/UserMapper.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/network/admin/AdminApi.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/repository/admin/AdminDataStoreImpl.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/repository/admin/AdminDataStroe.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/repository/admin/AdminRepositoryImpl.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/repository/user/UserDataStore.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/repository/user/UserDataStoreImpl.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/repository/user/UserRepositoryImpl.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../domain/src/main/java/com/example/domain/repository/AdminRepository.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../domain/src/main/java/com/example/domain/repository/UserRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../common/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../common/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/debug/app-debug.aab" beforeDir="false" afterPath="$PROJECT_DIR$/../common/debug/app-debug.aab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/proguard-rules.pro" beforeDir="false" afterPath="$PROJECT_DIR$/../common/proguard-rules.pro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/release/app-release.aab" beforeDir="false" afterPath="$PROJECT_DIR$/../common/release/app-release.aab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/androidTest/java/com/study/bamboo/ExampleInstrumentedTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/androidTest/java/com/study/bamboo/ExampleInstrumentedTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/ic_launcher-playstore.png" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/ic_launcher-playstore.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/adapter/PostLoadingAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/adapter/PostLoadingAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/adapter/admin/AdminAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/admin/adapter/admin/AdminAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/adapter/user/UserHomeItemAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user/src/main/java/com/example/user/adapter/user/UserHomeItemAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/base/BaseActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/base/BaseActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/base/BaseFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/base/BaseFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/bindingadapter/PostBindingAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/bindingadapter/PostBindingAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/db/PostDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/data/db/PostDao.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/db/PostDatabase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/data/db/PostDatabase.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/db/PostEntity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/data/db/PostEntity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/db/PostStatus.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/data/db/PostStatus.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/models/Emoji.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/models/admin/AcceptModify.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/model/admin/AcceptModify.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/models/admin/AcceptPost.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/model/admin/AcceptPost.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/models/admin/AdminRejectPost.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/model/admin/AdminRejectPost.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/models/admin/AdminSignInDTO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/model/admin/AdminSignInDTO.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/models/admin/DeletePost.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/model/admin/DeletePost.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/models/admin/DeletePostDto.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/model/admin/DeletePostDto.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/models/admin/PendingPost.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/model/admin/PendingPost.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/models/admin/PostCount.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/model/admin/PostCount.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/models/admin/PostCountItem.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/model/admin/PostCountItem.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/models/admin/SetStatusRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/model/admin/SetStatusRequest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/models/admin/UpdateStatus.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/model/admin/UpdateStatus.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/models/user/GetVerifyDTO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/model/user/GetVerifyDTO.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/models/user/UserGetPostDTO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/model/user/UserGetPostDTO.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/models/user/UserPostDTO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/model/user/UserPostDTO.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/models/user/UserPostDTOBase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/model/user/UserPostDTOBase.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/models/user/getcount/GetCount.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/model/user/getcount/GetCount.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/models/user/getcount/GetCountItem.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/model/user/getcount/GetCountItem.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/models/user/postcreate/PostCreateRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/model/user/postcreate/PostCreateRequest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/models/user/postcreate/PostCreateResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/model/user/postcreate/PostCreateResponse.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/models/user/postcreate/Verifier.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/model/user/postcreate/Verifier.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/models/user/report/ReportRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/model/user/report/ReportRequest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/models/user/report/ReportResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/model/user/report/ReportResponse.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/models/user/request/EmojiRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/model/user/request/EmojiRequest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/models/user/response/LoginResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../data/src/main/java/com/example/data/model/user/response/LoginResponse.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/user/AdminApi.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/network/user/UserApi.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/paging/GetPostSource.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/data/paging/GetPostSource.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/paging/page/AcceptPagingSource.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/data/paging/page/AcceptPagingSource.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/paging/page/DeletePagingSource.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/data/paging/page/DeletePagingSource.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/paging/page/PendingPagingSource.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/data/paging/page/PendingPagingSource.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/paging/page/RejectPagingSource.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/data/paging/page/RejectPagingSource.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/paging/viewModel/PagingPostViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/data/paging/viewModel/PagingPostViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/repository/DataStoreRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/data/repository/DataStoreRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/repository/Repository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/data/repository/Repository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/repository/UserRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/data/repository/UserRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/data/repository/remote/AdminRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/data/repository/remote/AdminRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/di/NetworkModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/di/NetworkModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/extension/Context.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/utils/extension/Context.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/utils/Admin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/utils/App.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/utils/App.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/utils/Event.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/utils/Event.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/utils/Functions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/utils/Functions.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/utils/LinearLayoutManagerWrapper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/utils/LinearLayoutManagerWrapper.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/utils/NetworkConnection.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/utils/NetworkConnection.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/utils/NetworkResult.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/utils/Util.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/utils/Util.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/utils/Variable.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/utils/Variable.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/view/activity/main/AdminActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/view/activity/main/AdminActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/view/activity/main/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/view/activity/main/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/view/activity/main/MainViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/view/activity/main/MainViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/view/activity/postcreate/PostCreateFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/admin/view/postcreate/PostCreateFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/view/activity/postcreate/PostCreateViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/admin/view/postcreate/PostCreateViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/view/activity/postcreate/TagSpinnerAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/admin/view/postcreate/TagSpinnerAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/view/activity/signin/LoginDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/view/activity/signin/LoginDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/view/activity/signin/SignInActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/view/activity/signin/SignInActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/view/activity/signin/SignInViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/view/activity/signin/SignInViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/view/activity/signin/UserGoogleDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/view/activity/signin/UserGoogleDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/view/activity/splash/SplashActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/view/activity/splash/SplashActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/view/activity/splash/SplashViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/view/activity/splash/SplashViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/view/activity/splash/WifiDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/java/com/study/bamboo/view/activity/splash/WifiDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/view/fragment/admin/AdminMainFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/admin/view/admin/AdminMainFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/view/fragment/admin/AdminViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/admin/view/admin/AdminViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/view/fragment/admin/dialog/AcceptDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/admin/view/admin/dialog/AcceptDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/view/fragment/admin/dialog/DeleteDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/admin/view/admin/dialog/DeleteDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/view/fragment/admin/dialog/PendingDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/admin/view/admin/dialog/PendingDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/view/fragment/admin/dialog/RejectCancelDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/admin/view/admin/dialog/RejectCancelDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/view/fragment/user/DeclarationFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user/src/main/java/com/example/user/view/user/DeclarationFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/view/fragment/user/MoreSeeFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user/src/main/java/com/example/user/view/user/MoreSeeFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/view/fragment/user/RulesFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user/src/main/java/com/example/user/view/user/RulesFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/view/fragment/user/UserMainFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user/src/main/java/com/example/user/view/user/UserMainFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/view/fragment/user/viewmodel/DeclarationViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user/src/main/java/com/example/user/view/user/viewmodel/DeclarationViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/study/bamboo/view/fragment/user/viewmodel/UserViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../user/src/main/java/com/example/user/view/user/viewmodel/UserViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/color/navigation_text_color.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/color/navigation_text_color.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable-v24/declaration_back_btn.png" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable-v24/declaration_back_btn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable-v24/free_post.png" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable-v24/free_post.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable-v24/google_logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable-v24/google_logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable-v24/refresh.png" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable-v24/refresh.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/accept_btn_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/accept_btn_background.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/admin_reject_spinner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/admin_reject_spinner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/admin_spinner_frame.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/admin_spinner_frame.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/bamboo_title_img.png" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/bamboo_title_img.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/delete_btn_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/delete_btn_background.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/error_img.png" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/error_img.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/home_fragment_recycler_frame.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/home_fragment_recycler_frame.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/ic__logo.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/ic__logo.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/ic_add_post.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/ic_add_post.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/ic_app_icon.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/ic_app_icon.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/ic_back_btn.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/ic_back_btn.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/ic_bamboo_logo.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/ic_bamboo_logo.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/ic_baseline_refresh_24.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/ic_baseline_refresh_24.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/ic_good_img.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/ic_good_img.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/ic_good_no_img.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/ic_good_no_img.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/ic_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/ic_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/ic_icon.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/ic_icon.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/ic_launcher_foreground.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/ic_launcher_foreground.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/ic_more_see.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/ic_more_see.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/ic_rules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/ic_rules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/ic_sad_img.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/ic_sad_img.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/ic_sad_no_img.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/ic_sad_no_img.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/ic_siren.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/ic_siren.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/loading_img.png" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/loading_img.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/login_dialog_login_btn.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/login_dialog_login_btn.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/login_dialog_password_edittext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/login_dialog_password_edittext.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/logo_layout_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/logo_layout_background.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/menu_selector_color.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/menu_selector_color.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/post_create_box.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/post_create_box.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/post_create_spinner_frame.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/post_create_spinner_frame.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/post_create_upload_btn.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/post_create_upload_btn.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/refresh_btn.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/refresh_btn.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/reject_btn_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/reject_btn_background.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/signin_btn.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/signin_btn.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/user_dialog_google_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/drawable/user_dialog_google_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/font/nanumsquareround_otfb.otf" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/font/nanumsquareround_otfb.otf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/font/nanumsquareround_otfeb.otf" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/font/nanumsquareround_otfeb.otf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/font/nanumsquareround_otfl.otf" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/font/nanumsquareround_otfl.otf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/font/nanumsquareround_otfr.otf" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/font/nanumsquareround_otfr.otf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout-v28/activity_admin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/accept_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/accept_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_admin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_admin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_login_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/layout/activity_login_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_no_wifi_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/layout/activity_no_wifi_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_sign_in.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_sign_in.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_splash.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/layout/activity_splash.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/admin_post_accepted_recycler_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/admin_post_accepted_recycler_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/admin_post_delete_recycler_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/admin_post_delete_recycler_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/admin_post_reject_recycler_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/admin_post_reject_recycler_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/admin_post_waiting_recycler_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/admin_post_waiting_recycler_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/admin_spinner_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/admin_spinner_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/delete_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/delete_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_admin_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_admin_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_declaration.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../user/src/main/res/layout/fragment_declaration.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_more_see.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../user/src/main/res/layout/fragment_more_see.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_post_create.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../user/src/main/res/layout/fragment_post_create.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_rules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../user/src/main/res/layout/fragment_rules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_user_google_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../user/src/main/res/layout/fragment_user_google_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_user_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../user/src/main/res/layout/fragment_user_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/pending_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/pending_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/post_create_tag_spinner_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../user/src/main/res/layout/post_create_tag_spinner_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/post_loading.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/layout/post_loading.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/reject_cancel_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/reject_cancel_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/user_post_recycler_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../user/src/main/res/layout/user_post_recycler_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/menu/admin_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/menu/admin_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/menu/recycler_view_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/menu/recycler_view_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/mipmap-hdpi/ic_launcher_foreground.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/mipmap-hdpi/ic_launcher_round.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/mipmap-mdpi/ic_launcher_foreground.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/mipmap-mdpi/ic_launcher_round.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/mipmap-xhdpi/ic_launcher_round.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/navigation/admin_navi.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/navigation/admin_navi.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/navigation/user_navi.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/navigation/user_navi.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-night/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/values-night/themes.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values/array.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/values/array.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/values/dimens.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values/ic_launcher_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/values/ic_launcher_background.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/main/res/values/themes.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/test/java/com/study/bamboo/ExampleUnitTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../common/src/test/java/com/study/bamboo/ExampleUnitTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../data/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../data/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../data/src/main/java/com/example/data/network/AdminService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../user/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user/src/main/res/layout/activity_main.xml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="232PP4CF1GKOIscV6y3ybNY0P3c" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="foldersAlwaysOnTop" value="false" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="87ad33ed-e50a-4ec1-803d-56d4164d9509" name="Default Changelist" comment="" />
+      <created>1640929180830</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1640929180830</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/admin/src/main/res/layout/activity_admin.xml" value="0.2713541666666667" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/admin/src/main/res/layout/activity_main.xml" value="0.4578125" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/admin/src/main/res/layout/activity_no_wifi_dialog.xml" value="0.4578125" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/admin/src/main/res/layout/activity_sign_in.xml" value="0.4578125" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/admin/src/main/res/layout/fragment_admin_main.xml" value="0.4578125" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/drawable/_11fba917e45262ae.xml" value="0.284375" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/drawable/admin_spinner_frame.xml" value="0.46822916666666664" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/drawable/home_fragment_recycler_frame.xml" value="0.46822916666666664" />
@@ -10,24 +15,40 @@
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/drawable/ic__logo.xml" value="0.46822916666666664" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/drawable/ic_app_icon.xml" value="0.37592592592592594" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/drawable/ic_bamboo_logo.xml" value="0.2682291666666667" />
-        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/drawable/ic_app_icon.xml" value="0.37592592592592594" />
-        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/drawable/ic_bamboo_logo.xml" value="0.2682291666666667" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/drawable/ic_launcher_background.xml" value="0.46822916666666664" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.43425925925925923" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/drawable/menu_selector_color.xml" value="0.46458333333333335" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout-v28/activity_admin.xml" value="0.4578125" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/accept_dialog.xml" value="0.2198581560283688" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/activity_admin.xml" value="0.18981481481481483" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/activity_login_dialog.xml" value="0.39311594202898553" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/activity_main.xml" value="0.21808510638297873" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/activity_no_wifi_dialog.xml" value="0.2198581560283688" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/activity_sign_in.xml" value="0.2198581560283688" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/admin_post_accepted_recycler_item.xml" value="0.18981481481481483" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/admin_post_delete_recycler_item.xml" value="0.18981481481481483" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/admin_post_waiting_recycler_item.xml" value="0.18981481481481483" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/admin_spinner_item.xml" value="0.18981481481481483" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/delete_dialog.xml" value="0.3894927536231884" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/fragment_declaration.xml" value="0.4578125" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/fragment_more_see.xml" value="0.4" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/fragment_post_create.xml" value="0.19537037037037036" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/fragment_rules.xml" value="0.4" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/fragment_user_google_dialog.xml" value="0.18981481481481483" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/fragment_user_main.xml" value="0.21808510638297873" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/pending_dialog.xml" value="0.3894927536231884" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/post_create_tag_spinner_item.xml" value="0.18981481481481483" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/post_loading.xml" value="0.18981481481481483" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/reject_cancel_dialog.xml" value="0.18981481481481483" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/layout/user_post_recycler_item.xml" value="0.5240174672489083" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.46822916666666664" />
         <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.43425925925925923" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/user/src/main/res/layout/activity_main.xml" value="0.4578125" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/user/src/main/res/layout/fragment_declaration.xml" value="0.2713541666666667" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/user/src/main/res/layout/fragment_rules.xml" value="0.4578125" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/user/src/main/res/layout/fragment_user_main.xml" value="0.4578125" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/user/src/main/res/layout/post_create_tag_spinner_item.xml" value="0.4578125" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/bamboo-android/user/src/main/res/layout/user_post_recycler_item.xml" value="0.4578125" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/bamboo-android/app/src/main/res/drawable/menu_selector_color.xml" value="0.26145833333333335" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/bamboo-android/app/src/main/res/drawable/post_create_spinner_frame.xml" value="0.23020833333333332" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/bamboo-android/app/src/main/res/drawable/post_create_upload_btn.xml" value="0.28888888888888886" />

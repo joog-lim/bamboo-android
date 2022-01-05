@@ -5,15 +5,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion Versions.COMPILE_SDK_VERSION
 
     defaultConfig {
-        minSdkVersion 30
-        targetSdkVersion 31
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion Versions.MIN_SDK_VERSION
+        targetSdkVersion Versions.TARGET_SDK_VERSION
 
-        
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
@@ -36,11 +34,15 @@ android {
 dependencies {
 
     implementation project(path: ':common')
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation project(path: ':domain')
+
+    implementation Libraries.PAGING_RUNTIME
+    implementation Libraries.PAGING_GUAVA
+
+    implementation Kotlin.CORE_KTX
+    implementation AndroidX.APP_COMPAT
+    implementation Google.MATERIAL
+    implementation AndroidX.CONSTRAINTLAYOUT
+    androidTestImplementation AndroidTest.ANDROID_JUNIT
+    androidTestImplementation AndroidTest.ESPRESSO_CORE
 }

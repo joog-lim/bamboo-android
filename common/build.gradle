@@ -27,7 +27,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    configurations { implementation.exclude group: 'org.jetbrains', module: 'annotations' }
 
     buildTypes {
         release {
@@ -61,6 +61,7 @@ dependencies {
     implementation AndroidX.NAVIGATION_FRAGMENT
     implementation AndroidX.NAVIGATION_SUPPORT
     implementation Google.GOOGLE_AUTH
+    implementation project(path: ':data')
     //test
     androidTestImplementation UnitTest.JUNIT
     androidTestImplementation AndroidTest.ESPRESSO_CORE
@@ -70,9 +71,11 @@ dependencies {
 
     implementation AndroidX.ACTIVITY_KTX
 
+    api 'tk.zielony:carbon:0.16.0.1'
+    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha07"
+    implementation "androidx.datastore:datastore-core:1.0.0-alpha07"
 
-    // dataStore
-    implementation AndroidX.DATASTORE
+    implementation AndroidX.ROOM_RUNTIME
 
     // dager hilt
     implementation Google.HILT_ANDROID

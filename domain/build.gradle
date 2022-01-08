@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion Versions.COMPILE_SDK_VERSION
 
     defaultConfig {
-        minSdkVersion 30
-        targetSdkVersion 31
+        minSdkVersion Versions.MIN_SDK_VERSION
+        targetSdkVersion Versions.TARGET_SDK_VERSION
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -36,10 +36,10 @@ dependencies {
     implementation RX.RX_JAVA
     implementation RX.RX_KOTLIN
     implementation RX.RX_BINDING
+    testImplementation Libraries.PAGING_TEST
+
     implementation Kotlin.CORE_KTX
-    implementation AndroidX.APP_COMPAT
     implementation Google.MATERIAL
-    implementation AndroidX.CONSTRAINTLAYOUT
     androidTestImplementation AndroidTest.ANDROID_JUNIT
     androidTestImplementation AndroidTest.ESPRESSO_CORE
 }

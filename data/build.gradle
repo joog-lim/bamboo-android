@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion Versions.COMPILE_SDK_VERSION
 
     defaultConfig {
-        minSdkVersion 30
-        targetSdkVersion 31
+        minSdkVersion Versions.MIN_SDK_VERSION
+        targetSdkVersion Versions.TARGET_SDK_VERSION
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -43,6 +43,28 @@ dependencies {
     implementation RX.RX_KOTLIN
     implementation RX.RX_BINDING
 
+    implementation AndroidX.ROOM_COMPILER
+    implementation AndroidX.ROOM_KTX
+    implementation AndroidX.ROOM_RUNTIME
+
+    implementation Libraries.PAGING_TEST
+    implementation Libraries.PAGING_RUNTIME
+    implementation Libraries.PAGING_GUAVA
+
+
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
+//
+//    implementation AndroidX.DATASTORE_PREFERENCES
+//    implementation AndroidX.DATASTORE_CORE
+
+    // TODO 위에 것 으로 하면안됨 이유 버전 update 후 stringPreferences 가 사라짐
+    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha07"
+    implementation "androidx.datastore:datastore-core:1.0.0-alpha07"
+
+    implementation Kotlin.COROUTINES_ANDROID
+
+    implementation Kotlin.KOTLIN_STDLIB
     implementation Kotlin.CORE_KTX
     implementation AndroidX.APP_COMPAT
     implementation Google.MATERIAL

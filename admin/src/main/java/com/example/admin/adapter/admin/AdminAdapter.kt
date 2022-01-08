@@ -1,30 +1,26 @@
-package com.study.bamboo.adapter.admin
+package com.example.admin.adapter.admin
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.study.bamboo.R
-import com.study.bamboo.data.network.models.user.UserPostDTOBase
-import com.study.bamboo.databinding.AdminPostAcceptedRecyclerItemBinding
-import com.study.bamboo.databinding.AdminPostDeleteRecyclerItemBinding
-import com.study.bamboo.databinding.AdminPostRejectRecyclerItemBinding
-import com.study.bamboo.databinding.AdminPostWaitingRecyclerItemBinding
-import com.study.bamboo.util.Admin
-import com.study.bamboo.view.fragment.admin.AdminMainFragmentDirections
+import com.example.domain.model.admin.response.PostEntity
+import com.study.admin.R
+import com.study.admin.databinding.AdminPostAcceptedRecyclerItemBinding
+import com.study.admin.databinding.AdminPostDeleteRecyclerItemBinding
+import com.study.admin.databinding.AdminPostRejectRecyclerItemBinding
+import com.study.admin.databinding.AdminPostWaitingRecyclerItemBinding
+import com.study.bamboo.adapter.RecyclerViewItemClickListener
 
-// TODO: 2021-08-16 어댑터를 나누자 각각의 상황에맞게
+// TODO
 
 
-class AdminAdapter
+class AdminAdapter(val onClickListener: RecyclerViewItemClickListener<PostEntity>)
 
     :
-    PagingDataAdapter<UserPostDTOBase, RecyclerView.ViewHolder>(diffCallback) {
+        PagingDataAdapter<PostEntity, RecyclerView.ViewHolder>(diffCallback) {
 
     companion object {
 
@@ -39,31 +35,19 @@ class AdminAdapter
         const val DELETED = "DELETED"
         const val REJECTED = "REJECTED"
 
-        private val diffCallback = object : DiffUtil.ItemCallback<UserPostDTOBase>() {
+        private val diffCallback = object : DiffUtil.ItemCallback<PostEntity>() {
             override fun areItemsTheSame(
-                oldItem: UserPostDTOBase,
-                newItem: UserPostDTOBase
+                    oldItem: PostEntity,
+                    newItem: PostEntity
             ): Boolean {
-                return when {
-                    oldItem is Admin.Accept && newItem is Admin.Accept -> oldItem == newItem
-                    oldItem is Admin.Pending && newItem is Admin.Pending -> oldItem == newItem
-                    oldItem is Admin.Delete && newItem is Admin.Delete -> oldItem == newItem
-                    oldItem is Admin.Reject && newItem is Admin.Reject -> oldItem == newItem
-                    else -> false
-                }
+                return oldItem == newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: UserPostDTOBase,
-                newItem: UserPostDTOBase
+                    oldItem: PostEntity,
+                    newItem: PostEntity
             ): Boolean {
-                return when {
-                    oldItem is Admin.Accept && newItem is Admin.Accept -> oldItem.id == newItem.id
-                    oldItem is Admin.Pending && newItem is Admin.Pending -> oldItem.id == newItem.id
-                    oldItem is Admin.Delete && newItem is Admin.Delete -> oldItem.id == newItem.id
-                    oldItem is Admin.Reject && newItem is Admin.Reject -> oldItem.id == newItem.id
-                    else -> false
-                }
+                return oldItem.id == newItem.id
             }
         }
 
@@ -71,123 +55,105 @@ class AdminAdapter
 
 
     //수락
-    class AdminAcceptItemViewHolder(val binding: AdminPostAcceptedRecyclerItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class AdminAcceptItemViewHolder(val binding: AdminPostAcceptedRecyclerItemBinding) :
+            RecyclerView.ViewHolder(binding.root) {
 
 
-        fun bind(data: UserPostDTOBase) {
-            binding.data = data as Admin.Accept
-            binding.viewHolder = AdminAdapter()
+        fun bind(data: PostEntity) {
+            binding.data = data
             binding.executePendingBindings()
 
         }
 
-        companion object {
-            fun from(parent: ViewGroup): AdminAcceptItemViewHolder {
-                val layoutInflater = LayoutInflater.from(parent.context)
-                val binding: AdminPostAcceptedRecyclerItemBinding = DataBindingUtil
-                    .inflate(
-                        layoutInflater, R.layout.admin_post_accepted_recycler_item,
-                        parent, false
-                    )
-                return AdminAcceptItemViewHolder(binding)
-            }
-        }
 
     }
 
     //삭제
-    class AdminDeleteItemViewHolder(val binding: AdminPostDeleteRecyclerItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class AdminDeleteItemViewHolder(val binding: AdminPostDeleteRecyclerItemBinding) :
+            RecyclerView.ViewHolder(binding.root) {
 
 
-        fun bind(data: UserPostDTOBase) {
+        fun bind(data: PostEntity) {
             binding.data = data
-            binding.viewHolder = AdminAdapter()
             binding.executePendingBindings()
-        }
-
-        companion object {
-            fun from(parent: ViewGroup): AdminDeleteItemViewHolder {
-                val layoutInflater = LayoutInflater.from(parent.context)
-                val binding: AdminPostDeleteRecyclerItemBinding = DataBindingUtil
-                    .inflate(
-                        layoutInflater, R.layout.admin_post_delete_recycler_item,
-                        parent, false
-                    )
-                return AdminDeleteItemViewHolder(binding)
+            binding.postMore.setOnClickListener {
+                onClickListener.onclick(data)
             }
         }
+
+
     }
 
+
     //대기
-    class AdminPendingItemViewHolder(val binding: AdminPostWaitingRecyclerItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class AdminPendingItemViewHolder(val binding: AdminPostWaitingRecyclerItemBinding) :
+            RecyclerView.ViewHolder(binding.root) {
 
 
-        fun bind(data: UserPostDTOBase) {
+        fun bind(data: PostEntity) {
             binding.data = data
-            binding.viewHolder = AdminAdapter()
             binding.executePendingBindings()
         }
 
-        companion object {
-            fun from(parent: ViewGroup): AdminPendingItemViewHolder {
-                val layoutInflater = LayoutInflater.from(parent.context)
-                val binding: AdminPostWaitingRecyclerItemBinding = DataBindingUtil
-                    .inflate(
-                        layoutInflater, R.layout.admin_post_waiting_recycler_item,
-                        parent, false
-                    )
-                return AdminPendingItemViewHolder(binding)
-            }
-        }
     }
 
 
     //거부
-    class AdminRejectItemViewHolder(val binding: AdminPostRejectRecyclerItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class AdminRejectItemViewHolder(val binding: AdminPostRejectRecyclerItemBinding) :
+            RecyclerView.ViewHolder(binding.root) {
 
 
-        fun bind(data: UserPostDTOBase) {
+        fun bind(data: PostEntity) {
             binding.data = data
-            binding.viewHolder = AdminAdapter()
             binding.executePendingBindings()
         }
 
-        companion object {
-            fun from(parent: ViewGroup): AdminRejectItemViewHolder {
-                val layoutInflater = LayoutInflater.from(parent.context)
-                val binding: AdminPostRejectRecyclerItemBinding = DataBindingUtil
-                    .inflate(
-                        layoutInflater, R.layout.admin_post_reject_recycler_item,
-                        parent, false
-                    )
-                return AdminRejectItemViewHolder(binding)
-            }
-        }
     }
 
-
-    override fun getItemViewType(position: Int): Int {
-        return when (getItem(position)) {
-            is Admin.Accept -> 1
-            is Admin.Pending -> 2
-            is Admin.Reject -> 3
-            is Admin.Delete -> 4
-            else -> 0 // loading model
-        }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            ACCEPTEDType -> AdminAcceptItemViewHolder.from(parent)
-            PENDINGType -> AdminPendingItemViewHolder.from(parent)
-            REJECTEDType -> AdminRejectItemViewHolder.from(parent)
-            DELETEDType -> AdminDeleteItemViewHolder.from(parent)
-            else -> AdminAcceptItemViewHolder.from(parent)
+            ACCEPTEDType -> {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding: AdminPostRejectRecyclerItemBinding = DataBindingUtil
+                        .inflate(
+                                layoutInflater, R.layout.admin_post_reject_recycler_item,
+                                parent, false
+                        )
+                return AdminRejectItemViewHolder(binding)
+            }
+            PENDINGType -> {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding: AdminPostWaitingRecyclerItemBinding = DataBindingUtil
+                        .inflate(
+                                layoutInflater, R.layout.admin_post_waiting_recycler_item,
+                                parent, false
+                        )
+                return AdminPendingItemViewHolder(binding)
+            }
+            REJECTEDType -> {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding: AdminPostAcceptedRecyclerItemBinding = DataBindingUtil
+                        .inflate(
+                                layoutInflater, R.layout.admin_post_accepted_recycler_item,
+                                parent, false
+                        )
+                return AdminAcceptItemViewHolder(binding)
+            }
+            DELETEDType -> {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding: AdminPostDeleteRecyclerItemBinding = DataBindingUtil
+                        .inflate(
+                                layoutInflater, R.layout.admin_post_delete_recycler_item,
+                                parent, false
+                        )
+                return AdminDeleteItemViewHolder(binding)
+            }
+
+            else -> throw Exception("잘못된 Adapter 입니다!")
+
         }
+
     }
 
 
@@ -196,96 +162,11 @@ class AdminAdapter
 
         if (item != null) {
             when (holder) {
-                is AdminAcceptItemViewHolder -> {
-                    holder.bind(item as Admin.Accept)
+                is AdminAcceptItemViewHolder -> holder.bind(item)
+                is AdminPendingItemViewHolder -> holder.bind(item)
+                is AdminDeleteItemViewHolder -> holder.bind(item)
+                is AdminRejectItemViewHolder -> holder.bind(item)
 
-                    holder.binding.postMore.setOnClickListener {
-                        try {
-                            val action =
-                                AdminMainFragmentDirections.actionAdminMainFragmentToAcceptDialog(
-                                    item.id,
-                                    holder.bindingAdapterPosition,
-                                    item.title,
-                                    item.content,
-                                    item.tag,
-                                    item.status
-                                )
-                            it.findNavController().navigateUp()
-                            it.findNavController().navigate(action)
-                        } catch (e: Exception) {
-                            Log.d(AdminAdapter.TAG, "onBindViewHolder: 네비게이션 찾을수 없음")
-                        }
-                    }
-                }
-                is AdminPendingItemViewHolder -> {
-
-                    holder.bind(item as Admin.Pending)
-                    holder.binding.postMore.setOnClickListener {
-                        try {
-                            holder.binding.postMore.setOnClickListener {
-                                val action =
-                                    AdminMainFragmentDirections.actionAdminMainFragmentToPendingDialog(
-                                        item.id, holder.bindingAdapterPosition
-                                    )
-                                it.findNavController().navigateUp()
-                                it.findNavController().navigate(action)
-                            }
-                        } catch (e: Exception) {
-                            Log.d("PendingAdapter", "onBindViewHolder: 네비게이션 없음 ")
-                        }
-                    }
-                    holder.binding.postModifyText.setOnClickListener {
-                        try {
-                            val action =
-                                AdminMainFragmentDirections.actionAdminMainFragmentToAcceptDialog(
-                                    item.id,
-                                    holder.bindingAdapterPosition,
-                                    item.title,
-                                    item.content,
-                                    item.tag,
-                                    item.status
-                                )
-                            it.findNavController().navigateUp()
-                            it.findNavController().navigate(action)
-                        } catch (e: Exception) {
-                            Log.d("PendingAdapter", "onBindViewHolder: 네비게이션 없음 ")
-                        }
-                    }
-
-                }
-                is AdminDeleteItemViewHolder -> {
-                    holder.bind(item as Admin.Delete)
-                    holder.binding.postMore.setOnClickListener {
-                        try {
-
-                            val action =
-                                AdminMainFragmentDirections.actionAdminMainFragmentToDeleteDialog(
-                                    item.id, holder.bindingAdapterPosition
-                                )
-                            it.findNavController().navigateUp()
-                            it.findNavController().navigate(action)
-
-                        } catch (e: Exception) {
-                            Log.d("DeleteAdapter", "onBindViewHolder: 네비게이션 문제있음")
-                        }
-                    }
-                }
-                is AdminRejectItemViewHolder -> {
-                    holder.bind(item as Admin.Reject)
-                    holder.binding.postMore.setOnClickListener {
-                        try {
-
-                            val action =
-                                AdminMainFragmentDirections.actionAdminMainFragmentToRejectCancelDialog(
-                                    item.id, holder.bindingAdapterPosition
-                                )
-                            it.findNavController().navigateUp()
-                            it.findNavController().navigate(action)
-                        } catch (e: Exception) {
-                            Log.d("RejectAdapter", "onBindViewHolder: 네비게이션없음")
-                        }
-                    }
-                }
 
             }
         }

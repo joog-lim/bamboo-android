@@ -39,6 +39,12 @@ dependencies {
     implementation Libraries.PAGING_RUNTIME
     implementation Libraries.PAGING_GUAVA
 
+    implementation Google.HILT_ANDROID
+    implementation Google.HILT_ANDROID_COMPILER
+
+    implementation AndroidX.NAVIGATION_FRAGMENT
+    implementation AndroidX.NAVIGATION_SUPPORT
+
     implementation Kotlin.CORE_KTX
     implementation AndroidX.APP_COMPAT
     implementation Google.MATERIAL

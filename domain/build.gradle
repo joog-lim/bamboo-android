@@ -30,14 +30,21 @@ android {
 
 dependencies {
 
-    implementation  Google.HILT_ANDROID
-    implementation  Google.HILT_ANDROID_COMPILER
+    // Android 의존성이 없기때문에 Inject를 통한 주입이 불가능하다.
+//    implementation Google.HILT_ANDROID
+//    implementation Google.HILT_ANDROID_COMPILER
     implementation RX.RX_ANDROID
     implementation RX.RX_JAVA
     implementation RX.RX_KOTLIN
     implementation RX.RX_BINDING
-    testImplementation Libraries.PAGING_TEST
+    // 임시적으로
+    // domain module은 Android의 의존성을 가지지 않아야 한다. 하지만 아직 방법을 모르네 추가는 해둠
+    // 나중에 변경
+    implementation Libraries.PAGING_TEST
+    implementation Libraries.PAGING_RUNTIME
+    implementation Libraries.PAGING_GUAVA
 
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
     implementation Kotlin.CORE_KTX
     implementation Google.MATERIAL
     androidTestImplementation AndroidTest.ANDROID_JUNIT

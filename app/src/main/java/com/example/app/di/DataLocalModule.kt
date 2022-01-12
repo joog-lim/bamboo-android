@@ -1,9 +1,8 @@
-package com.study.bamboo.di
+package com.example.app.di
 
 import android.content.Context
 import androidx.room.Room
 import com.example.data.db.PostDatabase
-import dagger.Component
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,7 +12,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object DataBaseModule {
+object DataLocalModule {
 
     @Singleton
     @Provides

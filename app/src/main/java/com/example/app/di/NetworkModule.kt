@@ -1,8 +1,7 @@
-package com.study.bamboo.di
+package com.example.app.di
 
 import com.example.data.network.admin.AdminApi
 import com.example.data.network.user.UserApi
-import com.study.bamboo.utils.Util.Companion.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,6 +18,7 @@ import javax.inject.Singleton
 // Singleton, Provides 쓸때 private 말고 public 으로 해야한다.
 object NetworkModule {
 
+    const val BASE_URL = "https://server.joog-lim.info/apiV3/test"
 
     @Provides
     @Singleton

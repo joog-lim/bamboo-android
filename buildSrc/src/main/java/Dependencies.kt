@@ -6,7 +6,7 @@ object Versions {
     const val COMPILE_SDK_VERSION = 30
     const val BUILD_TOOLS_VERSION = "30.0.3"
     const val MIN_SDK_VERSION = 23
-    const val TARGET_SDK_VERSION = 330
+    const val TARGET_SDK_VERSION = 30
     const val CORE_KTX = "1.5.0"
     const val APP_COMPAT = "1.3.0"
     const val ACTIVITY_KTX = "1.2.3"
@@ -24,7 +24,7 @@ object Versions {
     const val LEGACY_SUPPORT = "1.0.0"
     const val NAVIGATION = "2.3.5"
     const val GOOGLE_AUTH = "19.2.0"
-    const val DATASTORE ="1.0.0"
+    const val DATASTORE = "1.0.0"
     const val RX_BINDING = "3.0.0"
     const val RX = "3.0.0"
     const val PAGING = "3.1.0"
@@ -65,8 +65,9 @@ object AndroidX {
     const val ROOM_COMPILER =
         "androidx.room:room-compiler:${Versions.ROOM}"
 
-    const val DATASTORE_PREFERENCES="androidx.datastore:datastore-preferences:${Versions.DATASTORE}"
-    const val DATASTORE_CORE="androidx.datastore:datastore-core:${Versions.DATASTORE}"
+    const val DATASTORE_PREFERENCES =
+        "androidx.datastore:datastore-preferences:${Versions.DATASTORE}"
+    const val DATASTORE_CORE = "androidx.datastore:datastore-core:${Versions.DATASTORE}"
 }
 
 object Google {
@@ -90,6 +91,7 @@ object Libraries {
 
     const
     val OKHTTP = "com.squareup.okhttp3:okhttp:${Versions.OKHTTP}"
+
 
     const
     val OKHTTP_LOGGING_INTERCEPTOR =

@@ -8,7 +8,6 @@ import com.example.domain.model.user.request.Report
 import com.example.domain.model.user.response.AlgorithmCreateEntity
 import com.example.domain.model.user.response.GetVerifyEntity
 import com.example.domain.model.user.response.ReportEntity
-import com.example.domain.model.user.response.SignEntity
 import io.reactivex.rxjava3.core.Single
 
 interface UserRepository {
@@ -19,8 +18,6 @@ interface UserRepository {
         body: Report,
     ): Single<BaseDataEntity<ReportEntity>>
 
-     fun postLogin(authorization: String): Single<BaseDataEntity<SignEntity>>
-     fun deleteLogOut(authorization: String): Single<BaseEntity>
      fun postEmoji(
         authorization: String,
         body: EmojiEntity

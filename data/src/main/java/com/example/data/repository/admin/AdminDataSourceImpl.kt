@@ -34,12 +34,5 @@ class AdminDataSourceImpl @Inject constructor(override val service: AdminApi) : 
         return service.deleteAlgorithm(token, id)
     }
 
-    override fun getAlgorithmPage(
-        token: String,
-        count: Int,
-        page: Int,
-        status: String
-    ): Flowable<BaseDataResponse<AlgorithmResponse>> {
-        return service.getAlgorithmPage(token, count, page, status)
-    }
+
 }

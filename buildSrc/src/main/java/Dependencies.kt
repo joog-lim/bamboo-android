@@ -1,18 +1,18 @@
 object Versions {
-    const val KOTLIN_VERSION = "1.6.10"
+    const val KOTLIN_VERSION = "1.5.20"
     const val CORE = "1.3.2"
     const val KOTLINX_COROUTINES = "1.5.2"
     const val BUILD_GRADLE = "4.2.1"
-    const val COMPILE_SDK_VERSION = 30
+    const val COMPILE_SDK_VERSION = 31
     const val BUILD_TOOLS_VERSION = "30.0.3"
-    const val MIN_SDK_VERSION = 23
-    const val TARGET_SDK_VERSION = 30
+    const val MIN_SDK_VERSION = 30
+    const val TARGET_SDK_VERSION = 31
     const val CORE_KTX = "1.5.0"
     const val APP_COMPAT = "1.3.0"
     const val ACTIVITY_KTX = "1.2.3"
     const val FRAGMENT_KTX = "1.3.4"
     const val LIFECYCLE_KTX = "2.3.1"
-    const val ROOM = "2.3.0"
+    const val ROOM = "2.4.0-beta02"
     const val HILT = "2.38"
     const val MATERIAL = "1.3.0"
     const val RETROFIT = "2.7.1"
@@ -22,7 +22,7 @@ object Versions {
     const val ESPRESSO_CORE = "3.3.0"
     const val CONSTRAINTLAYOUT = "2.0.4"
     const val LEGACY_SUPPORT = "1.0.0"
-    const val NAVIGATION = "2.3.5"
+    const val NAVIGATION = "2.4.0-alpha10"
     const val GOOGLE_AUTH = "19.2.0"
     const val DATASTORE = "1.0.0"
     const val RX_BINDING = "3.0.0"
@@ -73,6 +73,8 @@ object AndroidX {
 object Google {
     const val HILT_ANDROID = "com.google.dagger:hilt-android:${Versions.HILT}"
     const val HILT_ANDROID_COMPILER = "com.google.dagger:hilt-android-compiler:${Versions.HILT}"
+    const val DAGGER_HILT_VIEW_MODEL = "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
+    const val DAGGER_HILT_ANDROIDX_COMPILER = "androidx.hilt:hilt-compiler:1.0.0"
     const val MATERIAL = "com.google.android.material:material:${Versions.MATERIAL}"
     const val GOOGLE_AUTH = "com.google.android.gms:play-services-auth:${Versions.GOOGLE_AUTH}"
 }

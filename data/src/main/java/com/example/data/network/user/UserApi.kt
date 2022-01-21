@@ -9,7 +9,6 @@ import com.example.data.model.user.request.AlgorithmCreateRequest
 import com.example.data.model.user.request.EmojiRequest
 import com.example.data.model.user.request.ReportRequest
 import com.example.data.model.user.response.ReportResponse
-import com.example.data.model.user.response.SignResponse
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.*
 
@@ -28,22 +27,13 @@ interface UserApi {
 
 
     @PATCH("post/{id}/report")
-    fun patchReport(
+    fun patchAlgorithmReport(
         @Path("id") id: String,
         @Body body: ReportRequest,
     ): Single<BaseDataResponse<ReportResponse>>
 
 
-    @POST("login")
-    fun postLogin(
-        @Header("Authorization") Authorization: String,
-    ): Single<BaseDataResponse<SignResponse>>
 
-
-    @DELETE("logout")
-    fun deleteLogOut(
-        @Header("Authorization") authorization: String
-    ): Single<BaseResponse>
 
 
     // 이모지

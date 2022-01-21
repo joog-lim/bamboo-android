@@ -4,27 +4,25 @@ package com.example.data.utils
 import android.content.Context
 import android.util.Log
 import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
-import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.example.data.utils.Constant.Companion.DEFAULT_TOKEN
-import com.example.data.utils.Constant.Companion.PREFERENCES_TOKEN
-import com.example.data.utils.Constant.Companion.PREFERENCE_NAME
-import com.example.data.utils.DataStoreRepository.PreferencesKeys.dataStoreToken
-
+import com.example.data.utils.DataStoreManager.Companion.PREFERENCE_NAME
+import com.example.data.utils.DataStoreManager.PreferencesKeys.dataStoreToken
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
 import java.io.IOException
 import javax.inject.Inject
+import javax.inject.Singleton
 
 private val Context.dataStore by preferencesDataStore(PREFERENCE_NAME)
 
-@ActivityRetainedScoped
-class DataStoreRepository @Inject constructor(@ApplicationContext private val context: Context) {
+@Singleton
+class DataStoreManager @Inject constructor(@ApplicationContext private val context: Context) {
 
 
     private object PreferencesKeys {
@@ -39,7 +37,6 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
 
     // 데이터를 쓴다
     suspend fun saveToken(token: String) {
-
         // 데이터 스트림에 내보낼 수 있는 새 흐름을 만듦
         dataStore.edit { preferences ->
             preferences[dataStoreToken] = token
@@ -52,7 +49,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
     }
 
 
-    val readToken: Flow<Token> = dataStore.data
+    var readToken: Flow<Token> = dataStore.data
         .catch { exception ->
             if (exception is IOException) {
                 emit(emptyPreferences())
@@ -66,6 +63,11 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
             Token(token)
         }
 
+    companion object{
+        const val DEFAULT_TOKEN="default token"
+        const val PREFERENCES_TOKEN="preferences token"
+        const val PREFERENCE_NAME="bamboo token"
+    }
 
 }
 

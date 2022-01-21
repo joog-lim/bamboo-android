@@ -1,12 +1,13 @@
-package com.study.bamboo.data.db
+package com.example.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.example.data.model.admin.response.Post
 
 
 @Database(
-    entities = [PostEntity::class, PostStatus::class],
+    entities = [Post::class],
     version = 1,
     exportSchema = false
 )

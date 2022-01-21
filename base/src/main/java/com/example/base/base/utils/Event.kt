@@ -1,10 +1,6 @@
-package com.study.bamboo.utils
+package com.example.base.base.utils
 
-import androidx.annotation.MainThread
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import java.util.concurrent.atomic.AtomicBoolean
 
 open class Event<out T>(private val content: T) {
     var hasBeenHandled = false

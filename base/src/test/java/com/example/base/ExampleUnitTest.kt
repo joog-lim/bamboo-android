@@ -1,4 +1,4 @@
-package com.study.bamboo
+package com.example.base
 
 import org.junit.Test
 

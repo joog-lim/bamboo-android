@@ -1,4 +1,4 @@
-package com.study.bamboo.adapter
+package com.example.base.base.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,8 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.study.bamboo.R
-import com.study.bamboo.databinding.PostLoadingBinding
+import com.example.base.R
+import com.example.base.databinding.PostLoadingBinding
 
 class PostLoadingAdapter(private val retry: () -> Unit) :
     LoadStateAdapter<PostLoadingAdapter.LoadStateHolder>() {

@@ -1,0 +1,88 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id("androidx.navigation.safeargs")
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-parcelize'
+}
+
+android {
+    compileSdkVersion Versions.COMPILE_SDK_VERSION
+    defaultConfig {
+        minSdkVersion Versions.MIN_SDK_VERSION
+        targetSdkVersion Versions.TARGET_SDK_VERSION
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        dataBinding true
+    }
+    kapt {
+        javacOptions {
+            // These options are normally set automatically via the Hilt Gradle plugin, but we
+            // set them manually to workaround a bug in the Kotlin 1.5.20
+            option("-Adagger.fastInit=ENABLED")
+            option("-Adagger.hilt.android.internal.disableAndroidSuperclassValidation=true")
+        }
+    }
+    kapt {
+        generateStubs = true
+    }
+    configurations { implementation.exclude group: 'org.jetbrains', module: 'annotations' }
+}
+
+dependencies {
+    implementation project(path: ':data')
+    implementation project(path: ':domain')
+    implementation project(path: ':base')
+    implementation Google.GOOGLE_AUTH
+
+    implementation Libraries.PAGING_RUNTIME
+    implementation Libraries.PAGING_GUAVA
+
+    implementation Google.HILT_ANDROID
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    kapt Google.HILT_ANDROID_COMPILER
+    implementation(Google.DAGGER_HILT_VIEW_MODEL)
+
+    api 'tk.zielony:carbon:0.16.0.1'
+    implementation Libraries.RETROFIT
+    implementation Libraries.RETROFIT_CONVERTER_GSON
+
+    implementation(Libraries.OKHTTP)
+    implementation(Libraries.OKHTTP_LOGGING_INTERCEPTOR)
+
+    implementation(AndroidX.ROOM_COMPILER)
+    implementation(AndroidX.ROOM_KTX)
+    implementation(AndroidX.ROOM_RUNTIME)
+    implementation AndroidX.NAVIGATION_FRAGMENT
+    implementation AndroidX.NAVIGATION_SUPPORT
+
+    implementation(RX.RX_KOTLIN)
+    implementation(RX.RX_ANDROID)
+    implementation Kotlin.CORE_KTX
+    implementation AndroidX.APP_COMPAT
+    implementation Google.MATERIAL
+    implementation AndroidX.CONSTRAINTLAYOUT
+    androidTestImplementation AndroidTest.ANDROID_JUNIT
+    androidTestImplementation AndroidTest.ESPRESSO_CORE
+}

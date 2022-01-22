@@ -7,7 +7,7 @@
 
         <variable
             name="activity"
-            type="com.example.presentation.view.user.UserMainFragment" />
+            type="com.study.presentation.view.user.UserMainFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

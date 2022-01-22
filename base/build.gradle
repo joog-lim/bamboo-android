@@ -33,6 +33,7 @@ android {
     buildFeatures {
         dataBinding true
     }
+    configurations { implementation.exclude group: 'org.jetbrains', module: 'annotations' }
 
 }
 
@@ -41,6 +42,8 @@ dependencies {
     implementation Libraries.PAGING_RUNTIME
     implementation Libraries.PAGING_GUAVA
     // dager hilt
+    implementation Google.HILT_ANDROID
+    kapt Google.HILT_ANDROID_COMPILER
 
     implementation AndroidX.FRAGMENT_KTX
     implementation RX.RX_ANDROID

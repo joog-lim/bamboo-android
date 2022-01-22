@@ -6,7 +6,7 @@
     <data>
         <variable
             name="data"
-            type="com.example.domain.model.admin.response.PostEntity" />
+            type="com.study.domain.model.admin.response.PostEntity" />
     </data>
 
     <LinearLayout

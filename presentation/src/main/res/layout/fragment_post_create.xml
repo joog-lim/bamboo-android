@@ -6,7 +6,7 @@
     <data>
         <variable
             name="fragment"
-            type="com.example.presentation.view.user.PostCreateFragment" />
+            type="com.study.presentation.view.user.PostCreateFragment" />
     </data>
 
     <RelativeLayout
@@ -25,8 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                app:carbon_elevation="8dp"
-                app:carbon_elevationShadowColor="@color/main_color">
+             >
 
                 <TextView
                     android:layout_width="match_parent"

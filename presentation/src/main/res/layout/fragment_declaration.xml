@@ -6,7 +6,7 @@
     <data>
         <variable
             name="fragment"
-            type="com.example.presentation.view.user.DeclarationFragment" />
+            type="com.study.presentation.view.user.DeclarationFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,8 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            app:carbon_elevation="8dp"
-            app:carbon_elevationShadowColor="@color/main_color"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">

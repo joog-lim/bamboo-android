@@ -7,7 +7,7 @@
 
         <variable
             name="fragment"
-            type="com.example.presentation.view.SignInFragment" />
+            type="com.study.presentation.view.SignInFragment" />
     </data>
 
 

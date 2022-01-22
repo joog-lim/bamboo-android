@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/adminMainFragment"
         tools:layout="@layout/fragment_admin_main"
-        android:name="com.example.presentation.view.AdminMainFragment"
+        android:name="com.example.presentation.view.admin.AdminMainFragment"
         android:label="dsad" >
 
 

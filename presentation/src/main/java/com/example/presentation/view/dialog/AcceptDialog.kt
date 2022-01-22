@@ -18,7 +18,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.presentation.adapter.AdminAdapter.Companion.ACCEPTED
 import com.example.presentation.adapter.AdminAdapter.Companion.PENDING
-import com.example.presentation.view.AdminViewModel
+import com.example.presentation.view.admin.AdminViewModel
 import com.example.domain.model.admin.request.AlgorithmModifyEntity
 import com.example.presentation.databinding.AcceptDialogBinding
 import com.example.presentation.utils.hideKeyboardFrom

@@ -1,7 +1,9 @@
 package com.example.presentation.view
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.graphics.Point
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -12,10 +14,12 @@ import android.view.ViewTreeObserver
 import android.view.animation.AnticipateInterpolator
 import androidx.core.animation.doOnEnd
 import com.example.presentation.R
+import dagger.hilt.android.AndroidEntryPoint
 import java.time.Duration
 import java.time.Instant
 import kotlin.concurrent.thread
 
+@AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
 
     var isReady = false
@@ -23,7 +27,6 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_splash)
-
         thread(start = true) {
             for (i in 1..5) {
                 Thread.sleep(1000)
@@ -40,12 +43,9 @@ class SplashActivity : AppCompatActivity() {
                     return if (isReady) {
                         // The content is ready; start drawing.
                         content.viewTreeObserver.removeOnPreDrawListener(this)
-                        val fragment = SignInFragment()
 
-                        supportFragmentManager
-                            .beginTransaction()
-                            .replace(R.id.sign_in_layout, fragment)
-                            .commit()
+                        startActivity(Intent(this@SplashActivity,SignInFragment::class.java))
+                        finish()
 
                         true
                     } else {
@@ -98,14 +98,5 @@ class SplashActivity : AppCompatActivity() {
 
     }
 
-//    private fun noUseWifi() {
-//        //다이얼로그
-//        val wifiDialog = WifiDialog()
-//        wifiDialog.show(supportFragmentManager, "noUseWifiDialog")
-//        val windowManager = this.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-//        val display = windowManager.defaultDisplay
-//        val size = Point()
-//        display.getSize(size)
-//        SplashActivity.deviceSizeX = size.x
-//    }
+
 }

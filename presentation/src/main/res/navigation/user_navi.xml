@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navi"
+    app:startDestination="@id/userMainFragment">
+
+
+    <fragment
+        android:id="@+id/userMainFragment"
+        tools:layout="@layout/fragment_user_main"
+        android:name="com.example.presentation.view.user.UserMainFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_userMainFragment_to_declarationFragment"
+            app:destination="@id/declarationFragment" />
+        <action
+            android:id="@+id/action_userMainFragment_to_postCreateFragment"
+            app:destination="@id/postCreateFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/userRulesFragment"
+        android:name="com.example.presentation.view.user.RulesFragment"
+        android:label="fragment_rules"
+        tools:layout="@layout/fragment_rules" />
+    <fragment
+        android:id="@+id/userMoreSeeFragment"
+        android:name="com.example.presentation.view.user.MoreSeeFragment"
+        android:label="fragment_more_see"
+        tools:layout="@layout/fragment_more_see" />
+    <fragment
+        android:id="@+id/postCreateFragment"
+        android:name="com.example.presentation.view.user.PostCreateFragment"
+        android:label="PostCreateFragment"
+        tools:layout="@layout/fragment_post_create">
+        <action
+            android:id="@+id/action_postCreateFragment_to_userMainFragment"
+            app:destination="@id/userMainFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/declarationFragment"
+        android:name="com.example.presentation.view.user.DeclarationFragment"
+        android:label="DeclarationFragment"
+        tools:layout="@layout/fragment_declaration">
+        <argument
+            android:name="id"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="true"/>
+        <action
+            android:id="@+id/action_declarationFragment_to_userMainFragment"
+            app:destination="@id/userMainFragment" />
+
+    </fragment>
+</navigation>

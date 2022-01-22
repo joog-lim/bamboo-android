@@ -1,6 +1,5 @@
 rootProject.name = "Bamboo"
-include ':common'
 include ':domain'
-include ':user'
-include ':admin'
 include ':data'
+include ':base'
+include ':presentation'

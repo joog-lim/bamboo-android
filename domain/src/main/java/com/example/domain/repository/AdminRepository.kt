@@ -24,10 +24,5 @@ interface AdminRepository {
 
     fun deleteAlgorithm(token: String, id: String): Single<BaseEntity>
 
-    fun getAlgorithmPage(
-        token: String,
-        count: Int,
-        page: Int,
-        status: String
-    ): Flowable<BaseDataEntity<AlgorithmEntity>>
+
 }

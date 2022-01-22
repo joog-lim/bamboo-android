@@ -38,14 +38,7 @@ interface AdminApi {
         @Path("id") arg: String,
     ): Single<BaseResponse>
 
-    // 게시물 페이지로 조히
-    @GET("algorithm/page")
-    fun getAlgorithmPage(
-        @Header("Authorization") authorization: String,
-        @Query("count") count: Int,
-        @Query("page") page: Int,
-        @Query("status") status: String
-    ): Flowable<BaseDataResponse<AlgorithmResponse>>
+
 
 
 }

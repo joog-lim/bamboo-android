@@ -24,10 +24,5 @@ interface AdminDataSource {
 
     fun deleteAlgorithm(token: String, id: String): Single<BaseResponse>
 
-    fun getAlgorithmPage(
-        token: String,
-        count: Int,
-        page: Int,
-        status: String
-    ): Flowable<BaseDataResponse<AlgorithmResponse>>
+
 }

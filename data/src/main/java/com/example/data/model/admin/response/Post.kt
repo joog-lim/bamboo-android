@@ -1,8 +1,10 @@
 package com.example.data.model.admin.response
 
 
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "algorithm_table")
 data class Post(
     @SerializedName("content")
     val content: String?,

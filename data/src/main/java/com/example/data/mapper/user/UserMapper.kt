@@ -14,6 +14,7 @@ import com.example.domain.model.admin.request.AlgorithmModifyEntity
 import com.example.domain.model.admin.request.SetStatusEntity
 import com.example.domain.model.admin.response.AlgorithmEntity
 import com.example.domain.model.admin.response.PostEntity
+import com.example.domain.model.common.LoginEntity
 import com.example.domain.model.user.request.AlgorithmCreate
 import com.example.domain.model.user.request.EmojiEntity
 import com.example.domain.model.user.request.Report
@@ -21,7 +22,6 @@ import com.example.domain.model.user.request.VerifierEntity
 import com.example.domain.model.user.response.AlgorithmCreateEntity
 import com.example.domain.model.user.response.GetVerifyEntity
 import com.example.domain.model.user.response.ReportEntity
-import com.example.domain.model.user.response.SignEntity
 
 
 fun SetStatusEntity.toData(): SetStatusRequest {
@@ -99,6 +99,6 @@ fun <T> BaseDataResponse<T>.toVerifyDomain(): BaseDataEntity<GetVerifyEntity> {
 fun <T> BaseDataResponse<T>.toReportDomain(): BaseDataEntity<ReportEntity> {
     return BaseDataEntity(this.status, this.message, this.data as ReportEntity)
 }
-fun <T> BaseDataResponse<T>.toSignDomain(): BaseDataEntity<SignEntity> {
-    return BaseDataEntity(this.status, this.message, this.data as SignEntity)
+fun <T> BaseDataResponse<T>.toSignDomain(): BaseDataEntity<LoginEntity> {
+    return BaseDataEntity(this.status, this.message, this.data as LoginEntity)
 }

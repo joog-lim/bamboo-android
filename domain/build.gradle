@@ -44,7 +44,7 @@ dependencies {
     implementation Libraries.PAGING_RUNTIME
     implementation Libraries.PAGING_GUAVA
 
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
+    implementation Kotlin.COROUTINES_ANDROID
     implementation Kotlin.CORE_KTX
     implementation Google.MATERIAL
     androidTestImplementation AndroidTest.ANDROID_JUNIT

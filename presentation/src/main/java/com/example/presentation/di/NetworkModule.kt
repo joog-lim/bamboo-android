@@ -19,7 +19,7 @@ import javax.inject.Singleton
 // Singleton, Provides 쓸때 private 말고 public 으로 해야한다.
 object NetworkModule {
 
-    private const val BASE_URL = "https://server.joog-lim.info/apiV3/test"
+    private const val BASE_URL = "https://server.joog-lim.info/apiV3/test/"
 
     @Provides
     @Singleton

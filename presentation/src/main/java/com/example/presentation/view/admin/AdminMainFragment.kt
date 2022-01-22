@@ -1,4 +1,4 @@
-package com.example.presentation.view
+package com.example.presentation.view.admin
 
 import android.util.Log
 import android.view.View

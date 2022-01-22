@@ -15,7 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.presentation.adapter.AdminAdapter.Companion.ACCEPTED
 import com.example.presentation.adapter.AdminAdapter.Companion.REJECTED
-import com.example.presentation.view.AdminViewModel
+import com.example.presentation.view.admin.AdminViewModel
 import com.example.domain.model.admin.request.SetStatusEntity
 import com.example.presentation.databinding.RejectCancelDialogBinding
 import com.example.presentation.utils.setNavResult

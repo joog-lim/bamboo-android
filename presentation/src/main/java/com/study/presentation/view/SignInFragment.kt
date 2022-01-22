@@ -26,12 +26,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-//todo
-// base 모듈 만들어서 login, splash  빼고 옮겨야함
 @AndroidEntryPoint
 class SignInFragment : BaseActivity<FragmentSignInBinding>(R.layout.fragment_sign_in) {
     @Inject
     lateinit var dataStore: DataStoreManager
+
+    private var mGoogleSignInClient: GoogleSignInClient? = null
     private val getGoogleLogin =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             Log.d("TAG", "${result.resultCode}: ")
@@ -40,7 +40,7 @@ class SignInFragment : BaseActivity<FragmentSignInBinding>(R.layout.fragment_sig
                 GoogleSignIn.getSignedInAccountFromIntent(intent)
             try {
                 val account = task.getResult(ApiException::class.java)
-                viewModel.postLogin(account.idToken.toString())
+                viewModel.postLogin(account?.idToken.toString())
             } catch (e: ApiException) {
                 Log.d("TAG", "onCreate: ${e.message}")
                 throw e
@@ -48,7 +48,6 @@ class SignInFragment : BaseActivity<FragmentSignInBinding>(R.layout.fragment_sig
 
 
         }
-    private var mGoogleSignInClient: GoogleSignInClient? = null
     private val viewModel: AuthViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +59,8 @@ class SignInFragment : BaseActivity<FragmentSignInBinding>(R.layout.fragment_sig
             .build()
 
         mGoogleSignInClient = GoogleSignIn.getClient(this@SignInFragment, gso)
+
+
 
         with(viewModel) {
             isLoading.observe(this@SignInFragment) {
@@ -86,9 +87,11 @@ class SignInFragment : BaseActivity<FragmentSignInBinding>(R.layout.fragment_sig
 
 
     private fun saveToken(token: String) = lifecycleScope.launch { dataStore.saveToken(token) }
+    fun guestOnClick() = startActivity(Intent(this, MainActivity::class.java))
+
 
     fun startGoogleLogin() {
-        getGoogleLogin.launch(mGoogleSignInClient!!.signInIntent)
+        getGoogleLogin.launch(mGoogleSignInClient?.signInIntent)
     }
 
 }

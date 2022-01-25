@@ -14,6 +14,7 @@ import com.study.data.utils.DataStoreManager.PreferencesKeys.dataStoreToken
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import java.io.IOException
 import javax.inject.Inject
@@ -62,7 +63,9 @@ class DataStoreManager @Inject constructor(@ApplicationContext private val conte
             Log.d("DataStoreRepository", "readToken  $token")
             Token(token)
         }
-
+    suspend fun getToken(): String {
+        return readToken.first().token
+    }
     companion object{
         const val DEFAULT_TOKEN="default token"
         const val PREFERENCES_TOKEN="preferences token"

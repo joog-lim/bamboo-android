@@ -1,3 +1,3 @@
 package com.study.domain.base
 
-data class BaseEntity (val status:Int,val message: String)
+data class BaseEntity (val success:Boolean, val code:String, val message: String)

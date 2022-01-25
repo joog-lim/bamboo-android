@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="data"
-            type="com.study.domain.model.admin.response.PostEntity" />
+            name="result"
+            type="com.study.domain.model.common.algorithm.ResultEntity" />
     </data>
 
     <LinearLayout
@@ -50,8 +50,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:number="@{data.number}"
-                    app:status="@{data.status}"
+                 app:pendingStatus="@{result.algorithmNumber}"
                     tools:text="#192번째 알고리즘" />
 
 
@@ -60,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/main_color"
-                    app:getTag="@{data.tag}"
+                    app:getTag="@{result.tag}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginEnd="13dp"
 
@@ -76,7 +75,7 @@
                     android:fontFamily="@font/nanumsquareround_otfb"
                     android:textColor="#C4C4C4"
                     android:textSize="@dimen/post_more"
-                    app:chooseStatus="@{data.status}"
+              android:text="수정"
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -100,7 +99,7 @@
                 android:gravity="start"
                 android:textColor="#C4C4C4"
                 android:textSize="@dimen/post_time"
-                app:day="@{data.createdAt}"
+                app:day="@{result.createdAt}"
 
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -130,7 +129,7 @@
             android:fontFamily="@font/nanumsquareround_otfeb"
             android:gravity="start"
             android:includeFontPadding="false"
-            android:text="@{data.title}"
+            android:text="@{result.title}"
             android:textColor="@color/black"
             android:inputType="textMultiLine"
             android:textSize="@dimen/post_md"
@@ -144,7 +143,7 @@
             android:fontFamily="@font/nanumsquareround_otfl"
             android:gravity="start"
             android:includeFontPadding="false"
-            android:text="@{data.content}"
+            android:text="@{result.content}"
             android:textColor="@color/black"
             android:textSize="@dimen/post_con"
             android:textStyle="bold"

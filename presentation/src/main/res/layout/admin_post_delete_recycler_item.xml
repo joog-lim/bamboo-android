@@ -5,10 +5,10 @@
 
     <data>
 
-        <variable
-            name="data"
-            type="com.study.domain.model.admin.response.PostEntity" />
 
+        <variable
+            name="result"
+            type="com.study.domain.model.common.algorithm.ResultEntity" />
 
     </data>
 
@@ -52,8 +52,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:number="@{data.number}"
-                    app:status="@{data.status}"
+                    app:deleteStatus="@{result.algorithmNumber}"
                     tools:text="#192번째 알고리즘" />
 
 
@@ -63,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="13dp"
                     android:textColor="@color/main_color"
-                    app:getTag="@{data.tag}"
+                    app:getTag="@{result.tag}"
                     app:layout_constraintBottom_toBottomOf="parent"
 
                     app:layout_constraintEnd_toStartOf="@+id/post_more"
@@ -77,8 +76,8 @@
                     android:background="@drawable/admin_reject_spinner"
                     android:fontFamily="@font/nanumsquareround_otfb"
                     android:textColor="#C4C4C4"
+                    android:text="더보기"
                     android:textSize="@dimen/post_more"
-                    app:chooseStatus="@{data.status}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -96,7 +95,7 @@
             android:gravity="start"
             android:textColor="#C4C4C4"
             android:textSize="@dimen/post_time"
-            app:day="@{data.createdAt}"
+            app:day="@{result.createdAt}"
 
             tools:text="2021년 3월 12일 새벽" />
 
@@ -108,7 +107,7 @@
             android:fontFamily="@font/nanumsquareround_otfeb"
             android:gravity="start"
             android:includeFontPadding="false"
-            android:text="@{data.title}"
+            android:text="@{result.title}"
             android:textColor="@color/black"
             android:textSize="@dimen/post_md"
             android:textStyle="bold"
@@ -121,7 +120,7 @@
             android:fontFamily="@font/nanumsquareround_otfl"
             android:gravity="start"
             android:includeFontPadding="false"
-            android:text="@{data.content}"
+            android:text="@{result.content}"
             android:textColor="@color/black"
             android:textSize="@dimen/post_con"
             android:textStyle="bold"

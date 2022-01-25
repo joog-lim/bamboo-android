@@ -3,6 +3,7 @@ package com.study.data.network.user
 
 import com.study.data.base.BaseDataResponse
 import com.study.data.base.BaseResponse
+import com.study.data.model.common.algorithm.Data
 import com.study.data.model.user.response.GetVerifyResponse
 import com.study.data.model.user.response.AlgorithmCreateResponse
 import com.study.data.model.user.request.AlgorithmCreateRequest
@@ -47,5 +48,11 @@ interface UserApi {
         @Body body: EmojiRequest
     ): Single<BaseResponse>
 
+    @GET("algorithm/list/page")
+    suspend  fun getAlgorithmPage(
+        @Header("Authorization") authorization: String,
+        @Query("count") count: Int,
+        @Query("criteria") criteria: Int,
+    ): BaseDataResponse<Data>
 
 }

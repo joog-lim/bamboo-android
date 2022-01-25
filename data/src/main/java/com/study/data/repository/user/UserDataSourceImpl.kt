@@ -1,8 +1,11 @@
 package com.study.data.repository.user
 
+import androidx.paging.PagingSource
 import com.study.data.base.BaseDataResponse
 import com.study.data.base.BaseDataSource
 import com.study.data.base.BaseResponse
+import com.study.data.model.common.algorithm.Data
+import com.study.data.model.common.algorithm.Result
 import com.study.data.model.user.request.AlgorithmCreateRequest
 import com.study.data.model.user.request.EmojiRequest
 import com.study.data.model.user.request.ReportRequest
@@ -10,6 +13,7 @@ import com.study.data.model.user.response.GetVerifyResponse
 import com.study.data.model.user.response.ReportResponse
 import com.study.data.model.user.response.AlgorithmCreateResponse
 import com.study.data.network.user.UserApi
+import com.study.data.paging.AlgorithmUserPagingSource
 import io.reactivex.rxjava3.core.Single
 
 class UserDataSourceImpl(override val service: UserApi) : UserDataSource,
@@ -45,6 +49,11 @@ class UserDataSourceImpl(override val service: UserApi) : UserDataSource,
         body: EmojiRequest
     ): Single<BaseResponse> {
         return service.deleteEmoji(authorization, body)
+    }
+    override fun getAlgorithmPagingSource(
+        token: String,
+    ): PagingSource<Int, Result> {
+        return AlgorithmUserPagingSource(service,token)
     }
 
 

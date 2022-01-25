@@ -1,8 +1,10 @@
 package com.study.data.network.admin
 
+import com.study.data.base.BaseDataResponse
 import com.study.data.base.BaseResponse
 import com.study.data.model.admin.request.AlgorithmModifyRequest
 import com.study.data.model.admin.request.SetStatusRequest
+import com.study.data.model.common.algorithm.Data
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.*
 
@@ -35,6 +37,12 @@ interface AdminApi {
     ): Single<BaseResponse>
 
 
-
+    @GET("algorithm/list/page/admin")
+    suspend  fun getAlgorithmPage(
+        @Header("Authorization") authorization: String,
+        @Query("count") count: Int,
+        @Query("criteria") criteria: Int,
+        @Query("status") status: String
+    ): BaseDataResponse<Data>
 
 }

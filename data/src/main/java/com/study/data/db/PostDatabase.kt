@@ -3,11 +3,10 @@ package com.study.data.db
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.study.data.model.admin.response.Post
 
 
 @Database(
-    entities = [Post::class],
+    entities = [Result::class],
     version = 1,
     exportSchema = false
 )

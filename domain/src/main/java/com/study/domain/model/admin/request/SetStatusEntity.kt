@@ -1,3 +1,3 @@
 package com.study.domain.model.admin.request
 
-data class SetStatusEntity(val status: String)
+data class SetStatusEntity(val status: String,val reason:String)

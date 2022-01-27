@@ -3,48 +3,40 @@ package com.study.data.paging
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.study.data.model.admin.response.Post
-import com.study.data.network.common.CommonApi
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
+import com.study.data.network.user.UserApi
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
+import com.study.data.model.common.algorithm.Result
 
-
-class AlgorithmPagingSource @Inject constructor(
-    private val adminApi: CommonApi,
+class AlgorithmUserPagingSource @Inject constructor(
+    private val userApi: UserApi,
     private val token: String,
-    private val status: String,
 
 
-    ) : PagingSource<Int, Post>() {
+    ) : PagingSource<Int, Result>() {
     companion object {
-        const val TAG = "PostPagingSource"
+        const val TAG = "AlgorithmPagingSource"
 
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Post> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Result> {
         return try {
             val page = params.key ?: 1
-            val response = adminApi.getAlgorithmPage(token, 20, page, status)
+
+            val response = userApi.getAlgorithmPage(token, 20, page)
 
 
-            val responseData = mutableListOf<Post>()
-            val data = response.subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    it.data.posts?.let { it1 -> responseData.addAll(it1) }
-                }, {
-                    throw it
-                })
+            val data = response.data?.result
+            val responseData = mutableListOf<Result>()
+            data?.let { responseData.addAll(it) }
 
-
+            Log.d(TAG, "load: ${response}")
             val prevKey = if (page == 1) null else page - 1
             LoadResult.Page(
                 data = responseData,
                 prevKey = prevKey,
-                nextKey = if (data.isDisposed) null else page.plus(1),
+                nextKey = if (responseData.isEmpty()) null else page.plus(1),
             )
 
 
@@ -63,7 +55,7 @@ class AlgorithmPagingSource @Inject constructor(
     }
 
 
-    override fun getRefreshKey(state: PagingState<Int, Post>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, Result>): Int? {
         Log.d(TAG, "getRefreshKey:${state.anchorPosition} ")
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
@@ -71,8 +63,6 @@ class AlgorithmPagingSource @Inject constructor(
         }
 
     }
-
-
 
 
 }

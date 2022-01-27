@@ -1,8 +1,10 @@
 package com.study.domain.model.common.algorithm
 
-import com.study.domain.model.common.algorithm.EmojiEntity
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
 
+@Parcelize
 data class ResultEntity(
     val algorithmNumber: Int,
     val content: String,
@@ -14,4 +16,4 @@ data class ResultEntity(
     val reason: String?,
     val tag: String,
     val title: String
-)
+) : Parcelable

@@ -53,6 +53,7 @@
         <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/common/src/main/res/layout/post_loading.xml" value="0.3645833333333333" />
         <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/common/src/main/res/menu/admin_item.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/drawable-v24/admin_accept_btn_background.xml" value="0.3416666666666667" />
+        <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/drawable-v24/admin_delete_btn_background.xml" value="0.33425925925925926" />
         <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/drawable-v24/ic__logo.xml" value="0.3416666666666667" />
         <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/drawable-v24/ic_home.xml" value="0.3416666666666667" />
         <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/drawable-v24/ic_more_see.xml" value="0.3416666666666667" />
@@ -64,18 +65,25 @@
         <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/layout/activity_admin.xml" value="0.21240942028985507" />
         <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/layout/activity_main.xml" value="0.3515625" />
         <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/layout/activity_no_wifi_dialog.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/layout/activity_user.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/layout/admin_post_accepted_recycler_item.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/layout/admin_post_delete_recycler_item.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/layout/admin_post_reject_recycler_item.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/layout/admin_post_waiting_recycler_item.xml" value="0.33" />
         <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/layout/admin_spinner_item.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/layout/delete_dialog.xml" value="0.21240942028985507" />
         <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/layout/fragment_admin_main.xml" value="0.21240942028985507" />
+        <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/layout/fragment_declaration.xml" value="0.25" />
         <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/layout/fragment_more_see.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/layout/fragment_post_create.xml" value="0.35190217391304346" />
         <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/layout/fragment_sign_in.xml" value="0.2" />
         <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/layout/fragment_splash.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/layout/fragment_user_main.xml" value="0.22" />
         <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/layout/pending_dialog.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/layout/reject_cancel_dialog.xml" value="0.36614583333333334" />
-        <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/layout/user_post_recycler_item.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/layout/user_post_recycler_item.xml" value="0.5" />
         <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/menu/admin_item.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/menu/recycler_view_item.xml" value="0.20208333333333334" />
         <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/presentation/src/main/res/menu/user_item.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/user/src/main/res/drawable/home_fragment_recycler_frame.xml" value="0.38229166666666664" />
         <entry key="..\:/Users/2004c/StudioProjects/bamboo-android/user/src/main/res/drawable/ic__logo.xml" value="0.38229166666666664" />

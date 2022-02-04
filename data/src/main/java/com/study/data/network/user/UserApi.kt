@@ -27,22 +27,19 @@ interface UserApi {
     fun getVerify(): Single<BaseDataResponse<GetVerifyResponse>>
 
 
-    @PATCH("post/{id}/report")
+    @PATCH("{id}/report")
     fun patchAlgorithmReport(
         @Path("id") id: String,
         @Body body: ReportRequest,
     ): Single<BaseDataResponse<ReportResponse>>
 
-
-
-
-
     // 이모지
+    @POST("leaf")
     fun postEmoji(
         @Header("Authorization") authorization: String,
         @Body body: EmojiRequest
     ): Single<BaseResponse>
-
+    @HTTP(method = "DELETE", path = "leaf", hasBody = true)
     fun deleteEmoji(
         @Header("Authorization") authorization: String,
         @Body body: EmojiRequest

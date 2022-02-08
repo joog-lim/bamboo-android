@@ -4,9 +4,11 @@ import android.util.Log
 import com.study.data.base.BaseDataResponse
 import com.study.data.mapper.toDomain
 import com.study.data.mapper.toLoginDomain
+import com.study.data.mapper.user.toData
 import com.study.data.model.common.LoginResponse
 import com.study.domain.base.BaseDataEntity
 import com.study.domain.base.BaseEntity
+import com.study.domain.model.admin.request.SetStatusEntity
 import com.study.domain.model.common.LoginEntity
 import com.study.domain.model.user.TokenEntity
 import com.study.domain.repository.CommonRepository
@@ -46,5 +48,12 @@ class CommonRepositoryImpl @Inject constructor(
         return dataSource.deleteLogOut(authorization).map { it.toDomain() }
     }
 
+    override fun patchStatusAlgorithm(
+        token: String,
+        id: String,
+        body: SetStatusEntity
+    ): Single<BaseEntity> {
+        return dataSource.patchStatusAlgorithm(token, id, body.toData()).map { it.toDomain() }
+    }
 }
 

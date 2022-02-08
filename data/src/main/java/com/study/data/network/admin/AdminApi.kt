@@ -11,13 +11,6 @@ import retrofit2.http.*
 interface AdminApi {
 
 
-    //게시물 상태 수정 (수락 상태, 거절 상태 등)
-    @PATCH("algorithm/{id}/status")
-    fun patchStatusAlgorithm(
-        @Header("Authorization") authorization: String,
-        @Path("id") id: String,
-        @Body body: SetStatusRequest,
-    ): Single<BaseResponse>
 
 
     // 게시물 수정

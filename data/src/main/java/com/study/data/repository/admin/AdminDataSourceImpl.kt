@@ -21,13 +21,7 @@ class AdminDataSourceImpl @Inject constructor(override val service: AdminApi) : 
     ): PagingSource<Int, Result> {
         return AlgorithmAdminPagingSource(service,token, status)
     }
-    override fun patchStatusAlgorithm(
-        token: String,
-        id: String,
-        body: SetStatusRequest
-    ): Single<BaseResponse> {
-        return service.patchStatusAlgorithm(token, id, body)
-    }
+
 
     override fun patchModifyAlgorithm(
         token: String,

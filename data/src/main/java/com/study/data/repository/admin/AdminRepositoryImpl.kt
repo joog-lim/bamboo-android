@@ -36,13 +36,7 @@ class AdminRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun patchStatusAlgorithm(
-        token: String,
-        id: String,
-        body: SetStatusEntity
-    ): Single<BaseEntity> {
-        return dataSource.patchStatusAlgorithm(token, id, body.toData()).map { it.toDomain() }
-    }
+
 
     override fun patchModifyAlgorithm(
         token: String,

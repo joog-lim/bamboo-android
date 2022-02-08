@@ -3,6 +3,7 @@ package com.study.data.repository.common
 import com.study.data.base.BaseDataResponse
 import com.study.data.base.BaseDataSource
 import com.study.data.base.BaseResponse
+import com.study.data.model.admin.request.SetStatusRequest
 import com.study.data.model.common.LoginResponse
 import com.study.data.network.common.CommonApi
 import com.study.data.utils.DataStoreManager
@@ -36,5 +37,12 @@ class CommonDataSourceImpl @Inject constructor(
 
     override suspend fun saveToken(token: String) {
         manager.saveToken(token)
+    }
+    override fun patchStatusAlgorithm(
+        token: String,
+        id: String,
+        body: SetStatusRequest
+    ): Single<BaseResponse> {
+        return service.patchStatusAlgorithm(token, id, body)
     }
 }

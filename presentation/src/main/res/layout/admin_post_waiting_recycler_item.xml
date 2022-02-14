@@ -50,7 +50,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                 app:pendingStatus="@{result.algorithmNumber}"
+                    app:pendingStatus="@{result.algorithmNumber}"
                     tools:text="#192번째 알고리즘" />
 
 
@@ -61,9 +61,8 @@
                     android:textColor="@color/main_color"
                     app:getTag="@{result.tag}"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginEnd="13dp"
 
-                    app:layout_constraintEnd_toStartOf="@+id/post_more"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="#공부" />
 
@@ -73,10 +72,9 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/admin_reject_spinner"
                     android:fontFamily="@font/nanumsquareround_otfb"
+                    android:text="수정"
                     android:textColor="#C4C4C4"
                     android:textSize="@dimen/post_more"
-              android:text="수정"
-
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -110,9 +108,9 @@
                 android:id="@+id/post_modify_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:fontFamily="@font/nanumsquareround_otfb"
                 android:text="게시물 수정"
-                android:layout_marginTop="5dp"
 
                 android:textColor="#A0A0A6"
                 android:textSize="13sp"
@@ -121,6 +119,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <TextView
             android:id="@+id/post_md"
             android:layout_width="match_parent"
@@ -129,9 +128,9 @@
             android:fontFamily="@font/nanumsquareround_otfeb"
             android:gravity="start"
             android:includeFontPadding="false"
+            android:inputType="textMultiLine"
             android:text="@{result.title}"
             android:textColor="@color/black"
-            android:inputType="textMultiLine"
             android:textSize="@dimen/post_md"
             android:textStyle="bold"
             tools:text="역시 개발은 새벽이지~" />
@@ -148,6 +147,29 @@
             android:textSize="@dimen/post_con"
             android:textStyle="bold"
             tools:text="새벽 코딩이 개꿀임. 진심 집중도 잘 되고 뭔가 날 방해하는 것도 없어. 이걸 참아??????????????????? 가능???????????" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="11dp"
+            android:orientation="horizontal">
 
+            <ImageView
+                android:id="@+id/leaf_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/no_click_leaf"
+                app:imgClicked="@{result.clicked}" />
+
+            <TextView
+                android:id="@+id/leaf_number_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="0"
+                android:layout_marginLeft="5dp"
+                android:backgroundTint="#C4C4C4"
+                app:leafNumber="@{result.emojiCount}" />
+        </LinearLayout>
     </LinearLayout>
 </layout>

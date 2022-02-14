@@ -9,4 +9,7 @@
     <string name="navigation_item_rules">규칙</string>
     <string name="navigation_item_home">홈</string>
     <string name="navigation_item_more_see">더보기</string>
+    <string name="reject_texT">거절취소</string>
+    <string name="questionAnswer">#softmeister01</string>
+    <string name="question">Q. %s</string>
 </resources>

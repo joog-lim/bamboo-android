@@ -4,6 +4,9 @@
 
     <data>
 
+        <variable
+            name="dialog"
+            type="com.study.presentation.view.admin.dialog.PendingDialog" />
     </data>
 
 
@@ -74,7 +77,7 @@
                         android:textSize="17sp" />
 
                     <EditText
-                        android:id="@+id/reject_reason_text"
+                        android:id="@+id/reason_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
@@ -84,7 +87,7 @@
                         android:background="@drawable/login_dialog_password_edittext"
                         android:elevation="10dp"
                         android:fontFamily="@font/nanumsquareround_otfb"
-                        android:hint="거절 : 타당한 이유를 간단히 적어주세요."
+                        android:hint="타당한 이유를 간단히 적어주세요."
                         android:inputType="textMultiLine"
                         android:padding="10dp"
                         android:textColorHint="#C4C4C4"
@@ -104,6 +107,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:layout_marginTop="10dp"
+                        android:onClick="@{()->dialog.acceptPost()}"
                         android:layout_weight="1"
                         android:background="@drawable/admin_accept_btn_background"
                         android:fontFamily="@font/nanumsquareround_otfb"
@@ -114,12 +118,13 @@
                         app:layout_constraintBottom_toBottomOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/pending_btn"
+                        android:id="@+id/reject_btn"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:layout_marginTop="10dp"
                         android:layout_weight="1"
+                        android:onClick="@{()->dialog.rejectPost()}"
                         android:background="@drawable/admin_delete_btn_background"
                         android:fontFamily="@font/nanumsquareround_otfb"
                         android:padding="20dp"

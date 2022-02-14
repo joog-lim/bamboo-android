@@ -39,19 +39,18 @@
             app:destination="@id/userMainFragment" />
     </fragment>
 
-    <fragment
+    <dialog
         android:id="@+id/declarationFragment"
         android:name="com.study.presentation.view.user.DeclarationFragment"
         android:label="DeclarationFragment"
         tools:layout="@layout/fragment_declaration">
-        <argument
-            android:name="id"
-            app:argType="string"
-            app:nullable="true"
-            android:defaultValue="true"/>
+
         <action
             android:id="@+id/action_declarationFragment_to_userMainFragment"
             app:destination="@id/userMainFragment" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
 
-    </fragment>
+    </dialog>
 </navigation>

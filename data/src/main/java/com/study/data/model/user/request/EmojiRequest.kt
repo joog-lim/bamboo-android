@@ -1,3 +1,3 @@
 package com.study.data.model.user.request
 
-data class EmojiRequest(val num: Int?)
+data class EmojiRequest(val number: Int?)

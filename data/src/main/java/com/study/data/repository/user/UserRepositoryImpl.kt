@@ -7,7 +7,6 @@ import androidx.paging.map
 import com.study.data.mapper.toDomain
 import com.study.data.mapper.user.toData
 import com.study.data.mapper.user.toDomain
-import com.study.data.mapper.user.toReportDomain
 import com.study.data.mapper.user.toVerifyDomain
 import com.study.data.network.user.UserApi
 import com.study.data.paging.AlgorithmUserPagingSource
@@ -35,13 +34,6 @@ class UserRepositoryImpl @Inject constructor(private val dataSource: UserDataSou
 
     override  fun getVerify(): Single<BaseDataEntity<GetVerifyEntity>> {
         return dataSource.getVerify().map { it.toVerifyDomain() }
-    }
-
-    override  fun patchAlgorithmReport(
-        id: String,
-        body: Report
-    ): Single<BaseDataEntity<ReportEntity>> {
-        return dataSource.patchReport(id, body.toData()).map { it.toReportDomain() }
     }
 
 

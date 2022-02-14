@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.presentation">
+    package="com.study.presentation">
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
@@ -10,6 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Bamboo">
+
         <activity
             android:name=".view.SplashActivity"
             android:exported="true">
@@ -23,7 +24,8 @@
             android:exported="true"/>
         <activity android:name=".view.MainActivity"
             android:exported="true"/>
-        <activity android:name=".view.SignInFragment"
+        <activity android:name=".view.SignInActivity"
+            android:launchMode="singleTop"
             android:exported="true"/>
     </application>
 

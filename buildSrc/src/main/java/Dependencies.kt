@@ -26,6 +26,7 @@ object Versions {
     const val GOOGLE_AUTH = "20.0.1"
     const val DATASTORE = "1.0.0"
     const val RX_BINDING = "3.0.0"
+    const val RX_ADAPTER = "2.9.0"
     const val RX = "3.0.0"
     const val PAGING = "3.1.0"
 
@@ -83,6 +84,7 @@ object RX {
     const val RX_ANDROID = "io.reactivex.rxjava3:rxandroid:${Versions.RX}"
     const val RX_KOTLIN = "io.reactivex.rxjava3:rxkotlin:${Versions.RX}"
     const val RX_BINDING = "com.jakewharton.rxbinding3:rxbinding:${Versions.RX_BINDING}"
+    const val RX_ADAPTER = "com.squareup.retrofit2:adapter-rxjava3:${Versions.RX_ADAPTER}"
     const val RX_JAVA = "io.reactivex.rxjava3:rxjava:${Versions.RX}"
 }
 

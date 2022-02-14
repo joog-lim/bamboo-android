@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="fragment"
             type="com.study.presentation.view.user.DeclarationFragment" />
@@ -11,54 +12,27 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:context=".view.fragment.user.DeclarationFragment">
 
-
-        <RelativeLayout
-            android:id="@+id/title_bar"
-            android:layout_width="match_parent"
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@id/back_btn"
-                android:fontFamily="@font/nanumsquareround_otfeb"
-                android:text="신고하기"
-                android:textColor="#E75858"
-                android:textSize="20sp" />
-
-            <ImageView
-                android:id="@+id/back_btn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="5dp"
-                android:onClick="@{fragment::backBtnClick}"
-                android:padding="10dp"
-                android:src="@drawable/declaration_back_btn" />
-        </RelativeLayout>
+            app:layout_constraintTop_toTopOf="parent" />
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/declaration_margin"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="@dimen/declaration_margin"
             android:background="@drawable/login_dialog_password_edittext"
             android:elevation="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="@dimen/declaration_margin"
-            android:layout_marginEnd="@dimen/declaration_margin"
             android:fontFamily="@font/nanumsquareround_otfb"
             android:padding="10dp"
             android:text="알고리즘을 신고합니다"
@@ -66,12 +40,15 @@
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_bar" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/contents"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:layout_marginStart="@dimen/declaration_margin"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="@dimen/declaration_margin"
             android:background="@drawable/login_dialog_password_edittext"
             android:elevation="5dp"
             android:fontFamily="@font/nanumsquareround_otfb"
@@ -80,9 +57,6 @@
             android:inputType="textMultiLine"
             android:padding="10dp"
             android:textColorHint="#C4C4C4"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="@dimen/declaration_margin"
-            android:layout_marginEnd="@dimen/declaration_margin"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -90,17 +64,24 @@
 
         <TextView
             android:id="@+id/btn"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="#E75858"
-            android:onClick="@{fragment::uploadBtn}"
+            android:background="@color/report_color"
+            android:fontFamily="@font/nanumsquareround_otfb"
             android:gravity="center"
+            android:onClick="@{()->fragment.uploadBtn()}"
             android:padding="20dp"
             android:text="신고"
+            android:layout_marginTop="10dp"
             android:textColor="@color/white"
-            android:fontFamily="@font/nanumsquareround_otfb"
             android:textSize="25sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="@+id/contents"
+            app:layout_constraintStart_toStartOf="@+id/contents"
+            app:layout_constraintTop_toBottomOf="@+id/contents" />
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

@@ -6,101 +6,192 @@
     <data>
 
         <variable
-            name="activity"
+            name="fragment"
             type="com.study.presentation.view.user.UserMainFragment" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.fragment.user.UserMainFragment">
+        tools:context=".view.fragment.admin.AdminMainFragment">
 
 
-        <LinearLayout
-            android:id="@+id/constraintLayout"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
             android:layout_height="match_parent"
-            android:layout_alignParentTop="true">
+            android:layout_alignParentTop="true"
+            android:orientation="vertical">
 
-
-            <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/top_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
+
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nanumsquareround_otfb"
-                    android:includeFontPadding="false"
-                    android:text="하고 싶던 말,"
-                    android:textColor="@color/main_color"
-                    android:textSize="20sp" />
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/nanumsquareround_otfb"
-                    android:includeFontPadding="false"
-                    android:text="무엇인가요?"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:layout_marginStart="20dp"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nanumsquareround_otfb"
+                        android:includeFontPadding="false"
+                        android:text="하고싶었던말"
+                        android:textColor="@color/main_color"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/nanumsquareround_otfb"
+                        android:includeFontPadding="false"
+                        android:text="무엇인가요?"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+                </LinearLayout>
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/post_recycler_view"
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <ImageView
+                android:id="@+id/not_found_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="100dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/error_img"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/top_layout" />
+
+            <TextView
+                android:id="@+id/not_found_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="27dp"
+                android:text="게시물을 찾을 수 없습니다."
+                android:textSize="20sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/not_found_img" />
+
+            <ImageView
+                android:id="@+id/error_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="100dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/loading_img"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/top_layout" />
+
+
+            <TextView
+                android:id="@+id/error_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="27dp"
+                android:text="인터넷 연결"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/error_img" />
+
+            <TextView
+                android:id="@+id/error_n_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:text="오픈라인 상태입니다. 인터넷 연결을 확인해주세요"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/error_text" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/error_retry_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@color/main_color"
+                android:fontFamily="@font/nanumsquareround_otfeb"
+                android:onClick="@{()->fragment.retrySetButton()}"
+                android:text="retry"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/not_found_text"
+                app:layout_constraintStart_toStartOf="@+id/not_found_text"
+                app:layout_constraintTop_toBottomOf="@+id/error_n_text" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/addPostBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="20dp"
+                android:backgroundTint="@color/main_color"
+                android:contentDescription="글 추가"
+                android:elevation="3dp"
+                android:onClick="@{()->fragment.postBtnClick()}"
+                android:src="@drawable/ic_add_post"
+                app:borderWidth="0dp"
+                app:fabSize="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:tint="@color/white" />
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/refresh_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                tools:listitem="@layout/user_post_recycler_item"
-
-                android:layout_marginBottom="17dp"/>
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/top_layout"
+                tools:layout_editor_absoluteX="16dp">
 
 
-        </LinearLayout>
+                <com.todkars.shimmer.ShimmerRecyclerView
+                    android:id="@+id/post_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="90dp"
+                    android:scrollbarFadeDuration="0"
+                    android:scrollbars="vertical"
+                    app:shimmer_recycler_item_count="10"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/top_layout"
+                    app:shimmer_recycler_layout="@layout/user_post_recycler_item" />
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addPostBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="16dp"
-            android:backgroundTint="@color/main_color"
-            android:contentDescription="글 추가"
-            android:elevation="3dp"
-            android:onClick="@{activity::addPostBtnClick}"
-            android:src="@drawable/ic_add_post"
-            app:borderWidth="0dp"
-            app:fabSize="normal"
-            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:tint="@color/white" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ProgressBar
-
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:indeterminateTint="@color/main_color"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 </layout>

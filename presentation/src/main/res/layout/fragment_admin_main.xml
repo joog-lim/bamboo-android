@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="fragment"
+            type="com.study.presentation.view.admin.AdminMainFragment" />
     </data>
 
     <RelativeLayout
@@ -80,6 +83,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
                         android:fontFamily="@font/nanumsquareround_otfb"
+                        android:onClick="@{()->fragment.setIntentUser()}"
                         android:text="사용자"
                         android:textColor="#C4C4C4"
                         android:textSize="15sp" />
@@ -174,11 +178,12 @@
                 android:id="@+id/error_retry_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:background="@color/main_color"
                 android:fontFamily="@font/nanumsquareround_otfeb"
+                android:onClick="@{()->fragment.retrySetButton()}"
                 android:text="retry"
                 android:visibility="gone"
-                android:layout_marginTop="15dp"
                 app:layout_constraintEnd_toEndOf="@+id/not_found_text"
                 app:layout_constraintStart_toStartOf="@+id/not_found_text"
                 app:layout_constraintTop_toBottomOf="@+id/error_n_text" />
@@ -202,7 +207,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/top_layout"
                     tools:itemCount="30"
-                    tools:listitem="@layout/admin_post_accepted_recycler_item" />
+                    tools:listitem="@layout/user_post_recycler_item" />
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 

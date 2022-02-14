@@ -1,6 +1,8 @@
 package com.study.presentation.di
 
+import com.study.data.network.admin.AdminApi
 import com.study.data.network.common.CommonApi
+import com.study.data.network.user.UserApi
 import com.study.data.repository.admin.AdminDataSourceImpl
 import com.study.data.repository.admin.AdminRepositoryImpl
 import com.study.data.repository.common.CommonDataSourceImpl
@@ -21,16 +23,16 @@ import javax.inject.Singleton
 object RepositoryModule {
     @Provides
     @Singleton
-    fun providesAdminRepository(adminDataSource: AdminDataSourceImpl) : AdminRepository =
-        AdminRepositoryImpl(adminDataSource)
+    fun providesAdminRepository(adminDataSource: AdminDataSourceImpl,api:AdminApi) : AdminRepository =
+        AdminRepositoryImpl(adminDataSource,api)
 
     @Provides
     @Singleton
-    fun providesUserRepository(dataSource: UserDataSourceImpl) : UserRepository =
-        UserRepositoryImpl(dataSource)
+    fun providesUserRepository(dataSource: UserDataSourceImpl,api:UserApi) : UserRepository =
+        UserRepositoryImpl(dataSource,api)
 
     @Provides
     @Singleton
-    fun providesCommonRepository(dataSource: CommonDataSourceImpl, api: CommonApi) :   CommonRepository =
-        CommonRepositoryImpl(dataSource, api)
+    fun providesCommonRepository(dataSource: CommonDataSourceImpl) :   CommonRepository =
+        CommonRepositoryImpl(dataSource)
 }

@@ -15,10 +15,6 @@ import kotlinx.coroutines.flow.Flow
 interface UserRepository {
     fun algorithmCreate(request: AlgorithmCreate): Single<BaseDataEntity<AlgorithmCreateEntity>>
     fun getVerify(): Single<BaseDataEntity<GetVerifyEntity>>
-    fun patchAlgorithmReport(
-        id: String,
-        body: Report,
-    ): Single<BaseDataEntity<ReportEntity>>
 
     fun postEmoji(
         authorization: String,

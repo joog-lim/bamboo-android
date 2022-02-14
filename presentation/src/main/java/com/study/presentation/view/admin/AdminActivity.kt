@@ -22,8 +22,8 @@ class AdminActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
         navi = binding.bottomNavigationView
-        supportActionBar!!.hide()
         navController = findNavController(R.id.adminNavHostFragment)
         //앱 바 구성성
         val appBarConfiguration = AppBarConfiguration(

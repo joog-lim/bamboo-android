@@ -7,7 +7,7 @@
 
         <variable
             name="fragment"
-            type="com.study.presentation.view.SignInFragment" />
+            type="com.study.presentation.view.SignInActivity" />
     </data>
 
 
@@ -15,8 +15,7 @@
         android:id="@+id/sign_in_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-      >
+        android:background="@color/white">
 
 
         <ImageView
@@ -62,13 +61,14 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/guest_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
             android:fontFamily="@font/nanumsquareround_otfb"
             android:gravity="center"
             android:includeFontPadding="false"
+            android:onClick="@{()->fragment.guestOnClick()}"
             android:text="게스트로 사용하기"
             android:textColor="#C4C4C4"
             android:textSize="15sp"
@@ -84,7 +84,7 @@
             android:layout_marginEnd="@dimen/signin_btn_margin_start_end"
             android:layout_marginBottom="40dp"
             android:background="#C4C4C4"
-            app:layout_constraintBottom_toTopOf="@+id/textView"
+            app:layout_constraintBottom_toTopOf="@+id/guest_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

@@ -1,104 +1,79 @@
 package com.study.presentation.view.user
 
-import android.content.Context
+import android.annotation.SuppressLint
 import android.graphics.Color
-import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.study.domain.model.user.request.Report
+import com.study.base.base.base.BaseDialogFragment
+import com.study.domain.model.admin.request.SetStatusEntity
 import com.study.presentation.R
+import com.study.presentation.adapter.STATUS
 import com.study.presentation.databinding.FragmentDeclarationBinding
+import com.study.presentation.view.admin.AdminViewModel
+import com.study.presentation.view.admin.AuthViewModel
 import com.study.presentation.view.user.viewmodel.AlgorithmViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class DeclarationFragment : Fragment(
-) {
-    private lateinit var binding: FragmentDeclarationBinding
-    private val viewModel by viewModels<AlgorithmViewModel>()
+class DeclarationFragment :
+    BaseDialogFragment<FragmentDeclarationBinding>(R.layout.fragment_declaration) {
+    private val adminViewModel by viewModels<AdminViewModel>()
+    private val authViewModel by viewModels<AuthViewModel>()
     private val args by navArgs<DeclarationFragmentArgs>()
-    private var checkPopBackStack = false
-    private lateinit var callback: OnBackPressedCallback
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        callback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                Log.d("TAG", "handleOnBackPressed: ")
-                findNavController().navigate(R.id.action_declarationFragment_to_userMainFragment)
+    override fun FragmentDeclarationBinding.onCreateView() {
+        fragment = this@DeclarationFragment
+    }
 
+    override fun FragmentDeclarationBinding.onViewCreated() {
+        with(adminViewModel) {
+            isSuccess.observe(requireActivity(), Observer {
+                Toast.makeText(requireContext(), "신고에 성공했습니다", Toast.LENGTH_SHORT).show()
+                dismiss()
+
+
+            })
+            isLoading.observe(viewLifecycleOwner) {
+                if (it) {
+                    binding.btn.apply {
+                        isEnabled = false
+                        setBackgroundResource(R.color.no_click_color)
+                    }
+                    binding.progressBar.visibility = View.VISIBLE
+
+                } else {
+                    binding.btn.apply {
+                        isEnabled = true
+                        setBackgroundResource((R.color.report_color))
+                    }
+                    binding.progressBar.visibility = View.GONE
+
+                }
+            }
+            isFailure.observe(viewLifecycleOwner) {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             }
         }
-        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        callback.remove()
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_declaration, container, false)
-        binding.fragment = this
-        checkPopBackStack = false
-
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        observeViewModel()
-
     }
 
     override fun onResume() {
         super.onResume()
-        checkPopBackStack = false
-
+        hideKeyboardFrom(requireContext(), binding.root)
     }
 
-    private fun observeViewModel() {
-        viewModel.isSuccess.observe(requireActivity(), Observer {
-            if (it) {
-                Toast.makeText(requireContext(), "신고에 성공했습니다", Toast.LENGTH_SHORT).show()
-                Log.d("로그", "신고 성공 후 $checkPopBackStack")
-                if (!checkPopBackStack) {
-                    checkPopBackStack = true
-                    this@DeclarationFragment.findNavController().popBackStack()
-                }
-            } else {
-                Toast.makeText(requireContext(), "신고에 실패했습니다", Toast.LENGTH_SHORT).show()
-                binding.btn.isEnabled = true
-                binding.btn.setBackgroundColor(Color.parseColor("#E75858"))
-            }
-        })
-    }
-
-    fun backBtnClick(view: View) {
-        this.findNavController().popBackStack()
-    }
-
-
-    fun uploadBtn(view: View) {
-        binding.btn.isEnabled = false
-        binding.btn.setBackgroundColor(Color.parseColor("#C2C1C1"))
-        val reportText = binding.contents.text.toString()
-        Log.d("로그", "안에 인 : ${args.id}")
-
-        viewModel.report(args.id, Report(reportText))
+    fun uploadBtn() {
+        lifecycleScope.launch {
+            adminViewModel.patchPost(
+                authViewModel.getToken(),
+                args.id,
+                SetStatusEntity(STATUS.REPORTED.toString(), binding.contents.text.toString())
+            )
+        }
     }
 }

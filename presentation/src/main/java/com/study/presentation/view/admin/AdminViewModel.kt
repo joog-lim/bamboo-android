@@ -1,19 +1,20 @@
 package com.study.presentation.view.admin
 
+import android.util.Log
+import androidx.annotation.NonNull
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.study.base.base.base.BaseViewModel
 import com.study.domain.model.admin.request.AlgorithmModifyEntity
 import com.study.domain.model.admin.request.SetStatusEntity
-import com.study.domain.model.admin.response.PostEntity
+import com.study.domain.model.common.algorithm.ResultEntity
 import com.study.domain.usecease.admin.AlgorithmAdminUseCase
-import com.study.domain.usecease.common.GetAlgorithmUseCase
+import com.study.domain.usecease.common.StatusUpdateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -24,37 +25,34 @@ import javax.inject.Inject
 class AdminViewModel @Inject constructor(
 
     private val algorithmAdminUseCase: AlgorithmAdminUseCase,
-    private val getAlgorithmUseCase: GetAlgorithmUseCase
+    private val statusUpdateUseCase: StatusUpdateUseCase
 
-) : ViewModel() {
+    ) : BaseViewModel() {
 
 
-
-    private val compositeDisposable = CompositeDisposable()
-    private lateinit var _isSuccess: MutableLiveData<String>
+    private val _isSuccess = MutableLiveData<String>()
     val isSuccess: LiveData<String> get() = _isSuccess
 
-    private lateinit var _isFailure: MutableLiveData<String>
+    private val _isFailure = MutableLiveData<String>()
     val isFailure: LiveData<String> get() = _isFailure
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading = _isLoading
 
 
-
-     fun acceptPatchPost(
+    fun acceptPatchPost(
         token: String,
-        id: String,
+        id: Int,
         bodyMap: AlgorithmModifyEntity
 
     ) = viewModelScope.launch {
         _isLoading.postValue(true)
-        algorithmAdminUseCase.patchModifyAlgorithm(token, id, bodyMap)
+        algorithmAdminUseCase.patchModifyAlgorithm(token, id.toString(), bodyMap)
             .observeOn(AndroidSchedulers.mainThread()) // 메인쓰레드에 동작
             .subscribeOn(Schedulers.io())
             .subscribe(
                 { response ->
-                    if (response.status in 200..299) {
+                    if (response.success) {
                         _isSuccess.value = "성공적으로 수정했습니다."
                         _isLoading.postValue(false)
 
@@ -71,17 +69,18 @@ class AdminViewModel @Inject constructor(
     }
 
 
-    fun patchPost(token: String, id: String, request: SetStatusEntity) =
+    fun patchPost(token: String, id:  Int, request: SetStatusEntity) =
         viewModelScope.launch {
+            Log.d("TAG", "patchPost: ")
             _isLoading.postValue(true)
-            algorithmAdminUseCase.patchStatusAlgorithm(token, id, request)
+            statusUpdateUseCase.patchStatusAlgorithm(token, id.toString(), request)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(
                     { response ->
 
-                        if (response.status in 200..299) {
-                            _isSuccess.value = "성공적으로 수정했습니다."
+                        if (response.success) {
+                            _isSuccess.value = "$request 상태를 성공적으로 수정했습니다."
                             _isLoading.postValue(false)
 
                         } else {
@@ -98,22 +97,22 @@ class AdminViewModel @Inject constructor(
         }
 
 
-    fun deletePost(token: String, id: String) =
+    fun deletePost(token: String, id: Int) =
         viewModelScope.launch {
             _isLoading.postValue(false)
-            algorithmAdminUseCase.deleteAlgorithm(token, id)
+            algorithmAdminUseCase.deleteAlgorithm(token, id.toString())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(
                     { response ->
-                        if (response.status in 200..299) {
+                        if (response.success) {
                             _isSuccess.value = "성공적으로 수정했습니다."
                             _isLoading.postValue(false)
                         } else {
                             _isFailure.value = "삭제하지 못했습니다. 에러 메세지 :  ${response.message}"
                             _isLoading.postValue(false)
                         }
-                    },{
+                    }, {
                         _isFailure.value = "삭제하지 못했습니다 에러 메세지 :  ${it.message}"
                         _isLoading.postValue(false)
                     }
@@ -122,13 +121,10 @@ class AdminViewModel @Inject constructor(
         }
 
 
-fun getAlgorithm(token: String, status: String): Flow<PagingData<PostEntity>> {
-    return getAlgorithmUseCase.getAlgorithmPagingSource(token, status)
-        .cachedIn(viewModelScope)
-}
+    fun getAlgorithm(token: String, status: String): Flow<PagingData<ResultEntity>> {
+        return algorithmAdminUseCase.getAlgorithmPagingSource(token, status)
+            .cachedIn(viewModelScope)
+    }
 
-override fun onCleared() {
-    super.onCleared()
-    compositeDisposable.clear()
-}
+
 }

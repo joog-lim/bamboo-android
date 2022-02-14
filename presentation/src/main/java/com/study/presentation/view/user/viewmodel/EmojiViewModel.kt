@@ -2,13 +2,12 @@ package com.study.presentation.view.user.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.study.base.base.base.BaseViewModel
 import com.study.domain.model.user.request.EmojiEntity
 import com.study.domain.usecease.user.EmojiUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,14 +15,13 @@ import javax.inject.Inject
 @HiltViewModel
 class EmojiViewModel @Inject constructor(
     private val emojiUseCase: EmojiUseCase
-) : ViewModel() {
+) : BaseViewModel() {
 
-    private val compositeDisposable = CompositeDisposable()
-    private lateinit var _isSuccess: MutableLiveData<Boolean>
+    private val _isSuccess = MutableLiveData<Boolean>()
     val isSuccess: LiveData<Boolean> get() = _isSuccess
 
-    private lateinit var _isFailure: MutableLiveData<Boolean>
-    val isFailure: LiveData<Boolean> get() = _isFailure
+    private val _isFailure = MutableLiveData<String>()
+    val isFailure: LiveData<String> get() = _isFailure
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading = _isLoading
@@ -33,21 +31,21 @@ class EmojiViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .subscribe(
                 { response ->
-                    if (response.status in 200..299) {
+                    if (response.success) {
                         _isSuccess.value = true
                         _isLoading.postValue(false)
 
                     } else {
-                        _isFailure.value = false
+                        _isFailure.value = response.message
                         _isLoading.postValue(false)
                     }
                 }, {
-                    _isFailure.value = false
+                    _isFailure.value = it.message
                     _isLoading.postValue(false)
                 }
 
             ).apply {
-                compositeDisposable.add(this)
+                addDisposable(this@apply)
             }
 
 
@@ -60,29 +58,26 @@ class EmojiViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .subscribe(
                 { response ->
-                    if (response.status in 200..299) {
+                    if (response.success) {
                         _isSuccess.value = true
                         _isLoading.postValue(false)
 
                     } else {
-                        _isFailure.value = false
+                        _isFailure.value = response.message
                         _isLoading.postValue(false)
                     }
                 }, {
-                    _isFailure.value = false
+                    _isFailure.value = it.message
                     _isLoading.postValue(false)
                 }
             ).apply {
-                compositeDisposable.add(this)
+                addDisposable(this@apply)
             }
 
 
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        compositeDisposable.clear()
-    }
+
 }
 
 

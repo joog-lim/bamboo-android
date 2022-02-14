@@ -10,11 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface AdminRepository {
 
-    fun patchStatusAlgorithm(
-        token: String,
-        id: String,
-        body: SetStatusEntity
-    ): Single<BaseEntity>
+
 
     fun patchModifyAlgorithm(
         token: String,

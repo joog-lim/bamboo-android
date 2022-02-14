@@ -18,13 +18,7 @@ class AlgorithmAdminUseCase(private val repository: AdminRepository) {
         ): Flow<PagingData<ResultEntity>> {
         return repository.getAlgorithmPagingSource(token, status)
     }
-    fun patchStatusAlgorithm(
-        token: String,
-        id: String,
-        body: SetStatusEntity
-    ): Single<BaseEntity> {
-        return repository.patchStatusAlgorithm(token, id, body)
-    }
+
 
     fun patchModifyAlgorithm(
         token: String,

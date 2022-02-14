@@ -22,12 +22,7 @@ class AlgorithmUserUseCase(private val repository: UserRepository) {
         return repository.algorithmCreate(request)
     }
 
-    fun patchAlgorithmReport(
-        id: String,
-        body: Report,
-    ): Single<BaseDataEntity<ReportEntity>> {
-        return repository.patchAlgorithmReport(id, body)
-    }
+
 
     fun getVerify(): Single<BaseDataEntity<GetVerifyEntity>> {
         return repository.getVerify()

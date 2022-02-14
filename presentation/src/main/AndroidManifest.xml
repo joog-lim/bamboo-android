@@ -24,7 +24,7 @@
             android:exported="true"/>
         <activity android:name=".view.MainActivity"
             android:exported="true"/>
-        <activity android:name=".view.SignInFragment"
+        <activity android:name=".view.SignInActivity"
             android:launchMode="singleTop"
             android:exported="true"/>
     </application>

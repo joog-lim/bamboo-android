@@ -4,6 +4,13 @@
 
     <data>
 
+        <variable
+            name="dialog"
+            type="com.study.presentation.view.admin.dialog.AcceptDialog" />
+
+        <variable
+            name="result"
+            type="com.study.domain.model.common.algorithm.ResultEntity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,8 +24,6 @@
             android:layout_height="match_parent"
             android:background="@color/white"
             android:orientation="vertical">
-
-
 
 
             <LinearLayout
@@ -84,6 +89,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
+                        android:text="@{result.title}"
                         android:layout_marginEnd="10dp"
                         android:background="@drawable/login_dialog_password_edittext"
                         android:elevation="10dp"
@@ -113,6 +119,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
+                        android:text="@{result.content}"
                         android:background="@drawable/login_dialog_password_edittext"
                         android:elevation="10dp"
                         android:fontFamily="@font/nanumsquareround_otfb"
@@ -122,29 +129,7 @@
                         android:textColorHint="#C4C4C4"
                         android:textSize="12sp" />
 
-                    <TextView
-                        android:id="@+id/update_tag_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginEnd="10dp"
-                        android:fontFamily="@font/nanumsquareround_otfb"
-                        android:text="태그를 선택해 주세요"
-                        android:textColor="@color/main_color"
-                        android:textSize="15sp" />
 
-
-                    <Spinner
-                        android:id="@+id/update_tag"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:entries="@array/PostCreateTagList"
-                        android:hint="태그"
-                        android:textSize="12sp" />
 
 
                 </LinearLayout>
@@ -153,27 +138,28 @@
                     android:id="@+id/accept_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="40dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/admin_accept_btn_background"
+                    android:elevation="10dp"
                     android:fontFamily="@font/nanumsquareround_otfb"
+                    android:onClick="@{()->dialog.acceptButtonClickListener()}"
                     android:padding="20dp"
                     android:text="수정하기"
-                    android:elevation="10dp"
                     android:textColor="@color/white"
-                    android:layout_margin="40dp"
-
                     android:textSize="17sp"
                     app:layout_constraintBottom_toBottomOf="parent" />
             </LinearLayout>
 
         </LinearLayout>
+
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:indeterminateTint="@color/main_color"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

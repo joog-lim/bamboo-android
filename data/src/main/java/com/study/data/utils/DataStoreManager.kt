@@ -46,6 +46,11 @@ class DataStoreManager @Inject constructor(@ApplicationContext private val conte
 
         }
 
+    }
+    suspend fun deleteToken(token:String){
+        dataStore.edit {preference->
+            preference.clear()
+        }
 
     }
 
@@ -63,18 +68,18 @@ class DataStoreManager @Inject constructor(@ApplicationContext private val conte
             Log.d("DataStoreRepository", "readToken  $token")
             Token(token)
         }
+
     suspend fun getToken(): String {
         return readToken.first().token
     }
-    companion object{
-        const val DEFAULT_TOKEN="default token"
-        const val PREFERENCES_TOKEN="preferences token"
-        const val PREFERENCE_NAME="bamboo token"
+
+    companion object {
+        const val DEFAULT_TOKEN = "default token"
+        const val PREFERENCES_TOKEN = "preferences token"
+        const val PREFERENCE_NAME = "bamboo token"
     }
 
 }
-
-
 
 
 data class Token(

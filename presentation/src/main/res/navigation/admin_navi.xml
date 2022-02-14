@@ -10,7 +10,7 @@
         android:id="@+id/adminMainFragment"
         tools:layout="@layout/fragment_admin_main"
         android:name="com.study.presentation.view.admin.AdminMainFragment"
-        android:label="dsad" >
+        android:label="" >
 
 
         <action
@@ -26,10 +26,8 @@
             android:id="@+id/action_adminMainFragment_to_acceptDialog"
             app:destination="@id/acceptDialog" />
         <argument
-            android:name="type"
-            app:nullable="false"
-            android:defaultValue="false"
-            app:argType="string" />
+            android:name="result"
+            app:argType="com.study.domain.model.common.algorithm.ResultEntity" />
 
     </fragment>
 
@@ -45,90 +43,61 @@
         tools:layout="@layout/fragment_more_see" />
     <dialog
         android:id="@+id/pendingDialog"
-        android:name="com.study.presentation.view.dialog.PendingDialog"
+        android:name="com.study.presentation.view.admin.dialog.PendingDialog"
         tools:layout="@layout/pending_dialog"
-        android:label="dasdas" >
+        android:label="" >
 
-        <argument
-            android:name="auth"
-            app:argType="string" />
-        <argument
-            android:name="position"
-            app:argType="integer" />
         <action
             android:id="@+id/action_pendingDialog_to_adminMainFragment"
             app:destination="@id/adminMainFragment" />
+        <argument
+            android:name="result"
+            app:argType="com.study.domain.model.common.algorithm.ResultEntity" />
 
     </dialog>
 
     <dialog
         android:id="@+id/deleteDialog"
-        android:name="com.study.presentation.view.dialog.DeleteDialog"
+        android:name="com.study.presentation.view.admin.dialog.DeleteDialog"
         tools:layout="@layout/delete_dialog"
-        android:label="dasdas" >
+        android:label="" >
 
-        <argument
-            android:name="auth"
-            app:argType="string" />
-        <argument
-            android:name="position"
-            app:argType="integer" />
         <action
             android:id="@+id/action_deleteDialog_to_adminMainFragment"
             app:destination="@id/adminMainFragment" />
+        <argument
+            android:name="result"
+            app:argType="com.study.domain.model.common.algorithm.ResultEntity" />
     </dialog>
     <dialog
         android:id="@+id/rejectCancelDialog"
-        android:name="com.study.presentation.view.dialog.RejectCancelDialog"
+        android:name="com.study.presentation.view.admin.dialog.RejectCancelDialog"
         tools:layout="@layout/reject_cancel_dialog"
-        android:label="dasdas" >
+        android:label="" >
 
-        <argument
-            android:name="auth"
-            app:argType="string" />
-        <argument
-            android:name="position"
-            app:argType="integer" />
+
         <action
             android:id="@+id/action_rejectCancelDialog_to_adminMainFragment"
             app:destination="@id/adminMainFragment" />
+        <argument
+            android:name="result"
+            app:argType="com.study.domain.model.common.algorithm.ResultEntity" />
 
     </dialog>
 
     <dialog
         android:id="@+id/acceptDialog"
-        android:name="com.study.presentation.view.dialog.AcceptDialog"
+        android:name="com.study.presentation.view.admin.dialog.AcceptDialog"
         tools:layout="@layout/accept_dialog"
-        android:label="dasdas" >
+        android:label="" >
 
-        <argument
-            android:name="auth"
-            app:argType="string" />
-
-
-        <argument
-            android:name="position"
-            app:argType="integer" />
-
-        <argument
-            android:name="title"
-            app:argType="string" />
-        <argument
-            android:name="content"
-            app:argType="string" />
-
-        <argument
-            android:name="tag"
-            app:argType="string" />
-
-        <argument
-            android:name="status"
-            app:argType="string" />
         <action
             android:id="@+id/action_acceptDialog_to_adminMainFragment"
             app:destination="@id/adminMainFragment" />
-
-
+        <argument
+            android:name="result"
+            app:argType="com.study.domain.model.common.algorithm.ResultEntity" />
+        
     </dialog>
 
 </navigation>

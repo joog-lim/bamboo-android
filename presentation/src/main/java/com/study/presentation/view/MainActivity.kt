@@ -50,8 +50,11 @@ class MainActivity : BaseActivity<ActivityUserBinding>(R.layout.activity_user) {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
+
+        if (!navController.navigateUp())
+            super.onBackPressed()
+
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

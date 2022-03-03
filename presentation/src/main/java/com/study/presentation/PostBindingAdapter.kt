@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 object PostBindingAdapter {
 
@@ -14,8 +16,10 @@ object PostBindingAdapter {
     @JvmStatic
     fun getDay(text: TextView, day: String) {
 
-        text.text = day.substring(0..10)
 
+        val parsedDate = LocalDateTime.parse(day, DateTimeFormatter.ISO_DATE_TIME)
+        val formattedDate = parsedDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd a"))
+        text.text = formattedDate
     }
 
 

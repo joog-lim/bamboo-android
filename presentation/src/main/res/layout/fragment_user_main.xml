@@ -178,7 +178,7 @@
                 tools:layout_editor_absoluteX="16dp">
 
 
-                <com.todkars.shimmer.ShimmerRecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/post_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

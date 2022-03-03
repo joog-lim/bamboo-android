@@ -77,6 +77,7 @@
                     android:fontFamily="@font/nanumsquareround_otfb"
                     android:textColor="#C4C4C4"
                     android:textSize="@dimen/post_more"
+                    android:text="수정"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

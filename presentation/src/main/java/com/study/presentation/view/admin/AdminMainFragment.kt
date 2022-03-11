@@ -18,12 +18,14 @@ import com.study.base.base.adapter.RecyclerViewItemClickListener
 import com.study.base.base.base.BaseFragment
 import com.study.base.base.utils.LinearLayoutManagerWrapper
 import com.study.domain.model.common.algorithm.ResultEntity
+import com.study.domain.model.user.request.EmojiEntity
 import com.study.presentation.R
 import com.study.presentation.adapter.AlgorithmAdapter
 import com.study.presentation.adapter.STATUS
 import com.study.presentation.databinding.FragmentAdminMainBinding
 import com.study.presentation.utils.DiaryUtil.Companion.DIALOG_RESULT_KEY
 import com.study.presentation.view.MainActivity
+import com.study.presentation.view.user.viewmodel.EmojiViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -40,6 +42,8 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
     private val viewModel: AdminViewModel by viewModels()
 
     private val authViewModel: AuthViewModel by viewModels()
+
+    private val emojiViewModel : EmojiViewModel by viewModels()
 
     private lateinit var adminAdapter: AlgorithmAdapter
 
@@ -387,7 +391,16 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
     }
 
     override fun onLeafClick(data: ResultEntity) {
-        Toast.makeText(requireContext(), "유저만 사용할 수 있습니다.", Toast.LENGTH_SHORT).show()
+        if (data.isClicked) {
+            lifecycleScope.launch {
+                emojiViewModel.deleteEmoji(authViewModel.getToken(), EmojiEntity(data.idx))
+            }
+
+        } else {
+            lifecycleScope.launch {
+                emojiViewModel.postEmoji(authViewModel.getToken(), EmojiEntity(data.idx))
+            }
+        }
     }
 
 

@@ -120,6 +120,10 @@ class AlgorithmAdapter(
                 onClickListener.onStateClick(data, STATUS.ACCEPTED.toString())
 
             }
+            binding.leafImg.setOnClickListener{
+                onClickListener.onLeafClick(data)
+            }
+
         }
 
     }

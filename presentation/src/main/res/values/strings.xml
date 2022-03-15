@@ -13,4 +13,5 @@
     <string name="questionAnswer">#softmeister01</string>
     <string name="question">Q. %s</string>
     <string name="accept_dialog_content">수정할 내용을 입력해 주세요.</string>
+    <string name="pending">대기</string>
 </resources>

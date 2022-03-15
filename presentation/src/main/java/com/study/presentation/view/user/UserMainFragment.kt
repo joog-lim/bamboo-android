@@ -127,12 +127,10 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
                     binding.errorText.isVisible = true
                     binding.errorImg.isVisible = true
                     binding.errorNText.isVisible = true
-                    binding.postRecyclerView.hideShimmer()
 
                 }
                 is LoadState.Loading -> {
                     with(binding) {
-                        postRecyclerView.showShimmer()
                         errorRetryBtn.isVisible = false
                         errorText.isVisible = false
                         errorNText.isVisible = false
@@ -143,7 +141,6 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
 
                 }
                 is LoadState.NotLoading -> {
-                    binding.postRecyclerView.hideShimmer()
                     binding.notFoundImg.isVisible =
                         combinedLoadStates.append.endOfPaginationReached and (userAlgorithmAdapter.itemCount < 1)
                     binding.notFoundText.isVisible =

@@ -75,6 +75,10 @@ class AlgorithmAdapter(
             binding.postMore.setOnClickListener {
                 onClickListener.onStateClick(data, STATUS.ACCEPTED.toString())
             }
+            binding.leafImg.setOnClickListener{
+                onClickListener.onLeafClick(data)
+            }
+
 
         }
 
@@ -92,6 +96,10 @@ class AlgorithmAdapter(
             binding.postMore.setOnClickListener {
                 onClickListener.onStateClick(data, STATUS.DELETED.toString())
             }
+            binding.leafImg.setOnClickListener{
+                onClickListener.onLeafClick(data)
+            }
+
         }
 
 
@@ -112,6 +120,10 @@ class AlgorithmAdapter(
                 onClickListener.onStateClick(data, STATUS.ACCEPTED.toString())
 
             }
+            binding.leafImg.setOnClickListener{
+                onClickListener.onLeafClick(data)
+            }
+
         }
 
     }
@@ -127,6 +139,9 @@ class AlgorithmAdapter(
             binding.executePendingBindings()
             binding.postMore.setOnClickListener {
                 onClickListener.onStateClick(data, STATUS.REJECTED.toString())
+            }
+            binding.leafImg.setOnClickListener{
+                onClickListener.onLeafClick(data)
             }
 
         }

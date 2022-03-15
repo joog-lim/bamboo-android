@@ -72,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/admin_reject_spinner"
                     android:fontFamily="@font/nanumsquareround_otfb"
-                    android:text="수정"
+                    android:text="@string/pending"
                     android:textColor="#C4C4C4"
                     android:textSize="@dimen/post_more"
                     app:layout_constraintBottom_toBottomOf="parent"

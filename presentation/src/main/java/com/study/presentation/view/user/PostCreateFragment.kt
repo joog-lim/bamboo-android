@@ -15,6 +15,7 @@ import com.study.base.base.base.BaseFragment
 import com.study.presentation.R
 import com.study.presentation.adapter.TagSpinnerAdapter
 import com.study.presentation.databinding.FragmentPostCreateBinding
+import com.study.presentation.utils.hideKeyBoard
 import com.study.presentation.view.user.viewmodel.AlgorithmViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -59,6 +60,8 @@ class PostCreateFragment : BaseFragment<FragmentPostCreateBinding>(R.layout.frag
 
             isSuccess.observe(viewLifecycleOwner) {
                 checkAnswerQuestion(it)
+                hideKeyBoard()
+
             }
             getVerifyResponse.observe(viewLifecycleOwner) {
                 getVerify(it?.question)
@@ -66,6 +69,7 @@ class PostCreateFragment : BaseFragment<FragmentPostCreateBinding>(R.layout.frag
             }
             isFailure.observe(viewLifecycleOwner) {
                 Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                hideKeyBoard()
             }
             isLoading.observe(viewLifecycleOwner) {
                 Log.d("TAG", "onViewCreated: ${it}")

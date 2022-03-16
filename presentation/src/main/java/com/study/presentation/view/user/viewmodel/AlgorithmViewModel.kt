@@ -47,6 +47,7 @@ class AlgorithmViewModel @Inject constructor(
         questionId: String,
         answer: String
     ) = viewModelScope.launch {
+        _isLoading.postValue(true)
 
         algorithmUserUserUseCase.algorithmCreate(
             AlgorithmCreate(
@@ -59,11 +60,16 @@ class AlgorithmViewModel @Inject constructor(
                 { response ->
                     if (response.success) {
                         _isSuccess.value = true
+                        _isLoading.postValue(false)
+
                         response.data?.id
                     } else {
+                        _isLoading.postValue(false)
+
                         _isFailure.value = response.message!!
                     }
                 }, {
+                    _isLoading.postValue(false)
                     _isFailure.value = it.message
                 }
             )
@@ -96,7 +102,6 @@ class AlgorithmViewModel @Inject constructor(
 
             )
     }
-
 
 
     fun getAlgorithm(token: String): Flow<PagingData<ResultEntity>> {

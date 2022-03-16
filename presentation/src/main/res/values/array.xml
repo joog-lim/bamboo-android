@@ -3,7 +3,7 @@
 
 
     <string-array name="PostCreateTagList">
-        <item>태그선택</item>
+        <item>태그 선택</item>
         <item>#유머</item>
         <item>#공부</item>
         <item>#일상</item>

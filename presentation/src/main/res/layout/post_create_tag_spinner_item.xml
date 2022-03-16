@@ -6,6 +6,7 @@
     <TextView
         android:id="@+id/choice_tag"
         android:layout_width="match_parent"
+        android:textAlignment="center"
         android:layout_height="wrap_content"
         android:ellipsize="marquee"
         android:fontFamily="@font/nanumsquareround_otfb"

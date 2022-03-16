@@ -1,5 +1,6 @@
 package com.study.presentation.view.user.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -31,16 +32,23 @@ class EmojiViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .subscribe(
                 { response ->
-                    if (response.success) {
-                        _isSuccess.value = true
-                        _isLoading.postValue(false)
+                    try {
+                        Log.d("TAG", "postEmoji: ${response}")
+                        if (response.success) {
+                            _isSuccess.value = true
+                            _isLoading.postValue(false)
 
-                    } else {
-                        _isFailure.value = response.message
-                        _isLoading.postValue(false)
+                        } else {
+
+                            _isFailure.value = response.message
+                            _isLoading.postValue(false)
+                        }
+                    } catch (e: Exception) {
+                        Log.d("TAG", "postEmoji: ${response}")
+
                     }
                 }, {
-                    _isFailure.value = it.message
+                    emojiMessage(it)
                     _isLoading.postValue(false)
                 }
 
@@ -67,14 +75,27 @@ class EmojiViewModel @Inject constructor(
                         _isLoading.postValue(false)
                     }
                 }, {
-                    _isFailure.value = it.message
+                    emojiMessage(it)
                     _isLoading.postValue(false)
                 }
             ).apply {
                 addDisposable(this@apply)
             }
 
+    }
 
+    private fun emojiMessage(throwable: Throwable) = when {
+        throwable.message?.contains("401") == true -> {
+            _isFailure.value = "액세스토큰이 유효하지않습니다."
+
+        }
+        throwable.message?.contains("400") == true -> {
+            _isFailure.value = "이미 처리된 이모지 입니다."
+
+        }
+        else -> {
+            _isFailure.value = throwable.message
+        }
     }
 
 

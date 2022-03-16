@@ -60,7 +60,7 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
                 userAlgorithmAdapter.refresh()
             }
             isFailure.observe(viewLifecycleOwner) {
-                Snackbar.make(binding.root, "사용하시려면 로그인을 해주세요.", Snackbar.LENGTH_SHORT)
+                Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT)
                     .setAction("OK") {
 
                     }.show()
@@ -167,7 +167,7 @@ class UserMainFragment : BaseFragment<FragmentUserMainBinding>(R.layout.fragment
     override fun onLeafClick(data: ResultEntity) {
 
         if (data.isClicked) {
-                lifecycleScope.launch {
+            lifecycleScope.launch {
                 userViewModel.deleteEmoji(authViewModel.getToken(), EmojiEntity(data.idx))
             }
 

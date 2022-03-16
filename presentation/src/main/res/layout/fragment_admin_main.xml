@@ -96,6 +96,7 @@
                         android:layout_marginTop="15dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginBottom="15dp"
+                        android:textAlignment="center"
                         android:background="@drawable/admin_spinner_frame"
                         android:elevation="10dp"
                         android:entries="@array/AdminItemList" />

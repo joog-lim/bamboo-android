@@ -30,6 +30,8 @@ class AlgorithmViewModel @Inject constructor(
     val isSuccess: LiveData<Boolean> get() = _isSuccess
     private val compositeDisposable = CompositeDisposable()
 
+    private val _idx = MutableLiveData<Int>()
+    val idx: LiveData<Int> get() = _idx
 
     private val _isFailure = MutableLiveData<String>()
     val isFailure: LiveData<String> get() = _isFailure
@@ -40,6 +42,10 @@ class AlgorithmViewModel @Inject constructor(
     private val _getVerifyResponse = MutableLiveData<GetVerifyEntity?>()
 
     val getVerifyResponse: LiveData<GetVerifyEntity?> get() = _getVerifyResponse
+    fun getIdx(idx: Int) {
+        _idx.value = idx
+    }
+
     fun callPostCreateAPI(
         title: String,
         content: String,

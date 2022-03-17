@@ -53,6 +53,9 @@
         <argument
             android:name="result"
             app:argType="com.study.domain.model.common.algorithm.ResultEntity" />
+        <action
+            android:id="@+id/action_pendingDialog_to_pendingFinishDialog"
+            app:destination="@id/pendingFinishDialog" />
 
     </dialog>
 
@@ -99,5 +102,9 @@
             app:argType="com.study.domain.model.common.algorithm.ResultEntity" />
         
     </dialog>
+    <dialog
+        android:id="@+id/pendingFinishDialog"
+        android:name="com.study.presentation.view.admin.dialog.PendingFinishDialog"
+        android:label="PendingFinishDialog" />
 
 </navigation>

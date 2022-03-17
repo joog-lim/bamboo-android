@@ -6,7 +6,7 @@
 
         <variable
             name="dialog"
-            type="com.study.presentation.view.admin.dialog.PendingDialog" />
+            type="com.study.presentation.view.admin.dialog.PendingFinishDialog" />
     </data>
 
 
@@ -52,28 +52,56 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/logo_img" />
 
+                <LinearLayout
+                    android:id="@+id/linearLayout5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginBottom="30dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/login_txt">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:fontFamily="@font/nanumsquareround_otfb"
+                        android:text="정말로 이 게시물을 승인하시겠습니까?"
+                        android:textColor="@color/main_color"
+                        android:textSize="17sp" />
+
+                    <EditText
+                        android:id="@+id/reason_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/login_dialog_password_edittext"
+                        android:elevation="10dp"
+                        android:fontFamily="@font/nanumsquareround_otfb"
+                        android:hint="타당한 이유를 간단히 적어주세요."
+                        android:inputType="textMultiLine"
+                        android:padding="10dp"
+                        android:textColorHint="#C4C4C4"
+                        android:textSize="12sp" />
+
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/accept_btn"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/admin_accept_btn_background"
-                        android:fontFamily="@font/nanumsquareround_otfb"
-                        android:onClick="@{()->dialog.acceptPost()}"
-                        android:padding="20dp"
-                        android:text="수락"
-                        android:textColor="@color/white"
-                        android:textSize="17sp"
-                        app:layout_constraintBottom_toBottomOf="parent" />
+
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/reject_btn"
@@ -82,11 +110,11 @@
                         android:layout_margin="8dp"
                         android:layout_marginTop="10dp"
                         android:layout_weight="1"
+                        android:onClick="@{()->dialog.rejectPost()}"
                         android:background="@drawable/admin_delete_btn_background"
                         android:fontFamily="@font/nanumsquareround_otfb"
-                        android:onClick="@{()->dialog.rejectPost()}"
                         android:padding="20dp"
-                        android:text="거절"
+                        android:text="완료"
                         android:textColor="@color/white"
                         android:textSize="17sp"
                         app:layout_constraintBottom_toBottomOf="parent" />

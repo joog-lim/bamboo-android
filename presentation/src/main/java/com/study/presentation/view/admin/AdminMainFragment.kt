@@ -23,7 +23,7 @@ import com.study.presentation.R
 import com.study.presentation.adapter.AlgorithmAdapter
 import com.study.presentation.adapter.STATUS
 import com.study.presentation.databinding.FragmentAdminMainBinding
-import com.study.presentation.utils.DiaryUtil.Companion.DIALOG_RESULT_KEY
+import com.study.presentation.utils.getDialogNavResult
 import com.study.presentation.view.MainActivity
 import com.study.presentation.view.user.viewmodel.EmojiViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -330,29 +330,7 @@ class AdminMainFragment : BaseFragment<FragmentAdminMainBinding>(R.layout.fragme
     }
 
 
-    private inline fun <T> getDialogNavResult(
-        @IdRes navId: Int,
-        key: String = DIALOG_RESULT_KEY,
-        crossinline onChanged: (T?) -> Unit
-    ) {
-        val backStackEntry = findNavController().getBackStackEntry(navId)
-        val observer = LifecycleEventObserver { _, event ->
-            if (event == Lifecycle.Event.ON_RESUME && backStackEntry.savedStateHandle.contains(key)) {
-                val result = backStackEntry.savedStateHandle.get<T>(key)
-                onChanged(result)
-                backStackEntry.savedStateHandle.remove<T>(key)
-            }
-        }
-        backStackEntry.lifecycle.addObserver(observer)
 
-        viewLifecycleOwner.lifecycle.addObserver(
-            LifecycleEventObserver { _, event ->
-                if (event == Lifecycle.Event.ON_DESTROY) {
-                    backStackEntry.lifecycle.removeObserver(observer)
-                }
-            }
-        )
-    }
 
 
     override fun onStateClick(data: ResultEntity, state: String) {

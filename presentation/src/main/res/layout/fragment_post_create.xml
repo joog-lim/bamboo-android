@@ -94,7 +94,7 @@
                     android:padding="10dp"
                     android:textSize="15sp" />
 
-                <Spinner
+                <androidx.appcompat.widget.AppCompatSpinner
                     android:id="@+id/choice_tag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -102,10 +102,11 @@
                     android:layout_centerVertical="true"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="@dimen/post_create_margin"
-                    android:background="@drawable/post_create_spinner_frame"
+                    android:background="@drawable/post_create_spinner"
                     android:elevation="5dp"
                     android:entries="@array/PostCreateTagList"
-                    android:textAlignment="center" />
+                    android:popupBackground="@drawable/post_create_spinner_frame" />
+
 
             </RelativeLayout>
 

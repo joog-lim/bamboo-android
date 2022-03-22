@@ -86,7 +86,7 @@ class EmojiViewModel @Inject constructor(
 
     private fun emojiMessage(throwable: Throwable) = when {
         throwable.message?.contains("401") == true -> {
-            _isFailure.value = "액세스토큰이 유효하지않습니다."
+            _isFailure.value = "사용하시려면 로그인 해주세요."
 
         }
         throwable.message?.contains("400") == true -> {

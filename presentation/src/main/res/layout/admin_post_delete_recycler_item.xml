@@ -45,14 +45,14 @@
                     android:id="@+id/post_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/text_reject_color"
                     android:fontFamily="@font/nanumsquareround_otfb"
+                    android:textColor="@color/text_reject_color"
                     android:textSize="@dimen/post_md"
 
+                    app:deleteStatus="@{result.algorithmNumber}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:deleteStatus="@{result.algorithmNumber}"
                     tools:text="#192번째 알고리즘" />
 
 
@@ -75,8 +75,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/admin_reject_spinner"
                     android:fontFamily="@font/nanumsquareround_otfb"
-                    android:textColor="#C4C4C4"
                     android:text="더보기"
+                    android:textColor="#C4C4C4"
                     android:textSize="@dimen/post_more"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -125,11 +125,14 @@
             android:textSize="@dimen/post_con"
             android:textStyle="bold"
             tools:text="새벽 코딩이 개꿀임. 진심 집중도 잘 되고 뭔가 날 방해하는 것도 없어. 이걸 참아??????????????????? 가능???????????" />
+
         <LinearLayout
+            android:id="@+id/leaf_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_marginTop="11dp"
+
             android:orientation="horizontal">
 
             <ImageView
@@ -137,6 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+
                 android:src="@drawable/no_click_leaf"
                 app:imgClicked="@{result.clicked}" />
 
@@ -144,10 +148,10 @@
                 android:id="@+id/leaf_number_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="0"
                 android:layout_marginLeft="5dp"
                 android:backgroundTint="#C4C4C4"
-              app:leafNumber="@{result.emojiCount}" />
+                app:leafNumber="@{result.emojiCount}"
+                tools:text="0" />
         </LinearLayout>
     </LinearLayout>
 

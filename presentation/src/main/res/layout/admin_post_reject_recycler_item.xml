@@ -123,7 +123,9 @@
             android:textSize="@dimen/post_con"
             android:textStyle="bold"
             tools:text="새벽 코딩이 개꿀임. 진심 집중도 잘 되고 뭔가 날 방해하는 것도 없어. 이걸 참아??????????????????? 가능???????????" />
+
         <LinearLayout
+            android:id="@+id/leaf_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -136,6 +138,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:src="@drawable/no_click_leaf"
+
                 app:imgClicked="@{result.clicked}" />
 
             <TextView
@@ -143,9 +146,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="0"
+                android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
                 android:backgroundTint="#C4C4C4"
-               app:leafNumber="@{result.emojiCount}" />
+                app:leafNumber="@{result.emojiCount}" />
         </LinearLayout>
     </LinearLayout>
 </layout>

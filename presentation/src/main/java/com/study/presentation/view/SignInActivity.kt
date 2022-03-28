@@ -48,7 +48,12 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
                     throw e
                 }
             } else {
-                Log.d("TAG", "${result.resultCode}: ")
+                if (result.resultCode == 0)
+                    Toast.makeText(this, "학교 이메일로 로그인 해주세요.", Toast.LENGTH_SHORT).show()
+                else
+                    Log.d("TAG", "${ (result.resultCode)}: ")
+
+
             }
 
 

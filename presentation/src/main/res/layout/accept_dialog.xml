@@ -6,7 +6,7 @@
 
         <variable
             name="dialog"
-            type="com.study.presentation.view.admin.dialog.AcceptDialog" />
+            type="com.study.bamboo.view.admin.dialog.AcceptDialog" />
 
         <variable
             name="result"

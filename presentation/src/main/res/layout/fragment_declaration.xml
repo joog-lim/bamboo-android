@@ -7,7 +7,7 @@
 
         <variable
             name="fragment"
-            type="com.study.presentation.view.user.DeclarationFragment" />
+            type="com.study.bamboo.view.user.DeclarationFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

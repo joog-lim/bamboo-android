@@ -6,7 +6,7 @@
 
         <variable
             name="dialog"
-            type="com.study.presentation.view.admin.dialog.PendingDialog" />
+            type="com.study.bamboo.view.admin.dialog.PendingDialog" />
     </data>
 
 

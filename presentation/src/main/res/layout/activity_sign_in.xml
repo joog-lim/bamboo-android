@@ -7,7 +7,7 @@
 
         <variable
             name="fragment"
-            type="com.study.presentation.view.SignInActivity" />
+            type="com.study.bamboo.view.SignInActivity" />
     </data>
 
 

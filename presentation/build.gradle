@@ -8,10 +8,10 @@ plugins {
 android {
     compileSdkVersion Versions.COMPILE_SDK_VERSION
     defaultConfig {
-        applicationId "com.study.presentation"
+        applicationId "com.study.bamboo"
         minSdkVersion Versions.MIN_SDK_VERSION
         targetSdkVersion Versions.TARGET_SDK_VERSION
-        versionCode 1
+        versionCode 210
         versionName "2.1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

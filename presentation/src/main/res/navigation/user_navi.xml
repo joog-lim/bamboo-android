@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/userMainFragment"
         tools:layout="@layout/fragment_user_main"
-        android:name="com.study.presentation.view.user.UserMainFragment"
+        android:name="com.study.bamboo.view.user.UserMainFragment"
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_userMainFragment_to_declarationFragment"
@@ -21,17 +21,17 @@
 
     <fragment
         android:id="@+id/userRulesFragment"
-        android:name="com.study.presentation.view.user.RulesFragment"
+        android:name="com.study.bamboo.view.user.RulesFragment"
         android:label="fragment_rules"
         tools:layout="@layout/fragment_rules" />
     <fragment
         android:id="@+id/userMoreSeeFragment"
-        android:name="com.study.presentation.view.user.MoreSeeFragment"
+        android:name="com.study.bamboo.view.user.MoreSeeFragment"
         android:label="fragment_more_see"
         tools:layout="@layout/fragment_more_see" />
     <fragment
         android:id="@+id/postCreateFragment"
-        android:name="com.study.presentation.view.user.PostCreateFragment"
+        android:name="com.study.bamboo.view.user.PostCreateFragment"
         android:label="PostCreateFragment"
         tools:layout="@layout/fragment_post_create">
         <action
@@ -41,7 +41,7 @@
 
     <dialog
         android:id="@+id/declarationFragment"
-        android:name="com.study.presentation.view.user.DeclarationFragment"
+        android:name="com.study.bamboo.view.user.DeclarationFragment"
         android:label="DeclarationFragment"
         tools:layout="@layout/fragment_declaration">
 

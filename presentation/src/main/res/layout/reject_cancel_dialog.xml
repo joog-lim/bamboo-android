@@ -6,7 +6,7 @@
 
         <variable
             name="dialog"
-            type="com.study.presentation.view.admin.dialog.RejectCancelDialog" />
+            type="com.study.bamboo.view.admin.dialog.RejectCancelDialog" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

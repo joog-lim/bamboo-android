@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/adminMainFragment"
         tools:layout="@layout/fragment_admin_main"
-        android:name="com.study.presentation.view.admin.AdminMainFragment"
+        android:name="com.study.bamboo.view.admin.AdminMainFragment"
         android:label="" >
 
 
@@ -33,17 +33,17 @@
 
     <fragment
         android:id="@+id/adminRulesFragment"
-        android:name="com.study.presentation.view.user.RulesFragment"
+        android:name="com.study.bamboo.view.user.RulesFragment"
         android:label="fragment_rules"
         tools:layout="@layout/fragment_rules" />
     <fragment
         android:id="@+id/adminMoreSeeFragment"
-        android:name="com.study.presentation.view.user.MoreSeeFragment"
+        android:name="com.study.bamboo.view.user.MoreSeeFragment"
         android:label="fragment_more_see"
         tools:layout="@layout/fragment_more_see" />
     <dialog
         android:id="@+id/pendingDialog"
-        android:name="com.study.presentation.view.admin.dialog.PendingDialog"
+        android:name="com.study.bamboo.view.admin.dialog.PendingDialog"
         tools:layout="@layout/pending_dialog"
         android:label="" >
 
@@ -61,7 +61,7 @@
 
     <dialog
         android:id="@+id/deleteDialog"
-        android:name="com.study.presentation.view.admin.dialog.DeleteDialog"
+        android:name="com.study.bamboo.view.admin.dialog.DeleteDialog"
         tools:layout="@layout/delete_dialog"
         android:label="" >
 
@@ -74,7 +74,7 @@
     </dialog>
     <dialog
         android:id="@+id/rejectCancelDialog"
-        android:name="com.study.presentation.view.admin.dialog.RejectCancelDialog"
+        android:name="com.study.bamboo.view.admin.dialog.RejectCancelDialog"
         tools:layout="@layout/reject_cancel_dialog"
         android:label="" >
 
@@ -90,7 +90,7 @@
 
     <dialog
         android:id="@+id/acceptDialog"
-        android:name="com.study.presentation.view.admin.dialog.AcceptDialog"
+        android:name="com.study.bamboo.view.admin.dialog.AcceptDialog"
         tools:layout="@layout/accept_dialog"
         android:label="" >
 
@@ -104,7 +104,7 @@
     </dialog>
     <dialog
         android:id="@+id/pendingFinishDialog"
-        android:name="com.study.presentation.view.admin.dialog.PendingFinishDialog"
+        android:name="com.study.bamboo.view.admin.dialog.PendingFinishDialog"
         android:label="PendingFinishDialog" />
 
 </navigation>

@@ -6,7 +6,7 @@
 
         <variable
             name="fragment"
-            type="com.study.presentation.view.admin.dialog.DeleteDialog" />
+            type="com.study.bamboo.view.admin.dialog.DeleteDialog" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
